@@ -851,7 +851,7 @@
     "href": "slides/02-slides.html#logical-data-contd",
     "title": "Basic Data Structures in R",
     "section": "Logical Data (cont’d)",
-    "text": "Logical Data (cont’d)\n\nCan be the outcome of logical test\n\n\nx <- runif(10,-10, 10) #generate 10 random numbers between -10 and 10\n(y <- x > 5) #test whether the values are greater than 5 and assign to object y\n\n [1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE\n\ntypeof(y) #how is R storing the object?\n\n[1] \"logical\"\n\nmean(y) #gives the proportion of y that is greater than 5\n\n[1] 0.3\n\nx[c(3,6,8)] <- NA #set the 3rd, 6th, and 8th value to NA\nis.na(x) #check which values are NA\n\n [1] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE"
+    "text": "Logical Data (cont’d)\n\nCan be the outcome of logical test\n\n\nx <- runif(10,-10, 10) #generate 10 random numbers between -10 and 10\n(y <- x > 5) #test whether the values are greater than 5 and assign to object y\n\n [1]  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE\n\ntypeof(y) #how is R storing the object?\n\n[1] \"logical\"\n\nmean(y) #gives the proportion of y that is greater than 5\n\n[1] 0.4\n\nx[c(3,6,8)] <- NA #set the 3rd, 6th, and 8th value to NA\nis.na(x) #check which values are NA\n\n [1] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE"
   },
   {
     "objectID": "slides/02-slides.html#numeric-data",
@@ -865,7 +865,7 @@
     "href": "slides/02-slides.html#integer-data",
     "title": "Basic Data Structures in R",
     "section": "Integer Data",
-    "text": "Integer Data\n\nInteger data is a special case of numeric data with no decimals\n\n\nmode(x) <- \"integer\"\nx\n\n [1] -6  5  9  1  0  5  7 -6  6 -9\n\nclass(x)\n\n[1] \"integer\"\n\ntypeof(x)\n\n[1] \"integer\"\n\nz <- sample.int(100, size=10) #sample 10 integers between 1 and 100\ntypeof(z)\n\n[1] \"integer\"\n\nclass(z)\n\n[1] \"integer\""
+    "text": "Integer Data\n\nInteger data is a special case of numeric data with no decimals\n\n\nmode(x) <- \"integer\"\nx\n\n [1] -1  0 -5 -8 -6 -9 -7  3  0  0\n\nclass(x)\n\n[1] \"integer\"\n\ntypeof(x)\n\n[1] \"integer\"\n\nz <- sample.int(100, size=10) #sample 10 integers between 1 and 100\ntypeof(z)\n\n[1] \"integer\"\n\nclass(z)\n\n[1] \"integer\""
   },
   {
     "objectID": "slides/02-slides.html#character-data",
@@ -935,21 +935,21 @@
     "href": "slides/02-slides.html#data-frames",
     "title": "Basic Data Structures in R",
     "section": "Data Frames",
-    "text": "Data Frames\n\nResemble tabular datasets used in spreadsheet programs\nLong vs. wide data\nSpecial type of list where every element has the same length (but can have different types of data)\n\n\n(dat <- data.frame(id = letters[1:5], x = 1:5, y = rep(date(),times=5 )))\n\n  id x                        y\n1  a 1 Wed Jul 12 11:20:24 2023\n2  b 2 Wed Jul 12 11:20:24 2023\n3  c 3 Wed Jul 12 11:20:24 2023\n4  d 4 Wed Jul 12 11:20:24 2023\n5  e 5 Wed Jul 12 11:20:24 2023\n\nis.list(dat)\n\n[1] TRUE\n\nclass(dat)\n\n[1] \"data.frame\""
+    "text": "Data Frames\n\nResemble tabular datasets used in spreadsheet programs\nLong vs. wide data\nSpecial type of list where every element has the same length (but can have different types of data)\n\n\n(dat <- data.frame(id = letters[1:5], x = 1:5, y = rep(date(),times=5 )))\n\n  id x                        y\n1  a 1 Wed Jul 12 16:28:38 2023\n2  b 2 Wed Jul 12 16:28:38 2023\n3  c 3 Wed Jul 12 16:28:38 2023\n4  d 4 Wed Jul 12 16:28:38 2023\n5  e 5 Wed Jul 12 16:28:38 2023\n\nis.list(dat)\n\n[1] TRUE\n\nclass(dat)\n\n[1] \"data.frame\""
   },
   {
     "objectID": "slides/02-slides.html#data-frames-contd",
     "href": "slides/02-slides.html#data-frames-contd",
     "title": "Basic Data Structures in R",
     "section": "Data Frames (cont’d)",
-    "text": "Data Frames (cont’d)\n\nLots of ways to access and summarize data in data frames\nUseful for making sure your functions are working as intended\n\n\nstr(dat) #compact summary of the structure of a dataframe\n\n'data.frame':   5 obs. of  3 variables:\n $ id: chr  \"a\" \"b\" \"c\" \"d\" ...\n $ x : int  1 2 3 4 5\n $ y : chr  \"Wed Jul 12 11:20:24 2023\" \"Wed Jul 12 11:20:24 2023\" \"Wed Jul 12 11:20:24 2023\" \"Wed Jul 12 11:20:24 2023\" ...\n\nsummary(dat) #estimate summary statistics of data frame\n\n      id                  x          y            \n Length:5           Min.   :1   Length:5          \n Class :character   1st Qu.:2   Class :character  \n Mode  :character   Median :3   Mode  :character  \n                    Mean   :3                     \n                    3rd Qu.:4                     \n                    Max.   :5"
+    "text": "Data Frames (cont’d)\n\nLots of ways to access and summarize data in data frames\nUseful for making sure your functions are working as intended\n\n\nstr(dat) #compact summary of the structure of a dataframe\n\n'data.frame':   5 obs. of  3 variables:\n $ id: chr  \"a\" \"b\" \"c\" \"d\" ...\n $ x : int  1 2 3 4 5\n $ y : chr  \"Wed Jul 12 16:28:38 2023\" \"Wed Jul 12 16:28:38 2023\" \"Wed Jul 12 16:28:38 2023\" \"Wed Jul 12 16:28:38 2023\" ...\n\nsummary(dat) #estimate summary statistics of data frame\n\n      id                  x          y            \n Length:5           Min.   :1   Length:5          \n Class :character   1st Qu.:2   Class :character  \n Mode  :character   Median :3   Mode  :character  \n                    Mean   :3                     \n                    3rd Qu.:4                     \n                    Max.   :5"
   },
   {
     "objectID": "slides/02-slides.html#data-frames-one-more-time",
     "href": "slides/02-slides.html#data-frames-one-more-time",
     "title": "Basic Data Structures in R",
     "section": "Data Frames (one more time)",
-    "text": "Data Frames (one more time)\n\nSpecial cases of names (colnames and rownames)\n\n\ncolnames(dat) #get the names of the variables stored in the data frame\n\n[1] \"id\" \"x\"  \"y\" \n\ndat$y\n\n[1] \"Wed Jul 12 11:20:24 2023\" \"Wed Jul 12 11:20:24 2023\"\n[3] \"Wed Jul 12 11:20:24 2023\" \"Wed Jul 12 11:20:24 2023\"\n[5] \"Wed Jul 12 11:20:24 2023\""
+    "text": "Data Frames (one more time)\n\nSpecial cases of names (colnames and rownames)\n\n\ncolnames(dat) #get the names of the variables stored in the data frame\n\n[1] \"id\" \"x\"  \"y\" \n\ndat$y\n\n[1] \"Wed Jul 12 16:28:38 2023\" \"Wed Jul 12 16:28:38 2023\"\n[3] \"Wed Jul 12 16:28:38 2023\" \"Wed Jul 12 16:28:38 2023\"\n[5] \"Wed Jul 12 16:28:38 2023\""
   },
   {
     "objectID": "slides/02-slides.html#tibbles",
@@ -1201,7 +1201,7 @@
     "href": "slides/04-slides.html#structure-of-functions-body",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Body",
-    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci <- function(x, conf = 0.95) {\n  se <- sd(x) / sqrt(length(x))\n  alpha <- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx <- runif(100)\nmean_ci(x)\n\n[1] 0.4695270 0.5824132\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.4517913 0.6001489"
+    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci <- function(x, conf = 0.95) {\n  se <- sd(x) / sqrt(length(x))\n  alpha <- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx <- runif(100)\nmean_ci(x)\n\n[1] 0.4713543 0.5859220\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.4533544 0.6039219"
   },
   {
     "objectID": "slides/04-slides.html#structure-of-functions-return",
@@ -1215,7 +1215,7 @@
     "href": "slides/04-slides.html#structure-of-functions-return-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Return",
-    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.47 0.582\n $ se   : num 0.0288"
+    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.471 0.586\n $ se   : num 0.0292"
   },
   {
     "objectID": "slides/04-slides.html#iteration",
@@ -1236,7 +1236,7 @@
     "href": "slides/04-slides.html#loops-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Loops",
-    "text": "Loops\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──\n✔ ggplot2 3.4.1     ✔ purrr   1.0.1\n✔ tibble  3.2.1     ✔ dplyr   1.1.2\n✔ tidyr   1.3.0     ✔ stringr 1.5.0\n✔ readr   2.1.4     ✔ forcats 0.5.1\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\ndf <- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput <- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] <- median(df[[i]])      # 3. body\n}\noutput\n\n[1] -0.23630578  0.55321427  0.15497540 -0.04393265\n\n#> [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
+    "text": "Loops\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──\n✔ ggplot2 3.4.1     ✔ purrr   1.0.1\n✔ tibble  3.2.1     ✔ dplyr   1.1.2\n✔ tidyr   1.3.0     ✔ stringr 1.5.0\n✔ readr   2.1.4     ✔ forcats 0.5.1\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\ndf <- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput <- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] <- median(df[[i]])      # 3. body\n}\noutput\n\n[1]  0.2239810  0.2780143  0.5138242 -0.1615732\n\n#> [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
   },
   {
     "objectID": "slides/04-slides.html#the-apply-family",
@@ -1257,7 +1257,7 @@
     "href": "slides/04-slides.html#the-apply-family-2",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "The apply family",
-    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata <- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] -0.4506037\n\n$item3\n[1] 1.033024\n\n$item4\n[1] 4.923691"
+    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata <- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] -0.9491515\n\n$item3\n[1] 0.9419658\n\n$item4\n[1] 5.0891"
   },
   {
     "objectID": "slides/04-slides.html#the-map-family",
@@ -1950,7 +1950,7 @@
     "href": "slides/11-slides.html#changing-resolutions-disagg",
     "title": "Operations With Raster Data I",
     "section": "Changing resolutions: disagg",
-    "text": "Changing resolutions: disagg\n\n\n\nra <- aggregate(r, 20)\nplot(ra)\n\n\n\n\n\n\nrd <- disagg(r, 20)\n\n\n|---------|---------|---------|---------|\n=====\n                                          \n\nplot(rd)"
+    "text": "Changing resolutions: disagg\n\n\n\nra <- aggregate(r, 20)\nplot(ra)\n\n\n\n\n\n\nrd <- disagg(r, 20)\n\n\n|---------|---------|---------|---------|\n=======\n                                          \n\nplot(rd)"
   },
   {
     "objectID": "slides/11-slides.html#changing-resolutions-resample",
@@ -2398,28 +2398,28 @@
     "href": "slides/15-slides.html#estimating-area",
     "title": "Building Spatial Databases based on Location",
     "section": "Estimating area",
-    "text": "Estimating area\n\n\n\n\nsf bases area (and length) calculations on the map units of the CRS\nthe units library allows conversion into a variety of units\n\n\n\n\nnz.sf <- nz %>% \n  mutate(area = st_area(nz))\nhead(nz.sf$area, 3)\n\nUnits: [m^2]\n[1] 12890576439  4911565037 24588819863\n\n\n\nnz.sf$areakm <- units::set_units(st_area(nz), km^2)\nhead(nz.sf$areakm, 3)\n\nUnits: [km^2]\n[1] 12890.576  4911.565 24588.820"
+    "text": "Estimating area\n\n\n\n\nsf bases area (and length) calculations on the map units of the CRS\nthe units library allows conversion into a variety of units\n\n\n\n\nnz.sf <- nz %>% \n  mutate(area = st_area(nz))\nhead(nz.sf$area, 3)\n\n\nnz.sf$areakm <- units::set_units(st_area(nz), km^2)\nhead(nz.sf$areakm, 3)"
   },
   {
     "objectID": "slides/15-slides.html#estimating-density-in-polygons",
     "href": "slides/15-slides.html#estimating-density-in-polygons",
     "title": "Building Spatial Databases based on Location",
     "section": "Estimating Density in Polygons",
-    "text": "Estimating Density in Polygons\n\n\n\nrandom_long_lat <- \n  data.frame(\n    long = sample(runif(2000, min = 1090144, max = 2089533), replace = F),\n    lat = sample(runif(2000, min = 4748537, max = 6191874), replace = F)\n  )\n\nrandom_long_lat_sf <- random_long_lat %>% \n  st_as_sf(coords = c(\"long\", \"lat\"), crs = st_crs(nz))\n\nrandom_nz <- random_long_lat_sf[nz.sf,]\nplot(st_geometry(random_nz), cex=0.1, col=\"red\")\nplot(st_geometry(nz.sf), add=TRUE)\n\n\n\n\n\n\n\nCreating new features based on the frequency of occurrence\nClarifying graphics\nUnderlies quadrat sampling for point patterns\nTwo steps: count and area"
+    "text": "Estimating Density in Polygons\n\n\n\nrandom_long_lat <- \n  data.frame(\n    long = sample(runif(2000, min = 1090144, max = 2089533), replace = F),\n    lat = sample(runif(2000, min = 4748537, max = 6191874), replace = F)\n  )\n\nrandom_long_lat_sf <- random_long_lat %>% \n  st_as_sf(coords = c(\"long\", \"lat\"), crs = st_crs(nz))\n\nrandom_nz <- random_long_lat_sf[nz.sf,]\nplot(st_geometry(random_nz), cex=0.1, col=\"red\")\nplot(st_geometry(nz.sf), add=TRUE)\n\n\n\n\nCreating new features based on the frequency of occurrence\nClarifying graphics\nUnderlies quadrat sampling for point patterns\nTwo steps: count and area"
   },
   {
     "objectID": "slides/15-slides.html#estimating-density-in-polygons-1",
     "href": "slides/15-slides.html#estimating-density-in-polygons-1",
     "title": "Building Spatial Databases based on Location",
     "section": "Estimating Density in Polygons",
-    "text": "Estimating Density in Polygons\n\n\n\nrandom_long_lat <- \n  data.frame(\n    long = sample(runif(2000, min = 1090144, max = 2089533), replace = F),\n    lat = sample(runif(2000, min = 4748537, max = 6191874), replace = F)\n  )\n\nrandom_long_lat_sf <- random_long_lat %>% \n  st_as_sf(coords = c(\"long\", \"lat\"), crs = st_crs(nz))\n\nrandom_nz <- random_long_lat_sf[nz.sf,]\nplot(st_geometry(random_nz), cex=0.1, col=\"red\")\nplot(st_geometry(nz.sf), add=TRUE)\n\n\n\n\n\n\nnz.df <- nz %>% \nmutate(counts = lengths(st_intersects(., random_nz)),\n       area = st_area(nz),\n       density = counts/area)\nhead(st_drop_geometry(nz.df[,7:10]))\n\n  counts              area              density\n1     13 12890576439 [m^2] 1.008489e-09 [1/m^2]\n2      7  4911565037 [m^2] 1.425208e-09 [1/m^2]\n3     38 24588819863 [m^2] 1.545418e-09 [1/m^2]\n4     17 12271015945 [m^2] 1.385378e-09 [1/m^2]\n5     13  8364554416 [m^2] 1.554177e-09 [1/m^2]\n6     18 14242517871 [m^2] 1.263821e-09 [1/m^2]"
+    "text": "Estimating Density in Polygons\n\n\n\nrandom_long_lat <- \n  data.frame(\n    long = sample(runif(2000, min = 1090144, max = 2089533), replace = F),\n    lat = sample(runif(2000, min = 4748537, max = 6191874), replace = F)\n  )\n\nrandom_long_lat_sf <- random_long_lat %>% \n  st_as_sf(coords = c(\"long\", \"lat\"), crs = st_crs(nz))\n\nrandom_nz <- random_long_lat_sf[nz.sf,]\nplot(st_geometry(random_nz), cex=0.1, col=\"red\")\nplot(st_geometry(nz.sf), add=TRUE)\n\n\n\nnz.df <- nz %>% \nmutate(counts = lengths(st_intersects(., random_nz)),\n       area = st_area(nz),\n       density = counts/area)\nhead(st_drop_geometry(nz.df[,7:10]))"
   },
   {
     "objectID": "slides/15-slides.html#estimating-density-in-polygons-2",
     "href": "slides/15-slides.html#estimating-density-in-polygons-2",
     "title": "Building Spatial Databases based on Location",
     "section": "Estimating Density in Polygons",
-    "text": "Estimating Density in Polygons\n\n\n\nplot(nz.df[\"counts\"], main=\"Counts\")\n\n\n\n\n\n\nplot(nz.df[\"density\"], main=\"Density\")"
+    "text": "Estimating Density in Polygons\n\n\n\nplot(nz.df[\"counts\"], main=\"Counts\")\n\n\n\nplot(nz.df[\"density\"], main=\"Density\")"
   },
   {
     "objectID": "slides/15-slides.html#estimating-distance",
@@ -2440,14 +2440,14 @@
     "href": "slides/15-slides.html#estimating-single-point-distance-1",
     "title": "Building Spatial Databases based on Location",
     "section": "Estimating Single Point Distance",
-    "text": "Estimating Single Point Distance\n\nSubsetting y into a single feature\n\n\n\n\ncanterbury = nz %>% filter(Name == \"Canterbury\")\ncanterbury_height = nz_height[canterbury, ]\nco = filter(nz, grepl(\"Canter|Otag\", Name))\nst_distance(nz_height[1:3, ], co)\n\nUnits: [m]\n          [,1]     [,2]\n[1,] 123537.16 15497.72\n[2,]  94282.77     0.00\n[3,]  93018.56     0.00\n\n\n\n\nplot(st_geometry(co)[2], col=\"red\") \nplot(st_geometry(nz_height)[1], col=\"blue\", add=TRUE)\nplot(st_geometry(nz_height)[2:3], add = TRUE, col=\"black\")"
+    "text": "Estimating Single Point Distance\n\nSubsetting y into a single feature\n\n\n\n\ncanterbury = nz %>% filter(Name == \"Canterbury\")\ncanterbury_height = nz_height[canterbury, ]\nco = filter(nz, grepl(\"Canter|Otag\", Name))\nst_distance(nz_height[1:3, ], co)\n\n\n\nplot(st_geometry(co)[2], col=\"red\") \nplot(st_geometry(nz_height)[1], col=\"blue\", add=TRUE)\nplot(st_geometry(nz_height)[2:3], add = TRUE, col=\"black\")"
   },
   {
     "objectID": "slides/15-slides.html#estimating-single-point-distance-2",
     "href": "slides/15-slides.html#estimating-single-point-distance-2",
     "title": "Building Spatial Databases based on Location",
     "section": "Estimating Single Point Distance",
-    "text": "Estimating Single Point Distance\n\nUsing nearest neighbor distances\n\n\n\n\nua <- urban_areas(cb = FALSE, progress_bar = FALSE) %>% \n  filter(., UATYP10 == \"U\") %>% \n  filter(., str_detect(NAME10, \"ID\")) %>% \n  st_transform(., crs=2163)\n\n#get index of nearest ID city\nnearest <-  st_nearest_feature(ua)\n#estimate distance\n(dist = st_distance(ua, ua[nearest,], by_element=TRUE))\n\nUnits: [m]\n[1]  61386.444  61386.444   1646.182   1646.182 136908.183 136908.183\n\n\n\n\nid <- states(cb = FALSE, progress_bar = FALSE) %>% \n  filter(., STUSPS == \"ID\")%>% \n  st_transform(., crs=2163)\n\nplot(st_geometry(id))\nplot(st_geometry(ua), add=TRUE)"
+    "text": "Estimating Single Point Distance\n\nUsing nearest neighbor distances\n\n\n\n\nua <- urban_areas(cb = FALSE, progress_bar = FALSE) %>% \n  filter(., UATYP10 == \"U\") %>% \n  filter(., str_detect(NAME10, \"ID\")) %>% \n  st_transform(., crs=2163)\n\n#get index of nearest ID city\nnearest <-  st_nearest_feature(ua)\n#estimate distance\n(dist = st_distance(ua, ua[nearest,], by_element=TRUE))\n\n\n\nid <- states(cb = FALSE, progress_bar = FALSE) %>% \n  filter(., STUSPS == \"ID\")%>% \n  st_transform(., crs=2163)\n\nplot(st_geometry(id))\nplot(st_geometry(ua), add=TRUE)"
   },
   {
     "objectID": "slides/15-slides.html#topological-subsetting-1",
@@ -2461,21 +2461,21 @@
     "href": "slides/15-slides.html#topological-subsetting-2",
     "title": "Building Spatial Databases based on Location",
     "section": "Topological Subsetting",
-    "text": "Topological Subsetting\n\n\n\n\nLots of verbs in sf for doing this (e.g., st_intersects, st_contains, st_touches)\nsee ?geos_binary_pred for a full list\nCreates an implicit attribute (the records in x that are “in” y)\n\n\n\nUsing sparse=TRUE\n\nst_intersects(nz_height, co, \n              sparse = TRUE)[1:3] \n\n[[1]]\ninteger(0)\n\n[[2]]\n[1] 2\n\n[[3]]\n[1] 2\n\nlengths(st_intersects(nz_height, \n                      co, sparse = TRUE))[1:3] > 0\n\n[1] FALSE  TRUE  TRUE"
+    "text": "Topological Subsetting\n\n\n\n\nLots of verbs in sf for doing this (e.g., st_intersects, st_contains, st_touches)\nsee ?geos_binary_pred for a full list\nCreates an implicit attribute (the records in x that are “in” y)\n\n\n\nUsing sparse=TRUE\n\nst_intersects(nz_height, co, \n              sparse = TRUE)[1:3] \n\nlengths(st_intersects(nz_height, \n                      co, sparse = TRUE))[1:3] > 0"
   },
   {
     "objectID": "slides/15-slides.html#topological-subsetting-3",
     "href": "slides/15-slides.html#topological-subsetting-3",
     "title": "Building Spatial Databases based on Location",
     "section": "Topological Subsetting",
-    "text": "Topological Subsetting\n\nThe sparse option controls how the results are returned\nWe can then find out if one or more elements satisfies the criteria\n\nUsing sparse=FALSE\n\nst_intersects(nz_height, co, sparse = FALSE)[1:3,] \n\n      [,1]  [,2]\n[1,] FALSE FALSE\n[2,] FALSE  TRUE\n[3,] FALSE  TRUE\n\napply(st_intersects(nz_height, co, sparse = FALSE), 1,any)[1:3]\n\n[1] FALSE  TRUE  TRUE"
+    "text": "Topological Subsetting\n\nThe sparse option controls how the results are returned\nWe can then find out if one or more elements satisfies the criteria\n\nUsing sparse=FALSE\n\nst_intersects(nz_height, co, sparse = FALSE)[1:3,] \n\napply(st_intersects(nz_height, co, sparse = FALSE), 1,any)[1:3]"
   },
   {
     "objectID": "slides/15-slides.html#topological-subsetting-4",
     "href": "slides/15-slides.html#topological-subsetting-4",
     "title": "Building Spatial Databases based on Location",
     "section": "Topological Subsetting",
-    "text": "Topological Subsetting\n\n\n\ncanterbury_height3 = nz_height %>%\n  filter(st_intersects(x = ., y = canterbury, sparse = FALSE))\n\nWarning: Using one column matrices in `filter()` was deprecated in dplyr 1.1.0.\nℹ Please use one dimensional logical vectors instead.\n\n\n\n\nplot(st_geometry(nz))\nplot(st_geometry(canterbury_height3), add=TRUE)"
+    "text": "Topological Subsetting\n\n\n\ncanterbury_height3 = nz_height %>%\n  filter(st_intersects(x = ., y = canterbury, sparse = FALSE))\n\n\n\nplot(st_geometry(nz))\nplot(st_geometry(canterbury_height3), add=TRUE)"
   },
   {
     "objectID": "slides/15-slides.html#spatial-joins-1",
@@ -2489,7 +2489,7 @@
     "href": "slides/15-slides.html#spatial-joins-2",
     "title": "Building Spatial Databases based on Location",
     "section": "Spatial Joins",
-    "text": "Spatial Joins\n\n\n\nset.seed(2018)\n(bb = st_bbox(world)) # the world's bounds\n\n      xmin       ymin       xmax       ymax \n-180.00000  -89.90000  179.99999   83.64513 \n\n#>   xmin   ymin   xmax   ymax \n#> -180.0  -89.9  180.0   83.6\nrandom_df = data.frame(\n  x = runif(n = 10, min = bb[1], max = bb[3]),\n  y = runif(n = 10, min = bb[2], max = bb[4])\n)\nrandom_points = random_df |> \n  st_as_sf(coords = c(\"x\", \"y\")) |> # set coordinates\n  st_set_crs(\"EPSG:4326\") # set geographic CRS\n\nrandom_joined = st_join(random_points, world[\"name_long\"])\n\n\n\nrandom_joined$name_long = as.character(random_joined$name_long)\n\njm0 <- tm_shape(world) + tm_borders(lwd = 0.5) + tm_format(\"World\")\njm1 <- jm0 +\n  tm_shape(shp = random_joined, bbox = bb) +\n  tm_symbols(col = \"name_long\", shape = 4, border.lwd = 2, palette = \"Dark2\")+\n  tm_layout(scale = 1, legend.bg.color = \"white\", legend.bg.alpha = 0.3, legend.position = c(\"right\", \"bottom\"))\njm1"
+    "text": "Spatial Joins\n\n\n\nset.seed(2018)\n(bb = st_bbox(world)) # the world's bounds\n#>   xmin   ymin   xmax   ymax \n#> -180.0  -89.9  180.0   83.6\nrandom_df = data.frame(\n  x = runif(n = 10, min = bb[1], max = bb[3]),\n  y = runif(n = 10, min = bb[2], max = bb[4])\n)\nrandom_points = random_df |> \n  st_as_sf(coords = c(\"x\", \"y\")) |> # set coordinates\n  st_set_crs(\"EPSG:4326\") # set geographic CRS\n\nrandom_joined = st_join(random_points, world[\"name_long\"])\n\n\n\nrandom_joined$name_long = as.character(random_joined$name_long)\n\njm0 <- tm_shape(world) + tm_borders(lwd = 0.5) + tm_format(\"World\")\njm1 <- jm0 +\n  tm_shape(shp = random_joined, bbox = bb) +\n  tm_symbols(col = \"name_long\", shape = 4, border.lwd = 2, palette = \"Dark2\")+\n  tm_layout(scale = 1, legend.bg.color = \"white\", legend.bg.alpha = 0.3, legend.position = c(\"right\", \"bottom\"))\njm1"
   },
   {
     "objectID": "slides/15-slides.html#spatial-joins-3",
@@ -2503,14 +2503,14 @@
     "href": "slides/15-slides.html#spatial-joins-4",
     "title": "Building Spatial Databases based on Location",
     "section": "Spatial Joins",
-    "text": "Spatial Joins\n\n\n\nany(st_touches(cycle_hire, cycle_hire_osm, sparse = FALSE))\n\n[1] FALSE\n\nz = st_join(cycle_hire, cycle_hire_osm, st_is_within_distance, dist = 20)\nnrow(cycle_hire)\n\n[1] 742\n\nnrow(z)\n\n[1] 762\n\n\n\n\nplot(st_geometry(cycle_hire), col = \"blue\")\nplot(st_geometry(cycle_hire_osm), add = TRUE, pch = 3, col = \"red\")"
+    "text": "Spatial Joins\n\n\n\nany(st_touches(cycle_hire, cycle_hire_osm, sparse = FALSE))\nz = st_join(cycle_hire, cycle_hire_osm, st_is_within_distance, dist = 20)\nnrow(cycle_hire)\nnrow(z)\n\n\n\nplot(st_geometry(cycle_hire), col = \"blue\")\nplot(st_geometry(cycle_hire_osm), add = TRUE, pch = 3, col = \"red\")"
   },
   {
     "objectID": "slides/15-slides.html#extending-joins-1",
     "href": "slides/15-slides.html#extending-joins-1",
     "title": "Building Spatial Databases based on Location",
     "section": "Extending Joins",
-    "text": "Extending Joins\n\n\nSometimes we are interested in analyzing locations that contain the overlap between two vectors\n\nHow much of home range a occurs on soil type b\nHow much of each Census tract is contained with a service provision area?\n\nst_intersection, st_union, and st_difference return new geometries that we can use as records in our spatial database\n\n\n\n\n\ntransmitters <-\n  data.frame(\n    ID = 1:2,\n    longitude = c(-80.631974, -77.808488),\n    latitude = c(35.838583, 35.526252),\n    radius = c(50, 100))\n\n### Turn transmitters df into an sf object\ntr_wgs <- \n  st_as_sf(transmitters, \n           coords = c(\"longitude\", \"latitude\"), \n           crs = 4326, \n           dim = \"XY\")\n\n### Set units (a projection that preserves area in NC)\ntr_wgs <- \n  st_transform(tr_wgs, \n               \"+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD27 +units=km\")\n\n### Create a buffer (not sure of the original km measurements, so right now it is just making a 100km buffer)\ntr_buff <- \n  st_buffer(tr_wgs, c(transmitters$radius))\n\n### Read North Carolina (and coerce to be same projection as tr_buff)\nnc <-\n  st_read(system.file(\"shape/nc.shp\", package=\"sf\"), quiet = TRUE) %>%\n  st_transform(., \"+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD27 +units=km\")\n\n### Plot\nggplot() +\n  geom_sf(data = nc) +\n  geom_sf(data = tr_buff, color=\"red\")\n\n\n\n\n\n\n\n\n\n\nintersect_pct <- st_intersection(nc, tr_buff) %>% \n   mutate(intersect_area = st_area(.)) %>%   # create new column with shape area\n   dplyr::select(NAME, intersect_area) %>%   # only select columns needed to merge\n   st_drop_geometry()\n\nWarning: attribute variables are assumed to be spatially constant throughout all\ngeometries\n\nnc <- mutate(nc, county_area = st_area(nc))\n\n# Merge by county name\nnc <- merge(nc, intersect_pct, by = \"NAME\", all.x = TRUE)\n\n# Calculate coverage\nnc <- nc %>% \n   mutate(coverage = as.numeric(intersect_area/county_area))"
+    "text": "Extending Joins\n\n\nSometimes we are interested in analyzing locations that contain the overlap between two vectors\n\nHow much of home range a occurs on soil type b\nHow much of each Census tract is contained with a service provision area?\n\nst_intersection, st_union, and st_difference return new geometries that we can use as records in our spatial database\n\n\n\n\n\ntransmitters <-\n  data.frame(\n    ID = 1:2,\n    longitude = c(-80.631974, -77.808488),\n    latitude = c(35.838583, 35.526252),\n    radius = c(50, 100))\n\n### Turn transmitters df into an sf object\ntr_wgs <- \n  st_as_sf(transmitters, \n           coords = c(\"longitude\", \"latitude\"), \n           crs = 4326, \n           dim = \"XY\")\n\n### Set units (a projection that preserves area in NC)\ntr_wgs <- \n  st_transform(tr_wgs, \n               \"+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD27 +units=km\")\n\n### Create a buffer (not sure of the original km measurements, so right now it is just making a 100km buffer)\ntr_buff <- \n  st_buffer(tr_wgs, c(transmitters$radius))\n\n### Read North Carolina (and coerce to be same projection as tr_buff)\nnc <-\n  st_read(system.file(\"shape/nc.shp\", package=\"sf\"), quiet = TRUE) %>%\n  st_transform(., \"+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD27 +units=km\")\n\n### Plot\nggplot() +\n  geom_sf(data = nc) +\n  geom_sf(data = tr_buff, color=\"red\")\n\n\n\nintersect_pct <- st_intersection(nc, tr_buff) %>% \n   mutate(intersect_area = st_area(.)) %>%   # create new column with shape area\n   dplyr::select(NAME, intersect_area) %>%   # only select columns needed to merge\n   st_drop_geometry()\n\nnc <- mutate(nc, county_area = st_area(nc))\n\n# Merge by county name\nnc <- merge(nc, intersect_pct, by = \"NAME\", all.x = TRUE)\n\n# Calculate coverage\nnc <- nc %>% \n   mutate(coverage = as.numeric(intersect_area/county_area))"
   },
   {
     "objectID": "slides/15-slides.html#extending-joins-2",
@@ -2674,11 +2674,11 @@
     "text": "Expected values and hypothesis testing\n\n\n\n\nConsidering each outcome as the realization of a process allows us to generate expected values\nThe simplest spatial process is Completely Spatial Random (CSR) process\nFirst Order effects: any event has an equal probability of occuring in a location\nSecond Order effects: the location of one event is independent of the other events\n\n\n\n\n\n\nFrom Manuel Gimond"
   },
   {
-    "objectID": "slides/17-slides.html#generating-expactations-for-csr",
-    "href": "slides/17-slides.html#generating-expactations-for-csr",
+    "objectID": "slides/17-slides.html#generating-expectations-for-csr",
+    "href": "slides/17-slides.html#generating-expectations-for-csr",
     "title": "Interpolation and Autocorrelation",
-    "section": "Generating expactations for CSR",
-    "text": "Generating expactations for CSR\n\n\n\nload(url(\"https://github.com/mgimond/Spatial/raw/main/Data/ppa.RData\"))\n\nlibrary(spatstat)\nmarks(starbucks)  <- NULL\nWindow(starbucks) <- ma\npop.lg <- log(pop)\nQ <- quadratcount(starbucks, nx= 6, ny=3)\npar(mfrow=c(2,1), mar=c(2,2,2,2))\nplot(starbucks, main=NULL, cols=rgb(0,0,0,.2), pch=20)\nplot(starbucks, pch=20, cols=\"grey70\", main=NULL)  # Plot points\nplot(Q, add=TRUE)\n\n\n\npar(mfrow=c(1,1), mar=c(5.1,4.1,4.1,2.1))\n\n\n\n\nWe can use quadrat counts to estimate the expected number of events in a given area\nThe probability of each possible count is given by:\n\n\\[\nP(n,k) = {n \\choose x}p^k(1-p)^{n-k}\n\\]\n\nGiven total coverage of quadrats, then \\(p=\\frac{\\frac{a}{x}}{a}\\) and\n\n\\[\n\\begin{equation}\nP(k,n,x) = {n \\choose k}\\bigg(\\frac{1}{x}\\bigg)^k\\bigg(\\frac{x-1}{x}\\bigg)^{n-k}\n\\end{equation}\n\\]"
+    "section": "Generating expectations for CSR",
+    "text": "Generating expectations for CSR\n\n\n\nload(url(\"https://github.com/mgimond/Spatial/raw/main/Data/ppa.RData\"))\n\nlibrary(spatstat)\nmarks(starbucks)  <- NULL\nWindow(starbucks) <- ma\npop.lg <- log(pop)\nQ <- quadratcount(starbucks, nx= 6, ny=3)\npar(mfrow=c(2,1), mar=c(2,2,2,2))\nplot(starbucks, main=NULL, cols=rgb(0,0,0,.2), pch=20)\nplot(starbucks, pch=20, cols=\"grey70\", main=NULL)  # Plot points\nplot(Q, add=TRUE)\n\n\n\npar(mfrow=c(1,1), mar=c(5.1,4.1,4.1,2.1))\n\n\n\n\nWe can use quadrat counts to estimate the expected number of events in a given area\nThe probability of each possible count is given by:\n\n\\[\nP(n,k) = {n \\choose x}p^k(1-p)^{n-k}\n\\]\n\nGiven total coverage of quadrats, then \\(p=\\frac{\\frac{a}{x}}{a}\\) and\n\n\\[\n\\begin{equation}\nP(k,n,x) = {n \\choose k}\\bigg(\\frac{1}{x}\\bigg)^k\\bigg(\\frac{x-1}{x}\\bigg)^{n-k}\n\\end{equation}\n\\]"
   },
   {
     "objectID": "slides/17-slides.html#spatial-autocorrelation",
@@ -3329,7 +3329,14 @@
     "href": "slides/21-slides.html#inference-presenceabsence-data",
     "title": "Multivariate Analysis III",
     "section": "Inference & Presence/Absence Data",
-    "text": "Inference & Presence/Absence Data\n\n\n\ncoef(mod1)\ncoef(mod2)\n\n\n\nprd1 <- predict(mod1, df, \"response\")\ndif1 <- plogis(linpred) - prd1\nprd2 <- predict(mod2, df, \"response\")\ndif2 <- plogis(linpred) - prd2\n\n\n\n\n\n\n\nInferring coefficient effects requires that your model fit the data well"
+    "text": "Inference & Presence/Absence Data\n\n\n\ncoef(mod1)\ncoef(mod2)\n\n\n\nprd1 <- predict(mod1, df, \"response\")\ndif1 <- plogis(linpred) - prd1\nprd2 <- predict(mod2, df, \"response\")\ndif2 <- plogis(linpred) - prd2\n\n\npar(mfrow=c(1,2))\nplot(dif1, main=\"misspecified\")\nplot(dif2, main=\"correct\")\npar(mfrow=c(1,1))\n\n\n\n\nInferring coefficient effects requires that your model fit the data well"
+  },
+  {
+    "objectID": "slides/21-slides.html#section",
+    "href": "slides/21-slides.html#section",
+    "title": "Multivariate Analysis III",
+    "section": "",
+    "text": "base.path <- \"/Users/mattwilliamson/Google Drive/My Drive/TEACHING/Intro_Spatial_Data_R/Data/2021/session28/\" #sets the path to the root directory\n\npres.abs <- st_read(paste0(base.path, \"presenceabsence.shp\"), quiet = TRUE) #read the points with presence absence data\n## OGR data source with driver: ESRI Shapefile \n## Source: \"/Users/matthewwilliamson/Downloads/session28/presenceabsence.shp\", layer: \"presenceabsence\"\n## with 100 features\n## It has 1 fields\npred.files <- list.files(base.path,pattern='grd$', full.names=TRUE) #get the bioclim data\n\npred.stack <- rast(pred.files) #read into a RasterStack\nnames(pred.stack) <- c(\"MeanAnnTemp\", \"TotalPrecip\", \"PrecipWetQuarter\", \"PrecipDryQuarter\", \"MinTempCold\", \"TempRange\")\nplot(pred.stack)\npts.df <- terra::extract(pred.stack, vect(pres.abs), df=TRUE)\npts.df[,2:7] <- scale(pts.df[,2:7])\npts.df <- cbind(pts.df, pres.abs$y)\ncolnames(pts.df)[8] <- \"y\""
   },
   {
     "objectID": "slides/21-slides.html#using-test-statistics",
