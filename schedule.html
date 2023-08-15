@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.37">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
 </style>
 
 
@@ -52,7 +57,8 @@ ul.task-list{list-style: none;}
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -73,49 +79,59 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="./index.html">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Intro to Spatial Data in R</span>
-  </a>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus.html">Syllabus</a>
+    <a class="nav-link" href="./syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./schedule.html" aria-current="page">Schedule</a>
+    <a class="nav-link active" href="./schedule.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./content/index.html">Content</a>
+    <a class="nav-link" href="./content/index.html" rel="" target="">
+ <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./assignment/index.html">Assignments</a>
+    <a class="nav-link" href="./assignment/index.html" rel="" target="">
+ <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./example/index.html">Examples</a>
+    <a class="nav-link" href="./example/index.html" rel="" target="">
+ <span class="menu-text">Examples</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resource/index.html">Resources</a>
+    <a class="nav-link" href="./resource/index.html" rel="" target="">
+ <span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://ecostatsbsu.slack.com/archives/CV4DEJ8M7"><i class="bi bi-slack" role="img" aria-label="Slack">
+    <a class="nav-link" href="https://ecostatsbsu.slack.com/archives/CV4DEJ8M7" rel="" target=""><i class="bi bi-slack" role="img" aria-label="Slack">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/BSU-Spatial-Data-in-R-Fall2022"><i class="bi bi-github" role="img" aria-label="GitHub">
+    <a class="nav-link" href="https://github.com/BSU-Spatial-Data-in-R-Fall2022" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://rstudio-lxp-01.boisestate.edu/auth-sign-in?appUri=%2F"><i class="bi bi-cloud-fill" role="img" aria-label="Rstudio">
+    <a class="nav-link" href="https://rstudio-lxp-01.boisestate.edu/auth-sign-in?appUri=%2F" rel="" target=""><i class="bi bi-cloud-fill" role="img" aria-label="Rstudio">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -138,6 +154,7 @@ ul.task-list{list-style: none;}
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -148,15 +165,16 @@ ul.task-list{list-style: none;}
 <p>Here’s your roadmap for the semester!</p>
 <ul>
 <li><p><a href="./content/"><strong>Content</strong></a> (<i class="fa-solid fa-book-open-reader" aria-hidden="true"></i>): This page contains the readings, slides, and recorded lectures for the week. Read and watch these <strong>before</strong> our in-person class.</p></li>
-<li><p><a href="./example/"><strong>Example</strong></a> (<i class="fa-solid fa-laptop-code" aria-hidden="true"></i>): This page contains fully annotated R code and other supplementary information that you can use as a reference for your assignments and project. This is only a reference page—you don’t have to necessarily do anything here. Some sections also contain videos of me live coding the examples so you can see what it looks like to work with R in real time. This page will be <em>very</em> helpful as you work on your assignments.</p></li>
-<li><p><a href="./assignment/"><strong>Assignment</strong></a> (<i class="fa-solid fa-pen-ruler" aria-hidden="true"></i>): This page contains the instructions for each assignment. Weekly reports are due by <em>noon</em> on the day of class. Other assignments are due by <em>11:59 PM</em> on the day they’re listed.</p></li>
+<li><p><a href="./lesson/index.qmd"><strong>Lesson</strong></a> (<i class="fa-solid fa-chalkboard-teacher" aria-hidden="true"></i>): This page contains additional annotated R code and other supplementary information that you can use as a reference for your assignments and project. This is only a reference page—you don’t have to necessarily do anything here, but it will be helpful as you work on your assignments.</p></li>
+<li><p><a href="./example/"><strong>Example</strong></a> (<i class="fa-solid fa-laptop-code" aria-hidden="true"></i>): This page the scripts that we work on in class as a reminder of some of the live-coding exercises. These are provided as a reference to help you link your notes to the syntax we use in class.</p></li>
+<li><p><a href="./assignment/"><strong>Assignment</strong></a> (<i class="fa-solid fa-pen-ruler" aria-hidden="true"></i>): This page contains the instructions for each assignment. Assignments are due by <em>11:59 PM</em> on the day they’re listed.</p></li>
 </ul>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Subscribe!
 </div>
 </div>
@@ -170,7 +188,7 @@ Subscribe!
 </div>
 <div class="g-col-12 g-col-md-10">
 <p>
-<input class="form-control" type="text" value="https://isdrfall22.classes.spaseslab.com/files/schedule.ics" onclick="this.select()" readonly="">
+<input class="form-control" type="text" value="https://isdrfall23.classes.spaseslab.com/files/schedule.ics" onclick="this.select()" readonly="">
 </p>
 </div>
 </div>
@@ -191,6 +209,9 @@ Title
 Content
 </th>
 <th style="text-align:center;">
+Lesson
+</th>
+<th style="text-align:center;">
 Example
 </th>
 <th style="text-align:center;">
@@ -199,153 +220,184 @@ Assignment
 </tr>
 </thead>
 <tbody>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 1</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>August 22</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">August 21</span><br><span class="content-session">(Session 1)</span>
 </td>
-<td style="text-align:left;width: 50%; ">
+<td style="text-align:left;width: 48%; ">
 <span class="content-title">Introduction to the course</span>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <a href="./content/01-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <a href="./example/getting-setup.html"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 2</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>August 24</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">August 23</span><br><span class="content-session">(Session 2)</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Basic data structures in R</span>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Why Geographic Analysis</span>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <a href="./content/02-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="2">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 3</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>August 29</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Rmarkdown, pseudocode, and literate programming</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/03-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>August 30</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">August 24</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-Self-Evaluation 1 due  <small>(submit by 23:59:00)</small>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Self-Evaluation 1 due</span>  <small>(submit by 11:59 PM)</small>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <a href="./assignment/self-eval1.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
 </td>
 </tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 4</strong>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">August 28</span><br><span class="content-session">(Session 3)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Introduction to Spatial Data</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/03-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>August 31</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">August 30</span><br><span class="content-session">(Session 4)</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Repetitive tasks, pipes, and functional programming</span>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Introduction to Spatial Data with R</span>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <a href="./content/04-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 5</strong>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">August 31</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Homework 1</span>  <small>(submit by 11:59 PM)</small>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./assignment/01-intro.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
 </td>
 </tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>September 5</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 4</span>
 </td>
-<td style="text-align:left;width: 50%; ">
+<td style="text-align:left;width: 48%; ">
 No Class<br><span class="content-note">(Labor Day)</span>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Homework 1</strong>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 6</span><br><span class="content-session">(Session 6)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Literate Programming, Quarto, Workflows</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/06-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>September 6</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 7</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-Homework 1  <small>(submit by 23:59:00)</small>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Homework 2</span>  <small>(submit by 11:59 PM)</small>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="./assignment/01-intro.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+<td style="text-align:center;width: 8%; ">
+<a href="./assignment/02-introspatial.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
 </td>
 </tr>
 </tbody>
@@ -367,6 +419,9 @@ Title
 Content
 </th>
 <th style="text-align:center;">
+Lesson
+</th>
+<th style="text-align:center;">
 Example
 </th>
 <th style="text-align:center;">
@@ -375,202 +430,324 @@ Assignment
 </tr>
 </thead>
 <tbody>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 6</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>September 7</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 11</span><br><span class="content-session">(Session 7)</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Spatial data is special data</span>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Areal Data: Coordinates and Geometries</span>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/06-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 7</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>September 12</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Spatial data as vectors</span>
-</td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <a href="./content/07-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="example/vector-intro.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 8</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>September 14</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 13</span><br><span class="content-session">(Session 8)</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Operations with vector data I</span>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Areal Data: Vector Data</span>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <a href="./content/08-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
 </td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<a href="example/vector-intro.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 9</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>September 19</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 14</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Operations with vector data II</span>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Homework 3</span>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/09-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 10</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>September 21</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Spatial data as matrices and rasters</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/10-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="example/raster-intro.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 11</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>September 26</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Operations with raster data I</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/11-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 12</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>September 28</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Operations with raster data II</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/12-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 13</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>October 3</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Combining vector and raster operations</span>  <small>(submit by 23:59:00)</small>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/13-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="example/combining-data.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Homework 2</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>October 4</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-Homework 2  <small>(submit by 23:59:00)</small>
-</td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="assignment/02-spatialops.qmd"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+<td style="text-align:center;width: 8%; ">
+<a href="./assignment/03-vector.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 18</span><br><span class="content-session">(Session 9)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Areal Data: Rasters</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/09-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 20</span><br><span class="content-session">(Session 10)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Mapping Geographic Data</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/10-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="example/mapping-intro.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 21</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Homework 4</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./assignment/04-maps.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 25</span><br><span class="content-session">(Session 11)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Operations With Vectors I</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/11-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 27</span><br><span class="content-session">(Session 12)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Operations With Vectors II</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/12-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">September 28</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Assignment Revision 1</span>  <small>(submit by 11:59 PM)</small>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="assignment/05-firstrevision.qmd"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 2</span><br><span class="content-session">(Session 13)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Operations With Rasters I</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/13-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="example/combining-data.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 4</span><br><span class="content-session">(Session 14)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Operations With Rasters II</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/14-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="example/intro-analysis.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 5</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Homework 5</span>  <small>(submit by 11:59 PM)</small>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./assignment/06-vectorops.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 9</span><br><span class="content-session">(Session 15)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Combining Tabular Data and Spatial Data</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/15-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 11</span><br><span class="content-session">(Session 16)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Combining Vectors and Continuous Rasters</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/16-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 15</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Homework 6</span>  <small>(submit by 11:59 PM)</small>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./assignment/07-rasterops.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 16</span><br><span class="content-session">(Session 17)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Combining Vectors and Categorical Rasters</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/17-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
 </tbody>
@@ -592,6 +769,9 @@ Title
 Content
 </th>
 <th style="text-align:center;">
+Lesson
+</th>
+<th style="text-align:center;">
 Example
 </th>
 <th style="text-align:center;">
@@ -600,219 +780,324 @@ Assignment
 </tr>
 </thead>
 <tbody>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 14</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>October 5</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 18</span><br><span class="content-session">(Session 18)</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Building analysis databates using attributes</span>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Point Patterns</span>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/14-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="example/intro-analysis.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 15</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>October 10</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Building analysis databates using location</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/15-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 16</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>October 12</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Assessing spatial autocorrelation</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/16-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="2">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 17</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>October 17</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Point pattern analysis and hypothesis testing</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/17-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>October 18</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-Self-Evaluation 2 due
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./assignment/self-eval2.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 18</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>October 19</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Interpolation</span>
-</td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <a href="./content/18-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="example/pattern-analysis.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 19</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>October 24</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Multivariate statistical analysis I</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/19-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="example/stat-analysis.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 20</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>October 26</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Multivariate statistical analysis II</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/20-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 21</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>October 31</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 19</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Multivariate statistical analysis III</span>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Homework 7</span>  <small>(submit by 11:59 PM)</small>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="./content/21-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Homework 3</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>November 1</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-Homework 3  <small>(submit by 23:59:00)</small>
-</td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="assignment/03-spatialmod.qmd"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+<td style="text-align:center;width: 8%; ">
+<a href="./assignment/08-combinations.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 23</span><br><span class="content-session">(Session 19)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Interpolation</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/19-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="example/pattern-analysis.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 25</span><br><span class="content-session">(Session 20)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Proximity and Areal Data</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/20-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="example/stat-analysis.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 26</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Homework 8</span>  <small>(submit by 11:59 PM)</small>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./assignment/09-pointpatterns.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">October 30</span><br><span class="content-session">(Session 21)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Spatial Autocorrelation</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/21-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 1</span><br><span class="content-session">(Session 22)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Statistical Modelling I</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/22-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 2</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Assignment Revision 2</span>  <small>(submit by 11:59 PM)</small>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="assignment/10-secondrevision.qmd"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 6</span><br><span class="content-session">(Session 23)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Statistical Modelling II</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/23-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 8</span><br><span class="content-session">(Session 24)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Statistical Modelling III</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/24-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="example/intro-ggplot.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 9</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Homework 9</span>  <small>(submit by 11:59 PM)</small>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./assignment/11-statmod.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 13</span><br><span class="content-session">(Session 25)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Movement and Networks I</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/25-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 15</span><br><span class="content-session">(Session 26)</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Movement and Networks II</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/26-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 16</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Homework 10</span>  <small>(submit by 11:59 PM)</small>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<a href="./assignment/12-nets.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 20</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+No Class<br><span class="content-note">(Fall Break)</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 22</span>
+</td>
+<td style="text-align:left;width: 48%; ">
+No Class<br><span class="content-note">(Fall Break)</span>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
 </tbody>
@@ -834,6 +1119,9 @@ Title
 Content
 </th>
 <th style="text-align:center;">
+Lesson
+</th>
+<th style="text-align:center;">
 Example
 </th>
 <th style="text-align:center;">
@@ -842,223 +1130,83 @@ Assignment
 </tr>
 </thead>
 <tbody>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 22</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>November 2</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 27</span><br><span class="content-session">(Session 29)</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Basic data visualization principles</span>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Data Visualization and Maps I</span>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="content/22-content.qmd"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/29-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="example/intro-ggplot.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 23</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>November 7</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Introduction to ggplot</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="content/23-content.qmd"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 24</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>November 9</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 29</span><br><span class="content-session">(Session 30)</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Maps, truth, and cartography</span>
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Data Visualization and Maps II</span>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="content/24-content.qmd"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/30-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 25</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>November 14</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">November 30</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Static maps in R</span>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Assignment Revision 3</span>  <small>(submit by 11:59 PM)</small>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="content/25-content.qmd"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="example/maps-in-r.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 26</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>November 16</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Building better maps</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="content/26-content.qmd"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Homework 4</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>November 18</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-Homework 4  <small>(submit by 23:59:00)</small>
-</td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="assignment/04-dataviz.qmd"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 27</strong>
+<td style="text-align:center;width: 8%; ">
+<a href="assignment/13-thirdrevision.qmd"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
 </td>
 </tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>November 21</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">December 4</span><br><span class="content-session">(Session 31)</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-No Class
+<td style="text-align:left;width: 48%; ">
+<span class="content-title">Introduction to Interactive Maps</span>
 </td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/31-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 28</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>November 23</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-No Class<br><span class="content-note">(Fall Break)</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 29</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>November 28</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Introduction to interactive maps I</span><br><span class="content-note">(Fall Break)</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="content/29-content.qmd"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 30</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>November 30</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
-<span class="content-title">Interactive maps II</span>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="content/30-content.qmd"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
@@ -1081,6 +1229,9 @@ Title
 Content
 </th>
 <th style="text-align:center;">
+Lesson
+</th>
+<th style="text-align:center;">
 Example
 </th>
 <th style="text-align:center;">
@@ -1089,108 +1240,83 @@ Assignment
 </tr>
 </thead>
 <tbody>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Final Project Draft</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>December 2</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">December 6</span><br><span class="content-session">(Session 32)</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-Final Project Draft  <small>(submit by 23:59:00)</small>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
-</td>
-<td style="text-align:center;width: 10%; ">
-<a href="./assignment/final-proj.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 31</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>December 5</strong>
-</td>
-<td style="text-align:left;width: 50%; ">
+<td style="text-align:left;width: 48%; ">
 <span class="content-title">Conclusion</span>
 </td>
-<td style="text-align:center;width: 10%; ">
-<a href="content/31-content.qmd"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
+<td style="text-align:center;width: 8%; ">
+<a href="./content/32-content.html"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
-<tr grouplength="1">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Session 32</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>December 7</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">December 8</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-Final Project Workday
+<td style="text-align:left;width: 48%; ">
+Final Project Workday<br><span class="content-note">(optional)</span>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>
 </td>
 </tr>
-<tr grouplength="2">
-<td colspan="5" style="border-bottom: 2px solid #000000;">
-<strong>Final Project</strong>
-</td>
-</tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>December 15</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">December 14</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-Final Project Due  <small>(submit by 23:59:00)</small>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Final Project Due</span>  <small>(submit by 11:59 PM)</small>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <a href="./assignment/final-proj.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
 </td>
 </tr>
 <tr>
-<td style="text-align:right;width: 20%; padding-right: 20px;padding-left: 2em;" indentlevel="1">
-<strong>December 16</strong>
+<td style="text-align:right;width: 20%; padding-right: 20px;">
+<span class="content-date">December 15</span>
 </td>
-<td style="text-align:left;width: 50%; ">
-Final Self-Evaluation Due  <small>(submit by 23:59:00)</small>
+<td style="text-align:left;width: 48%; ">
+<span class="content-flag"><i class="fas fa-star"></i> Final Self-Evaluation Due</span>  <small>(submit by 11:59 PM)</small>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
+<font color="#e9ecef"><i class="fa-solid fa-chalkboard-teacher fa-lg"></i></font>
+</td>
+<td style="text-align:center;width: 8%; ">
 <font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>
 </td>
-<td style="text-align:center;width: 10%; ">
+<td style="text-align:center;width: 8%; ">
 <a href="./assignment/self-eval3.html"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>
 </td>
 </tr>
@@ -1230,9 +1356,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1244,7 +1384,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1272,31 +1429,136 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
@@ -1304,7 +1566,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2023 by <a href="https://www.spaseslab.com">Matt Williamson</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
-    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/mattwilliamson/isdrfall22">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a> Based on websites designed by <a href="https://github.com/andrewheiss/evalf22.classes.andrewheiss.com">Andrew Heiss</a></div>
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/mattwilliamson/isdrfall23">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a> Based on websites designed by <a href="https://github.com/andrewheiss/evalf22.classes.andrewheiss.com">Andrew Heiss</a></div>
   </div>
 </footer>
 
