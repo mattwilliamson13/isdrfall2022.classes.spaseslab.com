@@ -1467,7 +1467,7 @@
     "href": "content/02-content.html#readings",
     "title": "Why Geographic Analysis",
     "section": "Readings",
-    "text": "Readings"
+    "text": "Readings\nThe following readings are intended to give you some sense of the discussion surrounding the role of spatial data in understanding the world. They are a mix of old favorites and relatively recent reviews. You don’t need to read all of them or memorize them, but they are worth a skim. I bet you’ll find something interesting.\n Conservation biogeography: assessment and prospects by Whitaker et al. (2005) provides an overview of the of geography in understanding ecosystem function and shaping conservation strategies.\n Economic geography, politics, and policy by Rickard (2020) provides a review of the role of geography in understanding responses to globalization.\n Revolutionary and counter revolutionary theory in geography and the problem of ghetto formation by David Harvey (1972) offers a scathing critique of quantitative geography (though Harvey was one of the founders of the field). See (Barnes 2009) for a relatively recent attempt to reconcile these views.\n Does scale exist? An epistemological scale continuum for complex human–environment systems by Steven Manson (2008) is one of my favorite summaries of the various definitions and confusion surrounding scale as a concept invoked in many disciplines.\n Spatial Scaling in Ecology by John Wiens (1989) describes the fundamental challenges of scale in Ecology."
   },
   {
     "objectID": "content/02-content.html#objectives",
@@ -1481,7 +1481,7 @@
     "href": "content/02-content.html#slides",
     "title": "Why Geographic Analysis",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides forthcoming"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
   },
   {
     "objectID": "assignment/self-eval3.html",
@@ -2018,261 +2018,170 @@
   {
     "objectID": "slides/02-slides.html#checking-in",
     "href": "slides/02-slides.html#checking-in",
-    "title": "Basic Data Structures in R",
+    "title": "Why Geographic Analysis",
     "section": "Checking in",
     "text": "Checking in\n\nWhat are some advantages and disadvantages of using R for spatial analysis\nWhat can I clarify about the course?\nHow do you feel about git and github classroom? How can I make that easier for you?"
   },
   {
     "objectID": "slides/02-slides.html#todays-plan",
     "href": "slides/02-slides.html#todays-plan",
-    "title": "Basic Data Structures in R",
+    "title": "Why Geographic Analysis",
     "section": "Today’s Plan",
-    "text": "Today’s Plan\n\n\nUnderstanding data types and their role in R\nReading, subsetting, and manipulating data\nGetting help\nFirst assignment is live!"
+    "text": "Today’s Plan\n\n\nWhat can we do with geographic information?\nConceptual challenges\nAnalytical challenges\nCritiques of quantitative geography"
   },
   {
-    "objectID": "slides/02-slides.html#data-types",
-    "href": "slides/02-slides.html#data-types",
-    "title": "Basic Data Structures in R",
-    "section": "Data types",
-    "text": "Data types\n\n\nThe basic schema that R uses to store data.\nCreates expectations for allowable values\nSets the “rules” for how your data can be manipulated\nAffects storage and combination with other data types\nFour most common: Logical, Numeric, Integer, Character"
+    "objectID": "slides/02-slides.html#what-is-geography",
+    "href": "slides/02-slides.html#what-is-geography",
+    "title": "Why Geographic Analysis",
+    "section": "What is geography",
+    "text": "What is geography\n\nGeo: land, earth, terrain\nGraph: writing, discourse\nTuan: Space (extent) and Place (location)\nAnalysis of the effects of extent and location on events or features"
   },
   {
-    "objectID": "slides/02-slides.html#logical-data",
-    "href": "slides/02-slides.html#logical-data",
-    "title": "Basic Data Structures in R",
-    "section": "Logical Data",
-    "text": "Logical Data\n\nData take on the value of either TRUE or FALSE.\nSpecial type of logical called NA to represent missing values\nCan be coerced to integers when numeric data is requires (TRUE = 1; FALSE = 0)"
+    "objectID": "slides/02-slides.html#five-themes-in-geography",
+    "href": "slides/02-slides.html#five-themes-in-geography",
+    "title": "Why Geographic Analysis",
+    "section": "Five Themes in Geography",
+    "text": "Five Themes in Geography\n\n\n\nLocation\nPlace\nRegion\nMovement\nHuman-Environment Interaction\n\n\n\n\n\nWGBH Educational Foundation"
   },
   {
-    "objectID": "slides/02-slides.html#logical-data-contd",
-    "href": "slides/02-slides.html#logical-data-contd",
-    "title": "Basic Data Structures in R",
-    "section": "Logical Data (cont’d)",
-    "text": "Logical Data (cont’d)\n\nCan be the outcome of logical test\n\n\nx &lt;- runif(10,-10, 10) #generate 10 random numbers between -10 and 10\n(y &lt;- x &gt; 5) #test whether the values are greater than 5 and assign to object y\n\n [1]  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE\n\ntypeof(y) #how is R storing the object?\n\n[1] \"logical\"\n\nmean(y) #gives the proportion of y that is greater than 5\n\n[1] 0.3\n\nx[c(3,6,8)] &lt;- NA #set the 3rd, 6th, and 8th value to NA\nis.na(x) #check which values are NA\n\n [1] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE"
+    "objectID": "slides/02-slides.html#location",
+    "href": "slides/02-slides.html#location",
+    "title": "Why Geographic Analysis",
+    "section": "Location",
+    "text": "Location\nThe place (on Earth) of a particular geographic feature"
   },
   {
-    "objectID": "slides/02-slides.html#numeric-data",
-    "href": "slides/02-slides.html#numeric-data",
-    "title": "Basic Data Structures in R",
-    "section": "Numeric Data",
-    "text": "Numeric Data\n\nAll of the elements of an object (or variable) are numbers that could have decimals\nR can store this as either double (at least 2 decimal points) or integer\n\n\nx &lt;- runif(10,-10, 10) #generate 10 random numbers between -10 and 10\ntypeof(x) #how is R storing the object?\n\n[1] \"double\"\n\nclass(x) #describes how R will treat the object \n\n[1] \"numeric\""
+    "objectID": "slides/02-slides.html#location-1",
+    "href": "slides/02-slides.html#location-1",
+    "title": "Why Geographic Analysis",
+    "section": "Location",
+    "text": "Location\nThe place (on Earth) of a particular geographic feature"
   },
   {
-    "objectID": "slides/02-slides.html#integer-data",
-    "href": "slides/02-slides.html#integer-data",
-    "title": "Basic Data Structures in R",
-    "section": "Integer Data",
-    "text": "Integer Data\n\nInteger data is a special case of numeric data with no decimals\n\n\nmode(x) &lt;- \"integer\"\nx\n\n [1]  7  4 -1  3 -6  9  3  0  6 -1\n\nclass(x)\n\n[1] \"integer\"\n\ntypeof(x)\n\n[1] \"integer\"\n\nz &lt;- sample.int(100, size=10) #sample 10 integers between 1 and 100\ntypeof(z)\n\n[1] \"integer\"\n\nclass(z)\n\n[1] \"integer\""
+    "objectID": "slides/02-slides.html#place",
+    "href": "slides/02-slides.html#place",
+    "title": "Why Geographic Analysis",
+    "section": "Place",
+    "text": "Place\nWhat is a location like?\n\n\n\n\n\n\n\n\n\n\n\n\nForest cover map by Robert Simmons via Wikimedia Commons; temp map from GISgeography.com"
   },
   {
-    "objectID": "slides/02-slides.html#character-data",
-    "href": "slides/02-slides.html#character-data",
-    "title": "Basic Data Structures in R",
-    "section": "Character Data",
-    "text": "Character Data\n\nRepresent string values\nStrings tend to be a word or multiple words\nCan be used with logical tests\n\n\nchar &lt;- c(\"Sarah\", \"Tracy\", \"Jon\") #use c() to combine multiple entries\ntypeof(char)\n\n[1] \"character\"\n\nchar == \"Jon\"\n\n[1] FALSE FALSE  TRUE\n\nchar[char==\"Jon\"] &lt;- \"Jeff\"\nchar\n\n[1] \"Sarah\" \"Tracy\" \"Jeff\""
+    "objectID": "slides/02-slides.html#place-1",
+    "href": "slides/02-slides.html#place-1",
+    "title": "Why Geographic Analysis",
+    "section": "Place",
+    "text": "Place\nWhat is a location like?"
   },
   {
-    "objectID": "slides/02-slides.html#factors",
-    "href": "slides/02-slides.html#factors",
-    "title": "Basic Data Structures in R",
-    "section": "Factors",
-    "text": "Factors\n\nA special case of character data\nData contains a limited number of possible character strings (categorical variables)\nThe levels of a factor describe the possible values (all others coerced to NA)\n\n\n(sex &lt;- factor(c(\"female\", \"female\", \"male\", \"female\", \"male\")))  #by default levels are ordered alphabetically\n\n[1] female female male   female male  \nLevels: female male\n\n(sex &lt;- factor(sex, levels = c(\"male\", \"female\"))) #changing the order of the levels\n\n[1] female female male   female male  \nLevels: male female"
+    "objectID": "slides/02-slides.html#region",
+    "href": "slides/02-slides.html#region",
+    "title": "Why Geographic Analysis",
+    "section": "Region",
+    "text": "Region\nHow are different areas similar or different?"
   },
   {
-    "objectID": "slides/02-slides.html#coercion",
-    "href": "slides/02-slides.html#coercion",
-    "title": "Basic Data Structures in R",
-    "section": "Coercion",
-    "text": "Coercion\n\nSometimes certain functions require a particular class of data require conversion (or coercion)\nmode - implicitly; as.xxx - explicitly\n\n\ntext &lt;- c(\"test1\", \"test2\", \"test1\", \"test1\") # create a character vector\nclass(text)\n\n[1] \"character\"\n\ntext_factor &lt;- as.factor(text) # transform to factor\nclass(text_factor) # recheck the class\n\n[1] \"factor\"\n\nlevels(text_factor)\n\n[1] \"test1\" \"test2\"\n\nas.numeric(text_factor)\n\n[1] 1 2 1 1"
+    "objectID": "slides/02-slides.html#region-1",
+    "href": "slides/02-slides.html#region-1",
+    "title": "Why Geographic Analysis",
+    "section": "Region",
+    "text": "Region\nHow are different areas similar or different?"
   },
   {
-    "objectID": "slides/02-slides.html#data-structures",
-    "href": "slides/02-slides.html#data-structures",
-    "title": "Basic Data Structures in R",
-    "section": "Data structures",
-    "text": "Data structures\n\nLots of options for how R stores data\nStructure determines which functions work and how they behave\nlength(), str(), summary(), head(), and tail() can help you explore\nMost of the RSpatial data structures build on these basic structures"
+    "objectID": "slides/02-slides.html#movement",
+    "href": "slides/02-slides.html#movement",
+    "title": "Why Geographic Analysis",
+    "section": "Movement",
+    "text": "Movement\nHow do genes, individuals, populations, ideas, goods, etc traverse the landscape."
   },
   {
-    "objectID": "slides/02-slides.html#vectors",
-    "href": "slides/02-slides.html#vectors",
-    "title": "Basic Data Structures in R",
-    "section": "Vectors",
-    "text": "Vectors\n\nA 1-dimensional collection of elements with the same data type\nCombining two datatypes makes R choose\n\n\nseries.1 &lt;- seq(10)\nseries.2 &lt;- seq(from = 0.5, to = 5, by = 0.5)\nseries.abc &lt;- letters[1:10]\nlength(series.1)\n\n[1] 10\n\nlength(series.2)\n\n[1] 10\n\nclass(c(series.abc, series.1)) #combine characters with numbers\n\n[1] \"character\""
+    "objectID": "slides/02-slides.html#movement-1",
+    "href": "slides/02-slides.html#movement-1",
+    "title": "Why Geographic Analysis",
+    "section": "Movement",
+    "text": "Movement\nHow do genes, individuals, populations, ideas, goods, etc traverse the landscape.\n\n\n\n\n\n\n\n\n\n\n\n\nBoth maps courtesy of High Country News"
   },
   {
-    "objectID": "slides/02-slides.html#vectors-contd",
-    "href": "slides/02-slides.html#vectors-contd",
-    "title": "Basic Data Structures in R",
-    "section": "Vectors (cont’d)",
-    "text": "Vectors (cont’d)\n\nCan combine them or perform ‘vectorized’ operations\n\n\nseries.comb &lt;- c(series.1, series.2)\nlength(series.comb)\n\n[1] 20\n\nseries.add &lt;- series.1 + series.2\nlength(series.add)\n\n[1] 10\n\nhead(series.add)\n\n[1] 1.5 3.0 4.5 6.0 7.5 9.0\n\n\n\nWhat happens if you try to add the character vector to the numeric vector?"
+    "objectID": "slides/02-slides.html#human-environment-interactions",
+    "href": "slides/02-slides.html#human-environment-interactions",
+    "title": "Why Geographic Analysis",
+    "section": "Human-Environment Interactions",
+    "text": "Human-Environment Interactions\nHow do people relate to and change the physical world to meet their needs?\n\n\n\n\n\n\n\n\n\n\n\n\nSmoke map courtesy of Capital Public Radio; Nightlights courtesy of NASA Earth Observatory."
   },
   {
-    "objectID": "slides/02-slides.html#matrices",
-    "href": "slides/02-slides.html#matrices",
-    "title": "Basic Data Structures in R",
-    "section": "Matrices",
-    "text": "Matrices\n\nAn extension of the numeric or character vectors to include 2-dimensions (rows and columns)\nArrays extend the idea to multiple dimensions\nElements of matrix must have the same data type\n\n\n(m &lt;- matrix(1:6, nrow = 2, ncol = 3)) #default is to fill by columns\n\n     [,1] [,2] [,3]\n[1,]    1    3    5\n[2,]    2    4    6\n\ndim(m)\n\n[1] 2 3\n\n(m &lt;- matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE))\n\n     [,1] [,2] [,3]\n[1,]    1    2    3\n[2,]    4    5    6"
+    "objectID": "slides/02-slides.html#description",
+    "href": "slides/02-slides.html#description",
+    "title": "Why Geographic Analysis",
+    "section": "Description",
+    "text": "Description\n\n\n\nCoordinates\nDistances\nNeighbors\nSummary statistics\n\n\n\n\n\n\n\ncourtesy of innovative GIS"
   },
   {
-    "objectID": "slides/02-slides.html#lists",
-    "href": "slides/02-slides.html#lists",
-    "title": "Basic Data Structures in R",
-    "section": "Lists",
-    "text": "Lists\n\nHold a variety of different data types and structures including more lists.\nUse a lot for functional programming (next week).\n\n\n(xlist &lt;- list(a = \"Waldo\", b = 1:10, data = head(mtcars)))\n\n$a\n[1] \"Waldo\"\n\n$b\n [1]  1  2  3  4  5  6  7  8  9 10\n\n$data\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1"
+    "objectID": "slides/02-slides.html#description-1",
+    "href": "slides/02-slides.html#description-1",
+    "title": "Why Geographic Analysis",
+    "section": "Description",
+    "text": "Description\n\n\n\nRange Maps\nHotspots\nIndices"
   },
   {
-    "objectID": "slides/02-slides.html#lists-contd",
-    "href": "slides/02-slides.html#lists-contd",
-    "title": "Basic Data Structures in R",
-    "section": "Lists (cont’d)",
-    "text": "Lists (cont’d)\n\nLists store information in slots\nAdding names to a list can help with accessing data\n\n\nnames(xlist)\n\n[1] \"a\"    \"b\"    \"data\"\n\nclass(xlist$data)\n\n[1] \"data.frame\""
+    "objectID": "slides/02-slides.html#explanation-and-inference",
+    "href": "slides/02-slides.html#explanation-and-inference",
+    "title": "Why Geographic Analysis",
+    "section": "Explanation and Inference",
+    "text": "Explanation and Inference\n\nCognitive Description: collection ordering and classification of data\nCause and Effect: design-based or model-based testing of the factors that give rise to geographic distributions\nSystems Analysis: describes the entire complex set of interactions that structure an activity"
   },
   {
-    "objectID": "slides/02-slides.html#data-frames",
-    "href": "slides/02-slides.html#data-frames",
-    "title": "Basic Data Structures in R",
-    "section": "Data Frames",
-    "text": "Data Frames\n\nResemble tabular datasets used in spreadsheet programs\nLong vs. wide data\nSpecial type of list where every element has the same length (but can have different types of data)\n\n\n(dat &lt;- data.frame(id = letters[1:5], x = 1:5, y = rep(date(),times=5 )))\n\n  id x                        y\n1  a 1 Tue Aug 15 09:43:53 2023\n2  b 2 Tue Aug 15 09:43:53 2023\n3  c 3 Tue Aug 15 09:43:53 2023\n4  d 4 Tue Aug 15 09:43:53 2023\n5  e 5 Tue Aug 15 09:43:53 2023\n\nis.list(dat)\n\n[1] TRUE\n\nclass(dat)\n\n[1] \"data.frame\""
+    "objectID": "slides/02-slides.html#prediction",
+    "href": "slides/02-slides.html#prediction",
+    "title": "Why Geographic Analysis",
+    "section": "Prediction",
+    "text": "Prediction\n\n\n\n\n\nExtend description or explanation into unmeasured space\nStationarity: the rules governing a process do not drift over space-time"
   },
   {
-    "objectID": "slides/02-slides.html#data-frames-contd",
-    "href": "slides/02-slides.html#data-frames-contd",
-    "title": "Basic Data Structures in R",
-    "section": "Data Frames (cont’d)",
-    "text": "Data Frames (cont’d)\n\nLots of ways to access and summarize data in data frames\nUseful for making sure your functions are working as intended\n\n\nstr(dat) #compact summary of the structure of a dataframe\n\n'data.frame':   5 obs. of  3 variables:\n $ id: chr  \"a\" \"b\" \"c\" \"d\" ...\n $ x : int  1 2 3 4 5\n $ y : chr  \"Tue Aug 15 09:43:53 2023\" \"Tue Aug 15 09:43:53 2023\" \"Tue Aug 15 09:43:53 2023\" \"Tue Aug 15 09:43:53 2023\" ...\n\nsummary(dat) #estimate summary statistics of data frame\n\n      id                  x          y            \n Length:5           Min.   :1   Length:5          \n Class :character   1st Qu.:2   Class :character  \n Mode  :character   Median :3   Mode  :character  \n                    Mean   :3                     \n                    3rd Qu.:4                     \n                    Max.   :5"
+    "objectID": "slides/02-slides.html#scale",
+    "href": "slides/02-slides.html#scale",
+    "title": "Why Geographic Analysis",
+    "section": "Scale",
+    "text": "Scale\n\nWhat do we even mean?\n\n\n\n\n\n\nGrain: the smallest unit of measurement\nExtent: the areal coverage of the measurement\n\n\n\n\n\nFrom Manson 2008"
   },
   {
-    "objectID": "slides/02-slides.html#data-frames-one-more-time",
-    "href": "slides/02-slides.html#data-frames-one-more-time",
-    "title": "Basic Data Structures in R",
-    "section": "Data Frames (one more time)",
-    "text": "Data Frames (one more time)\n\nSpecial cases of names (colnames and rownames)\n\n\ncolnames(dat) #get the names of the variables stored in the data frame\n\n[1] \"id\" \"x\"  \"y\" \n\ndat$y\n\n[1] \"Tue Aug 15 09:43:53 2023\" \"Tue Aug 15 09:43:53 2023\"\n[3] \"Tue Aug 15 09:43:53 2023\" \"Tue Aug 15 09:43:53 2023\"\n[5] \"Tue Aug 15 09:43:53 2023\""
+    "objectID": "slides/02-slides.html#scale-1",
+    "href": "slides/02-slides.html#scale-1",
+    "title": "Why Geographic Analysis",
+    "section": "Scale",
+    "text": "Scale\n\nEven if it exists, how do we know we are measuring at the right scale?"
   },
   {
-    "objectID": "slides/02-slides.html#tibbles",
-    "href": "slides/02-slides.html#tibbles",
-    "title": "Basic Data Structures in R",
-    "section": "Tibbles",
-    "text": "Tibbles\n\nSimilar to data frames, but allow for lists within columns\nDesigned for use with the tidyverse\nFoundation of sf objects\n\n\nlibrary(tidyverse) #load the package necessary\ndat.tib &lt;- tibble(dat)\nis.list(dat.tib)\n\n[1] TRUE\n\n## [1] TRUE\n\nclass(dat.tib)\n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\""
+    "objectID": "slides/02-slides.html#fallacies",
+    "href": "slides/02-slides.html#fallacies",
+    "title": "Why Geographic Analysis",
+    "section": "Fallacies",
+    "text": "Fallacies\n\n\n\nLocational Fallacy: Error due to the spatial characterization chosen for elements of study\nAtomic Fallacy: Applying conclusions from individuals to entire spatial units\nEcological Fallacy: Applying conclusions from aggregated information to individuals"
   },
   {
-    "objectID": "slides/02-slides.html#a-note-on-the-tidyverse",
-    "href": "slides/02-slides.html#a-note-on-the-tidyverse",
-    "title": "Basic Data Structures in R",
-    "section": "A Note on the tidyverse",
-    "text": "A Note on the tidyverse\n\nA self-contained universe of packages and functions designed to work together\nRely on “verbs” to make coding more intuitive\nBenefits and drawbacks"
+    "objectID": "slides/02-slides.html#measurement-error-and-mismatch",
+    "href": "slides/02-slides.html#measurement-error-and-mismatch",
+    "title": "Why Geographic Analysis",
+    "section": "Measurement Error and Mismatch",
+    "text": "Measurement Error and Mismatch"
   },
   {
-    "objectID": "slides/02-slides.html#reading-data",
-    "href": "slides/02-slides.html#reading-data",
-    "title": "Basic Data Structures in R",
-    "section": "Reading Data",
-    "text": "Reading Data\n\nThe first step in any data analysis\nDepends on the file type (.csv, .txt, .shp)\nCHECK YOURSELF\n\n\ncars &lt;- read.table('file/cars.txt')\nstr(cars)\n\n'data.frame':   50 obs. of  2 variables:\n $ speed: int  4 4 7 7 8 9 10 10 10 11 ...\n $ dist : int  2 10 4 22 16 10 18 26 34 17 ...\n\nsummary(cars)\n\n     speed           dist       \n Min.   : 4.0   Min.   :  2.00  \n 1st Qu.:12.0   1st Qu.: 26.00  \n Median :15.0   Median : 36.00  \n Mean   :15.4   Mean   : 42.98  \n 3rd Qu.:19.0   3rd Qu.: 56.00  \n Max.   :25.0   Max.   :120.00"
+    "objectID": "slides/02-slides.html#spatial-autocorrelation",
+    "href": "slides/02-slides.html#spatial-autocorrelation",
+    "title": "Why Geographic Analysis",
+    "section": "Spatial Autocorrelation",
+    "text": "Spatial Autocorrelation\n\nFrom Manuel Gimond"
   },
   {
-    "objectID": "slides/02-slides.html#reading-data-contd",
-    "href": "slides/02-slides.html#reading-data-contd",
-    "title": "Basic Data Structures in R",
-    "section": "Reading Data (cont’d)",
-    "text": "Reading Data (cont’d)\n\ntidyverse convention is to use “verb_object”\nFor reading data that means read_ instead of read.\nDifferent default behaviors!!\n\n\ncars_tv &lt;- read_table('file/cars.txt')\nstr(cars_tv)\n\nspc_tbl_ [50 × 2] (S3: spec_tbl_df/tbl_df/tbl/data.frame)\n $ \"speed\": chr [1:50] \"\\\"1\\\"\" \"\\\"2\\\"\" \"\\\"3\\\"\" \"\\\"4\\\"\" ...\n $ \"dist\" : num [1:50] 4 4 7 7 8 9 10 10 10 11 ...\n - attr(*, \"problems\")= tibble [50 × 5] (S3: tbl_df/tbl/data.frame)\n  ..$ row     : int [1:50] 1 2 3 4 5 6 7 8 9 10 ...\n  ..$ col     : chr [1:50] NA NA NA NA ...\n  ..$ expected: chr [1:50] \"2 columns\" \"2 columns\" \"2 columns\" \"2 columns\" ...\n  ..$ actual  : chr [1:50] \"3 columns\" \"3 columns\" \"3 columns\" \"3 columns\" ...\n  ..$ file    : chr [1:50] \"'file/cars.txt'\" \"'file/cars.txt'\" \"'file/cars.txt'\" \"'file/cars.txt'\" ...\n - attr(*, \"spec\")=\n  .. cols(\n  ..   `\"speed\"` = col_character(),\n  ..   `\"dist\"` = col_double()\n  .. )"
+    "objectID": "slides/02-slides.html#stationarity",
+    "href": "slides/02-slides.html#stationarity",
+    "title": "Why Geographic Analysis",
+    "section": "Stationarity",
+    "text": "Stationarity\nThe rules governing a process do not drift over space-time\n\n\n\nFirst Order effects: any event has an equal probability of occurring in a location\nSecond Order effects: the location of one event is independent of the other events\n\n\n\n\n\nFrom Manuel Gimond"
   },
   {
-    "objectID": "slides/02-slides.html#reading-data-contd-1",
-    "href": "slides/02-slides.html#reading-data-contd-1",
-    "title": "Basic Data Structures in R",
-    "section": "Reading Data (cont’d)",
-    "text": "Reading Data (cont’d)\n\nsummary(cars_tv)\n\n   \"speed\"              \"dist\"    \n Length:50          Min.   : 4.0  \n Class :character   1st Qu.:12.0  \n Mode  :character   Median :15.0  \n                    Mean   :15.4  \n                    3rd Qu.:19.0  \n                    Max.   :25.0  \n\nhead(cars_tv)\n\n# A tibble: 6 × 2\n  `\"speed\"` `\"dist\"`\n  &lt;chr&gt;        &lt;dbl&gt;\n1 \"\\\"1\\\"\"          4\n2 \"\\\"2\\\"\"          4\n3 \"\\\"3\\\"\"          7\n4 \"\\\"4\\\"\"          7\n5 \"\\\"5\\\"\"          8\n6 \"\\\"6\\\"\"          9\n\n\nWhat do you notice??"
-  },
-  {
-    "objectID": "slides/02-slides.html#selecting-data",
-    "href": "slides/02-slides.html#selecting-data",
-    "title": "Basic Data Structures in R",
-    "section": "Selecting Data",
-    "text": "Selecting Data\n\nWe often want to access subsets of our data\nFor named objects we can use $\n\n\nspeed &lt;- cars$speed #assign the whole speed column to an object\nhead(speed)\n\n[1] 4 4 7 7 8 9"
-  },
-  {
-    "objectID": "slides/02-slides.html#selecting-data-contd",
-    "href": "slides/02-slides.html#selecting-data-contd",
-    "title": "Basic Data Structures in R",
-    "section": "Selecting Data (cont’d)",
-    "text": "Selecting Data (cont’d)\n\nMore generally we can use [] (can use index and logicals)\n\n\n(speed2 &lt;- cars$speed[2]) # get the vector named speed and take the 2nd element in that vector\n\n[1] 4\n\n(speed3 &lt;- cars[4,2]) #get the vector located in the 2nd column and take the 4th element\n\n[1] 22\n\n(speed20 &lt;- cars[cars$speed &gt; 20,]) #return all columns where speed &gt;20\n\n   speed dist\n44    22   66\n45    23   54\n46    24   70\n47    24   92\n48    24   93\n49    24  120\n50    25   85"
-  },
-  {
-    "objectID": "slides/02-slides.html#selecting-data-contd-1",
-    "href": "slides/02-slides.html#selecting-data-contd-1",
-    "title": "Basic Data Structures in R",
-    "section": "Selecting Data (cont’d)",
-    "text": "Selecting Data (cont’d)\n\nFor lists we use [[]] to access a particular slot and [] to access data in that slot\n\n\nxlist &lt;- list(a = \"Waldo\", b = 1:10, data = head(mtcars))\nxlist[[3]][1,2] #get the 3rd slot in the list and return the value in the 1st row, 2nd column\n\n[1] 6"
-  },
-  {
-    "objectID": "slides/02-slides.html#selecting-data-contd-2",
-    "href": "slides/02-slides.html#selecting-data-contd-2",
-    "title": "Basic Data Structures in R",
-    "section": "Selecting Data (cont’d)",
-    "text": "Selecting Data (cont’d)\n\nIn the tidyverse we use select() to choose columns\nThe %&gt;% operator allows us to link steps together\n\n\nspeed &lt;- read.table('file/cars.txt') %&gt;% \n  select(., speed)\nhead(speed)\n\n  speed\n1     4\n2     4\n3     7\n4     7\n5     8\n6     9"
-  },
-  {
-    "objectID": "slides/02-slides.html#selecting-data-contd-3",
-    "href": "slides/02-slides.html#selecting-data-contd-3",
-    "title": "Basic Data Structures in R",
-    "section": "Selecting Data (cont’d)",
-    "text": "Selecting Data (cont’d)\n\nUse slice to get rows based on position\n\n\n(speed2 &lt;- read.table('file/cars.txt') %&gt;% \n  select(., speed) %&gt;% \n   slice(., 2))\n\n  speed\n2     4"
-  },
-  {
-    "objectID": "slides/02-slides.html#selecting-data-contd-4",
-    "href": "slides/02-slides.html#selecting-data-contd-4",
-    "title": "Basic Data Structures in R",
-    "section": "Selecting Data (cont’d)",
-    "text": "Selecting Data (cont’d)\n\nUsefilter to choose rows that meet a condition\n\n\n(speed2 &lt;- read.table('file/cars.txt') %&gt;% \n  filter(., speed &gt; 20))\n\n   speed dist\n44    22   66\n45    23   54\n46    24   70\n47    24   92\n48    24   93\n49    24  120\n50    25   85"
-  },
-  {
-    "objectID": "slides/02-slides.html#changing-data",
-    "href": "slides/02-slides.html#changing-data",
-    "title": "Basic Data Structures in R",
-    "section": "Changing Data",
-    "text": "Changing Data\n\nUpdating data (CAUTION)\nOften using a combination of index and logicals\n\n\nx &lt;- runif(10,-10, 10) #generate 10 random numbers between -10 and 10\nx[c(3,6,8)] &lt;- NA #set the 3rd, 6th, and 8th value to NA\nis.na(x) #check which values are NA\n\n [1] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE"
-  },
-  {
-    "objectID": "slides/02-slides.html#changing-data-1",
-    "href": "slides/02-slides.html#changing-data-1",
-    "title": "Basic Data Structures in R",
-    "section": "Changing Data",
-    "text": "Changing Data\n\nCreating new variables\nCan use $\n\n\nhead(mtcars, 3)\n\n               mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\n\nmtcars$hpwt &lt;- mtcars$hp/mtcars$wt\nhead(mtcars[,c(1, 5:12)],3)\n\n               mpg drat    wt  qsec vs am gear carb     hpwt\nMazda RX4     21.0 3.90 2.620 16.46  0  1    4    4 41.98473\nMazda RX4 Wag 21.0 3.90 2.875 17.02  0  1    4    4 38.26087\nDatsun 710    22.8 3.85 2.320 18.61  1  1    4    1 40.08621"
-  },
-  {
-    "objectID": "slides/02-slides.html#changing-data-2",
-    "href": "slides/02-slides.html#changing-data-2",
-    "title": "Basic Data Structures in R",
-    "section": "Changing Data",
-    "text": "Changing Data\n\nCreating new variables\nUsing tidyverse, mutate creates new variables for the entire dataset\n\n\nmtcars_update &lt;- mtcars %&gt;% \n  mutate(., hpwt = hp/wt)\nhead(mtcars_update[,c(1, 5:12)], 3)\n\n               mpg drat    wt  qsec vs am gear carb     hpwt\nMazda RX4     21.0 3.90 2.620 16.46  0  1    4    4 41.98473\nMazda RX4 Wag 21.0 3.90 2.875 17.02  0  1    4    4 38.26087\nDatsun 710    22.8 3.85 2.320 18.61  1  1    4    1 40.08621"
-  },
-  {
-    "objectID": "slides/02-slides.html#changing-data-3",
-    "href": "slides/02-slides.html#changing-data-3",
-    "title": "Basic Data Structures in R",
-    "section": "Changing Data",
-    "text": "Changing Data\n\nCreating new variables\nUsing summarise creates group level summaries\n\n\nmtcars_group &lt;- mtcars %&gt;% \n group_by(., cyl) %&gt;% \n  summarise(., meanmpg = mean(mpg))\nmtcars_group\n\n# A tibble: 3 × 2\n    cyl meanmpg\n  &lt;dbl&gt;   &lt;dbl&gt;\n1     4    26.7\n2     6    19.7\n3     8    15.1"
-  },
-  {
-    "objectID": "slides/02-slides.html#kinds-of-errors",
-    "href": "slides/02-slides.html#kinds-of-errors",
-    "title": "Basic Data Structures in R",
-    "section": "2 Kinds of Errors",
-    "text": "2 Kinds of Errors\n\nSyntax Errors: Your code won’t actually run\nSemantic Errors: Your code runs without error, but the result is unexpected"
-  },
-  {
-    "objectID": "slides/02-slides.html#asking-good-questions",
-    "href": "slides/02-slides.html#asking-good-questions",
-    "title": "Basic Data Structures in R",
-    "section": "Asking good questions",
-    "text": "Asking good questions\n\nWhat are you trying to do?\nWhat isn’t working?\nWhat are you expecting?\nWhy aren’t common solutions working?"
-  },
-  {
-    "objectID": "slides/02-slides.html#reproducible-examples",
-    "href": "slides/02-slides.html#reproducible-examples",
-    "title": "Basic Data Structures in R",
-    "section": "Reproducible examples",
-    "text": "Reproducible examples\n\nDon’t require someone to have your data or your computer\nMinimal amount of information and code to reproduce your error\nIncludes both code and your operating environment info\nSee the reprex package."
+    "objectID": "slides/02-slides.html#not-all-geography-needs-to-be-quantitative",
+    "href": "slides/02-slides.html#not-all-geography-needs-to-be-quantitative",
+    "title": "Why Geographic Analysis",
+    "section": "Not all geography needs to be quantitative",
+    "text": "Not all geography needs to be quantitative\n\nAbstraction removes the interesting part\nWhat “is” may require assumptions we don’t want to accept\nWholly dependent on the military-industrial complex"
   },
   {
     "objectID": "slides/04-slides.html#objectives",
@@ -2321,7 +2230,7 @@
     "href": "slides/04-slides.html#structure-of-functions-body",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Body",
-    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx &lt;- runif(100)\nmean_ci(x)\n\n[1] 0.4448119 0.5632028\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.4262113 0.5818034"
+    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx &lt;- runif(100)\nmean_ci(x)\n\n[1] 0.4642289 0.5863640\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.4450401 0.6055528"
   },
   {
     "objectID": "slides/04-slides.html#structure-of-functions-return",
@@ -2335,7 +2244,7 @@
     "href": "slides/04-slides.html#structure-of-functions-return-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Return",
-    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.445 0.563\n $ se   : num 0.0302"
+    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.464 0.586\n $ se   : num 0.0312"
   },
   {
     "objectID": "slides/04-slides.html#iteration",
@@ -2356,7 +2265,7 @@
     "href": "slides/04-slides.html#loops-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Loops",
-    "text": "Loops\n\nlibrary(tidyverse)\ndf &lt;- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput &lt;- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] &lt;- median(df[[i]])      # 3. body\n}\noutput\n\n[1]  0.87381436 -0.36342025 -0.09206311  0.53159376\n\n#&gt; [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
+    "text": "Loops\n\nlibrary(tidyverse)\ndf &lt;- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput &lt;- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] &lt;- median(df[[i]])      # 3. body\n}\noutput\n\n[1]  0.68400529 -0.10006700 -0.37078755 -0.06756608\n\n#&gt; [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
   },
   {
     "objectID": "slides/04-slides.html#the-apply-family",
@@ -2377,7 +2286,7 @@
     "href": "slides/04-slides.html#the-apply-family-2",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "The apply family",
-    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata &lt;- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] -0.2274961\n\n$item3\n[1] 0.9110922\n\n$item4\n[1] 4.836886"
+    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata &lt;- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] 0.3090117\n\n$item3\n[1] 1.058706\n\n$item4\n[1] 4.904276"
   },
   {
     "objectID": "slides/04-slides.html#the-map-family",

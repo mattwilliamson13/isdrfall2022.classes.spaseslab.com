@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -386,6 +405,12 @@ ul.task-list li input[type="checkbox"] {
 <p>Before we get inundated with technical details and syntax, I think it’s important to remind ourselves why we need geographical analysis. We’ll spend some time on the various conceptualizations of place and space, how those things show up in geographic data, and their implications for the kinds of science we can do when we’re using geographic data. This session is meant to provide a bit of philosophical foundation for you to keep in mind as you work through various parts of the analytic pipeline.</p>
 <section id="readings" class="level2">
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<p>The following readings are intended to give you some sense of the discussion surrounding the role of spatial data in understanding the world. They are a mix of old favorites and relatively recent reviews. You don’t need to read all of them or memorize them, but they are worth a skim. I bet you’ll find something interesting.</p>
+<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/j.1366-9516.2005.00143.x">Conservation biogeography: assessment and prospects</a> by Whitaker et al. <span class="citation" data-cites="whittaker2005">(<a href="#ref-whittaker2005" role="doc-biblioref">2005</a>)</span> provides an overview of the of geography in understanding ecosystem function and shaping conservation strategies.</p>
+<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://www.annualreviews.org/doi/abs/10.1146/annurev-polisci-050718-033649">Economic geography, politics, and policy</a> by Rickard <span class="citation" data-cites="rickard2020">(<a href="#ref-rickard2020" role="doc-biblioref">2020</a>)</span> provides a review of the role of geography in understanding responses to globalization.</p>
+<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1467-8330.1972.tb00486.x">Revolutionary and counter revolutionary theory in geography and the problem of ghetto formation</a> by David Harvey <span class="citation" data-cites="Harvey1972">(<a href="#ref-Harvey1972" role="doc-biblioref">1972</a>)</span> offers a scathing critique of quantitative geography (though Harvey was one of the founders of the field). See <span class="citation" data-cites="Barnes2009">(<a href="#ref-Barnes2009" role="doc-biblioref">Barnes 2009</a>)</span> for a relatively recent attempt to reconcile these views.</p>
+<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://www.sciencedirect.com/science/article/pii/S0016718506001564">Does scale exist? An epistemological scale continuum for complex human–environment systems</a> by Steven Manson <span class="citation" data-cites="MANSON2008">(<a href="#ref-MANSON2008" role="doc-biblioref">2008</a>)</span> is one of my favorite summaries of the various definitions and confusion surrounding scale as a concept invoked in many disciplines.</p>
+<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://www.jstor.org/stable/2389612">Spatial Scaling in Ecology</a> by John Wiens <span class="citation" data-cites="Wiens1989">(<a href="#ref-Wiens1989" role="doc-biblioref">1989</a>)</span> describes the fundamental challenges of scale in Ecology.</p>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
@@ -403,12 +428,34 @@ ul.task-list li input[type="checkbox"] {
 <p class="text-center buttons">
 <a class="btn btn-danger" target="_blank" href="../slides/02-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/02-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
-<p>Slides forthcoming</p>
+<div>
+<iframe class="slide-deck" src="../slides/02-slides.html"></iframe>
+</div>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-Barnes2009" class="csl-entry" role="listitem">
+Barnes, T. J. 2009. <a href="https://doi.org/10.1080/00330120902931937"><span>“Not only … but also”</span>: Quantitative and critical geography</a>. The Professional Geographer 61:292–300.
+</div>
+<div id="ref-Harvey1972" class="csl-entry" role="listitem">
+Harvey, D. 1972. <a href="https://doi.org/10.1111/j.1467-8330.1972.tb00486.x">REVOLUTIONARY AND COUNTER REVOLUTIONARY THEORY IN GEOGRAPHY AND THE PROBLEM OF GHETTO FORMATION</a>. Antipode 4:1–13.
+</div>
+<div id="ref-MANSON2008" class="csl-entry" role="listitem">
+Manson, S. M. 2008. <a href="https://doi.org/10.1016/j.geoforum.2006.09.010">Does scale exist? An epistemological scale continuum for complex human–environment systems</a>. Geoforum 39:776–788.
+</div>
+<div id="ref-rickard2020" class="csl-entry" role="listitem">
+Rickard, S. J. 2020. Economic geography, politics, and policy. Annual Review of Political Science 23:187–202.
+</div>
+<div id="ref-whittaker2005" class="csl-entry" role="listitem">
+Whittaker, R. J., M. B. Araújo, P. Jepson, R. J. Ladle, J. E. Watson, and K. J. Willis. 2005. Conservation biogeography: Assessment and prospect. Diversity and distributions 11:3–23.
+</div>
+<div id="ref-Wiens1989" class="csl-entry" role="listitem">
+Wiens, J. A. 1989. <a href="http://www.jstor.org/stable/2389612">Spatial scaling in ecology</a>. Functional Ecology 3:385–397.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
