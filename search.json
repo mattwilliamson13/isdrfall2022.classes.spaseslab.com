@@ -2279,7 +2279,7 @@
     "href": "slides/04-slides.html#structure-of-functions-body",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Body",
-    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx &lt;- runif(100)\nmean_ci(x)\n\n[1] 0.4460629 0.5562067\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.4287581 0.5735115"
+    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx &lt;- runif(100)\nmean_ci(x)\n\n[1] 0.3631653 0.4676549\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.3467488 0.4840714"
   },
   {
     "objectID": "slides/04-slides.html#structure-of-functions-return",
@@ -2293,7 +2293,7 @@
     "href": "slides/04-slides.html#structure-of-functions-return-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Return",
-    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.446 0.556\n $ se   : num 0.0281"
+    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.363 0.468\n $ se   : num 0.0267"
   },
   {
     "objectID": "slides/04-slides.html#iteration",
@@ -2314,7 +2314,7 @@
     "href": "slides/04-slides.html#loops-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Loops",
-    "text": "Loops\n\nlibrary(tidyverse)\ndf &lt;- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput &lt;- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] &lt;- median(df[[i]])      # 3. body\n}\noutput\n\n[1] 0.4170669 0.0865680 0.5060774 0.7682207\n\n#&gt; [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
+    "text": "Loops\n\nlibrary(tidyverse)\ndf &lt;- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput &lt;- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] &lt;- median(df[[i]])      # 3. body\n}\noutput\n\n[1] -0.1223330  0.3922895  0.2231591  0.4878572\n\n#&gt; [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
   },
   {
     "objectID": "slides/04-slides.html#the-apply-family",
@@ -2335,7 +2335,7 @@
     "href": "slides/04-slides.html#the-apply-family-2",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "The apply family",
-    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata &lt;- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] 0.2890189\n\n$item3\n[1] 1.073427\n\n$item4\n[1] 4.980024"
+    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata &lt;- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] 0.1066332\n\n$item3\n[1] 1.13045\n\n$item4\n[1] 5.00771"
   },
   {
     "objectID": "slides/04-slides.html#the-map-family",
