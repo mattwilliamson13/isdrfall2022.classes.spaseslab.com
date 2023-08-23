@@ -1050,79 +1050,93 @@
     "text": "Today’s goals\n\nArticulate why we care about space\nDescribe elements of spatial data\nDefine a coordinate reference system and its importance\nDescribe several ways to load spatial data into R\nIdentify projections in R"
   },
   {
-    "objectID": "slides/03-slides.html#for-today",
-    "href": "slides/03-slides.html#for-today",
-    "title": "Quarto, literate programming, and pseudocode",
-    "section": "For today",
-    "text": "For today\n\nIntroduce literate programming\nDescribe pseudocode and its utility for designing an analysis\nIntroduce Quarto as a means of documenting your work\nPractice workflow"
+    "objectID": "slides/03-slides.html#todays-plan",
+    "href": "slides/03-slides.html#todays-plan",
+    "title": "Introduction to Spatial Data",
+    "section": "Today’s Plan",
+    "text": "Today’s Plan\n\n\nWays to view the world\nWhat makes data (geo)spatial?\nCoordinate Reference Systems\nGeometries, support, and spatial messiness"
+  },
+  {
+    "objectID": "slides/03-slides.html#as-a-series-of-objects",
+    "href": "slides/03-slides.html#as-a-series-of-objects",
+    "title": "Introduction to Spatial Data",
+    "section": "…As a Series of Objects?",
+    "text": "…As a Series of Objects?\n\n\n\n\nThe world is a series of entities located in space.\nUsually distinguishable, discrete, and bounded\nSome spaces can hold multiple entities, others are empty\nObjects are digital representations of entities"
+  },
+  {
+    "objectID": "slides/03-slides.html#as-a-continuous-field",
+    "href": "slides/03-slides.html#as-a-continuous-field",
+    "title": "Introduction to Spatial Data",
+    "section": "…As a Continuous Field",
+    "text": "…As a Continuous Field\n\n\n\n\nThe earth is a single entity with properties that vary continuosly through space\nSpatial continuity: Every cell has a value (including “no data” or “not here”)\nSelf-definition: the values define the field\nSpace is tessellated: cells are mutually exclusive"
   },
   {
     "objectID": "slides/03-slides.html#what-is-literate-progamming",
     "href": "slides/03-slides.html#what-is-literate-progamming",
-    "title": "Quarto, literate programming, and pseudocode",
+    "title": "Introduction to Spatial Data",
     "section": "What is literate progamming?",
     "text": "What is literate progamming?\n\nLet us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do. r tufte::quote_footer('--- Donald Knuth, CSLI, 1984')"
   },
   {
     "objectID": "slides/03-slides.html#what-is-literate-programming",
     "href": "slides/03-slides.html#what-is-literate-programming",
-    "title": "Quarto, literate programming, and pseudocode",
+    "title": "Introduction to Spatial Data",
     "section": "What is literate programming?",
     "text": "What is literate programming?\n\nDocumentation containing code (not vice versa!)\nDirect connection between code and explanation\nConvey meaning to humans rather than telling computer what to do!\nMultiple “scales” possible"
   },
   {
     "objectID": "slides/03-slides.html#why-literate-programming",
     "href": "slides/03-slides.html#why-literate-programming",
-    "title": "Quarto, literate programming, and pseudocode",
+    "title": "Introduction to Spatial Data",
     "section": "Why literate programming?",
     "text": "Why literate programming?\n\nYour analysis scripts are computer software\nIntegrate math, figures, code, and narrative in one place\nExplaining something helps you learn it"
   },
   {
     "objectID": "slides/03-slides.html#pseudocode-and-literate-programming",
     "href": "slides/03-slides.html#pseudocode-and-literate-programming",
-    "title": "Quarto, literate programming, and pseudocode",
+    "title": "Introduction to Spatial Data",
     "section": "Pseudocode and literate programming",
     "text": "Pseudocode and literate programming\n\nAn informal way of writing the ‘logic’ of your program\nBalance between readability and precision\nAvoid syntactic drift"
   },
   {
     "objectID": "slides/03-slides.html#writing-pseudocode",
     "href": "slides/03-slides.html#writing-pseudocode",
-    "title": "Quarto, literate programming, and pseudocode",
+    "title": "Introduction to Spatial Data",
     "section": "Writing pseudocode",
     "text": "Writing pseudocode\n\n\n\nFocus on statements\nMathematical operations\nConditionals\nIteration\nExceptions"
   },
   {
     "objectID": "slides/03-slides.html#what-is-quarto",
     "href": "slides/03-slides.html#what-is-quarto",
-    "title": "Quarto, literate programming, and pseudocode",
+    "title": "Introduction to Spatial Data",
     "section": "What is Quarto?",
     "text": "What is Quarto?\n\nA multi-language platform for developing reproducible documents\nA ‘lab notebook’ for your analyses\nAllows transparent, reproducible scientific reports and presentations"
   },
   {
     "objectID": "slides/03-slides.html#key-components",
     "href": "slides/03-slides.html#key-components",
-    "title": "Quarto, literate programming, and pseudocode",
+    "title": "Introduction to Spatial Data",
     "section": "Key components",
     "text": "Key components\n\nMetadata and global options: YAML\nText, figures, and tables: Markdown and LaTeX\nCode: knitr (or jupyter if you’re into that sort of thing)"
   },
   {
     "objectID": "slides/03-slides.html#yaml---yet-another-markup-language",
     "href": "slides/03-slides.html#yaml---yet-another-markup-language",
-    "title": "Quarto, literate programming, and pseudocode",
+    "title": "Introduction to Spatial Data",
     "section": "YAML - Yet Another Markup Language",
     "text": "YAML - Yet Another Markup Language\n\nAllows you to set (or change) output format\nProvide options that apply to the entire document\nSpacing matters!"
   },
   {
     "objectID": "slides/03-slides.html#formatting-text",
     "href": "slides/03-slides.html#formatting-text",
-    "title": "Quarto, literate programming, and pseudocode",
+    "title": "Introduction to Spatial Data",
     "section": "Formatting Text",
     "text": "Formatting Text\n\nBasic formatting via Markdown\nFancier options using Divs and spans via Pandoc\nFenced Divs start and end with ::: (can be any number &gt;3 but must match)"
   },
   {
     "objectID": "slides/03-slides.html#adding-code-chunks",
     "href": "slides/03-slides.html#adding-code-chunks",
-    "title": "Quarto, literate programming, and pseudocode",
+    "title": "Introduction to Spatial Data",
     "section": "Adding Code Chunks",
     "text": "Adding Code Chunks\n\nUse 3x ``` on each end\nInclude the engine {r} (or python or Julia)\nInclude options beneath the “fence” using a hashpipe (#|)"
   },
@@ -1474,7 +1488,7 @@
     "href": "content/02-content.html#objectives",
     "title": "Why Geographic Analysis",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nIdentify major applications of geographical analysis\nDescribe critiques and limitations of quantitative geographical analysis\nDefine ‘scale’ and its implications for geographic analysis\nPlace your research in the broader context of geographic analysis"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDefine what we mean by description, explanation, and prediction in geography.\nDescribe critiques and limitations of quantitative geographical analysis\nDefine ‘scale’ and its implications for geographic analysis\nPlace your research in the broader context of geographic analysis"
   },
   {
     "objectID": "content/02-content.html#slides",
@@ -1502,14 +1516,14 @@
     "href": "assignment/self-eval1.html",
     "title": "Self-reflection 1",
     "section": "",
-    "text": "This is the first of three self-reflections that you’ll complete during the course. These provide an opportunity for me to learn more about you, check-in on how the course is going, and make sure that getting what you need from the course materials. This first reflection also helps us set the standards for your assessment in the course. As such, I’m asking that you complete this in a timely fashion and turn it in by Aug. 30. You’ll need to accept the link to access the questions."
+    "text": "This is the first of three self-reflections that you’ll complete during the course. These provide an opportunity for me to learn more about you, check-in on how the course is going, and make sure that getting what you need from the course materials. This first reflection also helps us set the standards for your assessment in the course. As such, I’m asking that you complete this in a timely fashion and turn it in by Aug. 24. You’ll need to accept the link to access the questions."
   },
   {
     "objectID": "assignment/self-eval1.html#instructions",
     "href": "assignment/self-eval1.html#instructions",
     "title": "Self-reflection 1",
     "section": "Instructions",
-    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named self-reflection-1-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file self-reflection-1-xxx.qmd and give it a title (like M Williamson Self-Reflection 1). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, self-reflection-1-xx.qmd, and self-reflection-1-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named self-reflection-1-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file self-reflection-1-xxx.qmd and give it a title (like M Williamson Self-Reflection 1). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 2 more times (having 3 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, self-reflection-1-xx.qmd, and self-reflection-1-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
   },
   {
     "objectID": "assignment/final-proj.html",
@@ -1614,7 +1628,7 @@
     "href": "assignment/01-intro.html",
     "title": "Assignment 1: Introductory material",
     "section": "",
-    "text": "The first part of the course was designed to introduce some of the foundations of geographic thought, core technical details of working with spatial data, and introduce R as a tool for end-to-end spatial workflows. This homework is meant to help reinforce those concepts and identify any gaps that I need to fill in as we go. There are additional step-by-step guides in the By the end of this assignment you should be able to:\nYou’ll need to accept the link to access the questions."
+    "text": "The first part of the course was designed to introduce some of the foundations of geographic thought, core technical details of working with spatial data, and introduce R as a tool for end-to-end spatial workflows. This homework is meant to help reinforce those concepts and identify any gaps that I need to fill in as we go. There are additional step-by-step guides in the By the end of this assignment you should be able to:"
   },
   {
     "objectID": "assignment/01-intro.html#instructions",
@@ -1622,6 +1636,13 @@
     "title": "Assignment 1: Introductory material",
     "section": "Instructions",
     "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-1-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-1-xxx.qmd and give it a title (like M Williamson Assignment 1). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 2 more times (having 3 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-1-xx.qmd, and assignment-1-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+  },
+  {
+    "objectID": "assignment/01-intro.html#questions-for-the-assignment",
+    "href": "assignment/01-intro.html#questions-for-the-assignment",
+    "title": "Assignment 1: Introductory material",
+    "section": "Questions for the Assignment",
+    "text": "Questions for the Assignment\n\nHow does geographic analysis fit into your goals for your research? Given our discussion of the aims and limitations of geographic analysis, are there particular issues that you would like to know more about or guard against?\nWhat are the primary components that describe spatial data?\nWhat is the coordinate reference system and why is it important\nFind two maps of the same area in different projections? How does the projection affect your perception of the data being displayed?\nRead in the cejst.shp file in the assignment01 folder. How many attributes describe each object? How many unique geometries are there? What is the coordinate reference system?"
   },
   {
     "objectID": "assignment/02-introspatial.html",
@@ -1799,18 +1820,32 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
   },
   {
+    "objectID": "content/03-content.html",
+    "href": "content/03-content.html",
+    "title": "Introduction to Spatial Data",
+    "section": "",
+    "text": "Now that you have a little more background in the breadth of philosophies, methods, and questions that geography encompasses, it’s time to start familiarizing yourself with the nature of spatial data. This lecture will be a little more conceptual, but is designed to help you make some sense for how R thinks about spatial data (or at least how the package developers have been thinking about it)."
+  },
+  {
+    "objectID": "content/03-content.html#readings",
+    "href": "content/03-content.html#readings",
+    "title": "Introduction to Spatial Data",
+    "section": "Readings",
+    "text": "Readings\n Types of Spatial Data from Paula Moraga’s new book Spatial Statistics for Data Science: Theory and Practice with R provides a nice overview of the types of spatial data from the perspective of a statistical analyst.\n Attributes and Support from Pebesma and Bivand’s Spatial Data Science with Applications in R gives more info and examples on the nature of the relationship between geometries and support.\n Scale and Projections from Mapping, Society, and Technology by Laura Matson and Melinda Kernik gives a nice overview of the challenges associated with representing location on Earth’s surface."
+  },
+  {
     "objectID": "content/03-content.html#objectives",
     "href": "content/03-content.html#objectives",
     "title": "Introduction to Spatial Data",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nDescribe five core geographic concepts.\nIdentify key elements that make data “spatial”.\nArticulate the importance of coordinate reference systems.\nRecognize the relationship between geometries and support."
+    "text": "Objectives\nBy the end of today you should be able to:\n\nContrast the different “views” of spatial data and their incorporation in GIS.\nIdentify key elements that make data “spatial”.\nArticulate the importance of coordinate reference systems.\nRecognize the relationship between geometries and support."
   },
   {
     "objectID": "content/03-content.html#slides",
     "href": "content/03-content.html#slides",
     "title": "Introduction to Spatial Data",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
   },
   {
     "objectID": "content/06-content.html",
@@ -2279,7 +2314,7 @@
     "href": "slides/04-slides.html#structure-of-functions-body",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Body",
-    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx &lt;- runif(100)\nmean_ci(x)\n\n[1] 0.3631653 0.4676549\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.3467488 0.4840714"
+    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx &lt;- runif(100)\nmean_ci(x)\n\n[1] 0.4318910 0.5533445\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.4128092 0.5724263"
   },
   {
     "objectID": "slides/04-slides.html#structure-of-functions-return",
@@ -2293,7 +2328,7 @@
     "href": "slides/04-slides.html#structure-of-functions-return-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Return",
-    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.363 0.468\n $ se   : num 0.0267"
+    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.432 0.553\n $ se   : num 0.031"
   },
   {
     "objectID": "slides/04-slides.html#iteration",
@@ -2314,7 +2349,7 @@
     "href": "slides/04-slides.html#loops-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Loops",
-    "text": "Loops\n\nlibrary(tidyverse)\ndf &lt;- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput &lt;- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] &lt;- median(df[[i]])      # 3. body\n}\noutput\n\n[1] -0.1223330  0.3922895  0.2231591  0.4878572\n\n#&gt; [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
+    "text": "Loops\n\nlibrary(tidyverse)\ndf &lt;- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput &lt;- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] &lt;- median(df[[i]])      # 3. body\n}\noutput\n\n[1]  0.19208052 -0.18659678  0.41662241 -0.01508773\n\n#&gt; [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
   },
   {
     "objectID": "slides/04-slides.html#the-apply-family",
@@ -2335,7 +2370,7 @@
     "href": "slides/04-slides.html#the-apply-family-2",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "The apply family",
-    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata &lt;- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] 0.1066332\n\n$item3\n[1] 1.13045\n\n$item4\n[1] 5.00771"
+    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata &lt;- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] -0.2246942\n\n$item3\n[1] 0.8088589\n\n$item4\n[1] 5.107846"
   },
   {
     "objectID": "slides/04-slides.html#the-map-family",
