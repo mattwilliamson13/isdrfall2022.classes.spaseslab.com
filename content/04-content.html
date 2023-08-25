@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -383,12 +402,23 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </header>
 
+<p>Now that we’ve covered some of the conceptual bases of spatial data and geographic analysis, it’s time to get started working with actual data in <code>R</code>. Today’s readings and lecture are focused on the basics of getting your data into the <code>R</code> environment and familiarizing yourself with the different components that make up spatial data objects. We’ll do fancier things in the weeks to come!</p>
 <section id="readings" class="level2">
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://r.geocompx.org/spatial-class">Chapter 2</a> in Geocomputation with R <span class="citation" data-cites="lovelace_geocomputation_2019">(<a href="#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace et al. 2019</a>)</span> provides and overview of using <code>sf</code> for vector datasets and <code>terra</code> for raster data.</p>
+<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://www.paulamoraga.com/book-spatial/spatial-data-in-r.html">Chapter 2</a> from Moraga (2023) explores similar topics, but provides more explanation about projections, coordinates, etc.</p>
+<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://r-spatial.github.io/sf/articles/sf1.html">Simple Features for R</a> provides a more in-depth, technical discussion of how the <code>sf</code> package organizes spatial data and attributes.</p>
+<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://rspatial.org/spatial/index.html">Ch 2.1-2.5 from Spatial Data Science with R and terra</a> describes the basic functionality of <code>terra</code> for both vector and raster datasets. For reasons we’ll discuss in class, we will rarely use <code>terra</code> for vector data.</p>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today, you should be able to:</p>
+<ol type="1">
+<li><p><strong>Read</strong> spatial data into your <code>R</code> environment.</p></li>
+<li><p><strong>Describe</strong> the various aspects of spatial data files and objects.</p></li>
+<li><p><strong>Generate</strong> simple summaries describing the spatial data object.</p></li>
+<li><p><strong>Determine</strong> the projection, extent, and resolution of spatial data objects.</p></li>
+</ol>
 </section>
 <section id="slides" class="level2">
 <h2 class="anchored" data-anchor-id="slides">Slides</h2>
@@ -399,9 +429,14 @@ ul.task-list li input[type="checkbox"] {
 <p>Slides Forthcoming</p>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-lovelace_geocomputation_2019" class="csl-entry" role="listitem">
+Lovelace, R., J. Nowosad, and J. Muenchow. 2019. Geocomputation with <span>R</span>. <span>CRC Press</span>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
