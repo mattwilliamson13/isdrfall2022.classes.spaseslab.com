@@ -942,14 +942,14 @@
     "href": "slides/06-slides.html#describing-absolute-locations",
     "title": "Spatial Data is Special Data",
     "section": "Describing Absolute Locations",
-    "text": "Describing Absolute Locations\n\nCoordinates: 2 or more measurements that specify location relative to a reference system\n\n\n\n\n\nCartesian coordinate system\norigin (O) = the point at which both measurement systems intersect\nAdaptable to multiple dimensions (e.g. z for altitude)\n\n\n\n\n\n\nCartesian Coordinate System"
+    "text": "Describing Absolute Locations\n\nCoordinates: 2 or more measurements that specify location relative to a reference system\n\n\n\n\n\nCartesian coordinate system\norigin (O) = the point at which both measurement systems intersect\nAdaptable to multiple dimensions (e.g. z for altitude)"
   },
   {
     "objectID": "slides/06-slides.html#locations-on-a-globe",
     "href": "slides/06-slides.html#locations-on-a-globe",
     "title": "Spatial Data is Special Data",
     "section": "Locations on a Globe",
-    "text": "Locations on a Globe\n\nThe earth is not flat…\n\n\n\n\n\n\nLatitude and Longitude\n\n\n\n\n\nGlobal Reference Systems (GRS)\nGraticule: the grid formed by the intersection of longitude and latitude\nThe graticule is based on an ellipsoid model of earth’s surface and contained in the datum"
+    "text": "Locations on a Globe\n\nThe earth is not flat…\n\n\n\n\n\n\n\nGlobal Reference Systems (GRS)\nGraticule: the grid formed by the intersection of longitude and latitude\nThe graticule is based on an ellipsoid model of earth’s surface and contained in the datum"
   },
   {
     "objectID": "slides/06-slides.html#global-reference-systems",
@@ -963,7 +963,7 @@
     "href": "slides/06-slides.html#the-earth-is-not-flat",
     "title": "Spatial Data is Special Data",
     "section": "The Earth is Not Flat",
-    "text": "The Earth is Not Flat\n\n\n\n\nBut maps, screens, and publications are…\nProjections describe how the data should be translated to a flat surface\nRely on ‘developable surfaces’\n\n\n\n\n\n\nDevelopable Surfaces\n\n\n\n\n\nProjection necessarily induces some form of distortion (tearing, compression, or shearing("
+    "text": "The Earth is Not Flat\n\n\n\n\nBut maps, screens, and publications are…\nProjections describe how the data should be translated to a flat surface\nRely on ‘developable surfaces’\n\n\n\n\n\n\n\nProjection necessarily induces some form of distortion (tearing, compression, or shearing("
   },
   {
     "objectID": "slides/06-slides.html#choosing-projections",
@@ -1183,11 +1183,74 @@
     "text": "Global Reference Systems\n\nThe datum describes which ellipsoid to use and the precise relations between locations on earth’s surface and Cartesian coordinates\n\n\nGeodetic datums (e.g., WGS84): distance from earth’s center of gravity\nLocal data (e.g., NAD83): better models for local variation in earth’s surface"
   },
   {
-    "objectID": "slides/03-slides.html#section-5",
-    "href": "slides/03-slides.html#section-5",
+    "objectID": "slides/03-slides.html#describing-location-extent",
+    "href": "slides/03-slides.html#describing-location-extent",
     "title": "Introduction to Spatial Data",
-    "section": "",
-    "text": "Coordinate Reference Systems\nGeometries, support, and spatial messiness"
+    "section": "Describing location: extent",
+    "text": "Describing location: extent\n\n\nHow much of the world does the data cover?\nFor rasters, these are the corners of the lattice\nFor vectors, we call this the bounding box"
+  },
+  {
+    "objectID": "slides/03-slides.html#describing-location-resolution",
+    "href": "slides/03-slides.html#describing-location-resolution",
+    "title": "Introduction to Spatial Data",
+    "section": "Describing location: resolution",
+    "text": "Describing location: resolution\n\n\n\n\nResolution: the accuracy that the location and shape of a map’s features can be depicted\nMinimum Mapping Unit: The minimum size and dimensions that can be reliably represented at a given map scale.\nMap scale vs. scale of analysis"
+  },
+  {
+    "objectID": "slides/03-slides.html#projections",
+    "href": "slides/03-slides.html#projections",
+    "title": "Introduction to Spatial Data",
+    "section": "Projections",
+    "text": "Projections\n\n\n\n\nBut maps, screens, and publications are…\nProjections describe how the data should be translated to a flat surface\nRely on ‘developable surfaces’\nDescribed by the Coordinate Reference System (CRS)\n\n\n\n\n\n\nDevelopable Surfaces\n\n\n\n\n\nProjection necessarily induces some form of distortion (tearing, compression, or shearing)"
+  },
+  {
+    "objectID": "slides/03-slides.html#coordinate-reference-systems",
+    "href": "slides/03-slides.html#coordinate-reference-systems",
+    "title": "Introduction to Spatial Data",
+    "section": "Coordinate Reference Systems",
+    "text": "Coordinate Reference Systems\n\n\nSome projections minimize distortion of angle, area, or distance\nOthers attempt to avoid extreme distortion of any kind\nIncludes: Datum, ellipsoid, units, and other information (e.g., False Easting, Central Meridian) to further map the projection to the GCS\nNot all projections have/require all of the parameters"
+  },
+  {
+    "objectID": "slides/03-slides.html#choosing-projections",
+    "href": "slides/03-slides.html#choosing-projections",
+    "title": "Introduction to Spatial Data",
+    "section": "Choosing Projections",
+    "text": "Choosing Projections\n\n\n\n\n\nEqual-area for thematic maps\nConformal for presentations\nMercator or equidistant for navigation and distance"
+  },
+  {
+    "objectID": "slides/03-slides.html#geometries",
+    "href": "slides/03-slides.html#geometries",
+    "title": "Introduction to Spatial Data",
+    "section": "Geometries",
+    "text": "Geometries\n\n\n\nVectors store aggregate the locations of a feature into a geometry\nMost vector operations require simple, valid geometries\n\n\n\n\n\nImage Source: Colin Williams (NEON)"
+  },
+  {
+    "objectID": "slides/03-slides.html#valid-geometries",
+    "href": "slides/03-slides.html#valid-geometries",
+    "title": "Introduction to Spatial Data",
+    "section": "Valid Geometries",
+    "text": "Valid Geometries\n\n\nA linestring is simple if it does not intersect\nValid polygons\nAre closed (i.e., the last vertex equals the first)\nHave holes (inner rings) that inside the the exterior boundary\nHave holes that touch the exterior at no more than one vertex (they don’t extend across a line) - For multipolygons, adjacent polygons touch only at points\nDo not repeat their own path"
+  },
+  {
+    "objectID": "slides/03-slides.html#empty-geometries",
+    "href": "slides/03-slides.html#empty-geometries",
+    "title": "Introduction to Spatial Data",
+    "section": "Empty Geometries",
+    "text": "Empty Geometries\n\nEmpty geometries arise when an operation produces NULL outcomes (like looking for the intersection between two non-intersecting polygons)\nsf allows empty geometries to make sure that information about the data type is retained\nSimilar to a data.frame with no rows or a list with NULL values\nMost vector operations require simple, valid geometries"
+  },
+  {
+    "objectID": "slides/03-slides.html#support",
+    "href": "slides/03-slides.html#support",
+    "title": "Introduction to Spatial Data",
+    "section": "Support",
+    "text": "Support\n\nSupport is the area to which an attribute applies.\n\n\n\nFor vectors, the attribute-geometry-relationship can be:\nconstant = applies to every point in the geometry (lines and polygons are just lots of points)\nidentity = a value unique to a geometry\naggregate = a single value that integrates data across the geometry\nRasters can have point (attribute refers to the cell center) or cell (attribute refers to an area similar to the pixel) support"
+  },
+  {
+    "objectID": "slides/03-slides.html#spatial-messiness",
+    "href": "slides/03-slides.html#spatial-messiness",
+    "title": "Introduction to Spatial Data",
+    "section": "Spatial Messiness",
+    "text": "Spatial Messiness\n\nQuantitative geography requires that our data are aligned\nAchieving alignment is part of reproducible workflows\nMaking principled decisions about projections, resolution, extent, etc"
   },
   {
     "objectID": "slides/01-slides.html#todays-plan",
@@ -2377,7 +2440,7 @@
     "href": "slides/04-slides.html#structure-of-functions-body",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Body",
-    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx &lt;- runif(100)\nmean_ci(x)\n\n[1] 0.4698064 0.5790584\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.4526417 0.5962231"
+    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx &lt;- runif(100)\nmean_ci(x)\n\n[1] 0.4522242 0.5612360\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.4350972 0.5783630"
   },
   {
     "objectID": "slides/04-slides.html#structure-of-functions-return",
@@ -2391,7 +2454,7 @@
     "href": "slides/04-slides.html#structure-of-functions-return-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Return",
-    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.47 0.579\n $ se   : num 0.0279"
+    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.452 0.561\n $ se   : num 0.0278"
   },
   {
     "objectID": "slides/04-slides.html#iteration",
@@ -2412,7 +2475,7 @@
     "href": "slides/04-slides.html#loops-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Loops",
-    "text": "Loops\n\nlibrary(tidyverse)\ndf &lt;- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput &lt;- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] &lt;- median(df[[i]])      # 3. body\n}\noutput\n\n[1] -0.53319042 -0.02651819  0.12699270 -0.79139345\n\n#&gt; [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
+    "text": "Loops\n\nlibrary(tidyverse)\ndf &lt;- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput &lt;- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] &lt;- median(df[[i]])      # 3. body\n}\noutput\n\n[1]  0.18970662 -0.03160902 -0.05779255 -0.10624501\n\n#&gt; [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
   },
   {
     "objectID": "slides/04-slides.html#the-apply-family",
@@ -2433,7 +2496,7 @@
     "href": "slides/04-slides.html#the-apply-family-2",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "The apply family",
-    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata &lt;- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] -0.2747576\n\n$item3\n[1] 1.290831\n\n$item4\n[1] 4.97355"
+    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata &lt;- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] 0.1799642\n\n$item3\n[1] 1.115704\n\n$item4\n[1] 5.073581"
   },
   {
     "objectID": "slides/04-slides.html#the-map-family",
