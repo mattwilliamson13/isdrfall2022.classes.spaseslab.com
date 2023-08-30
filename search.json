@@ -2543,128 +2543,156 @@
   {
     "objectID": "slides/04-slides.html#objectives",
     "href": "slides/04-slides.html#objectives",
-    "title": "Repetitive Tasks and Functional Programming",
+    "title": "Reading Spatial Data in R",
     "section": "Objectives",
-    "text": "Objectives\n\nDescribe the basic components of functions\nIntroduce the apply and map family of functions\nPractice designing functions for repetitive tasks"
+    "text": "Objectives\n\nRevisit the components of spatial data\nDescribe some of the key considerations for thinking about spatial data\nIntroduce the two primary R packages for spatial workflows\nLearn to read and explore spatial objects in R"
   },
   {
-    "objectID": "slides/04-slides.html#what-are-functions",
-    "href": "slides/04-slides.html#what-are-functions",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "What are functions?",
-    "text": "What are functions?\n\nA specific class of R object (can call function inside functions)\n\n\nrg &lt;- paste(\"The range of mpg is\", sum(mean(mtcars$mpg), sd(mtcars$mpg)), \"-\", sum(mean(mtcars$mpg), -sd(mtcars$mpg)))\nrg\n\n[1] \"The range of mpg is 26.1175730520891 - 14.0636769479109\"\n\n\n\nA self-contained (i.e., modular) piece of code that performs a specific task\nAllows powerful customization and extension of R"
+    "objectID": "slides/04-slides.html#describing-absolute-locations",
+    "href": "slides/04-slides.html#describing-absolute-locations",
+    "title": "Reading Spatial Data in R",
+    "section": "Describing Absolute Locations",
+    "text": "Describing Absolute Locations\n\nCoordinates: 2 or more measurements that specify location relative to a reference system\n\n\n\n\n\nCartesian coordinate system\norigin (O) = the point at which both measurement systems intersect\nAdaptable to multiple dimensions (e.g. z for altitude)\n\n\n\n\n\n\nCartesian Coordinate System"
   },
   {
-    "objectID": "slides/04-slides.html#why-use-functions",
-    "href": "slides/04-slides.html#why-use-functions",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "Why use functions?",
-    "text": "Why use functions?\n\nCopy-and-paste and repetitive typing are prone to errors\nEvocative names and modular code make your analysis more tractable\nUpdate in one place!\n\n\nIf you are copy-and-pasting more than 2x, consider a function!"
+    "objectID": "slides/04-slides.html#locations-on-a-globe",
+    "href": "slides/04-slides.html#locations-on-a-globe",
+    "title": "Reading Spatial Data in R",
+    "section": "Locations on a Globe",
+    "text": "Locations on a Globe\n\nThe earth is not flat…\n\n\nLatitude and Longitude"
   },
   {
-    "objectID": "slides/04-slides.html#getting-started",
-    "href": "slides/04-slides.html#getting-started",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "Getting started",
-    "text": "Getting started\n\nSketch out the steps in the algorithm (pseudocode!)\nDevelop working code for each step\nAnonymize\n\n\ndo_something &lt;- function(arg1, arg2, arg3){\n  intermediate_process &lt;- manipulate(arg1,arg2, arg3)\n  clean_output &lt;- cleanup(intermediate_process)\n  return(clean_output)\n}"
+    "objectID": "slides/04-slides.html#locations-on-a-globe-1",
+    "href": "slides/04-slides.html#locations-on-a-globe-1",
+    "title": "Reading Spatial Data in R",
+    "section": "Locations on a Globe",
+    "text": "Locations on a Globe\n\nThe earth is not flat…\nGlobal Reference Systems (GRS)\nGraticule: the grid formed by the intersection of longitude and latitude\nThe graticule is based on an ellipsoid model of earth’s surface and contained in the datum"
   },
   {
-    "objectID": "slides/04-slides.html#structure-of-functions-names",
-    "href": "slides/04-slides.html#structure-of-functions-names",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "Structure of functions: Names",
-    "text": "Structure of functions: Names\n\n\n\nWhat will your function do?\nShort, but clear!\nAvoid using reserved words or functions that already exist\nUse snake_case\n\n\n\nsomething &lt;- function(...){\n}\n\n\nNot Great\n\n\ndo_something_ultraspecific &lt;- function(...){\n}\n\n\nBetter\n\n\ndo_something &lt;- function(...){\n}\n\n\nPretty good"
+    "objectID": "slides/04-slides.html#global-reference-systems",
+    "href": "slides/04-slides.html#global-reference-systems",
+    "title": "Reading Spatial Data in R",
+    "section": "Global Reference Systems",
+    "text": "Global Reference Systems\n\nThe datum describes which ellipsoid to use and the precise relations between locations on earth’s surface and Cartesian coordinates\n\n\nGeodetic datums (e.g., WGS84): distance from earth’s center of gravity\nLocal data (e.g., NAD83): better models for local variation in earth’s surface"
   },
   {
-    "objectID": "slides/04-slides.html#structure-of-functions-arguments",
-    "href": "slides/04-slides.html#structure-of-functions-arguments",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "Structure of functions: Arguments",
-    "text": "Structure of functions: Arguments\n\nProvide the data that the function will work on\nProvide other arguments that control the details of the computation (often with defaults)\nCalled by name or position (names should be descriptive)\n\n\nnums &lt;- rnorm(n = 1000, mean=2, sd=1.5)\n\n\nSame As\n\n\nnums &lt;- rnorm(1000, 2, 1.5)"
+    "objectID": "slides/04-slides.html#describing-location-extent",
+    "href": "slides/04-slides.html#describing-location-extent",
+    "title": "Reading Spatial Data in R",
+    "section": "Describing location: extent",
+    "text": "Describing location: extent\n\n\nHow much of the world does the data cover?\nFor rasters, these are the corners of the lattice\nFor vectors, we call this the bounding box"
   },
   {
-    "objectID": "slides/04-slides.html#structure-of-functions-body",
-    "href": "slides/04-slides.html#structure-of-functions-body",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "Structure of functions: Body",
-    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx &lt;- runif(100)\nmean_ci(x)\n\n[1] 0.4833539 0.5930307\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.4661224 0.6102622"
+    "objectID": "slides/04-slides.html#describing-location-resolution",
+    "href": "slides/04-slides.html#describing-location-resolution",
+    "title": "Reading Spatial Data in R",
+    "section": "Describing location: resolution",
+    "text": "Describing location: resolution\n\n\n\n\nResolution: the accuracy that the location and shape of a map’s features can be depicted\nMinimum Mapping Unit: The minimum size and dimensions that can be reliably represented at a given map scale.\nMap scale vs. scale of analysis"
   },
   {
-    "objectID": "slides/04-slides.html#structure-of-functions-return",
-    "href": "slides/04-slides.html#structure-of-functions-return",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "Structure of functions: Return",
-    "text": "Structure of functions: Return\n\nDefault is to return the last argument evaluated\nCan use return() to return an earlier value\nCan use list to return multiple values\nA note on the Environment\n\n\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  ci &lt;- mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n  myresults &lt;- list(alpha = alpha, ci = ci, se = se)\n  return(myresults)\n}\n\nci_result &lt;- mean_ci(x)"
+    "objectID": "slides/04-slides.html#projections",
+    "href": "slides/04-slides.html#projections",
+    "title": "Reading Spatial Data in R",
+    "section": "Projections",
+    "text": "Projections\n\n\n\n\nBut maps, screens, and publications are…\nProjections describe how the data should be translated to a flat surface\nRely on ‘developable surfaces’\nDescribed by the Coordinate Reference System (CRS)\n\n\n\n\n\n\nDevelopable Surfaces\n\n\n\n\n\nProjection necessarily induces some form of distortion (tearing, compression, or shearing)"
   },
   {
-    "objectID": "slides/04-slides.html#structure-of-functions-return-1",
-    "href": "slides/04-slides.html#structure-of-functions-return-1",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "Structure of functions: Return",
-    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.483 0.593\n $ se   : num 0.028"
+    "objectID": "slides/04-slides.html#coordinate-reference-systems",
+    "href": "slides/04-slides.html#coordinate-reference-systems",
+    "title": "Reading Spatial Data in R",
+    "section": "Coordinate Reference Systems",
+    "text": "Coordinate Reference Systems\n\n\nSome projections minimize distortion of angle, area, or distance\nOthers attempt to avoid extreme distortion of any kind\nIncludes: Datum, ellipsoid, units, and other information (e.g., False Easting, Central Meridian) to further map the projection to the GCS\nNot all projections have/require all of the parameters"
   },
   {
-    "objectID": "slides/04-slides.html#iteration",
-    "href": "slides/04-slides.html#iteration",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "Iteration",
-    "text": "Iteration\n\nAnother tool for reducing code duplication\nIteration for when you need to repeat the same task on different columns or datasets\nImperative iteration uses loops (for and while)\nFunctional iteration combines functions with the apply family to break computational challenges into independent pieces."
+    "objectID": "slides/04-slides.html#choosing-projections",
+    "href": "slides/04-slides.html#choosing-projections",
+    "title": "Reading Spatial Data in R",
+    "section": "Choosing Projections",
+    "text": "Choosing Projections\n\n\n\n\n\nEqual-area for thematic maps\nConformal for presentations\nMercator or equidistant for navigation and distance"
   },
   {
-    "objectID": "slides/04-slides.html#loops",
-    "href": "slides/04-slides.html#loops",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "Loops",
-    "text": "Loops\n\nUse counters (for) or conditionals (while) to repeat a set of tasks\n3 key components\n\nOutput - before you can loop, you need a place to store the results\nSequence - defines what you are looping over\nBody - defines what the code is actually doing"
+    "objectID": "slides/04-slides.html#geometries",
+    "href": "slides/04-slides.html#geometries",
+    "title": "Reading Spatial Data in R",
+    "section": "Geometries",
+    "text": "Geometries\n\n\n\nVectors store aggregate the locations of a feature into a geometry\nMost vector operations require simple, valid geometries\n\n\n\n\n\nImage Source: Colin Williams (NEON)"
   },
   {
-    "objectID": "slides/04-slides.html#loops-1",
-    "href": "slides/04-slides.html#loops-1",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "Loops",
-    "text": "Loops\n\nlibrary(tidyverse)\ndf &lt;- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput &lt;- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] &lt;- median(df[[i]])      # 3. body\n}\noutput\n\n[1] 0.24768971 0.06045536 0.07749219 0.03685752\n\n#&gt; [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
+    "objectID": "slides/04-slides.html#valid-geometries",
+    "href": "slides/04-slides.html#valid-geometries",
+    "title": "Reading Spatial Data in R",
+    "section": "Valid Geometries",
+    "text": "Valid Geometries\n\n\nA linestring is simple if it does not intersect\nValid polygons\nAre closed (i.e., the last vertex equals the first)\nHave holes (inner rings) that inside the the exterior boundary\nHave holes that touch the exterior at no more than one vertex (they don’t extend across a line) - For multipolygons, adjacent polygons touch only at points\nDo not repeat their own path"
   },
   {
-    "objectID": "slides/04-slides.html#the-apply-family",
-    "href": "slides/04-slides.html#the-apply-family",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "The apply family",
-    "text": "The apply family\n\nVectorized functions that eliminate explicit for loops\nDiffer by the class they work on and the output they return\napply, lapply are most common; extensions for parallel processing (e.g., parallel::mclapply)"
+    "objectID": "slides/04-slides.html#empty-geometries",
+    "href": "slides/04-slides.html#empty-geometries",
+    "title": "Reading Spatial Data in R",
+    "section": "Empty Geometries",
+    "text": "Empty Geometries\n\nEmpty geometries arise when an operation produces NULL outcomes (like looking for the intersection between two non-intersecting polygons)\nsf allows empty geometries to make sure that information about the data type is retained\nSimilar to a data.frame with no rows or a list with NULL values\nMost vector operations require simple, valid geometries"
   },
   {
-    "objectID": "slides/04-slides.html#the-apply-family-1",
-    "href": "slides/04-slides.html#the-apply-family-1",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "The apply family",
-    "text": "The apply family\n\napply for vectors and data frames\nArgs: X for the data, MARGIN how will the function be applied, (1=rows, 2=columns), FUN for your function, ... for other arguments to the function\n\n\napply(mtcars, 2, mean)\n\n       mpg        cyl       disp         hp       drat         wt       qsec \n 20.090625   6.187500 230.721875 146.687500   3.596563   3.217250  17.848750 \n        vs         am       gear       carb \n  0.437500   0.406250   3.687500   2.812500"
+    "objectID": "slides/04-slides.html#support",
+    "href": "slides/04-slides.html#support",
+    "title": "Reading Spatial Data in R",
+    "section": "Support",
+    "text": "Support\n\nSupport is the area to which an attribute applies.\n\n\n\nFor vectors, the attribute-geometry-relationship can be:\nconstant = applies to every point in the geometry (lines and polygons are just lots of points)\nidentity = a value unique to a geometry\naggregate = a single value that integrates data across the geometry\nRasters can have point (attribute refers to the cell center) or cell (attribute refers to an area similar to the pixel) support"
   },
   {
-    "objectID": "slides/04-slides.html#the-apply-family-2",
-    "href": "slides/04-slides.html#the-apply-family-2",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "The apply family",
-    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata &lt;- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] 0.4868679\n\n$item3\n[1] 1.178962\n\n$item4\n[1] 4.916201"
+    "objectID": "slides/04-slides.html#spatial-messiness",
+    "href": "slides/04-slides.html#spatial-messiness",
+    "title": "Reading Spatial Data in R",
+    "section": "Spatial Messiness",
+    "text": "Spatial Messiness\n\nQuantitative geography requires that our data are aligned\nAchieving alignment is part of reproducible workflows\nMaking principled decisions about projections, resolution, extent, etc"
   },
   {
-    "objectID": "slides/04-slides.html#the-map-family",
-    "href": "slides/04-slides.html#the-map-family",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "The map family",
-    "text": "The map family\n\nSimilar to apply, but more consistent input/output\nAll take a vector for input\nDifference is based on the output you expect\nIntegrates with tidyverse"
+    "objectID": "slides/04-slides.html#data-types-and-r-packages",
+    "href": "slides/04-slides.html#data-types-and-r-packages",
+    "title": "Reading Spatial Data in R",
+    "section": "Data Types and R Packages",
+    "text": "Data Types and R Packages\n\n\nData Types\n\nVector Data\n\nPoint features\nLine features\nArea features (polygons)\n\nRaster Data\n\nSpatially continuous field\nBased on pixels (not points)"
   },
   {
-    "objectID": "slides/04-slides.html#the-map-family-1",
-    "href": "slides/04-slides.html#the-map-family-1",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "The map family",
-    "text": "The map family\n\nmap(): output is a list\nmap_int(): output is an integer vector\nmap_lgl(): output is a logical vector\nmap_dbl(): output is a double vector\nmap_chr(): output is a character vector\nmap_df(), map_dfr(), map_dfc(): output is a dataframe (r and c specify how to combine the data)"
+    "objectID": "slides/04-slides.html#reading-in-spatial-data-spreadsheets",
+    "href": "slides/04-slides.html#reading-in-spatial-data-spreadsheets",
+    "title": "Reading Spatial Data in R",
+    "section": "Reading in Spatial Data: spreadsheets",
+    "text": "Reading in Spatial Data: spreadsheets\n\n\nMost basic form of spatial data\nNeed x (longitude) and y (latitude) as columns\nNeed to know your CRS\nread_*** necessary to bring in the data\n\n\n\nlibrary(tidyverse)\nlibrary(sf)\n\nfile.to.read &lt;- read_csv(file = \"path/to/your/file\", \n                         col_names = TRUE, col_types = NULL, \n                         na =na = c(\"\", \"NA\"))\n\nfile.as.sf &lt;- st_as_sf(file.to.read, \n                       coords = c(\"longitude\", \"latitude\"), \n                       crs=4326)"
   },
   {
-    "objectID": "slides/04-slides.html#some-parting-thoughts",
-    "href": "slides/04-slides.html#some-parting-thoughts",
-    "title": "Repetitive Tasks and Functional Programming",
-    "section": "Some parting thoughts",
-    "text": "Some parting thoughts\n\nTransparency vs. speed\nTesting\nMoving forward"
+    "objectID": "slides/04-slides.html#reading-in-spatial-data-shapefiles",
+    "href": "slides/04-slides.html#reading-in-spatial-data-shapefiles",
+    "title": "Reading Spatial Data in R",
+    "section": "Reading in Spatial Data: shapefiles",
+    "text": "Reading in Spatial Data: shapefiles\n\nALL FILES NEED TO BE IN THE SAME FOLDER\n\n\n\n\n\n.shp is the shapefile itself\n.prj contains the CRS information\n.dbf contains the attributes\n.shx contains the indices for matching attributes to geometries\nother extensions contain metadata\n\n\n\n\n\nst_read and read_sf in the sf package will read shapefiles into R\nread_sf leaves character vectors alone (often beneficial)\nst_read can handle other datatypes (like geodatabases)\nReturns slightly different classes"
+  },
+  {
+    "objectID": "slides/04-slides.html#reading-in-spatial-data-shapefiles-1",
+    "href": "slides/04-slides.html#reading-in-spatial-data-shapefiles-1",
+    "title": "Reading Spatial Data in R",
+    "section": "Reading in Spatial Data: shapefiles",
+    "text": "Reading in Spatial Data: shapefiles\n\n\n\nlibrary(sf)\nshapefile.inR &lt;- read_sf(dsn = \"path/to/file.shp\", \n                         layer=NULL, geometry_column=...)"
+  },
+  {
+    "objectID": "slides/04-slides.html#reading-in-spatial-data-rasters",
+    "href": "slides/04-slides.html#reading-in-spatial-data-rasters",
+    "title": "Reading Spatial Data in R",
+    "section": "Reading in Spatial Data: rasters",
+    "text": "Reading in Spatial Data: rasters\n\nrast will read rasters using the terra package\nAlso used to create rasters from scratch\nReturns SpatRaster object\n\n\n\n\nlibrary(sf)\nraster.inR &lt;- rast(x = \"path/to/file.shp\", \n                         lyrs=NULL)"
+  },
+  {
+    "objectID": "slides/04-slides.html#introducing-the-data",
+    "href": "slides/04-slides.html#introducing-the-data",
+    "title": "Reading Spatial Data in R",
+    "section": "Introducing the Data",
+    "text": "Introducing the Data\n\nGood idea to get to know your data before manipulating it\nstr, summary, nrow, ncol are good places to start\nst_crs (for sf class objects) and crs (for SpatRaster objects)\nWe’ll practice a few of these now…"
+  },
+  {
+    "objectID": "slides/04-slides.html#saving-your-data",
+    "href": "slides/04-slides.html#saving-your-data",
+    "title": "Reading Spatial Data in R",
+    "section": "Saving your data",
+    "text": "Saving your data\n\nwrite_sf for sf objects; writeRaster for SpatRasters\n\n\nlibrary(sf)\nlibrary(terra)\n\nwrite_sf(object = object.to.save, dsn = \"path/to/save/object\", append = FALSE)\nwriteRaster(x=object, filename = \"path/to/save\")"
   },
   {
     "objectID": "slides/07-slides.html#objectives",
