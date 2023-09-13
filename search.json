@@ -828,79 +828,121 @@
   {
     "objectID": "slides/08-slides.html#objectives",
     "href": "slides/08-slides.html#objectives",
-    "title": "Vector Operations Part 1",
+    "title": "Areal Data: Vector Data",
     "section": "Objectives",
     "text": "Objectives\nBy the end of today, you should be able to:\n\nUnderstand predicates and measures in the context of spatial operations in sf\nDefine valid geometries and approaches for assessing geometries in R\nUse st_* and sf_* to evaluate attributes of geometries and calculate measurements"
   },
   {
     "objectID": "slides/08-slides.html#revisiting-simple-features",
     "href": "slides/08-slides.html#revisiting-simple-features",
-    "title": "Vector Operations Part 1",
+    "title": "Areal Data: Vector Data",
     "section": "Revisiting Simple Features",
     "text": "Revisiting Simple Features\n\n\n\n\nThe sf package relies on a simple feature data model to represent geometries\n\nhierarchical\nstandardized methods\ncomplementary binary and human-readable encoding\n\n\n\n\n\n\n\n\n\n\n\n\ntype\ndescription\n\n\n\n\nPOINT\nsingle point geometry\n\n\nMULTIPOINT\nset of points\n\n\nLINESTRING\nsingle linestring (two or more points connected by straight lines)\n\n\nMULTILINESTRING\nset of linestrings\n\n\nPOLYGON\nexterior ring with zero or more inner rings, denoting holes\n\n\nMULTIPOLYGON\nset of polygons\n\n\nGEOMETRYCOLLECTION\nset of the geometries above"
   },
   {
+    "objectID": "slides/08-slides.html#revisiting-simple-features-1",
+    "href": "slides/08-slides.html#revisiting-simple-features-1",
+    "title": "Areal Data: Vector Data",
+    "section": "Revisiting Simple Features",
+    "text": "Revisiting Simple Features\n\nYou already know how to access some elements of a simple feature\nst_crs - returns the coordinate reference system\nst_bbox - returns the bounding box for the simple feature"
+  },
+  {
     "objectID": "slides/08-slides.html#standaridized-methods",
     "href": "slides/08-slides.html#standaridized-methods",
-    "title": "Vector Operations Part 1",
+    "title": "Areal Data: Vector Data",
     "section": "Standaridized Methods",
     "text": "Standaridized Methods\n\nWe can categorize sf operations based on what they return and/or how many geometries they accept as input.\n\n\n\n\n\nOutput Categories\n\nPredicates: evaluate a logical statement asserting that a property is TRUE\nMeasures: return a numeric value with units based on the units of the CRS\nTransformations: create new geometries based on input geometries.\n\n\n\n\n\n\nInput Geometries\n\nUnary: operate on a single geometry at a time (meaning that if you have a MULTI* object the function works on each geometry individually)\nBinary: operate on pairs of geometries\nn-ary: operate on sets of geometries"
   },
   {
     "objectID": "slides/08-slides.html#remembering-valid-geometries",
     "href": "slides/08-slides.html#remembering-valid-geometries",
-    "title": "Vector Operations Part 1",
+    "title": "Areal Data: Vector Data",
     "section": "Remembering Valid Geometries",
-    "text": "Remembering Valid Geometries\n\nA linestring is simple if it does not intersect\n\n\n\n\nlibrary(sf)\n(ls = st_linestring(rbind(c(0,0), c(1,1), \n                          c(2,2), c(0,2), \n                          c(1,1), c(2,0))))\nc(is_simple = st_is_simple(ls))\n\nis_simple \n    FALSE"
+    "text": "Remembering Valid Geometries\n\n\nA linestring is simple if it does not intersect\n\n\n\nlibrary(sf)\nlibrary(tidyverse)\nls = st_linestring(rbind(c(0,0), c(1,1),  c(2,2), c(2,1), c(3,4)))\n\nls2 = st_linestring(rbind(c(0,0), c(1,1),  c(2,2), c(0,2), c(1,1), c(2,0)))"
   },
   {
     "objectID": "slides/08-slides.html#remembering-valid-geometries-1",
     "href": "slides/08-slides.html#remembering-valid-geometries-1",
-    "title": "Vector Operations Part 1",
+    "title": "Areal Data: Vector Data",
     "section": "Remembering Valid Geometries",
-    "text": "Remembering Valid Geometries\n\n\n\n\nValid polygons\n\nAre closed (i.e., the last vertex equals the first)\nHave holes (inner rings) that inside the the exterior boundary\nHave holes that touch the exterior at no more than one vertex (they don’t extend across a line)\n\nFor multipolygons, adjacent polygons touch only at points\n\nDo not repeat their own path"
+    "text": "Remembering Valid Geometries\n\nValid polygons\n\nAre closed (i.e., the last vertex equals the first)\nHave holes (inner rings) that inside the the exterior boundary\nHave holes that touch the exterior at no more than one vertex (they don’t extend across a line)\n\nFor multipolygons, adjacent polygons touch only at points\n\nDo not repeat their own path"
+  },
+  {
+    "objectID": "slides/08-slides.html#remembering-valid-geometries-2",
+    "href": "slides/08-slides.html#remembering-valid-geometries-2",
+    "title": "Areal Data: Vector Data",
+    "section": "Remembering Valid Geometries",
+    "text": "Remembering Valid Geometries\n\np1 = st_as_sfc(\"POLYGON((0 0, 0 10, 10 0, 10 10, 0 0))\")\np2 = st_as_sfc(\"POLYGON((0 0, 0 10, 5 5,  0 0))\")\np3 = st_as_sfc(\"POLYGON((5 5, 10 10, 10 0, 5 5))\")"
+  },
+  {
+    "objectID": "slides/08-slides.html#remembering-valid-geometries-3",
+    "href": "slides/08-slides.html#remembering-valid-geometries-3",
+    "title": "Areal Data: Vector Data",
+    "section": "Remembering Valid Geometries",
+    "text": "Remembering Valid Geometries\n\np4 = st_as_sfc(c(\"POLYGON((0 0, 0 10, 5 5,  0 0))\", \"POLYGON((5 5, 10 10, 10 0, 5 5))\"))\nplot(p4, col=c( \"#7C4A89\", \"blue\"))"
   },
   {
     "objectID": "slides/08-slides.html#empty-geometries",
     "href": "slides/08-slides.html#empty-geometries",
-    "title": "Vector Operations Part 1",
+    "title": "Areal Data: Vector Data",
     "section": "Empty Geometries",
     "text": "Empty Geometries\n\nEmpty geometries arise when an operation produces NULL outcomes (like looking for the intersection between two non-intersecting polygons)\nsf allows empty geometries to make sure that information about the data type is retained\nSimilar to a data.frame with no rows or a list with NULL values\nMost vector operations require simple, valid geometries"
   },
   {
     "objectID": "slides/08-slides.html#using-unary-predicates",
     "href": "slides/08-slides.html#using-unary-predicates",
-    "title": "Vector Operations Part 1",
+    "title": "Areal Data: Vector Data",
     "section": "Using Unary Predicates",
     "text": "Using Unary Predicates\n\nUnary predicates accept single geometries (or geometry collections)\nProvide helpful ways to check whether your data is ready to analyze\nUse the st_ prefix and return TRUE/FALSE\n\n\n\n\n\n\n\n\n\npredicate\nasks…\n\n\n\n\nis_simple\nis the geometry self-intersecting (i.e., simple)?\n\n\nis_valid\nis the geometry valid?\n\n\nis_empty\nis the geometry column of an object empty?\n\n\nis_longlat\ndoes the object have geographic coordinates? (FALSE if coords are projected, NA if no crs)\n\n\nis(geometry, class)\nis the geometry of a particular class?"
   },
   {
-    "objectID": "slides/08-slides.html#using-unary-predicates-1",
-    "href": "slides/08-slides.html#using-unary-predicates-1",
-    "title": "Vector Operations Part 1",
-    "section": "Using Unary Predicates",
-    "text": "Using Unary Predicates\n\n\n\nnc &lt;- st_read(\n  system.file(\"shape/nc.shp\", package=\"sf\"), \n  quiet=TRUE)\nplot(st_geometry(nc))\n\n\n\n\n\n\nst_is_longlat(nc)\n\n[1] TRUE\n\nany(is.na(st_is_valid(nc)))\n\n[1] FALSE"
-  },
-  {
     "objectID": "slides/08-slides.html#checking-geometries-with-unary-predicates",
     "href": "slides/08-slides.html#checking-geometries-with-unary-predicates",
-    "title": "Vector Operations Part 1",
+    "title": "Areal Data: Vector Data",
     "section": "Checking Geometries With Unary Predicates",
-    "text": "Checking Geometries With Unary Predicates\n\nBefore conducting costly analyses, it’s worth checking for:\n\n\n\nempty geometries, using any(is.na(st_dimension(x)))\ncorrupt geometries, using any(is.na(st_is_valid(x)))\ninvalid geometries, using any(na.omit(st_is_valid(x)) == FALSE); in case of corrupt and/or invalid geometries,\nin case of invalid geometries, query the reason for invalidity by st_is_valid(x, reason = TRUE)\n\n\nInvalid geometries will require transformation (next week!)"
+    "text": "Checking Geometries With Unary Predicates\n\nBefore conducting costly analyses, it’s worth checking for:\n\n\n\nempty geometries, using any(st_is_empty(x)))\ncorrupt geometries, using any(is.na(st_is_valid(x)))\ninvalid geometries, using any(na.omit(st_is_valid(x)) == FALSE); in case of corrupt and/or invalid geometries,\nin case of invalid geometries, query the reason for invalidity by st_is_valid(x, reason = TRUE)\n\n\nInvalid geometries will require transformation (next week!)"
+  },
+  {
+    "objectID": "slides/08-slides.html#checking-geometries-with-unary-predicates-1",
+    "href": "slides/08-slides.html#checking-geometries-with-unary-predicates-1",
+    "title": "Areal Data: Vector Data",
+    "section": "Checking Geometries With Unary Predicates",
+    "text": "Checking Geometries With Unary Predicates\n\n\n\n\n\n\n\n\nst_is_simple(ls)\n\n[1] TRUE\n\nst_is_simple(ls2)\n\n[1] FALSE\n\n\n\n\n\n\n\n\n\nst_is_valid(p1)\n\n[1] FALSE\n\nst_is_valid(p4)\n\n[1] TRUE TRUE"
+  },
+  {
+    "objectID": "slides/08-slides.html#unary-predicates-and-real-data",
+    "href": "slides/08-slides.html#unary-predicates-and-real-data",
+    "title": "Areal Data: Vector Data",
+    "section": "Unary Predicates and Real Data",
+    "text": "Unary Predicates and Real Data\n\n\n\nlibrary(tigris)\nid.cty &lt;- counties(\"ID\", \n                   progress_bar=FALSE)\nst_crs(id.cty)$input\n\n[1] \"NAD83\"\n\nst_is_longlat(id.cty)\n\n[1] TRUE\n\nst_is_valid(id.cty)[1:5]\n\n[1] TRUE TRUE TRUE TRUE TRUE\n\nall(st_is_valid(id.cty))\n\n[1] TRUE"
   },
   {
     "objectID": "slides/08-slides.html#binary-predicates-1",
     "href": "slides/08-slides.html#binary-predicates-1",
-    "title": "Vector Operations Part 1",
+    "title": "Areal Data: Vector Data",
     "section": "Binary Predicates",
     "text": "Binary Predicates\n\n\nAccept exactly two geometries (or collections)\nAlso return logical outcomes\nBased on the Dimensionally Extended 9-Intersection Model (DE-9IM)\n\n\n\n\n\n\npredicate\nmeaning\ninverse of\n\n\n\n\ncontains\nNone of the points of A are outside B\nwithin\n\n\ncontains_properly\nA contains B and B has no points in common with the boundary of A\n\n\n\ncovers\nNo points of B lie in the exterior of A\ncovered_by\n\n\ncovered_by\nInverse of covers\n\n\n\ncrosses\nA and B have some but not all interior points in common\n\n\n\ndisjoint\nA and B have no points in common\nintersects\n\n\nequals\nA and B are topologically equal: node order or number of nodes may differ; identical to A contains B AND A within B\n\n\n\nequals_exact\nA and B are geometrically equal, and have identical node order\n\n\n\nintersects\nA and B are not disjoint\ndisjoint\n\n\nis_within_distance\nA is closer to B than a given distance\n\n\n\nwithin\nNone of the points of B are outside A\ncontains\n\n\ntouches\nA and B have at least one boundary point in common, but no interior points\n\n\n\noverlaps\nA and B have some points in common; the dimension of these is identical to that of A and B\n\n\n\nrelate\ngiven a mask pattern, return whether A and B adhere to this pattern"
   },
   {
+    "objectID": "slides/08-slides.html#binary-predicates-2",
+    "href": "slides/08-slides.html#binary-predicates-2",
+    "title": "Areal Data: Vector Data",
+    "section": "Binary Predicates",
+    "text": "Binary Predicates\n\n\n\nid &lt;- states() %&gt;% \n  filter(STUSPS == \"ID\")\n\n\n  |                                                                            \n  |                                                                      |   0%\n  |                                                                            \n  |                                                                      |   1%\n  |                                                                            \n  |=                                                                     |   1%\n  |                                                                            \n  |=                                                                     |   2%\n  |                                                                            \n  |==                                                                    |   2%\n  |                                                                            \n  |==                                                                    |   3%\n  |                                                                            \n  |===                                                                   |   4%\n  |                                                                            \n  |===                                                                   |   5%\n  |                                                                            \n  |====                                                                  |   5%\n  |                                                                            \n  |====                                                                  |   6%\n  |                                                                            \n  |=====                                                                 |   7%\n  |                                                                            \n  |=====                                                                 |   8%\n  |                                                                            \n  |======                                                                |   8%\n  |                                                                            \n  |======                                                                |   9%\n  |                                                                            \n  |=======                                                               |   9%\n  |                                                                            \n  |=======                                                               |  10%\n  |                                                                            \n  |========                                                              |  11%\n  |                                                                            \n  |========                                                              |  12%\n  |                                                                            \n  |=========                                                             |  12%\n  |                                                                            \n  |=========                                                             |  13%\n  |                                                                            \n  |==========                                                            |  14%\n  |                                                                            \n  |==========                                                            |  15%\n  |                                                                            \n  |===========                                                           |  15%\n  |                                                                            \n  |===========                                                           |  16%\n  |                                                                            \n  |============                                                          |  17%\n  |                                                                            \n  |============                                                          |  18%\n  |                                                                            \n  |=============                                                         |  18%\n  |                                                                            \n  |=============                                                         |  19%\n  |                                                                            \n  |==============                                                        |  19%\n  |                                                                            \n  |==============                                                        |  20%\n  |                                                                            \n  |==============                                                        |  21%\n  |                                                                            \n  |===============                                                       |  21%\n  |                                                                            \n  |===============                                                       |  22%\n  |                                                                            \n  |================                                                      |  22%\n  |                                                                            \n  |================                                                      |  23%\n  |                                                                            \n  |=================                                                     |  24%\n  |                                                                            \n  |=================                                                     |  25%\n  |                                                                            \n  |==================                                                    |  25%\n  |                                                                            \n  |==================                                                    |  26%\n  |                                                                            \n  |===================                                                   |  26%\n  |                                                                            \n  |===================                                                   |  27%\n  |                                                                            \n  |===================                                                   |  28%\n  |                                                                            \n  |====================                                                  |  28%\n  |                                                                            \n  |====================                                                  |  29%\n  |                                                                            \n  |=====================                                                 |  30%\n  |                                                                            \n  |=====================                                                 |  31%\n  |                                                                            \n  |======================                                                |  31%\n  |                                                                            \n  |======================                                                |  32%\n  |                                                                            \n  |=======================                                               |  32%\n  |                                                                            \n  |=======================                                               |  33%\n  |                                                                            \n  |========================                                              |  34%\n  |                                                                            \n  |========================                                              |  35%\n  |                                                                            \n  |=========================                                             |  35%\n  |                                                                            \n  |=========================                                             |  36%\n  |                                                                            \n  |==========================                                            |  37%\n  |                                                                            \n  |==========================                                            |  38%\n  |                                                                            \n  |===========================                                           |  38%\n  |                                                                            \n  |===========================                                           |  39%\n  |                                                                            \n  |============================                                          |  39%\n  |                                                                            \n  |============================                                          |  40%\n  |                                                                            \n  |=============================                                         |  41%\n  |                                                                            \n  |=============================                                         |  42%\n  |                                                                            \n  |==============================                                        |  42%\n  |                                                                            \n  |==============================                                        |  43%\n  |                                                                            \n  |===============================                                       |  44%\n  |                                                                            \n  |===============================                                       |  45%\n  |                                                                            \n  |================================                                      |  45%\n  |                                                                            \n  |================================                                      |  46%\n  |                                                                            \n  |=================================                                     |  47%\n  |                                                                            \n  |=================================                                     |  48%\n  |                                                                            \n  |==================================                                    |  48%\n  |                                                                            \n  |==================================                                    |  49%\n  |                                                                            \n  |===================================                                   |  49%\n  |                                                                            \n  |===================================                                   |  50%\n  |                                                                            \n  |===================================                                   |  51%\n  |                                                                            \n  |====================================                                  |  51%\n  |                                                                            \n  |====================================                                  |  52%\n  |                                                                            \n  |=====================================                                 |  52%\n  |                                                                            \n  |=====================================                                 |  53%\n  |                                                                            \n  |======================================                                |  55%\n  |                                                                            \n  |=======================================                               |  55%\n  |                                                                            \n  |=======================================                               |  56%\n  |                                                                            \n  |========================================                              |  56%\n  |                                                                            \n  |==============================================                        |  66%\n  |                                                                            \n  |=================================================                     |  70%\n  |                                                                            \n  |==================================================                    |  71%\n  |                                                                            \n  |=====================================================                 |  76%\n  |                                                                            \n  |======================================================                |  77%\n  |                                                                            \n  |=======================================================               |  79%\n  |                                                                            \n  |=============================================================         |  87%\n  |                                                                            \n  |===============================================================       |  90%\n  |                                                                            \n  |================================================================      |  91%\n  |                                                                            \n  |================================================================      |  92%\n  |                                                                            \n  |=================================================================     |  93%\n  |                                                                            \n  |===================================================================   |  95%\n  |                                                                            \n  |======================================================================| 100%\n\nor &lt;- states() %&gt;% \n  filter(STUSPS == \"OR\")\nada.cty &lt;- id.cty %&gt;% \n  filter(NAME == \"Ada\")\n\n\n\nst_covers(id, ada.cty)\n\nSparse geometry binary predicate list of length 1, where the predicate\nwas `covers'\n 1: 1\n\nst_covers(id, ada.cty, sparse=FALSE)\n\n     [,1]\n[1,] TRUE\n\nst_within(ada.cty, or)\n\nSparse geometry binary predicate list of length 1, where the predicate\nwas `within'\n 1: (empty)\n\nst_within(ada.cty, or, sparse=FALSE)\n\n      [,1]\n[1,] FALSE"
+  },
+  {
     "objectID": "slides/08-slides.html#measures-1",
     "href": "slides/08-slides.html#measures-1",
-    "title": "Vector Operations Part 1",
+    "title": "Areal Data: Vector Data",
     "section": "Measures",
-    "text": "Measures\nUnary Measures\n\nReturn quantities of individual geometries\n\n\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ndimension\n0 for points, 1 for linear, 2 for polygons, possibly NA for empty geometries\n\n\narea\nthe area of a geometry\n\n\nlength\nthe length of a linear geometry\n\n\n\n\nBinary Measures\n\nst_distance returns the distance between pairs of geometries"
+    "text": "Measures\nUnary Measures\n\nReturn quantities of individual geometries\n\n\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ndimension\n0 for points, 1 for linear, 2 for polygons, possibly NA for empty geometries\n\n\narea\nthe area of a geometry\n\n\nlength\nthe length of a linear geometry\n\n\n\n\nUnary Measures\n\nst_area(id)\n\n2.15994e+11 [m^2]\n\nst_area(id.cty[1:5,])\n\nUnits: [m^2]\n[1] 2858212132 3380630278 1459359818 1726660484 1223521586\n\nst_dimension(id.cty[1:5,])\n\n[1] 2 2 2 2 2"
+  },
+  {
+    "objectID": "slides/08-slides.html#binary-measures",
+    "href": "slides/08-slides.html#binary-measures",
+    "title": "Areal Data: Vector Data",
+    "section": "Binary Measures",
+    "text": "Binary Measures\n\nst_distance returns the distance between pairs of geometries\n\n\nkootenai.cty &lt;- id.cty %&gt;% \n  filter(NAME == \"Kootenai\")\nst_distance(kootenai.cty, ada.cty)\n\nUnits: [m]\n         [,1]\n[1,] 396433.8\n\nst_distance(id.cty)[1:5, 1:5]\n\nUnits: [m]\n         [,1]     [,2]     [,3]     [,4]     [,5]\n[1,]      0.0 467635.7 277227.0 132998.0      0.0\n[2,] 467635.7      0.0 319706.4 656056.0 514306.9\n[3,] 277227.0 319706.4      0.0 377105.4 336146.8\n[4,] 132998.0 656056.0 377105.4      0.0 133045.5\n[5,]      0.0 514306.9 336146.8 133045.5      0.0"
   },
   {
     "objectID": "slides/06-slides.html#for-today",
@@ -2030,18 +2072,32 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
   },
   {
+    "objectID": "content/08-content.html",
+    "href": "content/08-content.html",
+    "title": "Areal Data: Vectors",
+    "section": "",
+    "text": "Now that you have started working with the various components of coordinates and coordinate reference systems, it’s time to start learning the fundamental aspects of working with vector data in sf and R. The syntax is a little confusing at first, but once you’ve gotten a sense for the logic behind it you should be able to start piecing together the functions necessary to implement the pseudocode you write for an analysis. We’ll spend more time on vector manipulation in the coming weeks so you’ll get plenty of practice with the ideas we introduce today."
+  },
+  {
+    "objectID": "content/08-content.html#readings",
+    "href": "content/08-content.html#readings",
+    "title": "Areal Data: Vectors",
+    "section": "Readings",
+    "text": "Readings\nSame as last class really, but hopefully you’ll begin to understand them better…\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Chapter 2, Sections 1-3 and Chapter 3, Section 1 of Spatial Data Science by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)"
+  },
+  {
     "objectID": "content/08-content.html#objectives",
     "href": "content/08-content.html#objectives",
     "title": "Areal Data: Vectors",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nImplement approaches for checking and reparing geometries in R\nUnderstand predicates and measures in the context of spatial operations in sf\nUse st_* to evaluate attributes of geometries and calculate measurements"
   },
   {
     "objectID": "content/08-content.html#slides",
     "href": "content/08-content.html#slides",
     "title": "Areal Data: Vectors",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
   },
   {
     "objectID": "content/10-content.html#objectives",
