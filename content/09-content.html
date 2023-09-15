@@ -387,12 +387,24 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </header>
 
+<p>Now that we’ve learned a bit about how to assess some of the important quantities of vector-based spatial data, we’ll try to apply a bit of the same logic to raster data. We’ll be using the <code>terra</code> package for the majority of raster options in this course primarily because it of its speed. That said, it is not a <code>tidyverse</code> package and so some of the intuition we used to organize the <code>sf</code> functions will be a little harder to extend here. I’ll do my best to help you make the links!!</p>
 <section id="readings" class="level2">
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<ul>
+<li><p><i class="fas fa-book"></i> <a href="https://www.paulamoraga.com/book-spatial/the-terra-package-for-raster-and-vector-data.html">Chapter 4</a> from Paula Moraga’s Spatial Statistics for Data Science: Theory and Practice with R provides a quick intro to using <code>terra</code> for raster and vector data.</p></li>
+<li><p><i class="fas fa-book"></i> <a href="https://rspatial.github.io/terra/reference/terra-package.html">The <code>terra</code> reference page</a> provides a brief overview of all of the functions and their categories. We’ll only focus on the <code>SpatRaster</code> methods.</p></li>
+<li><p><i class="fas fa-book"></i> <a href="https://rspatial.org/spatial/8-rastermanip.html">Raster Data Manipulation</a> from the Spatial Data Science with <code>R</code> and <code>terra</code> ebook provides some nice examples of <code>terra</code> functions in the context of spatial workflows.</p></li>
+</ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today, you should be able to:</p>
+<ul>
+<li><p>Access the elements that define a raster</p></li>
+<li><p>Build rasters from scratch using matrix operations and <code>terra</code></p></li>
+<li><p>Evaluate logical conditions with raster data</p></li>
+<li><p>Calculate different measures of raster data</p></li>
+</ul>
 </section>
 <section id="slides" class="level2">
 <h2 class="anchored" data-anchor-id="slides">Slides</h2>
@@ -400,7 +412,9 @@ ul.task-list li input[type="checkbox"] {
 <p class="text-center buttons">
 <a class="btn btn-danger" target="_blank" href="../slides/09-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/09-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
-<p>Slides Forthcoming</p>
+<div>
+<iframe class="slide-deck" src="../slides/09-slides.html"></iframe>
+</div>
 
 
 </section>

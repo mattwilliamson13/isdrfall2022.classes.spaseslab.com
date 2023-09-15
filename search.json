@@ -1582,18 +1582,32 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
   },
   {
+    "objectID": "content/09-content.html",
+    "href": "content/09-content.html",
+    "title": "Areal Data: Rasters",
+    "section": "",
+    "text": "Now that we’ve learned a bit about how to assess some of the important quantities of vector-based spatial data, we’ll try to apply a bit of the same logic to raster data. We’ll be using the terra package for the majority of raster options in this course primarily because it of its speed. That said, it is not a tidyverse package and so some of the intuition we used to organize the sf functions will be a little harder to extend here. I’ll do my best to help you make the links!!"
+  },
+  {
+    "objectID": "content/09-content.html#readings",
+    "href": "content/09-content.html#readings",
+    "title": "Areal Data: Rasters",
+    "section": "Readings",
+    "text": "Readings\n\n Chapter 4 from Paula Moraga’s Spatial Statistics for Data Science: Theory and Practice with R provides a quick intro to using terra for raster and vector data.\n The terra reference page provides a brief overview of all of the functions and their categories. We’ll only focus on the SpatRaster methods.\n Raster Data Manipulation from the Spatial Data Science with R and terra ebook provides some nice examples of terra functions in the context of spatial workflows."
+  },
+  {
     "objectID": "content/09-content.html#objectives",
     "href": "content/09-content.html#objectives",
     "title": "Areal Data: Rasters",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nAccess the elements that define a raster\nBuild rasters from scratch using matrix operations and terra\nEvaluate logical conditions with raster data\nCalculate different measures of raster data"
   },
   {
     "objectID": "content/09-content.html#slides",
     "href": "content/09-content.html#slides",
     "title": "Areal Data: Rasters",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
   },
   {
     "objectID": "content/07-content.html",
@@ -2097,7 +2111,7 @@
     "href": "content/08-content.html#slides",
     "title": "Areal Data: Vectors",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Recording"
   },
   {
     "objectID": "content/10-content.html#objectives",
@@ -2961,102 +2975,81 @@
     "text": "A Note on Vectors\n\nMoving forward we will rely primarily on the sf package for vector manipulation. Some packages require objects to be a different class. terra, for example, relies on SpatVectors. You can use as() to coerce objects from one type to another (assuming a method exists). You can also explore other packages. Many packages provide access to the ‘spatial’ backbones of R (like geos and gdal), they just differ in how the “verbs” are specified. For sf operations the st_ prefix is typical. For rgeos operations, the g prefix is common."
   },
   {
-    "objectID": "slides/09-slides.html#your-final-project",
-    "href": "slides/09-slides.html#your-final-project",
-    "title": "Vector Operations Part 1I",
-    "section": "Your final project",
-    "text": "Your final project\n\nAt least 5 datasets total (1 tabular, 1 vector, 1 raster, and 2 of your choosing)\nChoose 1 statistical approach to address your research question\nVisualizations - minimum of 3. 1 location map; the others should help address your question\nSubmission formats\nA note about your discussion"
+    "objectID": "slides/09-slides.html#revisiting-the-raster-data-model",
+    "href": "slides/09-slides.html#revisiting-the-raster-data-model",
+    "title": "Areal Data: Rasters",
+    "section": "Revisiting the Raster Data Model",
+    "text": "Revisiting the Raster Data Model\n\n\n\n\nVector data describe the “exact” locations of features on a landscape (including a Cartesian landscape)\nRaster data represent spatially continuous phenomena (NA is possible)\nDepict the alignment of data on a regular lattice (often a square)\n\nOperations mimic those for matrix objects in R\n\nGeometry is implicit; the spatial extent and number of rows and columns define the cell size"
   },
   {
-    "objectID": "slides/09-slides.html#objectives",
-    "href": "slides/09-slides.html#objectives",
-    "title": "Vector Operations Part 1I",
-    "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nComplete a workflow for identifying and remedying invalid geometries\nDescribe the various unary, binary, and n-ary transformers\nUse predicates and dplyr::filter to subset spatial data"
+    "objectID": "slides/09-slides.html#rasters-with-terra",
+    "href": "slides/09-slides.html#rasters-with-terra",
+    "title": "Areal Data: Rasters",
+    "section": "Rasters with terra",
+    "text": "Rasters with terra\n\nsyntax is different for terra compared to sf\nRepresentation in Environment is also different\nCan break pipes, Be Explicit"
   },
   {
-    "objectID": "slides/09-slides.html#revisiting-predicates-and-measures",
-    "href": "slides/09-slides.html#revisiting-predicates-and-measures",
-    "title": "Vector Operations Part 1I",
-    "section": "Revisiting predicates and measures",
-    "text": "Revisiting predicates and measures\n\nPredicates: evaluate a logical statement asserting that a property is TRUE\nMeasures: return a numeric value with units based on the units of the CRS\nUnary, binary, and n-ary distinguish how many geometries each function accepts and returns"
+    "objectID": "slides/09-slides.html#rasters-by-construction-1",
+    "href": "slides/09-slides.html#rasters-by-construction-1",
+    "title": "Areal Data: Rasters",
+    "section": "Rasters by Construction",
+    "text": "Rasters by Construction\n\n\n\nmtx &lt;- matrix(1:16, nrow=4)\nmtx\n\n     [,1] [,2] [,3] [,4]\n[1,]    1    5    9   13\n[2,]    2    6   10   14\n[3,]    3    7   11   15\n[4,]    4    8   12   16\n\nrstr &lt;- terra::rast(mtx)\nrstr\n\nclass       : SpatRaster \ndimensions  : 4, 4, 1  (nrow, ncol, nlyr)\nresolution  : 1, 1  (x, y)\nextent      : 0, 4, 0, 4  (xmin, xmax, ymin, ymax)\ncoord. ref. :  \nsource(s)   : memory\nname        : lyr.1 \nmin value   :     1 \nmax value   :    16 \n\n\n\n\n\n\n\n\n\n\n\nNote: you must have raster or terra loaded for plot() to work on Rast* objects; otherwise you get Error in as.double(y) : cannot coerce type 'S4' to vector of type 'double'"
   },
   {
-    "objectID": "slides/09-slides.html#transformations",
-    "href": "slides/09-slides.html#transformations",
-    "title": "Vector Operations Part 1I",
-    "section": "Transformations",
-    "text": "Transformations\n\n\nTransformations: create new geometries based on input geometries"
+    "objectID": "slides/09-slides.html#rasters-by-construction-origin",
+    "href": "slides/09-slides.html#rasters-by-construction-origin",
+    "title": "Areal Data: Rasters",
+    "section": "Rasters by Construction: Origin",
+    "text": "Rasters by Construction: Origin\n\nOrigin defines the location of the intersection of the x and y axes\n\n\n\n\nr &lt;- rast(xmin=-4, xmax = 9.5, ncols=10)\nr[] &lt;- runif(ncell(r))\norigin(r)\n\n[1] 0.05 0.00\n\nr2 &lt;- r\norigin(r2) &lt;- c(2,2)"
   },
   {
-    "objectID": "slides/09-slides.html#unary-transformations",
-    "href": "slides/09-slides.html#unary-transformations",
-    "title": "Vector Operations Part 1I",
-    "section": "Unary Transformations",
-    "text": "Unary Transformations\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\ncentroid\nof type POINT with the geometry’s centroid\n\n\nbuffer\nthat is this larger (or smaller) than the input geometry, depending on the buffer size\n\n\njitter\nthat was moved in space a certain amount, using a bivariate uniform distribution\n\n\nwrap_dateline\ncut into pieces that do no longer cover the dateline\n\n\nboundary\nwith the boundary of the input geometry\n\n\nconvex_hull\nthat forms the convex hull of the input geometry\n\n\nline_merge\nafter merging connecting LINESTRING elements of a MULTILINESTRING into longer LINESTRINGs.\n\n\nmake_valid\nthat is valid\n\n\nnode\nwith added nodes to linear geometries at intersections without a node; only works on individual linear geometries\n\n\npoint_on_surface\nwith a (arbitrary) point on a surface\n\n\npolygonize\nof type polygon, created from lines that form a closed ring"
+    "objectID": "slides/09-slides.html#rasters-by-construction-resolution",
+    "href": "slides/09-slides.html#rasters-by-construction-resolution",
+    "title": "Areal Data: Rasters",
+    "section": "Rasters by Construction: Resolution",
+    "text": "Rasters by Construction: Resolution\n\n\nGeometry is implicit; the spatial extent and number of rows and columns define the cell size\nResolution (res) defines the length and width of an individual pixel\n\n\n\n\n\nr &lt;- rast(xmin=-4, xmax = 9.5, \n          ncols=10)\nres(r)\n\n[1] 1.35 1.00\n\nr2 &lt;- rast(xmin=-4, xmax = 5, \n           ncols=10)\nres(r2)\n\n[1] 0.9 1.0\n\n\n\n\nr &lt;- rast(xmin=-4, xmax = 9.5, \n          res=c(0.5,0.5))\nncol(r)\n\n[1] 27\n\nr2 &lt;- rast(xmin=-4, xmax = 9.5, \n           res=c(5,5))\nncol(r2)\n\n[1] 3"
   },
   {
-    "objectID": "slides/09-slides.html#unary-transformations-contd",
-    "href": "slides/09-slides.html#unary-transformations-contd",
-    "title": "Vector Operations Part 1I",
-    "section": "Unary Transformations (cont’d)",
-    "text": "Unary Transformations (cont’d)\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\nsegmentize\na (linear) geometry with nodes at a given density or minimal distance\n\n\nsimplify\nsimplified by removing vertices/nodes (lines or polygons)\n\n\nsplit\nthat has been split with a splitting linestring\n\n\ntransform\ntransformed or convert to a new coordinate reference system (chapter @ref(cs))\n\n\ntriangulate\nwith Delauney triangulated polygon(s) (figure @ref(fig:vor))\n\n\nvoronoi\nwith the Voronoi tessellation of an input geometry (figure @ref(fig:vor))\n\n\nzm\nwith removed or added Z and/or M coordinates\n\n\ncollection_extract\nwith subgeometries from a GEOMETRYCOLLECTION of a particular type\n\n\ncast\nthat is converted to another type\n\n\n+\nthat is shifted over a given vector\n\n\n*\nthat is multiplied by a scalar or matrix"
+    "objectID": "slides/09-slides.html#extending-predicates",
+    "href": "slides/09-slides.html#extending-predicates",
+    "title": "Areal Data: Rasters",
+    "section": "Extending predicates",
+    "text": "Extending predicates\n\nPredicates: evaluate a logical statement asserting that a property is TRUE\nterra does not follow the same hierarchy as sf so a little trickier"
   },
   {
-    "objectID": "slides/09-slides.html#common-uses-of-unary-transformers",
-    "href": "slides/09-slides.html#common-uses-of-unary-transformers",
-    "title": "Vector Operations Part 1I",
-    "section": "Common uses of Unary Transformers",
-    "text": "Common uses of Unary Transformers\n\nCreating valid geometries\nReprojecting your data\nCombining or changing geometries"
+    "objectID": "slides/09-slides.html#unary-predicates-in-terra",
+    "href": "slides/09-slides.html#unary-predicates-in-terra",
+    "title": "Areal Data: Rasters",
+    "section": "Unary predicates in terra",
+    "text": "Unary predicates in terra\n\nCan tell us qualities of a raster dataset\nMany similar operations for SpatVector class (note use of .)\n\n\n\n\n\n\n\n\n\npredicate\nasks…\n\n\n\n\nis.lonlat\nDoes the object have a longitude/latitude CRS?\n\n\ninMemory\nis the object stored in memory?\n\n\nis.factor\nAre there categorical layers?\n\n\nhasValues\nDo the cells have values?"
   },
   {
-    "objectID": "slides/09-slides.html#binary-transformers",
-    "href": "slides/09-slides.html#binary-transformers",
-    "title": "Vector Operations Part 1I",
-    "section": "Binary Transformers",
-    "text": "Binary Transformers\n\n\n\n\n\n\n\n\n\nfunction\nreturns\ninfix operator\n\n\n\n\nintersection\nthe overlapping geometries for pair of geometries\n&\n\n\nunion\nthe combination of the geometries; removes internal boundaries and duplicate points, nodes or line pieces\n|\n\n\ndifference\nthe geometries of the first after removing the overlap with the second geometry\n/\n\n\nsym_difference\nthe combinations of the geometries after removing where they intersect; the negation (opposite) of intersection\n%/%\n\n\ncrop\ncrop an sf object to a specific rectangle"
+    "objectID": "slides/09-slides.html#unary-predicates-in-terra-1",
+    "href": "slides/09-slides.html#unary-predicates-in-terra-1",
+    "title": "Areal Data: Rasters",
+    "section": "Unary predicates in terra",
+    "text": "Unary predicates in terra\n\n\n\n\nglobal: tests if the raster covers all longitudes (from -180 to 180 degrees) such that the extreme columns are in fact adjacent\n\n\nr &lt;- rast()\nis.lonlat(r)\n\n[1] TRUE\n\nis.lonlat(r, global=TRUE)\n\n[1] TRUE\n\n\n\n\n\n\nperhaps: If TRUE and the crs is unknown, the method returns TRUE if the coordinates are plausible for longitude/latitude\n\n\ncrs(r) &lt;- \"\"\nis.lonlat(r)\n\n[1] NA\n\nis.lonlat(r, perhaps=TRUE, warn=FALSE)\n\n[1] TRUE\n\n\n\ncrs(r) &lt;- \"+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +ellps=WGS84\"\nis.lonlat(r)\n\n[1] FALSE"
   },
   {
-    "objectID": "slides/09-slides.html#binary-transformers-1",
-    "href": "slides/09-slides.html#binary-transformers-1",
-    "title": "Vector Operations Part 1I",
-    "section": "Binary Transformers",
-    "text": "Binary Transformers"
+    "objectID": "slides/09-slides.html#binary-predicates-in-terra",
+    "href": "slides/09-slides.html#binary-predicates-in-terra",
+    "title": "Areal Data: Rasters",
+    "section": "Binary predicates in terra",
+    "text": "Binary predicates in terra\n\nTake exactly 2 inputs, return 1 matrix of cell locs where value is TRUE\nadjacent: identifies cells adajcent to a set of raster cells"
   },
   {
-    "objectID": "slides/09-slides.html#common-uses-of-binary-transformers",
-    "href": "slides/09-slides.html#common-uses-of-binary-transformers",
-    "title": "Vector Operations Part 1I",
-    "section": "Common Uses of Binary Transformers",
-    "text": "Common Uses of Binary Transformers\n\nRelating partially overlapping datasets to each other\nReducing the extent of vector objects"
+    "objectID": "slides/09-slides.html#unary-measures-in-terra",
+    "href": "slides/09-slides.html#unary-measures-in-terra",
+    "title": "Areal Data: Rasters",
+    "section": "Unary measures in terra",
+    "text": "Unary measures in terra\n\nSlightly more flexible than sf\nOne result for each layer in a stack\n\n\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ncellSize\narea of individual cells\n\n\nexpanse\nsummed area of all cells\n\n\nvalues\nreturns all cell values\n\n\nncol\nnumber of columns\n\n\nnrow\nnumber of rows\n\n\nncell\nnumber of cells\n\n\nres\nresolution\n\n\next\nminimum and maximum of x and y coords\n\n\norigin\nthe orgin of a SpatRaster\n\n\ncrs\nthe coordinate reference system\n\n\ncats\ncategories of a categorical raster"
   },
   {
-    "objectID": "slides/09-slides.html#n-ary-transformers",
-    "href": "slides/09-slides.html#n-ary-transformers",
-    "title": "Vector Operations Part 1I",
-    "section": "N-ary Transformers",
-    "text": "N-ary Transformers\n\nSimilar to Binary (except st_crop)\nunion can be applied to a set of geometries to return its geometrical union\nintersection and difference take a single argument, but operate (sequentially) on all pairs, triples, quadruples, etc."
-  },
-  {
-    "objectID": "slides/09-slides.html#subsetting-data-1",
-    "href": "slides/09-slides.html#subsetting-data-1",
-    "title": "Vector Operations Part 1I",
-    "section": "Subsetting Data",
-    "text": "Subsetting Data\n\nOften want to restrict analyses to particular locations\nCan combine predicates with [] to subset based on geography\nCan also use dplyr::filter and dplyr::select to subset using attributes"
-  },
-  {
-    "objectID": "slides/09-slides.html#using-predicates",
-    "href": "slides/09-slides.html#using-predicates",
-    "title": "Vector Operations Part 1I",
-    "section": "Using predicates",
-    "text": "Using predicates\n\nCan combine predicates with [] to subset based on topological relations\nx[y, , op = st_intersects]\nst_filter( x = x, y = y, .predicate = st_intersects)"
-  },
-  {
-    "objectID": "slides/09-slides.html#using-dplyr",
-    "href": "slides/09-slides.html#using-dplyr",
-    "title": "Vector Operations Part 1I",
-    "section": "Using dplyr",
-    "text": "Using dplyr\n\n\nfilter returns rows that match a criteria\nselect returns columns\n\n\n\n\n\nlibrary(tidyverse)\ndurham.cty &lt;- nc %&gt;% \n  filter(., NAME == \"Durham\")\n## We can also use the bracket approach\ndurham.cty2 &lt;- nc[nc$NAME == \"Durham\",]\n\nplot(st_geometry(nc))\nplot(st_geometry(durham.cty), add=TRUE, col=\"blue\")\n\n\n\n\n\n\nnc.select &lt;- nc %&gt;% \n  select(., c(\"BIR79\", \"SID79\"))\nplot(nc.select)"
+    "objectID": "slides/09-slides.html#binary-measures-in-terra",
+    "href": "slides/09-slides.html#binary-measures-in-terra",
+    "title": "Areal Data: Rasters",
+    "section": "Binary measures in terra",
+    "text": "Binary measures in terra\n\nReturns a matrix or SpatRaster describing the measure\n\n\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ndistance\nshortest distance to non-NA or vector object\n\n\ngridDistance\nshortest distance through adjacent grid cells\n\n\ncostDistance\nShortest distance considering cell-varying friction\n\n\ndirection\nazimuth to cells that are not NA"
   },
   {
     "objectID": "slides/11-slides.html#objectives",
