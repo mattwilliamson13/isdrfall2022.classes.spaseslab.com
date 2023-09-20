@@ -702,128 +702,128 @@
   {
     "objectID": "slides/10-slides.html#objectives",
     "href": "slides/10-slides.html#objectives",
-    "title": "Spatial Data as Matrices and Rasters",
+    "title": "Introduction to Mapping Geographic Data",
     "section": "Objectives",
-    "text": "Objectives\n\nBy the end of today, you should be able to:\n\nDescribe the raster data model and its representation in R\nAccess the elements that define a raster\nBuild rasters from scratch using matrix operations and terra"
+    "text": "Objectives\n\nBy the end of today, you should be able to:\nDescribe the basic components of data visualization as a foundation for mapping syntax\nUnderstand layering in both base plot and tmap\nMake basic plots of multiple spatial data objects"
   },
   {
-    "objectID": "slides/10-slides.html#defining-the-raster-data-model-1",
-    "href": "slides/10-slides.html#defining-the-raster-data-model-1",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Defining the Raster Data Model",
-    "text": "Defining the Raster Data Model\n\n\n\n\nVector data describe the “exact” locations of features on a landscape (including a Cartesian landscape)\nRaster data represent spatially continuous phenomena (NA is possible)\nDepict the alignment of data on a regular lattice (often a square)\n\nOperations mimic those for matrix objects in R\n\nGeometry is implicit; the spatial extent and number of rows and columns define the cell size"
+    "objectID": "slides/10-slides.html#which-packages-have-plot-methods",
+    "href": "slides/10-slides.html#which-packages-have-plot-methods",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Which packages have plot methods?",
+    "text": "Which packages have plot methods?\n\n\n\nOften the fastest way to view data\nUse ?plot to see which packages export a method for the plot function\nOr you can use ?plot.*** to see which classes of objects have plot functions defined"
   },
   {
-    "objectID": "slides/10-slides.html#types-of-raster-data",
-    "href": "slides/10-slides.html#types-of-raster-data",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Types of Raster Data",
-    "text": "Types of Raster Data\n\n\n\n\n\n\n\n\n\n\nRegular: constant cell size; axes aligned with Easting and Northing\nRotated: constant cell size; axes not aligned with Easting and Northing\nSheared: constant cell size; axes not parallel\nRectilinear: cell size varies along a dimension\nCurvilinear: cell size and orientation dependent on the other dimension"
+    "objectID": "slides/10-slides.html#plot-for-sf-objects",
+    "href": "slides/10-slides.html#plot-for-sf-objects",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "plot for sf objects",
+    "text": "plot for sf objects\n\nCan plot outlines using plot(st_geometry(your.shapfile)) or plot(your.shapefile$geometry)\nPlotting attributes requires “extracting” the attributes (using plot(your.shapefile[\"ATTRIBUTE\"]))\nControlling aesthetics can be challenging\nlayering requires add=TRUE"
   },
   {
-    "objectID": "slides/10-slides.html#types-of-raster-data-1",
-    "href": "slides/10-slides.html#types-of-raster-data-1",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Types of Raster Data",
-    "text": "Types of Raster Data\n\nContinuous: numeric data representing a measurement (e.g., elevation, precipitation)\nCategorical: integer data representing factors (e.g., land use, land cover)"
+    "objectID": "slides/10-slides.html#plot-for-sf-objects-1",
+    "href": "slides/10-slides.html#plot-for-sf-objects-1",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "plot for sf objects",
+    "text": "plot for sf objects\n\n\n\nplot(st_geometry(cejst))\n\n\n\n\n\n\nplot(cejst[\"EALR_PFS\"])"
   },
   {
-    "objectID": "slides/10-slides.html#continuous-rasters",
-    "href": "slides/10-slides.html#continuous-rasters",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Continuous Rasters",
-    "text": "Continuous Rasters\n\n\n\nmintemp &lt;- rast(\"ftp://ftp.hafro.is/pub/data/rasters/Iceland_minbtemp.tif\")\nmintemp\n\nclass       : SpatRaster \ndimensions  : 340, 375, 1  (nrow, ncol, nlyr)\nresolution  : 2000, 2000  (x, y)\nextent      : -1050226, -300225.9, -699984.3, -19984.32  (xmin, xmax, ymin, ymax)\ncoord. ref. : +proj=laea +lat_0=69 +lon_0=-4 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs \nsource      : Iceland_minbtemp.tif \nname        : Iceland_minbtemp \nmin value   :       -0.9982879 \nmax value   :        8.6031137"
+    "objectID": "slides/10-slides.html#plot-for-spatrasters",
+    "href": "slides/10-slides.html#plot-for-spatrasters",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "plot for SpatRasters",
+    "text": "plot for SpatRasters\n\nplot(rast.data)"
   },
   {
-    "objectID": "slides/10-slides.html#categorical-rasters",
-    "href": "slides/10-slides.html#categorical-rasters",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Categorical Rasters",
-    "text": "Categorical Rasters\n\n\n\n\nRequires a classification matrix and coercion to factor\nlevels allows you to define the categories\n\n\n\n# Create classification matrix\ncm &lt;- matrix(c(\n  -2, 2, 0,\n  2, 4, 1,\n  4, 10, 2), ncol = 3, byrow = TRUE)\n\n# Create a raster with integers\ntemp_reclass &lt;- classify(mintemp, cm)\ntempcats &lt;- c(\"cold\", \"mild\", \"warm\")\nlevels(temp_reclass) &lt;- tempcats\ncats(temp_reclass)\n\n[[1]]\n  value category\n1     0     cold\n2     1     mild\n3     2     warm"
+    "objectID": "slides/10-slides.html#plot-for-spatrasters-1",
+    "href": "slides/10-slides.html#plot-for-spatrasters-1",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "plot for SpatRasters",
+    "text": "plot for SpatRasters\n\nplot(rast.data[\"WHP_ID\"], col=heat.colors(24, rev=TRUE))"
   },
   {
-    "objectID": "slides/10-slides.html#adding-dimensions",
-    "href": "slides/10-slides.html#adding-dimensions",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Adding Dimensions",
-    "text": "Adding Dimensions\n\nWhen data are aligned in space and/or time, more efficient to process as ‘cubes’ or ‘stacks’\nBands of satellite imagery, multiple predictors, spatio-temporal data"
+    "objectID": "slides/10-slides.html#combining-the-two-with-addtrue",
+    "href": "slides/10-slides.html#combining-the-two-with-addtrue",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Combining the two with add=TRUE",
+    "text": "Combining the two with add=TRUE\n\nplot(rast.data[\"WHP_ID\"], col=heat.colors(24, rev=TRUE))\nplot(st_geometry(st_transform(cejst, crs=crs(rast.data))), add=TRUE)"
   },
   {
-    "objectID": "slides/10-slides.html#a-note-about-support",
-    "href": "slides/10-slides.html#a-note-about-support",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "A note about support",
-    "text": "A note about support\n\n\nWe talked briefly about the agr option in the st_sf() function\nagr refers to the attribute-geometry-relationship which can be:\n\nconstant = applies to every point in the geometry (lines and polygons are just lots of points)\nidentity = a value unique to a geometry\naggregate = a single value that integrates data across the geometry\n\nSupport is the area to which an attribute applies.\nRasters can have point (attribute refers to the cell center) or cell (attribute refers to an area similar to the pixel) support"
+    "objectID": "slides/10-slides.html#grammar-of-graphics-wilkinson-2005",
+    "href": "slides/10-slides.html#grammar-of-graphics-wilkinson-2005",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Grammar of Graphics (Wilkinson 2005)",
+    "text": "Grammar of Graphics (Wilkinson 2005)\n\nGrammar: A set of structural rules that help establish the components of a language\nSystem and structure of language consist of syntax and semantics\nGrammar of Graphics: a framework that allows us to concisely describe the components of any graphic\nFollows a layered approach by using defined components to build a visualization\nggplot2 is a formal implementation in R"
   },
   {
-    "objectID": "slides/10-slides.html#rasters-in-r-1",
-    "href": "slides/10-slides.html#rasters-in-r-1",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Rasters in R",
-    "text": "Rasters in R\n\n\nraster - the original workhorse package; built on sp, rgdal, and rgeos\n\nRasterLayer, RasterStack, and RasterBrick classes\n\nterra - relatively new; developed by the raster folks, but designed to be much faster\n\nSpatRaster and SpatVector classes\n\nstars - developed by sf package developers; tidyverse compatible; designed for spatio-temporal data\n\nstars class\nCrosswalk between raster and stars is available here\nOnly way to deal with rectilinear and curvilinear data"
+    "objectID": "slides/10-slides.html#aesthetics-mapping-data-to-visual-elements",
+    "href": "slides/10-slides.html#aesthetics-mapping-data-to-visual-elements",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Aesthetics: Mapping Data to Visual Elements",
+    "text": "Aesthetics: Mapping Data to Visual Elements\n\n\n\n\nDefine the systematic conversion of data into elements of the visualization\nAre either categorical or continuous (exclusively)\nExamples include x, y, fill, color, and alpha\n\n\n\n\n\n\nFrom Wilke 2019"
   },
   {
-    "objectID": "slides/10-slides.html#rasters-with-terra",
-    "href": "slides/10-slides.html#rasters-with-terra",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Rasters with terra",
-    "text": "Rasters with terra\n\nsyntax is different for terra compared to sf\nRepresentation in Environment is also different\nCan break pipes, Be Explicit"
+    "objectID": "slides/10-slides.html#scales",
+    "href": "slides/10-slides.html#scales",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Scales",
+    "text": "Scales\n\nScales map data values to their aesthetics\nMust be a one-to-one relationship; each specific data value should map to only one aesthetic"
   },
   {
-    "objectID": "slides/10-slides.html#rasters-by-construction",
-    "href": "slides/10-slides.html#rasters-by-construction",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Rasters by Construction",
-    "text": "Rasters by Construction\n\n\n\nmtx &lt;- matrix(1:16, nrow=4)\nmtx\n\n     [,1] [,2] [,3] [,4]\n[1,]    1    5    9   13\n[2,]    2    6   10   14\n[3,]    3    7   11   15\n[4,]    4    8   12   16\n\nrstr &lt;- terra::rast(mtx)\nrstr\n\nclass       : SpatRaster \ndimensions  : 4, 4, 1  (nrow, ncol, nlyr)\nresolution  : 1, 1  (x, y)\nextent      : 0, 4, 0, 4  (xmin, xmax, ymin, ymax)\ncoord. ref. :  \nsource(s)   : memory\nname        : lyr.1 \nmin value   :     1 \nmax value   :    16 \n\n\n\n\n\n\n\n\n\n\n\nNote: you must have raster or terra loaded for plot() to work on Rast* objects; otherwise you get Error in as.double(y) : cannot coerce type 'S4' to vector of type 'double'"
+    "objectID": "slides/10-slides.html#using-tmap",
+    "href": "slides/10-slides.html#using-tmap",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Using tmap",
+    "text": "Using tmap\n\nlibrary(sf)\nlibrary(terra)\nlibrary(tmap)\npt &lt;- tm_shape(cejst) + \n  tm_polygons(col = \"EALR_PFS\",\n              border.col = \"white\") + \n  tm_legend(outside = TRUE)"
   },
   {
-    "objectID": "slides/10-slides.html#rasters-by-construction-origin",
-    "href": "slides/10-slides.html#rasters-by-construction-origin",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Rasters by Construction: Origin",
-    "text": "Rasters by Construction: Origin\n\nOrigin defines the location of the intersection of the x and y axes\n\n\n\n\nr &lt;- rast(xmin=-4, xmax = 9.5, ncols=10)\nr[] &lt;- runif(ncell(r))\norigin(r)\n\n[1] 0.05 0.00\n\nr2 &lt;- r\norigin(r2) &lt;- c(2,2)"
+    "objectID": "slides/10-slides.html#using-tmap-1",
+    "href": "slides/10-slides.html#using-tmap-1",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Using tmap",
+    "text": "Using tmap"
   },
   {
-    "objectID": "slides/10-slides.html#rasters-by-construction-resolution",
-    "href": "slides/10-slides.html#rasters-by-construction-resolution",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Rasters by Construction: Resolution",
-    "text": "Rasters by Construction: Resolution\n\n\nGeometry is implicit; the spatial extent and number of rows and columns define the cell size\nResolution (res) defines the length and width of an individual pixel\n\n\n\n\n\nr &lt;- rast(xmin=-4, xmax = 9.5, \n          ncols=10)\nres(r)\n\n[1] 1.35 1.00\n\nr2 &lt;- rast(xmin=-4, xmax = 5, \n           ncols=10)\nres(r2)\n\n[1] 0.9 1.0\n\n\n\n\nr &lt;- rast(xmin=-4, xmax = 9.5, \n          res=c(0.5,0.5))\nncol(r)\n\n[1] 27\n\nr2 &lt;- rast(xmin=-4, xmax = 9.5, \n           res=c(5,5))\nncol(r2)\n\n[1] 3"
+    "objectID": "slides/10-slides.html#changing-aesthetics",
+    "href": "slides/10-slides.html#changing-aesthetics",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Changing aesthetics",
+    "text": "Changing aesthetics\n\npt &lt;- tm_shape(cejst) + \n  tm_polygons(col = \"EALR_PFS\", n=10,palette=viridis(10),\n              border.col = \"white\") + \n  tm_legend(outside = TRUE)"
   },
   {
-    "objectID": "slides/10-slides.html#rasters-from-files",
-    "href": "slides/10-slides.html#rasters-from-files",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Rasters from Files",
-    "text": "Rasters from Files\n\nBuilding rasters useful for templates\nMore common to read from files\n\n\nr &lt;- rast(system.file(\"ex/elev.tif\", package=\"terra\"))\nr\n\nclass       : SpatRaster \ndimensions  : 90, 95, 1  (nrow, ncol, nlyr)\nresolution  : 0.008333333, 0.008333333  (x, y)\nextent      : 5.741667, 6.533333, 49.44167, 50.19167  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 (EPSG:4326) \nsource      : elev.tif \nname        : elevation \nmin value   :       141 \nmax value   :       547"
+    "objectID": "slides/10-slides.html#changing-aesthetics-1",
+    "href": "slides/10-slides.html#changing-aesthetics-1",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Changing aesthetics",
+    "text": "Changing aesthetics"
   },
   {
-    "objectID": "slides/10-slides.html#accessing-raster-attributes-coordinate-reference-system",
-    "href": "slides/10-slides.html#accessing-raster-attributes-coordinate-reference-system",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Accessing Raster Attributes: Coordinate Reference System",
-    "text": "Accessing Raster Attributes: Coordinate Reference System\n\nterra stores CRS in WKT format\nCan set and access using EPSG and proj (deprecated)\nPay attention to case\n\n\nr &lt;- rast(system.file(\"ex/elev.tif\", package=\"terra\"))\ncrs(r)\n\n[1] \"GEOGCRS[\\\"WGS 84\\\",\\n    ENSEMBLE[\\\"World Geodetic System 1984 ensemble\\\",\\n        MEMBER[\\\"World Geodetic System 1984 (Transit)\\\"],\\n        MEMBER[\\\"World Geodetic System 1984 (G730)\\\"],\\n        MEMBER[\\\"World Geodetic System 1984 (G873)\\\"],\\n        MEMBER[\\\"World Geodetic System 1984 (G1150)\\\"],\\n        MEMBER[\\\"World Geodetic System 1984 (G1674)\\\"],\\n        MEMBER[\\\"World Geodetic System 1984 (G1762)\\\"],\\n        MEMBER[\\\"World Geodetic System 1984 (G2139)\\\"],\\n        ELLIPSOID[\\\"WGS 84\\\",6378137,298.257223563,\\n            LENGTHUNIT[\\\"metre\\\",1]],\\n        ENSEMBLEACCURACY[2.0]],\\n    PRIMEM[\\\"Greenwich\\\",0,\\n        ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\\n    CS[ellipsoidal,2],\\n        AXIS[\\\"geodetic latitude (Lat)\\\",north,\\n            ORDER[1],\\n            ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\\n        AXIS[\\\"geodetic longitude (Lon)\\\",east,\\n            ORDER[2],\\n            ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\\n    USAGE[\\n        SCOPE[\\\"Horizontal component of 3D system.\\\"],\\n        AREA[\\\"World.\\\"],\\n        BBOX[-90,-180,90,180]],\\n    ID[\\\"EPSG\\\",4326]]\""
+    "objectID": "slides/10-slides.html#adding-layers",
+    "href": "slides/10-slides.html#adding-layers",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Adding layers",
+    "text": "Adding layers\nORDER MATTERS\n\nst &lt;- tigris::states(progress_bar=FALSE) %&gt;% filter(STUSPS %in% c(\"ID\", \"WA\", \"OR\")) %&gt;% st_transform(., crs = st_crs(cejst))\npt &lt;- tm_shape(cejst) + \n  tm_polygons(col = \"EALR_PFS\", n=10,palette=viridis(10),\n              border.col = \"white\") + \n  tm_shape(st) +\n  tm_borders(\"red\") +\n  tm_legend(outside = TRUE)"
   },
   {
-    "objectID": "slides/10-slides.html#accessing-raster-attributes-coordinate-reference-system-1",
-    "href": "slides/10-slides.html#accessing-raster-attributes-coordinate-reference-system-1",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Accessing Raster Attributes: Coordinate Reference System",
-    "text": "Accessing Raster Attributes: Coordinate Reference System\n\nr &lt;- rast(system.file(\"ex/elev.tif\", package=\"terra\"))\ncrs(r, describe=TRUE)\n\n    name authority code  area             extent\n1 WGS 84      EPSG 4326 World -180, 180, 90, -90\n\ncrs(r, proj=TRUE)\n\n[1] \"+proj=longlat +datum=WGS84 +no_defs\"\n\ncrs(r, parse=TRUE)\n\n [1] \"GEOGCRS[\\\"WGS 84\\\",\"                                      \n [2] \"    ENSEMBLE[\\\"World Geodetic System 1984 ensemble\\\",\"    \n [3] \"        MEMBER[\\\"World Geodetic System 1984 (Transit)\\\"],\"\n [4] \"        MEMBER[\\\"World Geodetic System 1984 (G730)\\\"],\"   \n [5] \"        MEMBER[\\\"World Geodetic System 1984 (G873)\\\"],\"   \n [6] \"        MEMBER[\\\"World Geodetic System 1984 (G1150)\\\"],\"  \n [7] \"        MEMBER[\\\"World Geodetic System 1984 (G1674)\\\"],\"  \n [8] \"        MEMBER[\\\"World Geodetic System 1984 (G1762)\\\"],\"  \n [9] \"        MEMBER[\\\"World Geodetic System 1984 (G2139)\\\"],\"  \n[10] \"        ELLIPSOID[\\\"WGS 84\\\",6378137,298.257223563,\"      \n[11] \"            LENGTHUNIT[\\\"metre\\\",1]],\"                    \n[12] \"        ENSEMBLEACCURACY[2.0]],\"                          \n[13] \"    PRIMEM[\\\"Greenwich\\\",0,\"                              \n[14] \"        ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\"       \n[15] \"    CS[ellipsoidal,2],\"                                   \n[16] \"        AXIS[\\\"geodetic latitude (Lat)\\\",north,\"          \n[17] \"            ORDER[1],\"                                    \n[18] \"            ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\"   \n[19] \"        AXIS[\\\"geodetic longitude (Lon)\\\",east,\"          \n[20] \"            ORDER[2],\"                                    \n[21] \"            ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\"   \n[22] \"    USAGE[\"                                               \n[23] \"        SCOPE[\\\"Horizontal component of 3D system.\\\"],\"   \n[24] \"        AREA[\\\"World.\\\"],\"                                \n[25] \"        BBOX[-90,-180,90,180]],\"                          \n[26] \"    ID[\\\"EPSG\\\",4326]]\""
+    "objectID": "slides/10-slides.html#adding-layers-1",
+    "href": "slides/10-slides.html#adding-layers-1",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Adding layers",
+    "text": "Adding layers"
   },
   {
-    "objectID": "slides/10-slides.html#accessing-raster-attributes-bounding-box",
-    "href": "slides/10-slides.html#accessing-raster-attributes-bounding-box",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Accessing Raster Attributes: Bounding box",
-    "text": "Accessing Raster Attributes: Bounding box\n\n\nterra uses ext() to get or set the extent/bounding box\nFills cells with NA\n\n\n\n\n\next(r)\n\nSpatExtent : 5.74166666666667, 6.53333333333333, 49.4416666666667, 50.1916666666667 (xmin, xmax, ymin, ymax)\n\nr2 &lt;- r\next(r2) &lt;- c(5, 7, 48, 52)\next(r2)\n\nSpatExtent : 5, 7, 48, 52 (xmin, xmax, ymin, ymax)"
+    "objectID": "slides/10-slides.html#integrating-rasters",
+    "href": "slides/10-slides.html#integrating-rasters",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Integrating Rasters",
+    "text": "Integrating Rasters\n\ncejst.proj &lt;- st_transform(cejst, crs=crs(rast.data)) %&gt;% filter(!st_is_empty(.))\nstates.proj &lt;- st_transform(st, crs=crs(rast.data))\npal8 &lt;- c(\"#33A02C\", \"#B2DF8A\", \"#FDBF6F\", \"#1F78B4\", \"#999999\", \"#E31A1C\", \"#E6E6E6\", \"#A6CEE3\")\npt &lt;- tm_shape(rast.data[\"category\"]) +\n  tm_raster(palette = pal8) +\n  tm_shape(cejst.proj) + \n  tm_polygons(col = \"EALR_PFS\", n=10,palette=viridis(10),\n              border.col = \"white\") + \n  tm_shape(states.proj) +\n  tm_borders(\"red\") +\n  tm_legend(outside = TRUE)"
   },
   {
-    "objectID": "slides/10-slides.html#converting-vectors-to-rasters",
-    "href": "slides/10-slides.html#converting-vectors-to-rasters",
-    "title": "Spatial Data as Matrices and Rasters",
-    "section": "Converting vectors to rasters",
-    "text": "Converting vectors to rasters\n\nSometimes necessary to convert between data models\nraster::rasterize, terra::rasterize, stars::st_rasterize, and fasterize::fasterize all will convert polygons to raster data\nstars::st_polygonize will work in the opposite direction\nterra::vect will read in vectors as SpatVectors or coerce sf to SpatVector"
+    "objectID": "slides/10-slides.html#integrating-rasters-1",
+    "href": "slides/10-slides.html#integrating-rasters-1",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Integrating Rasters",
+    "text": "Integrating Rasters"
   },
   {
     "objectID": "slides/08-slides.html#objectives",
@@ -2128,18 +2128,32 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Recording"
   },
   {
+    "objectID": "content/10-content.html",
+    "href": "content/10-content.html",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "",
+    "text": "Now that we’re getting into actual operations on spatial data and beginning to actually modify the geometries and attributes of spatial data, it’ll be important for you to be able to visualize the results. At this point, we’ll be focusing on rough visualization as a way of “gut-checking” the outcomes of your code. We’ll focus more on creating informative, aesthetically pleasing, publication quality visualizations."
+  },
+  {
+    "objectID": "content/10-content.html#readings",
+    "href": "content/10-content.html#readings",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Readings",
+    "text": "Readings\n\n Ch.3 Tmap in a nutshell from “Elegant and informative maps with tmap” by Martijn Tennekes and Jakub Nowosad provides a great “quick start” for using the tmap package for visualizing spatial data.\n Making maps with R by (Lovelace et al. 2019) introduces the tmap package for making nice maps with relatively minimal syntax.\n Making maps in R by Emily Burchfield illustrates some quick mapping syntax with base plot, ggplot, and tmap. For now, just focus on the base plot and tmap sections as we’ll take on the ggplot stuff later in the course."
+  },
+  {
     "objectID": "content/10-content.html#objectives",
     "href": "content/10-content.html#objectives",
     "title": "Introduction to Mapping Geographic Data",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nDescribe the basic components of data visualization as a foundation for mapping syntax\nUnderstand layering in both base plot and tmap\nMake basic plots of multiple spatial data objects"
   },
   {
     "objectID": "content/10-content.html#slides",
     "href": "content/10-content.html#slides",
     "title": "Introduction to Mapping Geographic Data",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
   },
   {
     "objectID": "content/12-content.html#objectives",

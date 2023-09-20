@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -387,12 +406,23 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </header>
 
+<p>Now that we’re getting into actual operations on spatial data and beginning to actually modify the geometries and attributes of spatial data, it’ll be important for you to be able to visualize the results. At this point, we’ll be focusing on rough visualization as a way of “gut-checking” the outcomes of your code. We’ll focus more on creating informative, aesthetically pleasing, publication quality visualizations.</p>
 <section id="readings" class="level2">
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<ul>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://r-tmap.github.io/tmap-book/nutshell.html">Ch.3 Tmap in a nutshell</a> from “Elegant and informative maps with tmap” by Martijn Tennekes and Jakub Nowosad provides a great “quick start” for using the <code>tmap</code> package for visualizing spatial data.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://geocompr.robinlovelace.net/adv-map.html">Making maps with <code>R</code></a> by <span class="citation" data-cites="lovelace_geocomputation_2019">(<a href="#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace et al. 2019</a>)</span> introduces the <code>tmap</code> package for making nice maps with relatively minimal syntax.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://www.emilyburchfield.org/courses/eds/making_maps_in_r">Making maps in <code>R</code></a> by Emily Burchfield illustrates some quick mapping syntax with base <code>plot</code>, <code>ggplot</code>, and <code>tmap</code>. For now, just focus on the base <code>plot</code> and <code>tmap</code> sections as we’ll take on the ggplot stuff later in the course.</p></li>
+</ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today, you should be able to:</p>
+<ul>
+<li><p>Describe the basic components of data visualization as a foundation for mapping syntax</p></li>
+<li><p>Understand layering in both base <code>plot</code> and <code>tmap</code></p></li>
+<li><p>Make basic plots of multiple spatial data objects</p></li>
+</ul>
 </section>
 <section id="slides" class="level2">
 <h2 class="anchored" data-anchor-id="slides">Slides</h2>
@@ -400,12 +430,19 @@ ul.task-list li input[type="checkbox"] {
 <p class="text-center buttons">
 <a class="btn btn-danger" target="_blank" href="../slides/10-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/10-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
-<p>Slides Forthcoming</p>
+<div>
+<iframe class="slide-deck" src="../slides/10-slides.html"></iframe>
+</div>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-lovelace_geocomputation_2019" class="csl-entry" role="listitem">
+Lovelace, R., J. Nowosad, and J. Muenchow. 2019. Geocomputation with <span>R</span>. <span>CRC Press</span>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
