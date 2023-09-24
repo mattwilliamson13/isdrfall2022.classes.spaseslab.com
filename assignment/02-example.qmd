@@ -10,7 +10,8 @@ I want to reproduce the figure from [@Nelson] depicting commute networks in the 
 # Methods
 
 Some pseudocode:
-```{}
+```{r}
+#| eval: false
 1. Retrieve ACS commute data
 2. Identify the source and destination networks
 3. Calculate the edge density for each source-destination pair
