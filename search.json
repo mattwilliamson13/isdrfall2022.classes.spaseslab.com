@@ -1593,7 +1593,7 @@
     "href": "content/11-content.html#slides",
     "title": "Operations With Vector Data I",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\nPanopto Vidoe Here"
   },
   {
     "objectID": "content/09-content.html",
@@ -3199,11 +3199,11 @@
     "text": "Creating “sampling areas”\n\nUncertainty in your point locations\nIncorporate a fixed range around each point\nCombine multiple points into a single polygon\n\n\nhospitals.id &lt;- landmarks.id.csv %&gt;% \n  st_as_sf(., coords = c(\"longitude\", \"lattitude\")) %&gt;% \n  filter(., MTFCC == \"K1231\")\nst_crs(hospitals.id) &lt;- 4326"
   },
   {
-    "objectID": "slides/11-slides.html#creating-samping-areas",
-    "href": "slides/11-slides.html#creating-samping-areas",
+    "objectID": "slides/11-slides.html#creating-sampling-areas-1",
+    "href": "slides/11-slides.html#creating-sampling-areas-1",
     "title": "Operations With Vector Data I",
-    "section": "Creating samping areas",
-    "text": "Creating samping areas\n\nhospital.buf &lt;- hospitals.id %&gt;%\n  st_buffer(., dist=10000)\n\nhospital.mcp &lt;- hospitals.id %&gt;% \n  st_convex_hull(.)"
+    "section": "Creating sampling areas",
+    "text": "Creating sampling areas\n\nhospital.buf &lt;- hospitals.id %&gt;%\n  st_buffer(., dist=10000)\n\nhospital.mcp &lt;- hospitals.id %&gt;% \n  st_convex_hull(.)"
   },
   {
     "objectID": "slides/11-slides.html#other-unary-transformations",
