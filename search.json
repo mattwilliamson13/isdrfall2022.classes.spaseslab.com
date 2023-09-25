@@ -3154,32 +3154,74 @@
     "href": "slides/11-slides.html#unary-transformations",
     "title": "Operations With Vector Data I",
     "section": "Unary Transformations",
-    "text": "Unary Transformations\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\ncentroid\nof type POINT with the geometry’s centroid\n\n\nbuffer\nthat is this larger (or smaller) than the input geometry, depending on the buffer size\n\n\njitter\nthat was moved in space a certain amount, using a bivariate uniform distribution\n\n\nwrap_dateline\ncut into pieces that do no longer cover the dateline\n\n\nboundary\nwith the boundary of the input geometry\n\n\nconvex_hull\nthat forms the convex hull of the input geometry\n\n\nline_merge\nafter merging connecting LINESTRING elements of a MULTILINESTRING into longer LINESTRINGs.\n\n\nmake_valid\nthat is valid\n\n\nnode\nwith added nodes to linear geometries at intersections without a node; only works on individual linear geometries\n\n\npoint_on_surface\nwith a (arbitrary) point on a surface\n\n\npolygonize\nof type polygon, created from lines that form a closed ring"
+    "text": "Unary Transformations\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\ncentroid\nof type POINT with the geometry’s centroid\n\n\nbuffer\nthat is larger (or smaller) than the input geometry, depending on the buffer size\n\n\njitter\nthat was moved in space a certain amount, using a bivariate uniform distribution\n\n\nwrap_dateline\ncut into pieces that do no longer cover the dateline\n\n\nboundary\nwith the boundary of the input geometry\n\n\nconvex_hull\nthat forms the convex hull of the input geometry\n\n\nline_merge\nafter merging connecting LINESTRING elements of a MULTILINESTRING into longer LINESTRINGs.\n\n\nmake_valid\nthat is valid\n\n\nnode\nwith added nodes to linear geometries at intersections without a node; only works on individual linear geometries\n\n\npoint_on_surface\nwith a (arbitrary) point on a surface\n\n\npolygonize\nof type polygon, created from lines that form a closed ring"
   },
   {
-    "objectID": "slides/11-slides.html#unary-transformations-contd",
-    "href": "slides/11-slides.html#unary-transformations-contd",
+    "objectID": "slides/11-slides.html#fixing-geometries",
+    "href": "slides/11-slides.html#fixing-geometries",
     "title": "Operations With Vector Data I",
-    "section": "Unary Transformations (cont’d)",
-    "text": "Unary Transformations (cont’d)\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\nsegmentize\na (linear) geometry with nodes at a given density or minimal distance\n\n\nsimplify\nsimplified by removing vertices/nodes (lines or polygons)\n\n\nsplit\nthat has been split with a splitting linestring\n\n\ntransform\ntransformed or convert to a new coordinate reference system (chapter @ref(cs))\n\n\ntriangulate\nwith Delauney triangulated polygon(s) (figure @ref(fig:vor))\n\n\nvoronoi\nwith the Voronoi tessellation of an input geometry (figure @ref(fig:vor))\n\n\nzm\nwith removed or added Z and/or M coordinates\n\n\ncollection_extract\nwith subgeometries from a GEOMETRYCOLLECTION of a particular type\n\n\ncast\nthat is converted to another type\n\n\n+\nthat is shifted over a given vector\n\n\n*\nthat is multiplied by a scalar or matrix"
+    "section": "Fixing geometries",
+    "text": "Fixing geometries\n\nWhen all(st_is_valid(your.shapefile)) returns FALSE\n\n\n\n\n\nst_make_valid has two methods:\n\noriginal converts rings into noded lines and extracts polygons\nstructured makes rings valid first then merges/subtracts from existing polgyons\nVerify that the output is what you expect!!\n\n\n\n\n\n```{r}\nx = st_sfc(st_polygon(list(rbind(c(0,0),c(0.5,0),c(0.5,0.5),c(0.5,0),c(1,0),c(1,1),c(0,1),c(0,0)))))\nst_is_valid(x)\n```\n\n[1] FALSE"
   },
   {
-    "objectID": "slides/11-slides.html#common-uses-of-unary-transformers",
-    "href": "slides/11-slides.html#common-uses-of-unary-transformers",
+    "objectID": "slides/11-slides.html#fixing-geometries-with-st_make_valid",
+    "href": "slides/11-slides.html#fixing-geometries-with-st_make_valid",
     "title": "Operations With Vector Data I",
-    "section": "Common uses of Unary Transformers",
-    "text": "Common uses of Unary Transformers\n\nCreating valid geometries\nReprojecting your data\nCombining or changing geometries"
+    "section": "Fixing geometries with st_make_valid",
+    "text": "Fixing geometries with st_make_valid\n\n\n\n\n\n\n\n\n\n```{r}\ny &lt;- x %&gt;% st_make_valid()\nst_is_valid(y)\n```\n\n[1] TRUE"
   },
   {
-    "objectID": "slides/11-slides.html#binary-transformers",
-    "href": "slides/11-slides.html#binary-transformers",
+    "objectID": "slides/11-slides.html#fixing-geometries-with-st_buffer",
+    "href": "slides/11-slides.html#fixing-geometries-with-st_buffer",
+    "title": "Operations With Vector Data I",
+    "section": "Fixing Geometries with st_buffer",
+    "text": "Fixing Geometries with st_buffer\n\n\n-st_buffer enforces valid geometries as an output\n\nSetting a 0 distance buffer leaves most geometries unchanged\nNot all transformations do this\n\n\n\n```{r}\nz &lt;- x %&gt;% st_buffer(., dist=0)\n\nst_is_valid(z)\n```\n\n[1] TRUE"
+  },
+  {
+    "objectID": "slides/11-slides.html#changing-crs-with-st_transform",
+    "href": "slides/11-slides.html#changing-crs-with-st_transform",
+    "title": "Operations With Vector Data I",
+    "section": "Changing CRS with st_transform",
+    "text": "Changing CRS with st_transform\n\nYou’ve already been using this!!\nDoes not guarantee valid geometries (use check = TRUE if you want this)\nWe’ll try to keep things from getting too complicated"
+  },
+  {
+    "objectID": "slides/11-slides.html#converting-areas-to-points-with-st_centroid-or-st_point_on_surface",
+    "href": "slides/11-slides.html#converting-areas-to-points-with-st_centroid-or-st_point_on_surface",
+    "title": "Operations With Vector Data I",
+    "section": "Converting areas to points with st_centroid or st_point_on_surface",
+    "text": "Converting areas to points with st_centroid or st_point_on_surface\n\n\n\n\nFor “sampling” other datasets\nTo simplify distance calculations\nTo construct networks\n\n\n\n\nid.counties &lt;- tigris::counties(state = \"ID\", progress_bar=FALSE)\nid.centroid &lt;- st_centroid(id.counties)\nid.pointonsurf &lt;- st_point_on_surface(id.counties)"
+  },
+  {
+    "objectID": "slides/11-slides.html#creating-sampling-areas",
+    "href": "slides/11-slides.html#creating-sampling-areas",
+    "title": "Operations With Vector Data I",
+    "section": "Creating “sampling areas”",
+    "text": "Creating “sampling areas”\n\nUncertainty in your point locations\nIncorporate a fixed range around each point\nCombine multiple points into a single polygon\n\n\nhospitals.id &lt;- landmarks.id.csv %&gt;% \n  st_as_sf(., coords = c(\"longitude\", \"lattitude\")) %&gt;% \n  filter(., MTFCC == \"K1231\")\nst_crs(hospitals.id) &lt;- 4326"
+  },
+  {
+    "objectID": "slides/11-slides.html#creating-samping-areas",
+    "href": "slides/11-slides.html#creating-samping-areas",
+    "title": "Operations With Vector Data I",
+    "section": "Creating samping areas",
+    "text": "Creating samping areas\n\nhospital.buf &lt;- hospitals.id %&gt;%\n  st_buffer(., dist=10000)\n\nhospital.mcp &lt;- hospitals.id %&gt;% \n  st_convex_hull(.)"
+  },
+  {
+    "objectID": "slides/11-slides.html#other-unary-transformations",
+    "href": "slides/11-slides.html#other-unary-transformations",
+    "title": "Operations With Vector Data I",
+    "section": "Other Unary Transformations",
+    "text": "Other Unary Transformations\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\nsegmentize\na (linear) geometry with nodes at a given density or minimal distance\n\n\nsimplify\nsimplified by removing vertices/nodes (lines or polygons)\n\n\nsplit\nthat has been split with a splitting linestring\n\n\ntransform\ntransformed or convert to a new coordinate reference system (chapter @ref(cs))\n\n\ntriangulate\nwith Delauney triangulated polygon(s) (figure @ref(fig:vor))\n\n\nvoronoi\nwith the Voronoi tessellation of an input geometry (figure @ref(fig:vor))\n\n\nzm\nwith removed or added Z and/or M coordinates\n\n\ncollection_extract\nwith subgeometries from a GEOMETRYCOLLECTION of a particular type\n\n\ncast\nthat is converted to another type\n\n\n+\nthat is shifted over a given vector\n\n\n*\nthat is multiplied by a scalar or matrix"
+  },
+  {
+    "objectID": "slides/11-slides.html#binary-transformers-1",
+    "href": "slides/11-slides.html#binary-transformers-1",
     "title": "Operations With Vector Data I",
     "section": "Binary Transformers",
     "text": "Binary Transformers\n\n\n\n\n\n\n\n\n\nfunction\nreturns\ninfix operator\n\n\n\n\nintersection\nthe overlapping geometries for pair of geometries\n&\n\n\nunion\nthe combination of the geometries; removes internal boundaries and duplicate points, nodes or line pieces\n|\n\n\ndifference\nthe geometries of the first after removing the overlap with the second geometry\n/\n\n\nsym_difference\nthe combinations of the geometries after removing where they intersect; the negation (opposite) of intersection\n%/%\n\n\ncrop\ncrop an sf object to a specific rectangle"
   },
   {
-    "objectID": "slides/11-slides.html#binary-transformers-1",
-    "href": "slides/11-slides.html#binary-transformers-1",
+    "objectID": "slides/11-slides.html#binary-transformers-2",
+    "href": "slides/11-slides.html#binary-transformers-2",
     "title": "Operations With Vector Data I",
     "section": "Binary Transformers",
     "text": "Binary Transformers"
