@@ -613,98 +613,112 @@
     "href": "slides/12-slides.html#example-questions",
     "title": "Operations With Vector Data II",
     "section": "Example questions",
-    "text": "Example questions\n\nWhat is the chronic heart disease risk of the ID counties that are furthest from hospitals?"
+    "text": "Example questions\n\nWhat is the chronic heart disease risk of the 10 ID counties that are furthest from hospitals?\nHow may \\(km^2\\) of ID are served by more than 1 hospital?\nWhat is the difference between the average risk of chronic heart disease in the counties served by at least two hospitals compared to those that aren’t served by any?"
   },
   {
-    "objectID": "slides/12-slides.html#revisiting-projections",
-    "href": "slides/12-slides.html#revisiting-projections",
+    "objectID": "slides/12-slides.html#key-assummptions",
+    "href": "slides/12-slides.html#key-assummptions",
     "title": "Operations With Vector Data II",
-    "section": "Revisiting Projections",
-    "text": "Revisiting Projections\n\nproject changes the entire coordinate reference system\n\n\n\n\n\nlibrary(terra)\na &lt;- rast(ncols=40, nrows=40, xmin=-110, xmax=-90, ymin=40, ymax=60, \n          crs=\"+proj=longlat +datum=WGS84\")\nvalues(a) &lt;- 1:ncell(a)\nnewcrs=\"+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84\"\nb &lt;- rast(ncols=94, nrows=124, xmin=-944881, xmax=935118, ymin=4664377, ymax=7144377, crs=newcrs)\nw &lt;- project(a, b)\n\n\n\n\n\n\n\n\n\norigin(a)\n\n[1] 0 0\n\norigin(w)\n\n[1] -4881.5  4377.0\n\next(a)\n\nSpatExtent : -110, -90, 40, 60 (xmin, xmax, ymin, ymax)\n\next(w)\n\nSpatExtent : -944881, 935118, 4664377, 7144377 (xmin, xmax, ymin, ymax)\n\nres(a)\n\n[1] 0.5 0.5\n\nres(w)\n\n[1] 19999.99 20000.00"
+    "section": "Key assummptions",
+    "text": "Key assummptions\n\nAll hospital locations are contained in the landmarks dataset\nA hospital service area is defined as a 100km radius\nHospital service areas can cross state lines."
   },
   {
-    "objectID": "slides/12-slides.html#revisiting-projections-1",
-    "href": "slides/12-slides.html#revisiting-projections-1",
+    "objectID": "slides/12-slides.html#what-do-we-need-to-know",
+    "href": "slides/12-slides.html#what-do-we-need-to-know",
     "title": "Operations With Vector Data II",
-    "section": "Revisiting Projections",
-    "text": "Revisiting Projections\n\n\nresample transfers values between SpatRaster objects that do not align\nMust have same crs\n\n\n\n\n\n\na &lt;- rast(ncols=40, nrows=40, xmin=-110, xmax=-90, ymin=40, ymax=60, \n          crs=\"+proj=longlat +datum=WGS84\")\nvalues(a) &lt;- 1:ncell(a)\n\nb &lt;- rast(ncols=94, nrows=124, xmin=-111, xmax=-80, ymin=45, ymax=65)\nw &lt;- resample(a, b)\n\n\n\n\n\n\n\n\n\n\norigin(a)\n\n[1] 0 0\n\norigin(b)\n\n[1] 0.1382979 0.0000000\n\norigin(w)\n\n[1] 0.1382979 0.0000000\n\nres(a)\n\n[1] 0.5 0.5\n\nres(b)\n\n[1] 0.3297872 0.1612903\n\nres(w)\n\n[1] 0.3297872 0.1612903"
+    "section": "What do we need to know?",
+    "text": "What do we need to know?\n\nWhere are the hospitals?\nHow far are the hospitals from ID counties?\nWhich counties are the furthest?\nWhat is the CHD risk?"
   },
   {
-    "objectID": "slides/12-slides.html#revisiting-projections-2",
-    "href": "slides/12-slides.html#revisiting-projections-2",
+    "objectID": "slides/12-slides.html#pseudocode",
+    "href": "slides/12-slides.html#pseudocode",
     "title": "Operations With Vector Data II",
-    "section": "Revisiting Projections",
-    "text": "Revisiting Projections\n\nif origin and extent are the same consider using aggregate, disagg, extend or crop"
+    "section": "Pseudocode",
+    "text": "Pseudocode\n\n1. Load the hospital and cdc datasets\n2. Align the data\n3. Filter cdc so it only has Idaho counties\n4. Calculate distance from hospitals\n5. Find top 10 counties based on distance\n6. Map chronic heart disease risk"
   },
   {
-    "objectID": "slides/12-slides.html#accessing-cell-values",
-    "href": "slides/12-slides.html#accessing-cell-values",
+    "objectID": "slides/12-slides.html#adding-functions",
+    "href": "slides/12-slides.html#adding-functions",
     "title": "Operations With Vector Data II",
-    "section": "Accessing Cell Values",
-    "text": "Accessing Cell Values\n\nWe can extract or change cell values using []\n\n\na &lt;- rast(ncols=10, nrows=10, xmin=-110, xmax=-100, ymin=40, ymax=50, \n          crs=\"+proj=longlat +datum=WGS84\")\nvalues(a) &lt;- 1\nb1 &lt;- a\nb2 &lt;- a\nb1[5,5] &lt;- 10\nb2[1, 1:10 ] &lt;- runif(10,4,10)"
+    "section": "Adding Functions",
+    "text": "Adding Functions\n\nLoad the hospital and cdc datasets\n\n\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tmap)\nhospital.sf &lt;- read_csv(\"data/opt/data/2023/vectorexample/hospitals_pnw.csv\") %&gt;% \n  st_as_sf(., coords = c(\"longitude\", \"latitude\"))\n\ncdc.sf &lt;- read_sf(\"data/opt/data/2023/vectorexample/cdc_nw.shp\")"
   },
   {
-    "objectID": "slides/12-slides.html#raster-math",
-    "href": "slides/12-slides.html#raster-math",
+    "objectID": "slides/12-slides.html#plotting-the-results",
+    "href": "slides/12-slides.html#plotting-the-results",
     "title": "Operations With Vector Data II",
-    "section": "Raster Math",
-    "text": "Raster Math\n\nPerforms cell-wise calculations on 1 (or more) SpatRasters\nGenerally works the same as matrix operations\nAll layers must be aligned"
+    "section": "Plotting the Results",
+    "text": "Plotting the Results"
   },
   {
-    "objectID": "slides/12-slides.html#raster-math-1",
-    "href": "slides/12-slides.html#raster-math-1",
+    "objectID": "slides/12-slides.html#example-questions-1",
+    "href": "slides/12-slides.html#example-questions-1",
     "title": "Operations With Vector Data II",
-    "section": "Raster Math",
-    "text": "Raster Math\n\nr &lt;- rast(ncol=5, nrow=5)\nvalues(r) &lt;- 1:ncell(r)\nr2 &lt;- r*2\nr3 &lt;- t(r)\nr4 &lt;- r + r2"
+    "section": "Example questions",
+    "text": "Example questions\n\nHow may \\(km^2\\) of ID are served by more than 1 hospital?"
   },
   {
-    "objectID": "slides/12-slides.html#cell-wise-operations-1",
-    "href": "slides/12-slides.html#cell-wise-operations-1",
+    "objectID": "slides/12-slides.html#what-do-we-need-to-know-1",
+    "href": "slides/12-slides.html#what-do-we-need-to-know-1",
     "title": "Operations With Vector Data II",
-    "section": "Cell-wise operations",
-    "text": "Cell-wise operations\n\nterra has a special set of apply functions\napp, lapp, tapp\napp applies a function to the values of each cell\nlapp applies a function using the layer as the value\ntapp applies the function to a subset of layers"
+    "section": "What do we need to know?",
+    "text": "What do we need to know?\n\nWhere are the hospitals?\nWhat is the service area for each hospital?\nWhere doe those service areas overlap?\nHow big is the overlap area?"
   },
   {
-    "objectID": "slides/12-slides.html#cell-wise-operations-2",
-    "href": "slides/12-slides.html#cell-wise-operations-2",
+    "objectID": "slides/12-slides.html#pseudocode-1",
+    "href": "slides/12-slides.html#pseudocode-1",
     "title": "Operations With Vector Data II",
-    "section": "Cell-wise operations",
-    "text": "Cell-wise operations\n\nr &lt;- rast(ncols=10, nrows=10)\nvalues(r) &lt;- 1:ncell(r)\nf &lt;- function(i) (i+1) * 2 * i + sqrt(i)\ns &lt;- app(r, f)"
+    "section": "Pseudocode",
+    "text": "Pseudocode"
   },
   {
-    "objectID": "slides/12-slides.html#cell-wise-operations-3",
-    "href": "slides/12-slides.html#cell-wise-operations-3",
+    "objectID": "slides/12-slides.html#adding-functions-1",
+    "href": "slides/12-slides.html#adding-functions-1",
     "title": "Operations With Vector Data II",
-    "section": "Cell-wise Operations",
-    "text": "Cell-wise Operations\n\ns &lt;- rast(system.file(\"ex/logo.tif\", package=\"terra\")) + 1  \nss &lt;- s[[2:1]]\n\nfvi &lt;- function(x, y){ (x - y ) / (x + y) } \nx &lt;- lapp(ss, fun=fvi)"
+    "section": "Adding Functions",
+    "text": "Adding Functions"
   },
   {
-    "objectID": "slides/12-slides.html#global-methods",
-    "href": "slides/12-slides.html#global-methods",
+    "objectID": "slides/12-slides.html#plotting-the-results-1",
+    "href": "slides/12-slides.html#plotting-the-results-1",
     "title": "Operations With Vector Data II",
-    "section": "Global Methods",
-    "text": "Global Methods\n\nProvide summaries of 1 or more layers\nUse zonal to extract values from one layer based on categorical layer\n\n\n\n\nr &lt;- rast(ncols=10, nrows=10)\nvalues(r) &lt;- 1:ncell(r)\nz &lt;- rast(r)\nvalues(z) &lt;- rep(c(1:2, NA, 3:4), each=20)\nnames(z) &lt;- \"zone\"\na &lt;-  zonal(r, z, \"sum\", na.rm=TRUE)\nb &lt;- zonal(r, z, \"sum\", na.rm=TRUE, as.raster=TRUE)\nplot(b)"
+    "section": "Plotting the Results",
+    "text": "Plotting the Results"
   },
   {
-    "objectID": "slides/12-slides.html#context-specific-functions",
-    "href": "slides/12-slides.html#context-specific-functions",
+    "objectID": "slides/12-slides.html#example-questions-2",
+    "href": "slides/12-slides.html#example-questions-2",
     "title": "Operations With Vector Data II",
-    "section": "Context-specific Functions",
-    "text": "Context-specific Functions\n\ndistance and relatives are based on relationships between cells\nfocal provides moving windows for smoothing data\nterrain allows calculation of slope, ruggedness, aspect using elevation rasters\nshade calculates hillshade based on terrain"
+    "section": "Example questions",
+    "text": "Example questions\n\nWhat is the difference between the average risk of chronic heart disease in the counties served by at least two hospitals compared to those that aren’t served by any?"
   },
   {
-    "objectID": "slides/12-slides.html#using-focal",
-    "href": "slides/12-slides.html#using-focal",
+    "objectID": "slides/12-slides.html#what-do-we-need-to-know-2",
+    "href": "slides/12-slides.html#what-do-we-need-to-know-2",
     "title": "Operations With Vector Data II",
-    "section": "Using focal",
-    "text": "Using focal\n\nfocal requires a window (w) or weights matrix\nna.policy determines how to deal with NAs in the smoother\nfillvalue and expand tell terra what to do at the edges\n\n\nr &lt;- rast(ncols=10, nrows=10, ext(0, 10, 0, 10))\nvalues(r) &lt;- 1:ncell(r)\n\nf &lt;- focal(r, w=3, fun=function(x, ...) quantile(x, c(.25, .5, .75), ...), na.rm=TRUE) \nplot(f)"
+    "section": "What do we need to know?",
+    "text": "What do we need to know?"
   },
   {
-    "objectID": "slides/12-slides.html#using-focal-1",
-    "href": "slides/12-slides.html#using-focal-1",
+    "objectID": "slides/12-slides.html#pseudocode-2",
+    "href": "slides/12-slides.html#pseudocode-2",
     "title": "Operations With Vector Data II",
-    "section": "Using focal",
-    "text": "Using focal"
+    "section": "Pseudocode",
+    "text": "Pseudocode"
+  },
+  {
+    "objectID": "slides/12-slides.html#adding-functions-2",
+    "href": "slides/12-slides.html#adding-functions-2",
+    "title": "Operations With Vector Data II",
+    "section": "Adding Functions",
+    "text": "Adding Functions"
+  },
+  {
+    "objectID": "slides/12-slides.html#plotting-the-results-2",
+    "href": "slides/12-slides.html#plotting-the-results-2",
+    "title": "Operations With Vector Data II",
+    "section": "Plotting the Results",
+    "text": "Plotting the Results"
   },
   {
     "objectID": "slides/10-slides.html#objectives",
@@ -2366,18 +2380,32 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\nPanopto Vidoe Here"
   },
   {
+    "objectID": "content/13-content.html",
+    "href": "content/13-content.html",
+    "title": "Operations with Raster Data I",
+    "section": "",
+    "text": "Now that we’ve learned about predicates and measures with raster data, it’s time to learn more about some of the transformations that we can conduct with terra. We’ll start with some of the basic transformations that operate on the entire dataset then move to some of the important cell-wise operations."
+  },
+  {
+    "objectID": "content/13-content.html#readings",
+    "href": "content/13-content.html#readings",
+    "title": "Operations with Raster Data I",
+    "section": "Readings",
+    "text": "Readings\n\n The terra package vignette describes the new raster functions available in terra, their relationship to those in the raster package, and the changes in syntax between the two.\n The Raster GIS Operations in R with terra chapter from Jasper Slingsby’s “A Minimal Introduction to GIS (in R)” bookdown project has worked examples of many of the operations we’ll learn today."
+  },
+  {
     "objectID": "content/13-content.html#objectives",
     "href": "content/13-content.html#objectives",
     "title": "Operations with Raster Data I",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nAlign rasters for spatial processing\nAdjust the resolution of raster data\nCombine (or reduce) rasters to match the extent of your analysis"
   },
   {
     "objectID": "content/13-content.html#slides",
     "href": "content/13-content.html#slides",
     "title": "Operations with Raster Data I",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
   },
   {
     "objectID": "content/15-content.html",
@@ -3292,128 +3320,100 @@
   {
     "objectID": "slides/13-slides.html#objectives",
     "href": "slides/13-slides.html#objectives",
-    "title": "Combining Raster and Vector Data",
+    "title": "Operations on Raster Data I",
     "section": "Objectives",
-    "text": "Objectives\n\nBy the end of today, you should be able to:\n\nClip, crop, or extend vector and raster data so that extents align\nConvert between raster and vector datasets\nGenerate new rasters describing the spatial arrangement of vector data\nExtract raster values as attributes of vector data"
+    "text": "Objectives\n\nBy the end of today, you should be able to:\n\nAlign rasters for spatial processing\nAdjust the resolution of raster data\nCombine (or reduce) rasters to match the extent of your analysis"
+  },
+  {
+    "objectID": "slides/13-slides.html#projecting-raster-data",
+    "href": "slides/13-slides.html#projecting-raster-data",
+    "title": "Operations on Raster Data I",
+    "section": "Projecting raster data",
+    "text": "Projecting raster data\n\n\n\n\nTransformation from lat/long to planar CRS involves some loss of precision\nNew cell values estimated using overlap with original cells\nInterpolation for continuous data, nearest neighbor for categorical data\nEqual-area projections are preferred; especially for large areas\n\n\n\n\n\nlibrary(sf)\nlibrary(terra)\nlibrary(spDataLarge)\nr &lt;- rast(xmin=-110, xmax=-90, ymin=40, ymax=60, ncols=40, nrows=40)\nvalues(r) &lt;- 1:ncell(r)\nplot(r)"
+  },
+  {
+    "objectID": "slides/13-slides.html#projecting-raster-data-1",
+    "href": "slides/13-slides.html#projecting-raster-data-1",
+    "title": "Operations on Raster Data I",
+    "section": "Projecting raster data",
+    "text": "Projecting raster data\n\n\n\nsimple method; alignment not guaranteed\n\n\nnewcrs &lt;- \"+proj=robin +datum=WGS84\"\npr1 &lt;- terra::project(r, newcrs)\nplot(pr1)\n\n\n\n\n\n\nproviding a template to ensure alignment"
+  },
+  {
+    "objectID": "slides/13-slides.html#aligning-data-resample",
+    "href": "slides/13-slides.html#aligning-data-resample",
+    "title": "Operations on Raster Data I",
+    "section": "Aligning Data: resample",
+    "text": "Aligning Data: resample\n\nr &lt;- rast(nrow=3, ncol=3, xmin=0, xmax=10, ymin=0, ymax=10)\nvalues(r) &lt;- 1:ncell(r)\ns &lt;- rast(nrow=25, ncol=30, xmin=1, xmax=11, ymin=-1, ymax=11)\nx &lt;- resample(r, s, method=\"bilinear\")"
+  },
+  {
+    "objectID": "slides/13-slides.html#downscaling-and-upscaling",
+    "href": "slides/13-slides.html#downscaling-and-upscaling",
+    "title": "Operations on Raster Data I",
+    "section": "Downscaling and Upscaling",
+    "text": "Downscaling and Upscaling\n\nAligning data for later analysis\nRemembering scale\nThinking about support"
+  },
+  {
+    "objectID": "slides/13-slides.html#changing-resolutions",
+    "href": "slides/13-slides.html#changing-resolutions",
+    "title": "Operations on Raster Data I",
+    "section": "Changing resolutions",
+    "text": "Changing resolutions\n\naggregate, disaggregate, resample allow changes in cell size\naggregate requires a function (e.g., mean() or min()) to determine what to do with the grouped values\nresample allows changes in cell size and shifting of cell centers (slower)"
+  },
+  {
+    "objectID": "slides/13-slides.html#changing-resolutions-aggregate",
+    "href": "slides/13-slides.html#changing-resolutions-aggregate",
+    "title": "Operations on Raster Data I",
+    "section": "Changing resolutions: aggregate",
+    "text": "Changing resolutions: aggregate\n\n\n\nr &lt;- rast()\nr\n\nclass       : SpatRaster \ndimensions  : 180, 360, 1  (nrow, ncol, nlyr)\nresolution  : 1, 1  (x, y)\nextent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 \n\nvalues(r) &lt;- 1:ncell(r)\nplot(r)\n\n\n\n\n\n\nra &lt;- aggregate(r, 20)\nra\n\nclass       : SpatRaster \ndimensions  : 9, 18, 1  (nrow, ncol, nlyr)\nresolution  : 20, 20  (x, y)\nextent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 \nsource(s)   : memory\nname        :   lyr.1 \nmin value   :  3430.5 \nmax value   : 61370.5 \n\nplot(ra)"
+  },
+  {
+    "objectID": "slides/13-slides.html#changing-resolutions-disagg",
+    "href": "slides/13-slides.html#changing-resolutions-disagg",
+    "title": "Operations on Raster Data I",
+    "section": "Changing resolutions: disagg",
+    "text": "Changing resolutions: disagg\n\n\n\nra &lt;- aggregate(r, 20)\nplot(ra)\n\n\n\n\n\n\nrd &lt;- disagg(r, 20)\n\n\n|---------|---------|---------|---------|\n======\n                                          \n\nrd\n\nclass       : SpatRaster \ndimensions  : 3600, 7200, 1  (nrow, ncol, nlyr)\nresolution  : 0.05, 0.05  (x, y)\nextent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 \nsource      : spat_CcWFmodP7kx8nTX_22640.tif \nname        : lyr.1 \nmin value   :     1 \nmax value   : 64800 \n\nplot(rd)"
   },
   {
     "objectID": "slides/13-slides.html#dealing-with-different-extents",
     "href": "slides/13-slides.html#dealing-with-different-extents",
-    "title": "Combining Raster and Vector Data",
+    "title": "Operations on Raster Data I",
     "section": "Dealing with Different Extents",
     "text": "Dealing with Different Extents\n\n\n\nRaster extents often larger than our analysis\nReducing memory and computational resources\nMaking attractive maps"
   },
   {
     "objectID": "slides/13-slides.html#using-terracrop",
     "href": "slides/13-slides.html#using-terracrop",
-    "title": "Combining Raster and Vector Data",
+    "title": "Operations on Raster Data I",
     "section": "Using terra::crop()",
     "text": "Using terra::crop()\n\n\n\n\n\n\n\n\n\n\nCoordinate Reference System must be the same for both objects\nCrop is based on the (converted) SpatExtent of the 2nd object\nsnap describes how y will be aligned to the raster\nReturns all data within the extent"
   },
   {
     "objectID": "slides/13-slides.html#using-terracrop-1",
     "href": "slides/13-slides.html#using-terracrop-1",
-    "title": "Combining Raster and Vector Data",
+    "title": "Operations on Raster Data I",
     "section": "Using terra::crop()",
     "text": "Using terra::crop()\n\n\n\n\nlibrary(sf)\nlibrary(terra)\nlibrary(spDataLarge)\nsrtm = rast(system.file(\"raster/srtm.tif\", package = \"spDataLarge\"))\nzion = read_sf(system.file(\"vector/zion.gpkg\", package = \"spDataLarge\"))\nzion = st_transform(zion, crs(srtm))\n\ncrs(srtm) == crs(zion)\n\n[1] TRUE\n\nsrtm.crop &lt;- crop(x=srtm, y=zion, snap=\"near\")"
   },
   {
     "objectID": "slides/13-slides.html#using-mask",
     "href": "slides/13-slides.html#using-mask",
-    "title": "Combining Raster and Vector Data",
+    "title": "Operations on Raster Data I",
     "section": "Using mask()",
     "text": "Using mask()\n\n\nOften want to get rid of all values outside of vector\nCan set mask=TRUE in crop() (y must be SpatVector)\nOr use mask()\n\n\n\n\n\nsrtm.crop.msk &lt;- crop(x=srtm, y=vect(zion), snap=\"near\", mask=TRUE)\nplot(srtm.crop.msk)\n\n\n\n\n\n\nsrtm.msk &lt;- mask(srtm.crop, vect(zion))\nplot(srtm.msk)"
   },
   {
     "objectID": "slides/13-slides.html#using-mask-1",
     "href": "slides/13-slides.html#using-mask-1",
-    "title": "Combining Raster and Vector Data",
+    "title": "Operations on Raster Data I",
     "section": "Using mask()",
     "text": "Using mask()\n\n\nAllows more control over what the mask does\nCan set maskvalues and updatevalues to change the resulting raster\nCan also use inverse to mask out the vector\n\n\n\n\n\nsrtm.msk &lt;- mask(srtm.crop, vect(zion), updatevalue=-1000)\nplot(srtm.msk)\n\n\n\n\n\n\nsrtm.msk &lt;- mask(srtm.crop, vect(zion), inverse=TRUE, updatevalue=0)\nplot(srtm.msk)"
   },
   {
     "objectID": "slides/13-slides.html#extending-boundaries",
     "href": "slides/13-slides.html#extending-boundaries",
-    "title": "Combining Raster and Vector Data",
+    "title": "Operations on Raster Data I",
     "section": "Extending boundaries",
     "text": "Extending boundaries\n\n\nVector slightly larger than raster\nEspecially when using buffered datasets\nCan use extend\nNot exact; depends on snap()\n\n\n\n\n\nzion.buff &lt;-  zion %&gt;% \n  st_buffer(., 10000)\nsrtm.ext &lt;- extend(srtm, vect(zion.buff))\next(srtm.ext)\n\nSpatExtent : -113.343749879444, -112.74791654615, 37.0479167631968, 37.5979167631601 (xmin, xmax, ymin, ymax)\n\next(vect(zion.buff))\n\nSpatExtent : -113.343652923976, -112.747986193365, 37.0477357596604, 37.5977812137969 (xmin, xmax, ymin, ymax)"
-  },
-  {
-    "objectID": "slides/13-slides.html#converting-between-formats-1",
-    "href": "slides/13-slides.html#converting-between-formats-1",
-    "title": "Combining Raster and Vector Data",
-    "section": "Converting Between Formats",
-    "text": "Converting Between Formats\n\nUsing coercion (as, rast, vect) can change class, but not data model\nSometimes we need to actually change the data model"
-  },
-  {
-    "objectID": "slides/13-slides.html#converting-vectors-to-rasters-using-rasterize",
-    "href": "slides/13-slides.html#converting-vectors-to-rasters-using-rasterize",
-    "title": "Combining Raster and Vector Data",
-    "section": "Converting Vectors to Rasters Using rasterize",
-    "text": "Converting Vectors to Rasters Using rasterize\n\nA special kind of data aggregation\nx is your SpatVector object\ny is a template raster with the appropriate CRS, resolution, and extent\nfun allows you to specify the value of the resulting raster"
-  },
-  {
-    "objectID": "slides/13-slides.html#using-rasterize",
-    "href": "slides/13-slides.html#using-rasterize",
-    "title": "Combining Raster and Vector Data",
-    "section": "Using rasterize",
-    "text": "Using rasterize\n\n\nPresence/Absence\nfield specifies which value should be returned to non-empty cells\n\n\n\n\n\n\ncycle_hire_osm = spData::cycle_hire_osm\ncycle_hire_osm_projected = st_transform(cycle_hire_osm, \"EPSG:27700\")\nraster_template = rast(ext(cycle_hire_osm_projected), resolution = 1000,\n                       crs = st_crs(cycle_hire_osm_projected)$wkt)\nch_raster1 = rasterize(cycle_hire_osm_projected, raster_template,\n                       field = 1)"
-  },
-  {
-    "objectID": "slides/13-slides.html#using-rasterize-1",
-    "href": "slides/13-slides.html#using-rasterize-1",
-    "title": "Combining Raster and Vector Data",
-    "section": "Using rasterize",
-    "text": "Using rasterize\n\n\nThe fun argument specifies how we aggregate the data\nUseful for counting occurrences (using length)\n\n\n\n\n\n\nch_raster2 = rasterize(cycle_hire_osm_projected, raster_template, \n                       fun = \"length\")"
-  },
-  {
-    "objectID": "slides/13-slides.html#using-rasterize-2",
-    "href": "slides/13-slides.html#using-rasterize-2",
-    "title": "Combining Raster and Vector Data",
-    "section": "Using rasterize",
-    "text": "Using rasterize\n\n\nThe fun argument specifies how we aggregate the data\nCan use a variety of functions\n\n\n\n\n\n\nch_raster3 = rasterize(cycle_hire_osm_projected, raster_template, \n                       field = \"capacity\", fun = sum)"
-  },
-  {
-    "objectID": "slides/13-slides.html#lines-and-polygons",
-    "href": "slides/13-slides.html#lines-and-polygons",
-    "title": "Combining Raster and Vector Data",
-    "section": "Lines and Polygons",
-    "text": "Lines and Polygons\n\nCan use rasterize or stars::st_rasterize\nResult depends on the touches argument"
-  },
-  {
-    "objectID": "slides/13-slides.html#converting-rasters-to-vectors",
-    "href": "slides/13-slides.html#converting-rasters-to-vectors",
-    "title": "Combining Raster and Vector Data",
-    "section": "Converting rasters to vectors",
-    "text": "Converting rasters to vectors\n\nLess common, but can convert to vector data\nas.points, as.countour, and polygonize\n\n\n\n\n\ndem = rast(system.file(\"raster/dem.tif\", package = \"spDataLarge\"))\ncl = as.contour(dem)"
-  },
-  {
-    "objectID": "slides/13-slides.html#generating-new-data-1",
-    "href": "slides/13-slides.html#generating-new-data-1",
-    "title": "Combining Raster and Vector Data",
-    "section": "Generating New Data",
-    "text": "Generating New Data\n\nSometimes we want a raster describing the spatial context of vector data\ndistance is a simple method\nWe’ll use interpolation in the next few weeks"
-  },
-  {
-    "objectID": "slides/13-slides.html#generating-distance-rasters",
-    "href": "slides/13-slides.html#generating-distance-rasters",
-    "title": "Combining Raster and Vector Data",
-    "section": "Generating Distance Rasters",
-    "text": "Generating Distance Rasters\n\nreturns a distance matrix or SpatRaster\n\n\ncycle_hire_osm = spData::cycle_hire_osm\ncycle_hire_osm_projected = st_transform(cycle_hire_osm, \"EPSG:27700\")\n\ncycle_dist &lt;- distance(vect(cycle_hire_osm_projected))\nhead(as.matrix(cycle_dist))[1:5, 1:5]\n\n          1         2        3         4         5\n1    0.0000 2550.9619 1736.118  407.1558 1922.3728\n2 2550.9619    0.0000 1072.401 2820.4804  725.2172\n3 1736.1178 1072.4011    0.000 1908.1413  360.7490\n4  407.1558 2820.4804 1908.141    0.0000 2148.0087\n5 1922.3728  725.2172  360.749 2148.0087    0.0000"
-  },
-  {
-    "objectID": "slides/13-slides.html#generating-distance-rasters-1",
-    "href": "slides/13-slides.html#generating-distance-rasters-1",
-    "title": "Combining Raster and Vector Data",
-    "section": "Generating Distance Rasters",
-    "text": "Generating Distance Rasters\n\nreturns a distance matrix or SpatRaster\n\n\nraster_template = rast(ext(cycle_hire_osm_projected), resolution = 100,\n                       crs = st_crs(cycle_hire_osm_projected)$wkt)\nch_raster1 = rasterize(cycle_hire_osm_projected, raster_template,\n                       field = 1)\n\nch_dist_rast &lt;- distance(ch_raster1)\nplot(ch_dist_rast)"
-  },
-  {
-    "objectID": "slides/13-slides.html#creating-vector-data-by-extraction",
-    "href": "slides/13-slides.html#creating-vector-data-by-extraction",
-    "title": "Combining Raster and Vector Data",
-    "section": "Creating Vector Data by Extraction",
-    "text": "Creating Vector Data by Extraction\n\nSometimes we want to use rasters to create new attributes\nfun controls how the cells are aggregated\n\n\ncycle_hire_osm = spData::cycle_hire_osm\ncycle_hire_osm_proj_buff &lt;- st_transform(cycle_hire_osm, \"EPSG:27700\") %&gt;% \n  st_buffer(., 5000) %&gt;% \n  as(., \"SpatVector\")\n\ncycle_ext &lt;- extract(ch_dist_rast, cycle_hire_osm_proj_buff)\nhead(cycle_ext)\n\n  ID     last\n1  1 1360.147\n2  1 1280.625\n3  1 1204.159\n4  1 1131.371\n5  1 1063.015\n6  1 1000.000"
   },
   {
     "objectID": "slides/15-slides.html#update-on-assignments",
