@@ -387,12 +387,22 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </header>
 
+<p>Now that we’ve done some “global” transformations of raster data using <code>terra</code>, we’ll look at some of the options for cell-wise transformations. Rather than manipulating the extent, resolution, or CRS of the raster data; we’ll actually be using functions to change the values of the cells themselves.</p>
 <section id="readings" class="level2">
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<ul>
+<li><p><i class="fas fa-external-link-square-alt"></i> The <a href="https://rspatial.org/terra/pkg/1-introduction.html#"><code>terra</code> package vignette</a> describes the new raster functions available in <code>terra</code>, their relationship to those in the <code>raster</code> package, and the changes in syntax between the two.</p></li>
+<li><p><i class="fas fa-book"></i> The <a href="https://www.ecologi.st/spatial-r/raster-gis-operations-in-r-with-terra.html">Raster GIS Operations in R with terra</a> chapter from Jasper Slingsby’s “A Minimal Introduction to GIS (in R)” bookdown project has worked examples of many of the operations we’ll learn today.</p></li>
+</ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today, you should be able to:</p>
+<ul>
+<li><p>Use moving windows as a means of smoothing raster data</p></li>
+<li><p>Reclassify data using conditional statements and reclassification tables</p></li>
+<li><p>Use raster math as a means of creating new data based on an existing dataset.</p></li>
+</ul>
 </section>
 <section id="slides" class="level2">
 <h2 class="anchored" data-anchor-id="slides">Slides</h2>
@@ -400,7 +410,9 @@ ul.task-list li input[type="checkbox"] {
 <p class="text-center buttons">
 <a class="btn btn-danger" target="_blank" href="../slides/14-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/14-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
-<p>Slides Forthcoming</p>
+<div>
+<iframe class="slide-deck" src="../slides/14-slides.html"></iframe>
+</div>
 
 
 </section>

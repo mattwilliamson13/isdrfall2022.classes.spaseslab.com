@@ -443,163 +443,128 @@
   {
     "objectID": "slides/14-slides.html#objectives",
     "href": "slides/14-slides.html#objectives",
-    "title": "Building Spatial Databases with Attributes",
+    "title": "Raster Data: II",
     "section": "Objectives",
-    "text": "Objectives\n\nBy the end of today, you should be able to:\n\nDefine spatial analysis\nDescribe the steps in planning a spatial analysis\nUnderstand the structure of relational databases\nBegin building a database for spatial analysis"
+    "text": "Objectives\n\nBy the end of today, you should be able to:\n\nUse moving windows as a means of smoothing raster data\nReclassify data using conditional statements and reclassification tables\nUse raster math as a means of creating new data based on an existing dataset."
   },
   {
-    "objectID": "slides/14-slides.html#what-is-spatial-analysis-1",
-    "href": "slides/14-slides.html#what-is-spatial-analysis-1",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "What is spatial analysis?",
-    "text": "What is spatial analysis?\n\n“The process of examining the locations, attributes, and relationships of features in spatial data through overlay and other analytical techniques in order to address a question or gain useful knowledge. Spatial analysis extracts or creates new information from spatial data”.\n\n— ESRI Dictionary"
+    "objectID": "slides/14-slides.html#why-use-moving-windows",
+    "href": "slides/14-slides.html#why-use-moving-windows",
+    "title": "Raster Data: II",
+    "section": "Why use moving windows?",
+    "text": "Why use moving windows?\n\nTo create new data that reflects “neighborhood” data\nTo smooth out values\nTo detect (and fill) holes or edges\nChange the thematic scale of your data (without changing resolution)"
   },
   {
-    "objectID": "slides/14-slides.html#what-is-spatial-analysis-2",
-    "href": "slides/14-slides.html#what-is-spatial-analysis-2",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "What is spatial analysis?",
-    "text": "What is spatial analysis?\n\n\n\nThe process of turning maps into information\nAny- or everything we do with GIS\nThe use of computational and statistical algorithms to understand the relations between things that co-occur in space.\n\n\n\n\n\nJohn Snow’s cholera outbreak map"
+    "objectID": "slides/14-slides.html#what-is-a-moving-window",
+    "href": "slides/14-slides.html#what-is-a-moving-window",
+    "title": "Raster Data: II",
+    "section": "What is a moving window?",
+    "text": "What is a moving window?"
   },
   {
-    "objectID": "slides/14-slides.html#common-goals-for-spatial-analysis",
-    "href": "slides/14-slides.html#common-goals-for-spatial-analysis",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Common goals for spatial analysis",
-    "text": "Common goals for spatial analysis\n\n\n\n\n\ncourtesy of NatureServe\n\n\n\n\nDescribe and visualize locations or events\nQuantify patterns\nCharacterize ‘suitability’\nDetermine (statistical) relations"
+    "objectID": "slides/14-slides.html#implementing-moving-windows-in-r",
+    "href": "slides/14-slides.html#implementing-moving-windows-in-r",
+    "title": "Raster Data: II",
+    "section": "Implementing Moving Windows in R",
+    "text": "Implementing Moving Windows in R\n\nUse the focal function in terra\n\nfocal(x, w=3, fun=\"sum\", ..., na.policy=\"all\", fillvalue=NA,          expand=FALSE, silent=TRUE, filename=\"\", overwrite=FALSE, wopt=list())"
   },
   {
-    "objectID": "slides/14-slides.html#common-pitfalls-of-spatial-analysis",
-    "href": "slides/14-slides.html#common-pitfalls-of-spatial-analysis",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Common pitfalls of spatial analysis",
-    "text": "Common pitfalls of spatial analysis\n\nLocational Fallacy: Error due to the spatial characterization chosen for elements of study\nAtomic Fallacy: Applying conclusions from individuals to entire spatial units\nEcological Fallacy: Applying conclusions from aggregated information to individuals\n\n\n\nSpatial analysis is an inherently complex endeavor and one that is advancing rapidly. So-called “best practices” for addressing many of these issues are still being developed and debated. This doesn’t mean you shouldn’t do spatial analysis, but you should keep these things in mind as you design, implement, and interpret your analyses"
+    "objectID": "slides/14-slides.html#focal-for-continuous-rasters",
+    "href": "slides/14-slides.html#focal-for-continuous-rasters",
+    "title": "Raster Data: II",
+    "section": "focal for Continuous Rasters",
+    "text": "focal for Continuous Rasters\n\nlibrary(tidyverse)\nlibrary(terra)\nlibrary(spData)\nsrtm = rast(system.file(\"raster/srtm.tif\", package = \"spDataLarge\"))\nsrtm3  &lt;-  focal(x = srtm, w = 3)\nsrtm9  &lt;-  focal(x = srtm, w = 9)\nsrtm21  &lt;-  focal(x = srtm, w = 21)"
   },
   {
-    "objectID": "slides/14-slides.html#workflows-for-spatial-analysis-1",
-    "href": "slides/14-slides.html#workflows-for-spatial-analysis-1",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Workflows for spatial analysis",
-    "text": "Workflows for spatial analysis\n\n\n\nAcquisition (not really a focus, but see Resources)\nGeoprocessing\nAnalysis\nVisualization\n\n\n\n\n\ncourtesy of University of Illinois"
+    "objectID": "slides/14-slides.html#focal-for-continuous-rasters-1",
+    "href": "slides/14-slides.html#focal-for-continuous-rasters-1",
+    "title": "Raster Data: II",
+    "section": "focal for Continuous Rasters",
+    "text": "focal for Continuous Rasters"
   },
   {
-    "objectID": "slides/14-slides.html#geoprocessing",
-    "href": "slides/14-slides.html#geoprocessing",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Geoprocessing",
-    "text": "Geoprocessing\nManipulation of data for subsequent use\n\nAlignment\nData cleaning and transformation\nCombination of multiple datasets\nSelection and subsetting"
+    "objectID": "slides/14-slides.html#focal-for-continuous-rasters-2",
+    "href": "slides/14-slides.html#focal-for-continuous-rasters-2",
+    "title": "Raster Data: II",
+    "section": "focal for Continuous Rasters",
+    "text": "focal for Continuous Rasters\n\nsrtmsum  &lt;-  focal(x = srtm, w = 3, fun=\"sum\")\nsrtmmax  &lt;-  focal(x = srtm, w = 9, fun=\"mean\")\nsrtmmin  &lt;-  focal(x = srtm, w = 21, fun=\"min\")"
   },
   {
-    "objectID": "slides/14-slides.html#databases-and-attributes-1",
-    "href": "slides/14-slides.html#databases-and-attributes-1",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Databases and attributes",
-    "text": "Databases and attributes\n\n\n\n\n\ncourtesy of Giscommons\n\n\n\n\n\nPrevious focus has been largely on location\nGeographic data often also includes non-spatial data\nAttributes: Non-spatial information that further describes a spatial feature\nTypically stored in tables where each row represents a spatial feature\n\nWide vs. long format"
+    "objectID": "slides/14-slides.html#focal-for-continuous-rasters-3",
+    "href": "slides/14-slides.html#focal-for-continuous-rasters-3",
+    "title": "Raster Data: II",
+    "section": "focal for Continuous Rasters",
+    "text": "focal for Continuous Rasters"
   },
   {
-    "objectID": "slides/14-slides.html#common-attribute-operations",
-    "href": "slides/14-slides.html#common-attribute-operations",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Common attribute operations",
-    "text": "Common attribute operations\n\nsf designed to work with tidyverse\nAllows use of dplyr data manipulation verbs\nCan use scales package for units\nAlso allows %&gt;% to chain together multiple steps\ngeometries are “sticky”\nPay attention to masking!!"
+    "objectID": "slides/14-slides.html#focal-for-continous-rasters",
+    "href": "slides/14-slides.html#focal-for-continous-rasters",
+    "title": "Raster Data: II",
+    "section": "focal for Continous Rasters",
+    "text": "focal for Continous Rasters\n\ncan alter the size and shape of window by providing a weights matrix for w\nCan create different custom functions for fun (see the help file)\nna.policy for filling holes or avoiding them"
   },
   {
-    "objectID": "slides/14-slides.html#revisiting-the-tidyverse",
-    "href": "slides/14-slides.html#revisiting-the-tidyverse",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Revisiting the tidyverse",
-    "text": "Revisiting the tidyverse\n\nFields contain individual attributes\nSelecting fields\n\n\n\n\ncolnames(world)\n\n [1] \"iso_a2\"    \"name_long\" \"continent\" \"region_un\" \"subregion\" \"type\"     \n [7] \"area_km2\"  \"pop\"       \"lifeExp\"   \"gdpPercap\" \"geom\"     \n\nhead(world)[,1:3] %&gt;% \n  st_drop_geometry()\n\n# A tibble: 6 × 3\n  iso_a2 name_long      continent    \n* &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;        \n1 FJ     Fiji           Oceania      \n2 TZ     Tanzania       Africa       \n3 EH     Western Sahara Africa       \n4 CA     Canada         North America\n5 US     United States  North America\n6 KZ     Kazakhstan     Asia         \n\n\n\n\nworld %&gt;%\n  dplyr::select(name_long, continent) %&gt;%\n  st_drop_geometry() %&gt;% \n  head(.) \n\n# A tibble: 6 × 2\n  name_long      continent    \n  &lt;chr&gt;          &lt;chr&gt;        \n1 Fiji           Oceania      \n2 Tanzania       Africa       \n3 Western Sahara Africa       \n4 Canada         North America\n5 United States  North America\n6 Kazakhstan     Asia"
+    "objectID": "slides/14-slides.html#reclassification-1",
+    "href": "slides/14-slides.html#reclassification-1",
+    "title": "Raster Data: II",
+    "section": "Reclassification",
+    "text": "Reclassification\n\nCreate new data based on the presence of a particular class(es) of interest\nCombine classes in a categorical map\nUseful as inputs for overlay analyses"
   },
   {
-    "objectID": "slides/14-slides.html#revisiting-the-tidyverse-1",
-    "href": "slides/14-slides.html#revisiting-the-tidyverse-1",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Revisiting the tidyverse",
-    "text": "Revisiting the tidyverse\n\nFeatures refer to the individual observations in the dataset\nSelecting features\n\n\n\n\nhead(world)[1:3, 1:3] %&gt;% \n  st_drop_geometry()\n\n# A tibble: 3 × 3\n  iso_a2 name_long      continent\n* &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;    \n1 FJ     Fiji           Oceania  \n2 TZ     Tanzania       Africa   \n3 EH     Western Sahara Africa   \n\n\n\n\nworld %&gt;%\n  filter(continent == \"Asia\") %&gt;% \n    dplyr::select(name_long, continent) %&gt;%\n  st_drop_geometry() %&gt;% \n  head(.)\n\n# A tibble: 6 × 2\n  name_long   continent\n  &lt;chr&gt;       &lt;chr&gt;    \n1 Kazakhstan  Asia     \n2 Uzbekistan  Asia     \n3 Indonesia   Asia     \n4 Timor-Leste Asia     \n5 Israel      Asia     \n6 Lebanon     Asia"
+    "objectID": "slides/14-slides.html#reclassifying-rasters-in-r",
+    "href": "slides/14-slides.html#reclassifying-rasters-in-r",
+    "title": "Raster Data: II",
+    "section": "Reclassifying rasters in R",
+    "text": "Reclassifying rasters in R\n\nUsing [] and conditionals\n\n\nsrtm = rast(system.file(\"raster/srtm.tif\", package = \"spDataLarge\"))\nsrtm.lowelev &lt;- srtm\nsrtm.lowelev[srtm.lowelev &gt; 2500] &lt;- 1\nplot(srtm.lowelev)"
   },
   {
-    "objectID": "slides/14-slides.html#revisiting-the-tidyverse-2",
-    "href": "slides/14-slides.html#revisiting-the-tidyverse-2",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Revisiting the tidyverse",
-    "text": "Revisiting the tidyverse\n\nCreating new fields\n\n\nworld %&gt;%\n  filter(continent == \"Asia\") %&gt;% \n    dplyr::select(name_long, continent, pop, gdpPercap ,area_km2) %&gt;%\n  mutate(., dens = pop/area_km2,\n         totGDP = gdpPercap * pop) %&gt;%\n  st_drop_geometry() %&gt;% \n  head(.)\n\n# A tibble: 6 × 7\n  name_long   continent       pop gdpPercap area_km2   dens  totGDP\n  &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;\n1 Kazakhstan  Asia       17288285    23587. 2729811.   6.33 4.08e11\n2 Uzbekistan  Asia       30757700     5371.  461410.  66.7  1.65e11\n3 Indonesia   Asia      255131116    10003. 1819251. 140.   2.55e12\n4 Timor-Leste Asia        1212814     6263.   14715.  82.4  7.60e 9\n5 Israel      Asia        8215700    31702.   22991. 357.   2.60e11\n6 Lebanon     Asia        5603279    13831.   10099. 555.   7.75e10"
+    "objectID": "slides/14-slides.html#reclassifying-rasters-in-r-1",
+    "href": "slides/14-slides.html#reclassifying-rasters-in-r-1",
+    "title": "Raster Data: II",
+    "section": "Reclassifying rasters in R",
+    "text": "Reclassifying rasters in R\n\nUsing [] and conditionals\n\n\nsrtm = rast(system.file(\"raster/srtm.tif\", package = \"spDataLarge\"))\n\n\nsrtm.na &lt;- srtm\nsrtm.na[200:300, 200:300] &lt;- NA\nsrtm.na[is.na(srtm.na)] &lt;- 8000\nplot(srtm.na)"
   },
   {
-    "objectID": "slides/14-slides.html#revisiting-the-tidyverse-3",
-    "href": "slides/14-slides.html#revisiting-the-tidyverse-3",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Revisiting the tidyverse",
-    "text": "Revisiting the tidyverse\n\nCreating new fields"
+    "objectID": "slides/14-slides.html#reclassifying-categorical-rasters",
+    "href": "slides/14-slides.html#reclassifying-categorical-rasters",
+    "title": "Raster Data: II",
+    "section": "Reclassifying Categorical Rasters",
+    "text": "Reclassifying Categorical Rasters\n\nNeed a classification matrix\nUse classify\n\n\nmintemp &lt;- rast(\"ftp://ftp.hafro.is/pub/data/rasters/Iceland_minbtemp.tif\")\ncm &lt;- matrix(c(\n  -2, 2, 0,\n  2, 4, 1,\n  4, 10, 2), ncol = 3, byrow = TRUE)\n\n# Create a raster with integers\ntemp_reclass &lt;- classify(mintemp, cm)\ntempcats &lt;- c(\"cold\", \"mild\", \"warm\")\nlevels(temp_reclass) &lt;- tempcats"
   },
   {
-    "objectID": "slides/14-slides.html#revisiting-the-tidyverse-4",
-    "href": "slides/14-slides.html#revisiting-the-tidyverse-4",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Revisiting the tidyverse",
-    "text": "Revisiting the tidyverse\n\nAggregating data\n\n\n\n\nworld %&gt;%\n  st_drop_geometry(.) %&gt;% \n  group_by(continent) %&gt;%\n  summarize(pop = sum(pop, na.rm = TRUE))\n\n# A tibble: 8 × 2\n  continent                      pop\n  &lt;chr&gt;                        &lt;dbl&gt;\n1 Africa                  1154946633\n2 Antarctica                       0\n3 Asia                    4311408059\n4 Europe                   669036256\n5 North America            565028684\n6 Oceania                   37757833\n7 Seven seas (open ocean)          0\n8 South America            412060811"
+    "objectID": "slides/14-slides.html#reclassifying-categorical-rasters-1",
+    "href": "slides/14-slides.html#reclassifying-categorical-rasters-1",
+    "title": "Raster Data: II",
+    "section": "Reclassifying Categorical Rasters",
+    "text": "Reclassifying Categorical Rasters"
   },
   {
-    "objectID": "slides/14-slides.html#joining-aspatial-data-1",
-    "href": "slides/14-slides.html#joining-aspatial-data-1",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Joining (a)spatial data",
-    "text": "Joining (a)spatial data\n\n\n\nRequires a “key” field\nMultiple outcomes possible\nThink about your final data form"
+    "objectID": "slides/14-slides.html#raster-math",
+    "href": "slides/14-slides.html#raster-math",
+    "title": "Raster Data: II",
+    "section": "Raster Math",
+    "text": "Raster Math\n\nPerforms cell-wise calculations on 1 (or more) SpatRasters\nGenerally works the same as matrix operations\nAll layers must be aligned"
   },
   {
-    "objectID": "slides/14-slides.html#left-join",
-    "href": "slides/14-slides.html#left-join",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Left Join",
-    "text": "Left Join\n\nUseful for adding other attributes not in your spatial data\nReturns all of the records in x attributed with y\nPay attention to the number of rows!"
+    "objectID": "slides/14-slides.html#raster-math-1",
+    "href": "slides/14-slides.html#raster-math-1",
+    "title": "Raster Data: II",
+    "section": "Raster Math",
+    "text": "Raster Math\n\nr &lt;- rast(ncol=5, nrow=5)\nvalues(r) &lt;- 1:ncell(r)\nr2 &lt;- r*2\nr3 &lt;- t(r)\nr4 &lt;- r + r2"
   },
   {
-    "objectID": "slides/14-slides.html#left-join-1",
-    "href": "slides/14-slides.html#left-join-1",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Left Join",
-    "text": "Left Join"
+    "objectID": "slides/14-slides.html#cell-wise-operations",
+    "href": "slides/14-slides.html#cell-wise-operations",
+    "title": "Raster Data: II",
+    "section": "Cell-wise operations",
+    "text": "Cell-wise operations\n\nterra has a special set of apply functions\napp, lapp, tapp\napp applies a function to the values of each cell\nlapp applies a function using the layer as the value\ntapp applies the function to a subset of layers"
   },
   {
-    "objectID": "slides/14-slides.html#left-join-2",
-    "href": "slides/14-slides.html#left-join-2",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Left Join",
-    "text": "Left Join\n\n\n\nhead(coffee_data)\n\n# A tibble: 6 × 3\n  name_long                coffee_production_2016 coffee_production_2017\n  &lt;chr&gt;                                     &lt;int&gt;                  &lt;int&gt;\n1 Angola                                       NA                     NA\n2 Bolivia                                       3                      4\n3 Brazil                                     3277                   2786\n4 Burundi                                      37                     38\n5 Cameroon                                      8                      6\n6 Central African Republic                     NA                     NA\n\n\n\n\nworld_coffee = left_join(world, coffee_data)\nnrow(world_coffee)\n\n[1] 177"
-  },
-  {
-    "objectID": "slides/14-slides.html#left-join-3",
-    "href": "slides/14-slides.html#left-join-3",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Left Join",
-    "text": "Left Join"
-  },
-  {
-    "objectID": "slides/14-slides.html#inner-join",
-    "href": "slides/14-slides.html#inner-join",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Inner Join",
-    "text": "Inner Join\n\nUseful for subsetting to “complete” records\nReturns all of the records in x with matching y\nPay attention to the number of rows!"
-  },
-  {
-    "objectID": "slides/14-slides.html#inner-join-1",
-    "href": "slides/14-slides.html#inner-join-1",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Inner Join",
-    "text": "Inner Join"
-  },
-  {
-    "objectID": "slides/14-slides.html#inner-join-2",
-    "href": "slides/14-slides.html#inner-join-2",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Inner Join",
-    "text": "Inner Join\n\n\n\nworld_coffee_inner = inner_join(world, coffee_data)\nnrow(world_coffee_inner)\n\n[1] 45\n\n\n\n\nsetdiff(coffee_data$name_long, world$name_long)\n\n[1] \"Congo, Dem. Rep. of\" \"Others\""
-  },
-  {
-    "objectID": "slides/14-slides.html#inner-join-3",
-    "href": "slides/14-slides.html#inner-join-3",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "Inner Join",
-    "text": "Inner Join"
+    "objectID": "slides/14-slides.html#context-specific-functions",
+    "href": "slides/14-slides.html#context-specific-functions",
+    "title": "Raster Data: II",
+    "section": "Context-specific Functions",
+    "text": "Context-specific Functions\n\ndistance and relatives are based on relationships between cells\nterrain allows calculation of slope, ruggedness, aspect using elevation rasters\nshade calculates hillshade based on terrain"
   },
   {
     "objectID": "slides/12-slides.html#objectives",
@@ -613,74 +578,116 @@
     "href": "slides/12-slides.html#example-questions",
     "title": "Operations With Vector Data II",
     "section": "Example questions",
-    "text": "Example questions\n\nWhat is the chronic heart disease risk of the 10 ID counties that are furthest from hospitals?\nHow may \\(km^2\\) of ID are served by more than 1 hospital?\nWhat is the difference between the average risk of chronic heart disease in the counties served by at least two hospitals compared to those that aren’t served by any?"
+    "text": "Example questions\n\nWhat is the chronic heart disease risk of the 10 ID tracts that are furthest from hospitals?\nHow may \\(km^2\\) of ID are served by more than 1 hospital?\nWhat is the difference between the average risk of chronic heart disease in the tracts served by at least two hospitals compared to those that aren’t served by any?"
   },
   {
     "objectID": "slides/12-slides.html#key-assummptions",
     "href": "slides/12-slides.html#key-assummptions",
     "title": "Operations With Vector Data II",
     "section": "Key assummptions",
-    "text": "Key assummptions\n\nAll hospital locations are contained in the landmarks dataset\nA hospital service area is defined as a 100km radius\nHospital service areas can cross state lines."
+    "text": "Key assummptions\n\nAll hospital locations are contained in the landmarks dataset\nA hospital service area is defined as a 50km radius\nHospital service areas can cross state lines."
   },
   {
     "objectID": "slides/12-slides.html#what-do-we-need-to-know",
     "href": "slides/12-slides.html#what-do-we-need-to-know",
     "title": "Operations With Vector Data II",
     "section": "What do we need to know?",
-    "text": "What do we need to know?\n\nWhere are the hospitals?\nHow far are the hospitals from ID counties?\nWhich counties are the furthest?\nWhat is the CHD risk?"
+    "text": "What do we need to know?\n\nWhere are the hospitals?\nHow far are the hospitals from ID tracts?\nWhich tracts are the furthest?\nWhat is the CHD risk?"
   },
   {
     "objectID": "slides/12-slides.html#pseudocode",
     "href": "slides/12-slides.html#pseudocode",
     "title": "Operations With Vector Data II",
     "section": "Pseudocode",
-    "text": "Pseudocode\n\n1. Load the hospital and cdc datasets\n2. Align the data\n3. Filter cdc so it only has Idaho counties\n4. Calculate distance from hospitals\n5. Find top 10 counties based on distance\n6. Map chronic heart disease risk"
+    "text": "Pseudocode\n\n1. Load the hospital and cdc datasets\n2. Align the data\n3. Filter cdc so it only has Idaho tracts\n4. Calculate distance from hospitals\n5. Find top 10 tracts based on distance\n6. Map chronic heart disease risk"
   },
   {
     "objectID": "slides/12-slides.html#adding-functions",
     "href": "slides/12-slides.html#adding-functions",
     "title": "Operations With Vector Data II",
     "section": "Adding Functions",
-    "text": "Adding Functions\n\nLoad the hospital and cdc datasets\n\n\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tmap)\nhospital.sf &lt;- read_csv(\"data/opt/data/2023/vectorexample/hospitals_pnw.csv\") %&gt;% \n  st_as_sf(., coords = c(\"longitude\", \"latitude\"))\n\ncdc.sf &lt;- read_sf(\"data/opt/data/2023/vectorexample/cdc_nw.shp\")"
-  },
-  {
-    "objectID": "slides/12-slides.html#plotting-the-results",
-    "href": "slides/12-slides.html#plotting-the-results",
-    "title": "Operations With Vector Data II",
-    "section": "Plotting the Results",
-    "text": "Plotting the Results"
-  },
-  {
-    "objectID": "slides/12-slides.html#example-questions-1",
-    "href": "slides/12-slides.html#example-questions-1",
-    "title": "Operations With Vector Data II",
-    "section": "Example questions",
-    "text": "Example questions\n\nHow may \\(km^2\\) of ID are served by more than 1 hospital?"
-  },
-  {
-    "objectID": "slides/12-slides.html#what-do-we-need-to-know-1",
-    "href": "slides/12-slides.html#what-do-we-need-to-know-1",
-    "title": "Operations With Vector Data II",
-    "section": "What do we need to know?",
-    "text": "What do we need to know?\n\nWhere are the hospitals?\nWhat is the service area for each hospital?\nWhere doe those service areas overlap?\nHow big is the overlap area?"
-  },
-  {
-    "objectID": "slides/12-slides.html#pseudocode-1",
-    "href": "slides/12-slides.html#pseudocode-1",
-    "title": "Operations With Vector Data II",
-    "section": "Pseudocode",
-    "text": "Pseudocode"
+    "text": "Adding Functions\n\nLoad the hospital and cdc datasets\n\n\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tmap)\nhospital.sf &lt;- read_csv(\"data/opt/data/2023/vectorexample/hospitals_pnw.csv\") %&gt;% \n  st_as_sf(., coords = c(\"longitude\", \"latitude\"))\nst_crs(hospital.sf)\n\nCoordinate Reference System: NA\n\ncdc.sf &lt;- read_sf(\"data/opt/data/2023/vectorexample/cdc_nw.shp\")\nst_crs(cdc.sf)$epsg\n\n[1] NA"
   },
   {
     "objectID": "slides/12-slides.html#adding-functions-1",
     "href": "slides/12-slides.html#adding-functions-1",
     "title": "Operations With Vector Data II",
     "section": "Adding Functions",
-    "text": "Adding Functions"
+    "text": "Adding Functions\n\nAlign the data\n\n\nst_crs(hospital.sf) &lt;- 4326\n\nhospital.sf.proj &lt;- hospital.sf %&gt;% \n  st_transform(., crs=st_crs(cdc.sf))\n\nst_crs(hospital.sf.proj) == st_crs(cdc.sf)\n\n[1] TRUE\n\nidentical(st_crs(hospital.sf.proj), st_crs(cdc.sf))\n\n[1] TRUE"
   },
   {
-    "objectID": "slides/12-slides.html#plotting-the-results-1",
-    "href": "slides/12-slides.html#plotting-the-results-1",
+    "objectID": "slides/12-slides.html#adding-functions-2",
+    "href": "slides/12-slides.html#adding-functions-2",
+    "title": "Operations With Vector Data II",
+    "section": "Adding Functions",
+    "text": "Adding Functions\n\nFilter cdc so it only has Idaho tracts\n\n\n\n\ncdc.idaho &lt;- cdc.sf %&gt;% \n  filter(STATEFP == \"16\")\n\n\n\nplot(st_geometry(cdc.idaho))"
+  },
+  {
+    "objectID": "slides/12-slides.html#adding-functions-3",
+    "href": "slides/12-slides.html#adding-functions-3",
+    "title": "Operations With Vector Data II",
+    "section": "Adding Functions",
+    "text": "Adding Functions\n\nCalculate distance from hospitals\n\n\nnearest.hosp &lt;- st_nearest_feature(cdc.idaho, hospital.sf.proj)\nstr(nearest.hosp)\n\n int [1:191] 6 45 45 45 3 3 3 3 6 3 ...\n\nnearest.hosp.sf &lt;- hospital.sf.proj[nearest.hosp,]\nhospital.dist &lt;- st_distance(cdc.idaho, nearest.hosp.sf, by_element = TRUE)\nstr(hospital.dist)\n\n Units: [m] num [1:191] 29501 46541 39386 32726 23534 ..."
+  },
+  {
+    "objectID": "slides/12-slides.html#adding-functions-4",
+    "href": "slides/12-slides.html#adding-functions-4",
+    "title": "Operations With Vector Data II",
+    "section": "Adding Functions",
+    "text": "Adding Functions\n\nFind top 10 counties based on distance\n\n\ncdc.idaho.hosp &lt;- cdc.idaho %&gt;% \n  mutate(., disthosp = hospital.dist)\n\ncdc.furthest &lt;- cdc.idaho.hosp %&gt;% \n  slice_max(., n=10, order_by= disthosp)\n\nhead(cdc.furthest$disthosp)\n\nUnits: [m]\n[1] 94506.47 83446.11 81134.60 70762.53 70425.16 70084.68"
+  },
+  {
+    "objectID": "slides/12-slides.html#adding-functions-5",
+    "href": "slides/12-slides.html#adding-functions-5",
+    "title": "Operations With Vector Data II",
+    "section": "Adding Functions",
+    "text": "Adding Functions\n\nMap chronic heart disease risk\n\n\nlibrary(tmap)\n\ntm_shape(tigris::counties(\"ID\", progress_bar=FALSE)) +\n  tm_polygons() +\n  tm_shape(cdc.furthest) +\n  tm_polygons(\"disthosp\", title=\"Dist to Hospital (m2)\") +\n  tm_shape(hospital.sf.proj[cdc.idaho,]) +\n  tm_symbols(size=0.25)"
+  },
+  {
+    "objectID": "slides/12-slides.html#what-do-we-need-to-know-1",
+    "href": "slides/12-slides.html#what-do-we-need-to-know-1",
+    "title": "Operations With Vector Data II",
+    "section": "What do we need to know?",
+    "text": "What do we need to know?\n\nWhere are the hospitals?\nWhat is the service area for each hospital?\nWhere do those service areas overlap?\nHow big is the overlap area?"
+  },
+  {
+    "objectID": "slides/12-slides.html#pseudocode-1",
+    "href": "slides/12-slides.html#pseudocode-1",
+    "title": "Operations With Vector Data II",
+    "section": "Pseudocode",
+    "text": "Pseudocode\n\n1. Load the hospital dataset and add projection\n2. Buffer hospitals by service area\n3. Find intersection of service areas\n4. Calculate area of overlap"
+  },
+  {
+    "objectID": "slides/12-slides.html#adding-functions-6",
+    "href": "slides/12-slides.html#adding-functions-6",
+    "title": "Operations With Vector Data II",
+    "section": "Adding Functions",
+    "text": "Adding Functions\n\nLoad the hospital dataset and add projection\n\n\nhospital.sf &lt;- read_csv(\"data/opt/data/2023/vectorexample/hospitals_pnw.csv\") %&gt;% \n  st_as_sf(., coords = c(\"longitude\", \"latitude\"))\n\nst_crs(hospital.sf) &lt;- 4326"
+  },
+  {
+    "objectID": "slides/12-slides.html#adding-functions-7",
+    "href": "slides/12-slides.html#adding-functions-7",
+    "title": "Operations With Vector Data II",
+    "section": "Adding Functions",
+    "text": "Adding Functions\n\nBuffer hospitals by service area\n\n\n\n\nhospital.buf &lt;- hospital.sf %&gt;%\n  filter(STATEFP == \"16\") %&gt;% \n  st_buffer(., dist = units::set_units(30, \"kilometers\"))\n\n\n\nplot(st_geometry(hospital.buf))"
+  },
+  {
+    "objectID": "slides/12-slides.html#adding-functions-8",
+    "href": "slides/12-slides.html#adding-functions-8",
+    "title": "Operations With Vector Data II",
+    "section": "Adding Functions",
+    "text": "Adding Functions\n\nFind intersection of service areas ::: columns ::: {.column width=“40%”}\n\n\nhospital.int &lt;- hospital.buf %&gt;% \n  st_intersection()\nall(st_is_valid(hospital.int))\n\n::: ::: {.column width=“40%”}"
+  },
+  {
+    "objectID": "slides/12-slides.html#adding-functions-9",
+    "href": "slides/12-slides.html#adding-functions-9",
+    "title": "Operations With Vector Data II",
+    "section": "Adding Functions",
+    "text": "Adding Functions\n\nCalculate area of overlap"
+  },
+  {
+    "objectID": "slides/12-slides.html#plotting-the-results",
+    "href": "slides/12-slides.html#plotting-the-results",
     "title": "Operations With Vector Data II",
     "section": "Plotting the Results",
     "text": "Plotting the Results"
@@ -707,15 +714,15 @@
     "text": "Pseudocode"
   },
   {
-    "objectID": "slides/12-slides.html#adding-functions-2",
-    "href": "slides/12-slides.html#adding-functions-2",
+    "objectID": "slides/12-slides.html#adding-functions-10",
+    "href": "slides/12-slides.html#adding-functions-10",
     "title": "Operations With Vector Data II",
     "section": "Adding Functions",
     "text": "Adding Functions"
   },
   {
-    "objectID": "slides/12-slides.html#plotting-the-results-2",
-    "href": "slides/12-slides.html#plotting-the-results-2",
+    "objectID": "slides/12-slides.html#plotting-the-results-1",
+    "href": "slides/12-slides.html#plotting-the-results-1",
     "title": "Operations With Vector Data II",
     "section": "Plotting the Results",
     "text": "Plotting the Results"
@@ -1701,18 +1708,32 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
   },
   {
+    "objectID": "content/14-content.html",
+    "href": "content/14-content.html",
+    "title": "Operations with Raster Data II",
+    "section": "",
+    "text": "Now that we’ve done some “global” transformations of raster data using terra, we’ll look at some of the options for cell-wise transformations. Rather than manipulating the extent, resolution, or CRS of the raster data; we’ll actually be using functions to change the values of the cells themselves."
+  },
+  {
+    "objectID": "content/14-content.html#readings",
+    "href": "content/14-content.html#readings",
+    "title": "Operations with Raster Data II",
+    "section": "Readings",
+    "text": "Readings\n\n The terra package vignette describes the new raster functions available in terra, their relationship to those in the raster package, and the changes in syntax between the two.\n The Raster GIS Operations in R with terra chapter from Jasper Slingsby’s “A Minimal Introduction to GIS (in R)” bookdown project has worked examples of many of the operations we’ll learn today."
+  },
+  {
     "objectID": "content/14-content.html#objectives",
     "href": "content/14-content.html#objectives",
     "title": "Operations with Raster Data II",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nUse moving windows as a means of smoothing raster data\nReclassify data using conditional statements and reclassification tables\nUse raster math as a means of creating new data based on an existing dataset."
   },
   {
     "objectID": "content/14-content.html#slides",
     "href": "content/14-content.html#slides",
     "title": "Operations with Raster Data II",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
   },
   {
     "objectID": "content/12-content.html",
@@ -3371,7 +3392,7 @@
     "href": "slides/13-slides.html#changing-resolutions-disagg",
     "title": "Operations on Raster Data I",
     "section": "Changing resolutions: disagg",
-    "text": "Changing resolutions: disagg\n\n\n\nra &lt;- aggregate(r, 20)\nplot(ra)\n\n\n\n\n\n\nrd &lt;- disagg(r, 20)\n\n\n|---------|---------|---------|---------|\n======\n                                          \n\nrd\n\nclass       : SpatRaster \ndimensions  : 3600, 7200, 1  (nrow, ncol, nlyr)\nresolution  : 0.05, 0.05  (x, y)\nextent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 \nsource      : spat_CcWFmodP7kx8nTX_22640.tif \nname        : lyr.1 \nmin value   :     1 \nmax value   : 64800 \n\nplot(rd)"
+    "text": "Changing resolutions: disagg\n\n\n\nra &lt;- aggregate(r, 20)\nplot(ra)\n\n\n\n\n\n\nrd &lt;- disagg(r, 20)\n\n\n|---------|---------|---------|---------|\n=====\n                                          \n\nrd\n\nclass       : SpatRaster \ndimensions  : 3600, 7200, 1  (nrow, ncol, nlyr)\nresolution  : 0.05, 0.05  (x, y)\nextent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 \nsource      : spat_4QyAlALziT1WmUe_97640.tif \nname        : lyr.1 \nmin value   :     1 \nmax value   : 64800 \n\nplot(rd)"
   },
   {
     "objectID": "slides/13-slides.html#dealing-with-different-extents",
