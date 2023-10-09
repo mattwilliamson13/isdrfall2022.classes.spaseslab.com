@@ -1733,7 +1733,7 @@
     "href": "content/14-content.html#slides",
     "title": "Operations with Raster Data II",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to today’s Panopto Slides"
   },
   {
     "objectID": "content/12-content.html",
@@ -2433,28 +2433,28 @@
     "href": "content/15-content.html",
     "title": "Combining Spatial and Tabular Data",
     "section": "",
-    "text": "Today we’ll continue our development of attributes (or covariates) in our spatial databases. We’ll look at developing attributes that describe various geographic properties along with joining and subsetting based on locations."
+    "text": "Today we’ll begin exploring typical workflows for spatial analysis by working with attribute data. Attributes generally provide additional information about a location that we can use for visualization and analysis. Unlike spatial operations that we’ll explore next week, attribute data do not all require geographic information (but they do need some means of relating to a geography). These chapters are not ‘prerequisite’ reading for the week, but provide a lot of helpful background for attribute operations in R."
   },
   {
     "objectID": "content/15-content.html#resources",
     "href": "content/15-content.html#resources",
     "title": "Combining Spatial and Tabular Data",
     "section": "Resources",
-    "text": "Resources"
+    "text": "Resources\n\n The Tidy Data and Relational Data sections from R For Data Science (Wickham and Grolemund 2016) provide a great overview to data cleaning and manipulation functions available in the tidyverse.\n Doing things with multiple tables has a lot of nice visual examples of for using the _join functions in dplyr.\n This article (Di Minin et al. 2021) provides a recent recap of a variety of reasons why we may need to combine data from multiple, often disparate, sources.\n The Spatial Data Operations Chapter in (Lovelace et al. 2019) makes the concepts of a network concrete (literally) by using a transportation route example to illustrate the various components of a network analysis in R."
   },
   {
     "objectID": "content/15-content.html#objectives",
     "href": "content/15-content.html#objectives",
     "title": "Combining Spatial and Tabular Data",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nDefine spatial analysis\nDescribe the steps in planning a spatial analysis\nUnderstand the structure of relational databases\nUse attributes and topology to subset data\nGenerate new features using geographic data\nJoin data based on attributes and location"
   },
   {
     "objectID": "content/15-content.html#slides",
     "href": "content/15-content.html#slides",
     "title": "Combining Spatial and Tabular Data",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
   },
   {
     "objectID": "content/17-content.html#objectives",
@@ -3437,170 +3437,303 @@
     "text": "Extending boundaries\n\n\nVector slightly larger than raster\nEspecially when using buffered datasets\nCan use extend\nNot exact; depends on snap()\n\n\n\n\n\nzion.buff &lt;-  zion %&gt;% \n  st_buffer(., 10000)\nsrtm.ext &lt;- extend(srtm, vect(zion.buff))\next(srtm.ext)\n\nSpatExtent : -113.343749879444, -112.74791654615, 37.0479167631968, 37.5979167631601 (xmin, xmax, ymin, ymax)\n\next(vect(zion.buff))\n\nSpatExtent : -113.343652923976, -112.747986193365, 37.0477357596604, 37.5977812137969 (xmin, xmax, ymin, ymax)"
   },
   {
-    "objectID": "slides/15-slides.html#update-on-assignments",
-    "href": "slides/15-slides.html#update-on-assignments",
-    "title": "Building Spatial Databases based on Location",
-    "section": "Update on assignments",
-    "text": "Update on assignments\n\nAssignment 2 due by 14 Oct\nSelf-assessment 2 due 21 Oct\nResubmits\nFinal Project"
-  },
-  {
     "objectID": "slides/15-slides.html#objectives",
     "href": "slides/15-slides.html#objectives",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nCreate new features based on topological relationships\nUse topological subsetting to reduce features\nUse spatial joins to add attributes based on location"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nDefine spatial analysis\nDescribe the steps in planning a spatial analysis\nUnderstand the structure of relational databases\nUse attributes and topology to subset data\nGenerate new features using geographic data\nJoin data based on attributes and location"
   },
   {
-    "objectID": "slides/15-slides.html#what-is-spatial-analysis",
-    "href": "slides/15-slides.html#what-is-spatial-analysis",
-    "title": "Building Spatial Databases based on Location",
+    "objectID": "slides/15-slides.html#what-is-spatial-analysis-1",
+    "href": "slides/15-slides.html#what-is-spatial-analysis-1",
+    "title": "Combining Tabular and Spatial Data",
     "section": "What is spatial analysis?",
     "text": "What is spatial analysis?\n\n“The process of examining the locations, attributes, and relationships of features in spatial data through overlay and other analytical techniques in order to address a question or gain useful knowledge. Spatial analysis extracts or creates new information from spatial data”.\n\n— ESRI Dictionary"
   },
   {
-    "objectID": "slides/15-slides.html#workflows-for-spatial-analysis",
-    "href": "slides/15-slides.html#workflows-for-spatial-analysis",
-    "title": "Building Spatial Databases based on Location",
-    "section": "Workflows for spatial analysis",
-    "text": "Workflows for spatial analysis\n\n\n\n\n\ncourtesy of Humboldt State University\n\n\n\n\nAlign processing with objectives\nImagining the visualizations and analysis clarifies file formats and variables\nHelps build reproducibility"
+    "objectID": "slides/15-slides.html#what-is-spatial-analysis-2",
+    "href": "slides/15-slides.html#what-is-spatial-analysis-2",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "What is spatial analysis?",
+    "text": "What is spatial analysis?\n\n\n\nThe process of turning maps into information\nAny- or everything we do with GIS\nThe use of computational and statistical algorithms to understand the relations between things that co-occur in space.\n\n\n\n\n\nJohn Snow’s cholera outbreak map"
   },
   {
-    "objectID": "slides/15-slides.html#databases-and-attributes",
-    "href": "slides/15-slides.html#databases-and-attributes",
-    "title": "Building Spatial Databases based on Location",
+    "objectID": "slides/15-slides.html#common-goals-for-spatial-analysis",
+    "href": "slides/15-slides.html#common-goals-for-spatial-analysis",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Common goals for spatial analysis",
+    "text": "Common goals for spatial analysis\n\n\n\n\n\ncourtesy of NatureServe\n\n\n\n\nDescribe and visualize locations or events\nQuantify patterns\nCharacterize ‘suitability’\nDetermine (statistical) relations"
+  },
+  {
+    "objectID": "slides/15-slides.html#common-pitfalls-of-spatial-analysis",
+    "href": "slides/15-slides.html#common-pitfalls-of-spatial-analysis",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Common pitfalls of spatial analysis",
+    "text": "Common pitfalls of spatial analysis\n\nLocational Fallacy: Error due to the spatial characterization chosen for elements of study\nAtomic Fallacy: Applying conclusions from individuals to entire spatial units\nEcological Fallacy: Applying conclusions from aggregated information to individuals\n\n\n\nSpatial analysis is an inherently complex endeavor and one that is advancing rapidly. So-called “best practices” for addressing many of these issues are still being developed and debated. This doesn’t mean you shouldn’t do spatial analysis, but you should keep these things in mind as you design, implement, and interpret your analyses"
+  },
+  {
+    "objectID": "slides/15-slides.html#workflows-for-spatial-analysis-1",
+    "href": "slides/15-slides.html#workflows-for-spatial-analysis-1",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Workflows for spatial analysis",
+    "text": "Workflows for spatial analysis\n\n\n\nAcquisition (not really a focus, but see Resources)\nGeoprocessing\nAnalysis\nVisualization\n\n\n\n\n\ncourtesy of University of Illinois"
+  },
+  {
+    "objectID": "slides/15-slides.html#geoprocessing",
+    "href": "slides/15-slides.html#geoprocessing",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Geoprocessing",
+    "text": "Geoprocessing\nManipulation of data for subsequent use\n\nAlignment\nData cleaning and transformation\nCombination of multiple datasets\nSelection and subsetting"
+  },
+  {
+    "objectID": "slides/15-slides.html#databases-and-attributes-1",
+    "href": "slides/15-slides.html#databases-and-attributes-1",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Databases and Attributes",
     "text": "Databases and Attributes\n\n\n\n\n\ncourtesy of Giscommons\n\n\n\n\n\nAttributes: Information that further describes a spatial feature\nAttributes → predictors for analysis\nLast week focus on thematic relations between datasets\n\nShared ‘keys’ help define linkages between objects\n\nSometimes we are interested in attributes that describe location (overlaps, contains, distance)\nSometimes we want to join based on location rather than thematic connections\n\nMust have the same CRS"
   },
   {
+    "objectID": "slides/15-slides.html#databases-and-attributes-2",
+    "href": "slides/15-slides.html#databases-and-attributes-2",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Databases and attributes",
+    "text": "Databases and attributes\n\n\n\n\n\ncourtesy of Giscommons\n\n\n\n\n\nPrevious focus has been largely on location\nGeographic data often also includes non-spatial data\nAttributes: Non-spatial information that further describes a spatial feature\nTypically stored in tables where each row represents a spatial feature\n\nWide vs. long format"
+  },
+  {
+    "objectID": "slides/15-slides.html#common-attribute-operations",
+    "href": "slides/15-slides.html#common-attribute-operations",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Common attribute operations",
+    "text": "Common attribute operations\n\nsf designed to work with tidyverse\nAllows use of dplyr data manipulation verbs (e.g. filter, select, slice)\nCan use scales package for units\nAlso allows %&gt;% to chain together multiple steps\ngeometries are “sticky”"
+  },
+  {
+    "objectID": "slides/15-slides.html#subsetting-by-field",
+    "href": "slides/15-slides.html#subsetting-by-field",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Subsetting by Field",
+    "text": "Subsetting by Field\n\nFields contain individual attributes\nSelecting fields\n\n\n\n\ncolnames(world)\n\n [1] \"iso_a2\"    \"name_long\" \"continent\" \"region_un\" \"subregion\" \"type\"     \n [7] \"area_km2\"  \"pop\"       \"lifeExp\"   \"gdpPercap\" \"geom\"     \n\nhead(world)[,1:3] %&gt;% \n  st_drop_geometry()\n\n# A tibble: 6 × 3\n  iso_a2 name_long      continent    \n* &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;        \n1 FJ     Fiji           Oceania      \n2 TZ     Tanzania       Africa       \n3 EH     Western Sahara Africa       \n4 CA     Canada         North America\n5 US     United States  North America\n6 KZ     Kazakhstan     Asia         \n\n\n\n\nworld %&gt;%\n  dplyr::select(name_long, continent) %&gt;%\n  st_drop_geometry() %&gt;% \n  head(.) \n\n# A tibble: 6 × 2\n  name_long      continent    \n  &lt;chr&gt;          &lt;chr&gt;        \n1 Fiji           Oceania      \n2 Tanzania       Africa       \n3 Western Sahara Africa       \n4 Canada         North America\n5 United States  North America\n6 Kazakhstan     Asia"
+  },
+  {
+    "objectID": "slides/15-slides.html#subsetting-by-features",
+    "href": "slides/15-slides.html#subsetting-by-features",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Subsetting by Features",
+    "text": "Subsetting by Features\n\nFeatures refer to the individual observations in the dataset\nSelecting features\n\n\n\n\nhead(world)[1:3, 1:3] %&gt;% \n  st_drop_geometry()\n\n# A tibble: 3 × 3\n  iso_a2 name_long      continent\n* &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;    \n1 FJ     Fiji           Oceania  \n2 TZ     Tanzania       Africa   \n3 EH     Western Sahara Africa   \n\n\n\n\nworld %&gt;%\n  filter(continent == \"Asia\") %&gt;% \n    dplyr::select(name_long, continent) %&gt;%\n  st_drop_geometry() %&gt;% \n  head(.)\n\n# A tibble: 6 × 2\n  name_long   continent\n  &lt;chr&gt;       &lt;chr&gt;    \n1 Kazakhstan  Asia     \n2 Uzbekistan  Asia     \n3 Indonesia   Asia     \n4 Timor-Leste Asia     \n5 Israel      Asia     \n6 Lebanon     Asia"
+  },
+  {
+    "objectID": "slides/15-slides.html#topological-subsetting",
+    "href": "slides/15-slides.html#topological-subsetting",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Topological Subsetting",
+    "text": "Topological Subsetting\n\n\nTopological relations describe the spatial relationships between objects\nWe can use the overlap (or not) of vector data to subset the data based on topology\nNeed valid geometries\nEasiest way is to use [ notation, but also most restrictive\n\n\n\n\n\ncanterbury = nz  %&gt;% filter(Name == \"Canterbury\")\ncanterbury_height = nz_height[canterbury, ]"
+  },
+  {
+    "objectID": "slides/15-slides.html#topological-subsetting-1",
+    "href": "slides/15-slides.html#topological-subsetting-1",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Topological Subsetting",
+    "text": "Topological Subsetting\n\n\n\n\nLots of verbs in sf for doing this (e.g., st_intersects, st_contains, st_touches)\nsee ?geos_binary_pred for a full list\nCreates an implicit attribute (the records in x that are “in” y)\n\n\n\nUsing sparse=TRUE\n\nco = filter(nz, grepl(\"Canter|Otag\", Name))\nst_intersects(nz_height, co, \n              sparse = TRUE)[1:3] \n\n[[1]]\ninteger(0)\n\n[[2]]\n[1] 2\n\n[[3]]\n[1] 2\n\nlengths(st_intersects(nz_height, \n                      co, sparse = TRUE))[1:3] &gt; 0\n\n[1] FALSE  TRUE  TRUE"
+  },
+  {
+    "objectID": "slides/15-slides.html#topological-subsetting-2",
+    "href": "slides/15-slides.html#topological-subsetting-2",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Topological Subsetting",
+    "text": "Topological Subsetting\n\nThe sparse option controls how the results are returned\nWe can then find out if one or more elements satisfies the criteria\n\nUsing sparse=FALSE\n\nst_intersects(nz_height, co, sparse = FALSE)[1:3,] \n\n      [,1]  [,2]\n[1,] FALSE FALSE\n[2,] FALSE  TRUE\n[3,] FALSE  TRUE\n\napply(st_intersects(nz_height, co, sparse = FALSE), 1,any)[1:3]\n\n[1] FALSE  TRUE  TRUE"
+  },
+  {
+    "objectID": "slides/15-slides.html#topological-subsetting-3",
+    "href": "slides/15-slides.html#topological-subsetting-3",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Topological Subsetting",
+    "text": "Topological Subsetting\n\n\n\ncanterbury_height3 = nz_height %&gt;%\n  filter(st_intersects(x = ., y = canterbury, sparse = FALSE))"
+  },
+  {
+    "objectID": "slides/15-slides.html#revisiting-the-tidyverse",
+    "href": "slides/15-slides.html#revisiting-the-tidyverse",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Revisiting the tidyverse",
+    "text": "Revisiting the tidyverse\n\nCreating new fields\n\n\nworld %&gt;%\n  filter(continent == \"Asia\") %&gt;% \n    dplyr::select(name_long, continent, pop, gdpPercap ,area_km2) %&gt;%\n  mutate(., dens = pop/area_km2,\n         totGDP = gdpPercap * pop) %&gt;%\n  st_drop_geometry() %&gt;% \n  head(.)\n\n# A tibble: 6 × 7\n  name_long   continent       pop gdpPercap area_km2   dens  totGDP\n  &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;\n1 Kazakhstan  Asia       17288285    23587. 2729811.   6.33 4.08e11\n2 Uzbekistan  Asia       30757700     5371.  461410.  66.7  1.65e11\n3 Indonesia   Asia      255131116    10003. 1819251. 140.   2.55e12\n4 Timor-Leste Asia        1212814     6263.   14715.  82.4  7.60e 9\n5 Israel      Asia        8215700    31702.   22991. 357.   2.60e11\n6 Lebanon     Asia        5603279    13831.   10099. 555.   7.75e10"
+  },
+  {
+    "objectID": "slides/15-slides.html#revisiting-the-tidyverse-1",
+    "href": "slides/15-slides.html#revisiting-the-tidyverse-1",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Revisiting the tidyverse",
+    "text": "Revisiting the tidyverse\n\nCreating new fields"
+  },
+  {
+    "objectID": "slides/15-slides.html#revisiting-the-tidyverse-2",
+    "href": "slides/15-slides.html#revisiting-the-tidyverse-2",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Revisiting the tidyverse",
+    "text": "Revisiting the tidyverse\n\nAggregating data\n\n\n\n\nworld %&gt;%\n  st_drop_geometry(.) %&gt;% \n  group_by(continent) %&gt;%\n  summarize(pop = sum(pop, na.rm = TRUE))\n\n# A tibble: 8 × 2\n  continent                      pop\n  &lt;chr&gt;                        &lt;dbl&gt;\n1 Africa                  1154946633\n2 Antarctica                       0\n3 Asia                    4311408059\n4 Europe                   669036256\n5 North America            565028684\n6 Oceania                   37757833\n7 Seven seas (open ocean)          0\n8 South America            412060811"
+  },
+  {
     "objectID": "slides/15-slides.html#attributes-based-on-geometry-and-location-measures",
     "href": "slides/15-slides.html#attributes-based-on-geometry-and-location-measures",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Attributes based on geometry and location (measures)",
     "text": "Attributes based on geometry and location (measures)\n\nAttributes like area and length can be useful for a number of analyses\n\nEstimates of ‘effort’ in sampling designs\nOffsets for modeling rates (e.g., Poisson regression)\n\nNeed to assign the result of the function to a column in data frame (e.g., $, mutate, and summarize)\nOften useful to test before assigning"
   },
   {
     "objectID": "slides/15-slides.html#estimating-area",
     "href": "slides/15-slides.html#estimating-area",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Estimating area",
-    "text": "Estimating area\n\n\n\n\nsf bases area (and length) calculations on the map units of the CRS\nthe units library allows conversion into a variety of units\n\n\n\n\nnz.sf &lt;- nz %&gt;% \n  mutate(area = st_area(nz))\nhead(nz.sf$area, 3)\n\n\nnz.sf$areakm &lt;- units::set_units(st_area(nz), km^2)\nhead(nz.sf$areakm, 3)"
+    "text": "Estimating area\n\n\n\n\nsf bases area (and length) calculations on the map units of the CRS\nthe units library allows conversion into a variety of units\n\n\n\n\nnz.sf &lt;- nz %&gt;% \n  mutate(area = st_area(nz))\nhead(nz.sf$area, 3)\n\nUnits: [m^2]\n[1] 12890576439  4911565037 24588819863\n\n\n\nnz.sf$areakm &lt;- units::set_units(st_area(nz), km^2)\nhead(nz.sf$areakm, 3)\n\nUnits: [km^2]\n[1] 12890.576  4911.565 24588.820"
   },
   {
     "objectID": "slides/15-slides.html#estimating-density-in-polygons",
     "href": "slides/15-slides.html#estimating-density-in-polygons",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Estimating Density in Polygons",
-    "text": "Estimating Density in Polygons\n\n\n\n\n\n\nCreating new features based on the frequency of occurrence\nClarifying graphics\nUnderlies quadrat sampling for point patterns\nTwo steps: count and area"
+    "text": "Estimating Density in Polygons\n\n\n\n\n\n\n\n\n\n\nCreating new features based on the frequency of occurrence\nClarifying graphics\nUnderlies quadrat sampling for point patterns\nTwo steps: count and area"
   },
   {
     "objectID": "slides/15-slides.html#estimating-density-in-polygons-1",
     "href": "slides/15-slides.html#estimating-density-in-polygons-1",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Estimating Density in Polygons",
-    "text": "Estimating Density in Polygons\n\n\n\n\n\nnz.df &lt;- nz %&gt;% \nmutate(counts = lengths(st_intersects(., random_nz)),\n       area = st_area(nz),\n       density = counts/area)\nhead(st_drop_geometry(nz.df[,7:10]))"
+    "text": "Estimating Density in Polygons\n\n\n\n\n\n\n\n\n\nnz.df &lt;- nz %&gt;% \nmutate(counts = lengths(st_intersects(., random_nz)),\n       area = st_area(nz),\n       density = counts/area)\nhead(st_drop_geometry(nz.df[,7:10]))\n\n  counts              area              density\n1     17 12890576439 [m^2] 1.318793e-09 [1/m^2]\n2      6  4911565037 [m^2] 1.221607e-09 [1/m^2]\n3     37 24588819863 [m^2] 1.504749e-09 [1/m^2]\n4     22 12271015945 [m^2] 1.792843e-09 [1/m^2]\n5     12  8364554416 [m^2] 1.434625e-09 [1/m^2]\n6     19 14242517871 [m^2] 1.334034e-09 [1/m^2]"
   },
   {
     "objectID": "slides/15-slides.html#estimating-density-in-polygons-2",
     "href": "slides/15-slides.html#estimating-density-in-polygons-2",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Estimating Density in Polygons",
     "text": "Estimating Density in Polygons"
   },
   {
     "objectID": "slides/15-slides.html#estimating-distance",
     "href": "slides/15-slides.html#estimating-distance",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Estimating Distance",
     "text": "Estimating Distance\n\nAs a covariate\nFor use in covariance matrices\nAs a means of assigning connections in networks"
   },
   {
     "objectID": "slides/15-slides.html#estimating-single-point-distance",
     "href": "slides/15-slides.html#estimating-single-point-distance",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Estimating Single Point Distance",
     "text": "Estimating Single Point Distance\n\n\n\nst_distance returns distances between all features in x and all features in y\nOne-to-One relationship requires choosing a single point for y"
   },
   {
     "objectID": "slides/15-slides.html#estimating-single-point-distance-1",
     "href": "slides/15-slides.html#estimating-single-point-distance-1",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Estimating Single Point Distance",
-    "text": "Estimating Single Point Distance\n\nSubsetting y into a single feature\n\n\n\n\ncanterbury = nz %&gt;% filter(Name == \"Canterbury\")\ncanterbury_height = nz_height[canterbury, ]\nco = filter(nz, grepl(\"Canter|Otag\", Name))\nst_distance(nz_height[1:3, ], co)"
+    "text": "Estimating Single Point Distance\n\nSubsetting y into a single feature\n\n\n\n\ncanterbury = nz %&gt;% filter(Name == \"Canterbury\")\ncanterbury_height = nz_height[canterbury, ]\nco = filter(nz, grepl(\"Canter|Otag\", Name))\nst_distance(nz_height[1:3, ], co)\n\nUnits: [m]\n          [,1]     [,2]\n[1,] 123537.16 15497.72\n[2,]  94282.77     0.00\n[3,]  93018.56     0.00"
   },
   {
     "objectID": "slides/15-slides.html#estimating-single-point-distance-2",
     "href": "slides/15-slides.html#estimating-single-point-distance-2",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Estimating Single Point Distance",
-    "text": "Estimating Single Point Distance\n\nUsing nearest neighbor distances\n\n\n\n\nua &lt;- urban_areas(cb = FALSE, progress_bar = FALSE) %&gt;% \n  filter(., UATYP10 == \"U\") %&gt;% \n  filter(., str_detect(NAME10, \"ID\")) %&gt;% \n  st_transform(., crs=2163)\n\n#get index of nearest ID city\nnearest &lt;-  st_nearest_feature(ua)\n#estimate distance\n(dist = st_distance(ua, ua[nearest,], by_element=TRUE))"
+    "text": "Estimating Single Point Distance\n\nUsing nearest neighbor distances\n\n\n\n\nua &lt;- urban_areas(cb = FALSE, progress_bar = FALSE) %&gt;% \n  filter(., UATYP10 == \"U\") %&gt;% \n  filter(., str_detect(NAME10, \"ID\")) %&gt;% \n  st_transform(., crs=2163)\n\n#get index of nearest ID city\nnearest &lt;-  st_nearest_feature(ua)\n#estimate distance\n(dist = st_distance(ua, ua[nearest,], by_element=TRUE))\n\nUnits: [m]\n[1]  61386.444  61386.444   1646.182   1646.182 136908.183 136908.183"
   },
   {
-    "objectID": "slides/15-slides.html#topological-subsetting-1",
-    "href": "slides/15-slides.html#topological-subsetting-1",
-    "title": "Building Spatial Databases based on Location",
-    "section": "Topological Subsetting",
-    "text": "Topological Subsetting\n\n\nTopological relations describe the spatial relationships between objects\nWe can use the overlap (or not) of vector data to subset the data based on topology\nNeed valid geometries\nEasiest way is to use [ notation, but also most restrictive\n\n\n\n\n\nctby_height &lt;-  nz_height[canterbury, ]"
+    "objectID": "slides/15-slides.html#joining-aspatial-data-1",
+    "href": "slides/15-slides.html#joining-aspatial-data-1",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Joining (a)spatial data",
+    "text": "Joining (a)spatial data\n\n\n\nRequires a “key” field\nMultiple outcomes possible\nThink about your final data form"
   },
   {
-    "objectID": "slides/15-slides.html#topological-subsetting-2",
-    "href": "slides/15-slides.html#topological-subsetting-2",
-    "title": "Building Spatial Databases based on Location",
-    "section": "Topological Subsetting",
-    "text": "Topological Subsetting\n\n\n\n\nLots of verbs in sf for doing this (e.g., st_intersects, st_contains, st_touches)\nsee ?geos_binary_pred for a full list\nCreates an implicit attribute (the records in x that are “in” y)\n\n\n\nUsing sparse=TRUE\n\nst_intersects(nz_height, co, \n              sparse = TRUE)[1:3] \n\nlengths(st_intersects(nz_height, \n                      co, sparse = TRUE))[1:3] &gt; 0"
+    "objectID": "slides/15-slides.html#left-join",
+    "href": "slides/15-slides.html#left-join",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Left Join",
+    "text": "Left Join\n\nUseful for adding other attributes not in your spatial data\nReturns all of the records in x attributed with y\nPay attention to the number of rows!"
   },
   {
-    "objectID": "slides/15-slides.html#topological-subsetting-3",
-    "href": "slides/15-slides.html#topological-subsetting-3",
-    "title": "Building Spatial Databases based on Location",
-    "section": "Topological Subsetting",
-    "text": "Topological Subsetting\n\nThe sparse option controls how the results are returned\nWe can then find out if one or more elements satisfies the criteria\n\nUsing sparse=FALSE\n\nst_intersects(nz_height, co, sparse = FALSE)[1:3,] \n\napply(st_intersects(nz_height, co, sparse = FALSE), 1,any)[1:3]"
+    "objectID": "slides/15-slides.html#left-join-1",
+    "href": "slides/15-slides.html#left-join-1",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Left Join",
+    "text": "Left Join"
   },
   {
-    "objectID": "slides/15-slides.html#topological-subsetting-4",
-    "href": "slides/15-slides.html#topological-subsetting-4",
-    "title": "Building Spatial Databases based on Location",
-    "section": "Topological Subsetting",
-    "text": "Topological Subsetting\n\n\n\ncanterbury_height3 = nz_height %&gt;%\n  filter(st_intersects(x = ., y = canterbury, sparse = FALSE))"
+    "objectID": "slides/15-slides.html#left-join-2",
+    "href": "slides/15-slides.html#left-join-2",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Left Join",
+    "text": "Left Join\n\n\n\nhead(coffee_data)\n\n# A tibble: 6 × 3\n  name_long                coffee_production_2016 coffee_production_2017\n  &lt;chr&gt;                                     &lt;int&gt;                  &lt;int&gt;\n1 Angola                                       NA                     NA\n2 Bolivia                                       3                      4\n3 Brazil                                     3277                   2786\n4 Burundi                                      37                     38\n5 Cameroon                                      8                      6\n6 Central African Republic                     NA                     NA\n\n\n\n\nworld_coffee = left_join(world, coffee_data)\nnrow(world_coffee)\n\n[1] 177"
+  },
+  {
+    "objectID": "slides/15-slides.html#left-join-3",
+    "href": "slides/15-slides.html#left-join-3",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Left Join",
+    "text": "Left Join"
+  },
+  {
+    "objectID": "slides/15-slides.html#inner-join",
+    "href": "slides/15-slides.html#inner-join",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Inner Join",
+    "text": "Inner Join\n\nUseful for subsetting to “complete” records\nReturns all of the records in x with matching y\nPay attention to the number of rows!"
+  },
+  {
+    "objectID": "slides/15-slides.html#inner-join-1",
+    "href": "slides/15-slides.html#inner-join-1",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Inner Join",
+    "text": "Inner Join"
+  },
+  {
+    "objectID": "slides/15-slides.html#inner-join-2",
+    "href": "slides/15-slides.html#inner-join-2",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Inner Join",
+    "text": "Inner Join\n\n\n\nworld_coffee_inner = inner_join(world, coffee_data)\nnrow(world_coffee_inner)\n\n[1] 45\n\n\n\n\nsetdiff(coffee_data$name_long, world$name_long)\n\n[1] \"Congo, Dem. Rep. of\" \"Others\""
+  },
+  {
+    "objectID": "slides/15-slides.html#inner-join-3",
+    "href": "slides/15-slides.html#inner-join-3",
+    "title": "Combining Tabular and Spatial Data",
+    "section": "Inner Join",
+    "text": "Inner Join"
   },
   {
     "objectID": "slides/15-slides.html#spatial-joins-1",
     "href": "slides/15-slides.html#spatial-joins-1",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Spatial Joins",
     "text": "Spatial Joins\n\nsf package provides st_join for vectors\nAllows joins based on the predicates (st_intersects, st_touches, st_within_distance, etc.)\nDefault is a left join"
   },
   {
     "objectID": "slides/15-slides.html#spatial-joins-2",
     "href": "slides/15-slides.html#spatial-joins-2",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Spatial Joins",
-    "text": "Spatial Joins\n\n\n\nset.seed(2018)\n(bb = st_bbox(world)) # the world's bounds\n#&gt;   xmin   ymin   xmax   ymax \n#&gt; -180.0  -89.9  180.0   83.6\nrandom_df = data.frame(\n  x = runif(n = 10, min = bb[1], max = bb[3]),\n  y = runif(n = 10, min = bb[2], max = bb[4])\n)\nrandom_points = random_df |&gt; \n  st_as_sf(coords = c(\"x\", \"y\")) |&gt; # set coordinates\n  st_set_crs(\"EPSG:4326\") # set geographic CRS\n\nrandom_joined = st_join(random_points, world[\"name_long\"])"
+    "text": "Spatial Joins\n\n\n\nset.seed(2018)\n(bb = st_bbox(world)) # the world's bounds\n\n      xmin       ymin       xmax       ymax \n-180.00000  -89.90000  179.99999   83.64513 \n\n#&gt;   xmin   ymin   xmax   ymax \n#&gt; -180.0  -89.9  180.0   83.6\nrandom_df = data.frame(\n  x = runif(n = 10, min = bb[1], max = bb[3]),\n  y = runif(n = 10, min = bb[2], max = bb[4])\n)\nrandom_points = random_df |&gt; \n  st_as_sf(coords = c(\"x\", \"y\")) |&gt; # set coordinates\n  st_set_crs(\"EPSG:4326\") # set geographic CRS\n\nrandom_joined = st_join(random_points, world[\"name_long\"])"
   },
   {
     "objectID": "slides/15-slides.html#spatial-joins-3",
     "href": "slides/15-slides.html#spatial-joins-3",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Spatial Joins",
     "text": "Spatial Joins\n\nSometimes we may want to be less restrictive\nJust because objects don’t touch doesn’t mean they don’t relate to each other\nCan use predicates in st_join\nRemember that default is left_join (so the number of records can grow if multiple matches)"
   },
   {
     "objectID": "slides/15-slides.html#spatial-joins-4",
     "href": "slides/15-slides.html#spatial-joins-4",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Spatial Joins",
-    "text": "Spatial Joins\n\n\n\nany(st_touches(cycle_hire, cycle_hire_osm, sparse = FALSE))\nz = st_join(cycle_hire, cycle_hire_osm, st_is_within_distance, dist = 20)\nnrow(cycle_hire)\nnrow(z)"
+    "text": "Spatial Joins\n\n\n\nany(st_touches(cycle_hire, cycle_hire_osm, sparse = FALSE))\n\n[1] FALSE\n\nz = st_join(cycle_hire, cycle_hire_osm, st_is_within_distance, dist = 20)\nnrow(cycle_hire)\n\n[1] 742\n\nnrow(z)\n\n[1] 762"
   },
   {
     "objectID": "slides/15-slides.html#extending-joins-1",
     "href": "slides/15-slides.html#extending-joins-1",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Extending Joins",
-    "text": "Extending Joins\n\n\nSometimes we are interested in analyzing locations that contain the overlap between two vectors\n\nHow much of home range a occurs on soil type b\nHow much of each Census tract is contained with a service provision area?\n\nst_intersection, st_union, and st_difference return new geometries that we can use as records in our spatial database\n\n\n\n\n\n\n\nintersect_pct &lt;- st_intersection(nc, tr_buff) %&gt;% \n   mutate(intersect_area = st_area(.)) %&gt;%   # create new column with shape area\n   dplyr::select(NAME, intersect_area) %&gt;%   # only select columns needed to merge\n   st_drop_geometry()\n\nnc &lt;- mutate(nc, county_area = st_area(nc))\n\n# Merge by county name\nnc &lt;- merge(nc, intersect_pct, by = \"NAME\", all.x = TRUE)\n\n# Calculate coverage\nnc &lt;- nc %&gt;% \n   mutate(coverage = as.numeric(intersect_area/county_area))"
+    "text": "Extending Joins\n\n\nSometimes we are interested in analyzing locations that contain the overlap between two vectors\n\nHow much of home range a occurs on soil type b\nHow much of each Census tract is contained with a service provision area?\n\nst_intersection, st_union, and st_difference return new geometries that we can use as records in our spatial database\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nintersect_pct &lt;- st_intersection(nc, tr_buff) %&gt;% \n   mutate(intersect_area = st_area(.)) %&gt;%   # create new column with shape area\n   dplyr::select(NAME, intersect_area) %&gt;%   # only select columns needed to merge\n   st_drop_geometry()\n\nnc &lt;- mutate(nc, county_area = st_area(nc))\n\n# Merge by county name\nnc &lt;- merge(nc, intersect_pct, by = \"NAME\", all.x = TRUE)\n\n# Calculate coverage\nnc &lt;- nc %&gt;% \n   mutate(coverage = as.numeric(intersect_area/county_area))"
   },
   {
     "objectID": "slides/15-slides.html#extending-joins-2",
     "href": "slides/15-slides.html#extending-joins-2",
-    "title": "Building Spatial Databases based on Location",
+    "title": "Combining Tabular and Spatial Data",
     "section": "Extending Joins",
     "text": "Extending Joins"
   },
