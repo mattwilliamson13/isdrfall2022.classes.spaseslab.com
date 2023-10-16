@@ -1,0 +1,16 @@
+{
+  "hash": "8aacff9b840715c780990749710b82f3",
+  "result": {
+    "markdown": "---\ntitle: \"Spatial Autocorrelation\"\ndate: \"2023-10-30\"\n---\n\n\n\n\n\n\n## Resources\n\n\n## Objectives\n\nBy the end of today you should be able to:\n\n\n\n<p class=\"text-center buttons\"><a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/21-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a> <a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/21-slides.pdf\" role=\"button\"><i class=\"fa-solid fa-file-pdf\"></i> Download PDF of all slides</a></p>\n\n\nSlides Forthcoming\n\n",
+    "supporting": [
+      "21-content_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

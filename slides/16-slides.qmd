@@ -1,0 +1,88 @@
+---
+title: "Integrating Rasters and Vector Data"
+subtitle: "HES 505 Fall 2023: Session 16"
+author: "Matt Williamson"
+format: 
+  revealjs:
+    theme: mytheme.scss
+    slide-number: true
+    show-slide-number: print
+    self-contained: true  
+---
+
+```{r}
+#| include: false
+library(sf)
+library(tidyverse)
+library(terra)
+library(tigris)
+library(tmap)
+```
+
+# Today's Plan {background="#43464B" background-image="img/slide_14/bison.png"}
+
+
+## Objectives
+
+- Use `dplyr` with `predicates` and `measures` to subset and manipulate data
+
+- Use `extract` to access raster data
+
+- Use `zonal` to summarize access data
+
+- Join data into a single analyzable dataframe
+
+
+# Motivating Question {background="#9F281A"}
+
+> How do Collaborative Forest Landscape Restoration projects compare to other National Forest lands with respect to social and wildfire risks?
+
+## Setting up some pseudocode
+
+
+## Subsetting to the relevant data
+
+- Where are the National Forests?
+
+```{r}
+#| echo: true
+tmp <- tempfile()
+fs.url <- "https://data.fs.usda.gov/geodata/edw/edw_resources/shp/S_USA.AdministrativeForest.zip"
+download.file(fs.url, tmp)
+temp2 <- tempfile()
+unzip(zipfile = tmp, exdir = temp2)
+fs.bdry <- read_sf(temp2)
+all(st_is_valid(fs.bdry))
+fs.bdry.valid <- st_make_valid(fs.bdry)
+
+```
+
+## Subsetting to the relevant data
+
+- Where are the National Forests?
+
+- Using `[]`
+
+```{r}
+#| echo: true
+
+pnw <- counties(c("ID", "WA", "OR"), progress_bar=FALSE) %>% 
+  st_transform(, crs=st_crs(fs.bdry))
+fs.pnw <- fs.bdry.valid[pnw,]
+
+tm_shape(pnw) +
+  tm_polygons(border.col = "black") +
+  tm_shape(fs.pnw) +
+  tm_polygons(col="darkgreen")
+
+```
+
+## Getting the CEJST tracts
+
+- Load from server
+
+## Choose the CEJST tracts
+
+## Select the appropriate variables
+
+## Extract raster data

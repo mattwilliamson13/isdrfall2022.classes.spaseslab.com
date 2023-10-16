@@ -1,0 +1,20 @@
+{
+  "hash": "fd07ac1f21b749d1a1ee48e76e2117f0",
+  "result": {
+    "markdown": "---\ntitle: \"Integrating Rasters and Vector Data\"\nsubtitle: \"HES 505 Fall 2023: Session 16\"\nauthor: \"Matt Williamson\"\nformat: \n  revealjs:\n    theme: mytheme.scss\n    slide-number: true\n    show-slide-number: print\n    self-contained: true  \n---\n\n\n\n\n# Today's Plan {background=\"#43464B\" background-image=\"img/slide_14/bison.png\"}\n\n\n## Objectives\n\n- Use `dplyr` with `predicates` and `measures` to subset and manipulate data\n\n- Use `extract` to access raster data\n\n- Use `zonal` to summarize access data\n\n- Join data into a single analyzable dataframe\n\n\n# Motivating Question {background=\"#9F281A\"}\n\n> How do Collaborative Forest Landscape Restoration projects compare to other National Forest lands with respect to social and wildfire risks?\n\n## Setting up some pseudocode\n\n\n## Subsetting to the relevant data\n\n- Where are the National Forests?\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntmp <- tempfile()\nfs.url <- \"https://data.fs.usda.gov/geodata/edw/edw_resources/shp/S_USA.AdministrativeForest.zip\"\ndownload.file(fs.url, tmp)\ntemp2 <- tempfile()\nunzip(zipfile = tmp, exdir = temp2)\nfs.bdry <- read_sf(temp2)\nall(st_is_valid(fs.bdry))\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] FALSE\n```\n:::\n\n```{.r .cell-code}\nfs.bdry.valid <- st_make_valid(fs.bdry)\n```\n:::\n\n\n## Subsetting to the relevant data\n\n- Where are the National Forests?\n\n- Using `[]`\n\n\n::: {.cell}\n\n```{.r .cell-code}\npnw <- counties(c(\"ID\", \"WA\", \"OR\"), progress_bar=FALSE) %>% \n  st_transform(, crs=st_crs(fs.bdry))\nfs.pnw <- fs.bdry.valid[pnw,]\n\ntm_shape(pnw) +\n  tm_polygons(border.col = \"black\") +\n  tm_shape(fs.pnw) +\n  tm_polygons(col=\"darkgreen\")\n```\n\n::: {.cell-output-display}\n![](16-slides_files/figure-revealjs/unnamed-chunk-3-1.png){width=960}\n:::\n:::\n\n\n## Getting the CEJST tracts\n\n- Load from server\n\n## Choose the CEJST tracts\n\n## Select the appropriate variables\n\n## Extract raster data\n",
+    "supporting": [
+      "16-slides_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    // dispatch for htmlwidgets\n    function fireSlideEnter() {\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n    }\n\n    function fireSlideChanged(previousSlide, currentSlide) {\n      fireSlideEnter();\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

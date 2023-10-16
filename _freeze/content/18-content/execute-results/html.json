@@ -1,0 +1,16 @@
+{
+  "hash": "45369b680496ed68c59f3e554858eaf7",
+  "result": {
+    "markdown": "---\ntitle: \"Point Patterns\"\ndate: \"2023-10-18\"\n---\n\n\n\n\n\n\n## Resources\n\n\n## Objectives\n\nBy the end of today you should be able to:\n\n\n## Slides\n\nThe slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n\n<p class=\"text-center buttons\"><a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/18-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a> <a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/18-slides.pdf\" role=\"button\"><i class=\"fa-solid fa-file-pdf\"></i> Download PDF of all slides</a></p>\n\n\nSlides Forthcoming",
+    "supporting": [
+      "18-content_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

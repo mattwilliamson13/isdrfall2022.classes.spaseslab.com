@@ -1,0 +1,14 @@
+{
+  "hash": "723f82d9fdaf0515a500181c05e1f9e6",
+  "result": {
+    "markdown": "---\ntitle: \"Statistical Modelling II\"\ndate: \"2023-11-6\"\n---\n\n\n\n\n\n\n## Resources\n\n\n## Objectives\n\nBy the end of today you should be able to:\n\n\n\n<p class=\"text-center buttons\"><a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/23-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a> <a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/23-slides.pdf\" role=\"button\"><i class=\"fa-solid fa-file-pdf\"></i> Download PDF of all slides</a></p>\n\n\nSlides Forthcoming\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

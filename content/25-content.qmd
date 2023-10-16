@@ -1,0 +1,25 @@
+---
+title: "Movement and Networks I"
+date: "2023-11-13"
+---
+
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+```
+
+
+
+## Resources
+
+
+## Objectives
+
+By the end of today you should be able to:
+
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/25-slides")
+```
+
+Slides Forthcoming
+

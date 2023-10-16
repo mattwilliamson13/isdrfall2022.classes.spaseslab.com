@@ -1,0 +1,25 @@
+---
+title: "Interpolation"
+date: "2023-10-23"
+---
+
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+```
+
+
+
+## Resources
+
+
+## Objectives
+
+By the end of today you should be able to:
+
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/19-slides")
+```
+
+Slides forthcoming

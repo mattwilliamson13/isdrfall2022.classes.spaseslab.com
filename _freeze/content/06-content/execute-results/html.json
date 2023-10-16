@@ -1,0 +1,16 @@
+{
+  "hash": "a1d681adab76d358e86781d0a948e104",
+  "result": {
+    "markdown": "---\ntitle: \"Literate Programming, Quarto, and Workflows\"\ndate: \"2023-09-6\"\n---\n\n\n\n\nToday we'll focus on some of the tools for reproducible workflows using `R`. We'll introduce Quarto as a means of authoring different kinds of documents. We'll talk about literate programming and leaving breadcrumbs for yourself (and others). Finally, we'll begin to work through the ideas of workflow planning\n\n## Readings\n\n- {{< fa arrow-up-right-from-square >}} [Authoring in Quarto](https://quarto.org/docs/get-started/authoring/rstudio.html) - an intro to Quarto for developing different kinds of documents. Lots of other resources linked here!!\n\n- {{< fa arrow-up-right-from-square >}} [Pseudocode: what it is and how to write it](https://builtin.com/data-science/pseudocode) - A nice blogpost by Sara Metawalli the sketches out the logic of pseudocode and why it can be helpful.\n\n- <i class=\"fas fa-book\"></i> [The Whole Game](https://r4ds.hadley.nz/whole-game.html) - from Wickham et al., *R for Data Science* [@wickham2016r]. Focus on the sections that begin with \"Workflow\" to get a sense for how we'll start putting the pieces together.\n\n- <i class=\"fas fa-book\"></i> [Scripts, algorithms, and functions](https://geocompr.robinlovelace.net/algorithms.html) - chapter 11 in in Lovelace et al., *Geocomputation with R* [@lovelace_geocomputation_2019] introduces some concepts behind geospatial programming. A few of these pieces will make more sense in the next few weeks, but the general advice on constructing code and planning analyses is useful now.\n\n## Objectives\nBy the end of today you should be able to:\n\n* **Develop** basic docs with Quarto\n\n* **Understand** the basics of creating readable code\n\n* **Use** pseudocode to sketch out a computational problem\n\n## Slides\nThe slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n\n<p class=\"text-center buttons\"><a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/06-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a> <a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/06-slides.pdf\" role=\"button\"><i class=\"fa-solid fa-file-pdf\"></i> Download PDF of all slides</a></p>\n\n\n<div>\n\n\n```{=html}\n<iframe class=\"slide-deck\" src=\"/slides/06-slides.html\"></iframe>\n```\n\n\n</div>",
+    "supporting": [
+      "06-content_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
