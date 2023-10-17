@@ -343,53 +343,81 @@
     "text": "Objectives\n\nUse dplyr with predicates and measures to subset and manipulate data\nUse extract to access raster data\nUse zonal to summarize access data\nJoin data into a single analyzable dataframe"
   },
   {
-    "objectID": "slides/16-slides.html#setting-up-some-pseudocode",
-    "href": "slides/16-slides.html#setting-up-some-pseudocode",
+    "objectID": "slides/16-slides.html#thinking-about-the-data",
+    "href": "slides/16-slides.html#thinking-about-the-data",
     "title": "Integrating Rasters and Vector Data",
-    "section": "Setting up some pseudocode",
-    "text": "Setting up some pseudocode"
+    "section": "Thinking about the data",
+    "text": "Thinking about the data\n\nDatasets - Forest Service Boundaries, CFLRP Boundaries, Wildfire Risk Raster, CEJST shapefile\nDependent Variable - CFLRP (T or F)\nIndependent Variables - Wildfire hazard, income, education, housing burdent"
   },
   {
-    "objectID": "slides/16-slides.html#subsetting-to-the-relevant-data",
-    "href": "slides/16-slides.html#subsetting-to-the-relevant-data",
+    "objectID": "slides/16-slides.html#building-some-pseudocode",
+    "href": "slides/16-slides.html#building-some-pseudocode",
     "title": "Integrating Rasters and Vector Data",
-    "section": "Subsetting to the relevant data",
-    "text": "Subsetting to the relevant data\n\nWhere are the National Forests?\n\n\ntmp &lt;- tempfile()\nfs.url &lt;- \"https://data.fs.usda.gov/geodata/edw/edw_resources/shp/S_USA.AdministrativeForest.zip\"\ndownload.file(fs.url, tmp)\ntemp2 &lt;- tempfile()\nunzip(zipfile = tmp, exdir = temp2)\nfs.bdry &lt;- read_sf(temp2)\nall(st_is_valid(fs.bdry))\n\n[1] FALSE\n\nfs.bdry.valid &lt;- st_make_valid(fs.bdry)"
+    "section": "Building some Pseudocode",
+    "text": "Building some Pseudocode\n\n1. Load Libraries\n2. Load data\n3. Check validity and alignment\n4. Subset to relevant geographies\n5. Select relevant attributes\n6. Extract wildfire risk\n7. CFLRP T or F"
   },
   {
-    "objectID": "slides/16-slides.html#subsetting-to-the-relevant-data-1",
-    "href": "slides/16-slides.html#subsetting-to-the-relevant-data-1",
+    "objectID": "slides/16-slides.html#load-libraries",
+    "href": "slides/16-slides.html#load-libraries",
     "title": "Integrating Rasters and Vector Data",
-    "section": "Subsetting to the relevant data",
-    "text": "Subsetting to the relevant data\n\nWhere are the National Forests?\nUsing []\n\n\npnw &lt;- counties(c(\"ID\", \"WA\", \"OR\"), progress_bar=FALSE) %&gt;% \n  st_transform(, crs=st_crs(fs.bdry))\nfs.pnw &lt;- fs.bdry.valid[pnw,]\n\ntm_shape(pnw) +\n  tm_polygons(border.col = \"black\") +\n  tm_shape(fs.pnw) +\n  tm_polygons(col=\"darkgreen\")"
+    "section": "Load libraries",
+    "text": "Load libraries\n\nlibrary(sf)\nlibrary(terra)\nlibrary(tidyverse)\nlibrary(tmap)"
   },
   {
-    "objectID": "slides/16-slides.html#getting-the-cejst-tracts",
-    "href": "slides/16-slides.html#getting-the-cejst-tracts",
+    "objectID": "slides/16-slides.html#load-the-data",
+    "href": "slides/16-slides.html#load-the-data",
     "title": "Integrating Rasters and Vector Data",
-    "section": "Getting the CEJST tracts",
-    "text": "Getting the CEJST tracts\n\nLoad from server"
+    "section": "Load the data",
+    "text": "Load the data\n\nDownloading USFS data using tempfiles and unzip\n\n\n### FS Boundaries\ntmp &lt;- tempfile()\nfs.url &lt;- \"https://data.fs.usda.gov/geodata/edw/edw_resources/shp/S_USA.AdministrativeForest.zip\"\ndownload.file(fs.url, tmp)\ntmp2 &lt;- tempfile()\nunzip(zipfile=tmp, exdir = tmp2 )\n\nfs.bdry &lt;- read_sf(tmp2)\n\n### CFLRP Data\ntmp &lt;- tempfile()\ncflrp.url &lt;- \"https://data.fs.usda.gov/geodata/edw/edw_resources/shp/S_USA.CFLR_HPRP_ProjectBoundary.zip\"\ndownload.file(cflrp.url, tmp)\ntmp2 &lt;- tempfile()\nunzip(zipfile=tmp, exdir = tmp2 )\ncflrp.bdry &lt;- read_sf(tmp2)"
   },
   {
-    "objectID": "slides/16-slides.html#choose-the-cejst-tracts",
-    "href": "slides/16-slides.html#choose-the-cejst-tracts",
+    "objectID": "slides/16-slides.html#load-the-data-1",
+    "href": "slides/16-slides.html#load-the-data-1",
     "title": "Integrating Rasters and Vector Data",
-    "section": "Choose the CEJST tracts",
-    "text": "Choose the CEJST tracts"
+    "section": "Load the data",
+    "text": "Load the data\n\nFrom our class folder\n\n\n### Wildfire Hazard Data\nwildfire.haz &lt;- rast(\"opt/data/2023/assignment01/wildfire_hazard_agg.tif\")\n\n## CEJST data\ncejst &lt;- read_sf(\"opt/data/2023/assignment01/cejst_pnw.shp\")"
   },
   {
-    "objectID": "slides/16-slides.html#select-the-appropriate-variables",
-    "href": "slides/16-slides.html#select-the-appropriate-variables",
+    "objectID": "slides/16-slides.html#check-validity",
+    "href": "slides/16-slides.html#check-validity",
     "title": "Integrating Rasters and Vector Data",
-    "section": "Select the appropriate variables",
-    "text": "Select the appropriate variables"
+    "section": "Check Validity",
+    "text": "Check Validity\n\nThe USFS datasets are new; let’s check the geometries\n\n\nall(st_is_valid(fs.bdry))\n\n[1] FALSE\n\nall(st_is_valid(cflrp.bdry))\n\n[1] FALSE\n\n\n\nMake them valid\n\n\nfs.bdry.valid &lt;- st_make_valid(fs.bdry)\nall(st_is_valid(fs.bdry.valid))\n\n[1] TRUE\n\ncflrp.bdry.valid &lt;- st_make_valid(cflrp.bdry)\nall(st_is_valid(cflrp.bdry.valid))\n\n[1] TRUE"
   },
   {
-    "objectID": "slides/16-slides.html#extract-raster-data",
-    "href": "slides/16-slides.html#extract-raster-data",
+    "objectID": "slides/16-slides.html#set-projection",
+    "href": "slides/16-slides.html#set-projection",
     "title": "Integrating Rasters and Vector Data",
-    "section": "Extract raster data",
-    "text": "Extract raster data"
+    "section": "Set Projection",
+    "text": "Set Projection\n\nWe know these are in different CRS\nProject to the CRS of the raster\nUsing %&gt;% to pipe data through the function\n\n\ncflrp.proj &lt;- cflrp.bdry.valid %&gt;% st_transform(., crs=crs(wildfire.haz))\ncejst.proj &lt;- cejst %&gt;% st_transform(., crs=crs(wildfire.haz))\nfs.proj &lt;- fs.bdry.valid %&gt;% st_transform(., crs=crs(wildfire.haz))"
+  },
+  {
+    "objectID": "slides/16-slides.html#subset-geometries",
+    "href": "slides/16-slides.html#subset-geometries",
+    "title": "Integrating Rasters and Vector Data",
+    "section": "Subset Geometries",
+    "text": "Subset Geometries\n\nWe can use the [] notation to subset the one dataset based on the geometry of the other\nNeed USFS and CFLRP within the region\nThen need tracts that overlap USFS\n\n\nfs.subset &lt;- fs.proj[cejst.proj, ]\ncflrp.subset &lt;- cflrp.proj[cejst.proj, ]\ncejst.subset &lt;- cejst.proj[fs.subset, ]"
+  },
+  {
+    "objectID": "slides/16-slides.html#subset-geometries-1",
+    "href": "slides/16-slides.html#subset-geometries-1",
+    "title": "Integrating Rasters and Vector Data",
+    "section": "Subset geometries",
+    "text": "Subset geometries\n\n\n\nsub.map &lt;- tm_shape(cejst.subset) +\n  tm_polygons(col=\"gray\") +\n  tm_shape(fs.subset) + \n  tm_polygons(col=\"darkgreen\") +\n  tm_shape(cflrp.subset) +\n  tm_polygons(col=\"goldenrod\")"
+  },
+  {
+    "objectID": "slides/16-slides.html#select-relevant-columns",
+    "href": "slides/16-slides.html#select-relevant-columns",
+    "title": "Integrating Rasters and Vector Data",
+    "section": "Select Relevant Columns",
+    "text": "Select Relevant Columns\n\nUse the codebook to identify the right columns\nThen use select from dplyr\ngeometries are sticky!\n\n\ncejst.df &lt;- cejst.subset %&gt;% \n  select(GEOID10, LMI_PFS, LHE, HBF_PFS)\nhead(cejst.df)\n\nSimple feature collection with 6 features and 4 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -1598729 ymin: 2388182 xmax: -1475201 ymax: 3000813\nProjected CRS: unnamed\n# A tibble: 6 × 5\n  GEOID10     LMI_PFS   LHE HBF_PFS                                     geometry\n  &lt;chr&gt;         &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;                           &lt;MULTIPOLYGON [m]&gt;\n1 16025970100    0.75     0    0.6  (((-1485848 2427049, -1485813 2426977, -148…\n2 16057005500    0.43     0    0.44 (((-1567845 2843218, -1567803 2843209, -156…\n3 16057005600    0.3      0    0.05 (((-1573408 2823058, -1573412 2823071, -157…\n4 16009950100    0.55     1    0.4  (((-1566013 2857573, -1565966 2857623, -156…\n5 16017950500    0.75     1    0.53 (((-1545064 2973813, -1545058 2973793, -154…\n6 16017950400    0.6      1    0.68 (((-1544958 2973552, -1544957 2973564, -154…"
+  },
+  {
+    "objectID": "slides/16-slides.html#extract-wildfire-data",
+    "href": "slides/16-slides.html#extract-wildfire-data",
+    "title": "Integrating Rasters and Vector Data",
+    "section": "Extract wildfire data",
+    "text": "Extract wildfire data\n\nCan use zonal for one summary statistic\nOr extract for multiple\n\n\nwildfire.zones &lt;- terra::zonal(wildfire.haz, vect(cejst.df), fun=\"mean\", na.rm=TRUE)\n\nhead(wildfire.zones)\n\n     WHP_ID\n1 2997.7951\n2  182.8864\n3  386.9580\n4  173.1703\n5  193.4199\n6  210.4406"
   },
   {
     "objectID": "slides/14-slides.html#objectives",
@@ -1670,7 +1698,7 @@
     "href": "content/16-content.html#slides",
     "title": "Integrating Rasters and Vector Data",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Zoom Recording"
   },
   {
     "objectID": "content/14-content.html",
