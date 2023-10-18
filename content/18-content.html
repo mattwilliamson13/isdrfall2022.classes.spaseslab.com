@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Intro to Spatial Data in R - Point Patterns</title>
+<title>Intro to Spatial Data in R - Combining Data and Point Patterns</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -63,12 +82,12 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Intro to Spatial Data in R - Point Patterns">
+<meta property="og:title" content="Intro to Spatial Data in R - Combining Data and Point Patterns">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://isdrfall23.classes.spaseslab.com/files/social-image-f22.png">
 <meta property="og:site-name" content="Intro to Spatial Data in R">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:title" content="Intro to Spatial Data in R - Point Patterns">
+<meta name="twitter:title" content="Intro to Spatial Data in R - Combining Data and Point Patterns">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://isdrfall23.classes.spaseslab.com/files/social-image-f22.png">
 <meta name="twitter:creator" content="@MwilliamsonMatt">
@@ -380,19 +399,32 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Point Patterns</h1>
+<h1 class="title display-7">Combining Data and Point Patterns</h1>
 
 <div class="date-block bg-content text-white p-2">
   <p class="date">Content for Wednesday, October 18, 2023</p>
 </div>
 </header>
 
+<p>Today we’ll finish up our example of combining data for analysis and introduce point process models as a first version of spatial analysis. We’ll need a few new packages here, but many of the key data management processes will remain the same.</p>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><p><i class="fas fa-book"></i> The <a href="https://www.paulamoraga.com/book-spatial/spatial-point-patterns.html">Chapters 17 and 18</a> on Spatial Point Processes and the <code>spatstat</code> package in Paula Moraga’s book <em>Spatial Statistics for Data Science: Theory and Practice with R</em>.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/j.0030-1299.2004.12497.x?casa_token=D8RfesZ_AjUAAAAA%3AkLmb_B8BubHk4swR3flI9QS4sQnO87wZSImZXsQFD41Q9iEExMEO_bDTPvnvOHtERcit-3YmShhyU0g">Rings, circles, and null-models for point pattern analysis in ecology</a> by <span class="citation" data-cites="wiegand">(<a href="#ref-wiegand" role="doc-biblioref">Wiegand and A. Moloney 2004</a>)</span> provides an introduction to metrics for spatial clustering with applications in ecology.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://link.springer.com/article/10.1007/s10182-017-0301-8">Improving the usability of spatial point process methodology: an interdisciplinary dialogue between statistics and ecology</a> by Janine Illian (a major contributor to modern point pattern analyses) and David Burslem (a Scottish plant ecologist) <span class="citation" data-cites="illian2017">(<a href="#ref-illian2017" role="doc-biblioref">Illian and Burslem 2017</a>)</span> is a fairly modern take on the challenges associated with point process modeling in ecology.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://mgimond.github.io/Spatial/chp11_0.html">Chapter 11: Point Pattern Analysis</a> in Manuel Gimond’s Introduction to GIS and Spatial Analysis <code>bookdown</code> project provides a nice (and free) introduction to some of these introductory point process methods.</p></li>
+</ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today you should be able to:</p>
+<ul>
+<li><p>Complete the creation of a dataset for analysis using vector and raster data</p></li>
+<li><p>Define a point process and their utility for ecological applications</p></li>
+<li><p>Define first and second-order Complete Spatial Randomness</p></li>
+<li><p>Use several common functions to explore point patterns</p></li>
+</ul>
 </section>
 <section id="slides" class="level2">
 <h2 class="anchored" data-anchor-id="slides">Slides</h2>
@@ -400,12 +432,22 @@ ul.task-list li input[type="checkbox"] {
 <p class="text-center buttons">
 <a class="btn btn-danger" target="_blank" href="../slides/18-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/18-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
-<p>Slides Forthcoming</p>
+<div>
+<iframe class="slide-deck" src="../slides/18-slides.html"></iframe>
+</div>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-illian2017" class="csl-entry" role="listitem">
+Illian, J. B., and D. F. Burslem. 2017. Improving the usability of spatial point process methodology: An interdisciplinary dialogue between statistics and ecology. AStA Advances in Statistical Analysis 101:495–520.
+</div>
+<div id="ref-wiegand" class="csl-entry" role="listitem">
+Wiegand, T., and K. A. Moloney. 2004. <a href="https://doi.org/10.1111/j.0030-1299.2004.12497.x">Rings, circles, and null-models for point pattern analysis in ecology</a>. Oikos 104:209–229.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
