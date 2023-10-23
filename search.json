@@ -1677,7 +1677,7 @@
     "href": "content/18-content.html#slides",
     "title": "Combining Data and Point Patterns",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Video"
   },
   {
     "objectID": "content/16-content.html",
@@ -2485,11 +2485,25 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
   },
   {
+    "objectID": "content/19-content.html",
+    "href": "content/19-content.html",
+    "title": "Interpolation",
+    "section": "",
+    "text": "Point patterns give us the foundation for beginning geostatistical analyses. In geostatistical analyses, we have observations or a spatial process from a limited sample of locations, but would like to be able to infer the values of that process across the entire study region (or at least an area larger than we initially sampled). Interpolation provides one simple way of doing this that relies on the notion that we can learn something about the process simply from our measurements and the location those measurements were taken. We can extend these approaches by adding additional covariates and model structures, but we’ll start simple for now."
+  },
+  {
+    "objectID": "content/19-content.html#resources",
+    "href": "content/19-content.html#resources",
+    "title": "Interpolation",
+    "section": "Resources",
+    "text": "Resources\n\n Chapter 2: Scale in (Fletcher and Fortin 2018) provides a thorough introduction to the ecologist’s conceptualization of scale with R examples.\n This article by Steven Manson (Manson 2008) provides a more comprehensive view of conceptualizations of scale.\n The Hypothesis Testing and Autocorrelation chapters of Manuel Gimond’s Introduction to GIS and Spatial Analysis bookdown project provide concrete examples of attempts to find process from spatial patterns.\n Chapter 12: Spatial Interpolation in Spatial Data Science by Edzer Pebesma and Roger Bivand provides examples of different types of kriging and interpolation using sf and stars."
+  },
+  {
     "objectID": "content/19-content.html#objectives",
     "href": "content/19-content.html#objectives",
     "title": "Interpolation",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides forthcoming"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDistinguish deterministic and stochastic processes\nDefine autocorrelation and describe its estimation\nArticulate the benefits and drawbacks of autocorrelation\nLeverage point patterns and autocorrelation to interpolate missing data\n\n\n View all slides in new window  Download PDF of all slides"
   },
   {
     "objectID": "content/21-content.html#objectives",
@@ -3983,193 +3997,277 @@
     "text": "Fitted Semivariograms\n\nRely on functional forms to model semivariance"
   },
   {
-    "objectID": "slides/19-slides.html#estimating-favorability",
-    "href": "slides/19-slides.html#estimating-favorability",
-    "title": "Multivariate Analysis I",
-    "section": "Estimating favorability",
-    "text": "Estimating favorability\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = \\prod_{M=1}^{m}X_m(\\mathbf{s})\n\\end{equation}\n\\]\n\nTreat \\(F(\\mathbf{s})\\) as binary\nThen \\(F(\\mathbf{s}) = 1\\) if all inputs (\\(X_m(\\mathbf{s})\\)) are suitable\nThen \\(F(\\mathbf{s}) = 0\\) if not"
+    "objectID": "slides/19-slides.html#patterns-as-realizations-of-spatial-processes",
+    "href": "slides/19-slides.html#patterns-as-realizations-of-spatial-processes",
+    "title": "Interpolation",
+    "section": "Patterns as realizations of spatial processes",
+    "text": "Patterns as realizations of spatial processes\n\nA spatial process is a description of how a spatial pattern might be generated\nGenerative models\nAn observed pattern as a possible realization of an hypothesized process"
   },
   {
-    "objectID": "slides/19-slides.html#estimating-favorability-1",
-    "href": "slides/19-slides.html#estimating-favorability-1",
-    "title": "Multivariate Analysis I",
-    "section": "Estimating favorability",
-    "text": "Estimating favorability\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = f(w_1X_1(\\mathbf{s}), w_2X_2(\\mathbf{s}), w_3X_3(\\mathbf{s}), ..., w_mX_m(\\mathbf{s}))\n\\end{equation}\n\\]\n\n\\(F(\\mathbf{s})\\) does not have to be binary (could be ordinal or continuous)\n\\(X_m(\\mathbf{s})\\) could also be extended beyond simply ‘suitable/not suitable’\nAdding weights allows incorporation of relative importance\nOther functions for combining inputs (\\(X_m(\\mathbf{s})\\))"
+    "objectID": "slides/19-slides.html#deterministic-vs.-stochastic-processes",
+    "href": "slides/19-slides.html#deterministic-vs.-stochastic-processes",
+    "title": "Interpolation",
+    "section": "Deterministic vs. stochastic processes",
+    "text": "Deterministic vs. stochastic processes\n\nDeterministic processes: always produce the same outcome\n\n\\[\nz = 2x + 3y\n\\]\n\nResults in a spatially continuous field"
   },
   {
-    "objectID": "slides/19-slides.html#weighted-linear-combinations",
-    "href": "slides/19-slides.html#weighted-linear-combinations",
-    "title": "Multivariate Analysis I",
-    "section": "Weighted Linear Combinations",
-    "text": "Weighted Linear Combinations\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = \\frac{\\sum_{i=1}^{m}w_iX_i(\\mathbf{s})}{\\sum_{i=1}^{m}w_i}\n\\end{equation}\n\\]\n\n\\(F(s)\\) is now an index based of the values of \\(X_m(\\mathbf{s})\\)\n\\(w_i\\) can incorporate weights of evidence, uncertainty, or different participant preferences\nDividing by \\(\\sum_{i=1}^{m}w_i\\) normalizes by the sum of weights"
+    "objectID": "slides/19-slides.html#deterministic-vs.-stochastic-processes-1",
+    "href": "slides/19-slides.html#deterministic-vs.-stochastic-processes-1",
+    "title": "Interpolation",
+    "section": "Deterministic vs. stochastic processes",
+    "text": "Deterministic vs. stochastic processes\n\nx &lt;- rast(nrows = 10, ncols=10, xmin = 0, xmax=10, ymin = 0, ymax=10)\nvalues(x) &lt;- 1\nz &lt;- x\nvalues(z) &lt;- 2 * crds(x)[,1] + 3*crds(x)[,2]"
   },
   {
-    "objectID": "slides/19-slides.html#model-driven-overlay",
-    "href": "slides/19-slides.html#model-driven-overlay",
-    "title": "Multivariate Analysis I",
-    "section": "Model-driven overlay",
-    "text": "Model-driven overlay\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = w_0 + \\sum_{i=1}^{m}w_iX_i(\\mathbf{s}) + \\epsilon\n\\end{equation}\n\\]\n\nIf we estimate \\(w_i\\) using data, we specify \\(F(s)\\) as the outcome of regression\nWhen \\(F(s)\\) is binary → logistic regression\nWhen \\(F(s)\\) is continuous → linear (gamma) regression\nWhen \\(F(s)\\) is discrete → Poisson regression\nAssumptions about \\(\\epsilon\\) matter!!"
+    "objectID": "slides/19-slides.html#deterministic-vs.-stochastic-processes-2",
+    "href": "slides/19-slides.html#deterministic-vs.-stochastic-processes-2",
+    "title": "Interpolation",
+    "section": "Deterministic vs. stochastic processes",
+    "text": "Deterministic vs. stochastic processes\n\n\n\n\nStochastic processes: variation makes each realization difficult to predict\n\n\\[\nz = 2x + 3y + d\n\\]\n\nThe process is random, not the result (!!)\nMeasurement error makes deterministic processes appear stochastic\n\n\n\n\nx &lt;- rast(nrows = 10, ncols=10, xmin = 0, xmax=10, ymin = 0, ymax=10)\nvalues(x) &lt;- 1\nfun &lt;- function(z){\na &lt;- z\nd &lt;- runif(ncell(z), -50,50)\nvalues(a) &lt;- 2 * crds(x)[,1] + 3*crds(x)[,2] + d\nreturn(a)\n}\n\nb &lt;- replicate(n=6, fun(z=x), simplify=FALSE)\nd &lt;- do.call(c, b)"
   },
   {
-    "objectID": "slides/19-slides.html#why-do-we-create-distribution-models",
-    "href": "slides/19-slides.html#why-do-we-create-distribution-models",
-    "title": "Multivariate Analysis I",
-    "section": "Why do we create distribution models?",
-    "text": "Why do we create distribution models?\n\n\n\n\nTo identify important correlations between predictors and the occurrence of an event\nGenerate maps of the ‘range’ or ‘niche’ of events\nUnderstand spatial patterns of event co-occurrence\nForecast changes in event distributions\n\n\n\n\n\n\nFrom Wiens et al. 2009"
+    "objectID": "slides/19-slides.html#deterministic-vs.-stochastic-processes-3",
+    "href": "slides/19-slides.html#deterministic-vs.-stochastic-processes-3",
+    "title": "Interpolation",
+    "section": "Deterministic vs. stochastic processes",
+    "text": "Deterministic vs. stochastic processes"
   },
   {
-    "objectID": "slides/19-slides.html#general-analysis-situation",
-    "href": "slides/19-slides.html#general-analysis-situation",
-    "title": "Multivariate Analysis I",
-    "section": "General analysis situation",
-    "text": "General analysis situation\n\nFrom Long\n\nSpatially referenced locations of events \\((\\mathbf{y})\\) sampled from the study extent\nA matrix of predictors \\((\\mathbf{X})\\) that can be assigned to each event based on spatial location\n\n\nGoal: Estimate the probability of occurrence of events across unsampled regions of the study area based on correlations with predictors"
+    "objectID": "slides/19-slides.html#expected-values-and-hypothesis-testing",
+    "href": "slides/19-slides.html#expected-values-and-hypothesis-testing",
+    "title": "Interpolation",
+    "section": "Expected values and hypothesis testing",
+    "text": "Expected values and hypothesis testing\n\n\n\n\nConsidering each outcome as the realization of a process allows us to generate expected values\nThe simplest spatial process is Completely Spatial Random (CSR) process\nFirst Order effects: any event has an equal probability of occurring in a location\nSecond Order effects: the location of one event is independent of the other events\n\n\n\n\n\n\nFrom Manuel Gimond"
   },
   {
-    "objectID": "slides/19-slides.html#modeling-presence-absence-data",
-    "href": "slides/19-slides.html#modeling-presence-absence-data",
-    "title": "Multivariate Analysis I",
-    "section": "Modeling Presence-Absence Data",
-    "text": "Modeling Presence-Absence Data\n\n\n\nRandom or systematic sample of the study region\nThe presence (or absence) of the event is recorded for each point\nHypothesized predictors of occurrence are measured (or extracted) at each point\n\n\n\n\n\nFrom By Ragnvald - Own work, CC BY-SA 3.0"
+    "objectID": "slides/19-slides.html#generating-expactations-for-csr",
+    "href": "slides/19-slides.html#generating-expactations-for-csr",
+    "title": "Interpolation",
+    "section": "Generating expactations for CSR",
+    "text": "Generating expactations for CSR\n\n\n\n\n\n\n\n\n\n\nWe can use quadrat counts to estimate the expected number of events in a given area\nThe probability of each possible count is given by:\n\n\\[\nP(n,k) = {n \\choose x}p^k(1-p)^{n-k}\n\\]\n\nGiven total coverage of quadrats, then \\(p=\\frac{\\frac{a}{x}}{a}\\) and\n\n\\[\n\\begin{equation}\nP(k,n,x) = {n \\choose k}\\bigg(\\frac{1}{x}\\bigg)^k\\bigg(\\frac{x-1}{x}\\bigg)^{n-k}\n\\end{equation}\n\\]"
   },
   {
-    "objectID": "slides/19-slides.html#logistic-regression",
-    "href": "slides/19-slides.html#logistic-regression",
-    "title": "Multivariate Analysis I",
-    "section": "Logistic regression",
-    "text": "Logistic regression\n\n\n\n\nWe can model favorability as the probability of occurrence using a logistic regression\nA link function maps the linear predictor \\((\\mathbf{x_i}'\\beta + \\alpha)\\) onto the support (0-1) for probabilities\nEstimates of \\(\\beta\\) can then be used to generate ‘wall-to-wall’ spatial predictions\n\n\n\n\\[\n\\begin{equation}\ny_{i} \\sim \\text{Bern}(p_i)\\\\\n\\text{link}(p_i) = \\mathbf{x_i}'\\beta + \\alpha\n\\end{equation}\n\\]\n\n\n\nFrom Mendoza"
+    "objectID": "slides/19-slides.html#revisiting-ripleys-k",
+    "href": "slides/19-slides.html#revisiting-ripleys-k",
+    "title": "Interpolation",
+    "section": "Revisiting Ripley’s \\(K\\)",
+    "text": "Revisiting Ripley’s \\(K\\)\n\n\nNearest neighbor methods throw away a lot of information\nIf points have independent, fixed marginal densities, then they exhibit complete, spatial randomness (CSR)\nThe K function is an alternative, based on a series of circles with increasing radius\n\n\\[\n\\begin{equation}\nK(d) = \\lambda^{-1}E(N_d)\n\\end{equation}\n\\]\n\nWe can test for clustering by comparing to the expectation:\n\n\\[\n\\begin{equation}\nK_{CSR}(d) = \\pi d^2\n\\end{equation}\n\\]\n\nif \\(k(d) &gt; K_{CSR}(d)\\) then there is clustering at the scale defined by \\(d\\)"
   },
   {
-    "objectID": "slides/19-slides.html#an-example",
-    "href": "slides/19-slides.html#an-example",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nInputs from the dismo package"
+    "objectID": "slides/19-slides.html#ripleys-k-function",
+    "href": "slides/19-slides.html#ripleys-k-function",
+    "title": "Interpolation",
+    "section": "Ripley’s \\(K\\) Function",
+    "text": "Ripley’s \\(K\\) Function\n\nWhen working with a sample the distribution of \\(K\\) is unknown\nEstimate with\n\n\\[\n\\begin{equation}\n\\hat{K}(d) = \\hat{\\lambda}^{-1}\\sum_{i=1}^n\\sum_{j=1}^n\\frac{I(d_{ij} &lt;d)}{n(n-1)}\n\\end{equation}\n\\]\nwhere:\n\\[\n\\begin{equation}\n\\hat{\\lambda} = \\frac{n}{|A|}\n\\end{equation}\n\\]"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-1",
-    "href": "slides/19-slides.html#an-example-1",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nThe sample data\n\n\n\nhead(pres.abs)"
+    "objectID": "slides/19-slides.html#ripleys-k-function-1",
+    "href": "slides/19-slides.html#ripleys-k-function-1",
+    "title": "Interpolation",
+    "section": "Ripley’s \\(K\\) Function",
+    "text": "Ripley’s \\(K\\) Function\n\nUsing the spatstat package"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-2",
-    "href": "slides/19-slides.html#an-example-2",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nBuilding our dataframe\n\npts.df &lt;- terra::extract(pred.stack, vect(pres.abs), df=TRUE)\nhead(pts.df)"
+    "objectID": "slides/19-slides.html#ripleys-k-function-2",
+    "href": "slides/19-slides.html#ripleys-k-function-2",
+    "title": "Interpolation",
+    "section": "Ripley’s \\(K\\) Function",
+    "text": "Ripley’s \\(K\\) Function\n\nkf &lt;- Kest(bramblecanes, correction-\"border\")\nplot(kf)"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-3",
-    "href": "slides/19-slides.html#an-example-3",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nBuilding our dataframe\n\npts.df[,2:7] &lt;- scale(pts.df[,2:7])\nsummary(pts.df)"
+    "objectID": "slides/19-slides.html#ripleys-k-function-3",
+    "href": "slides/19-slides.html#ripleys-k-function-3",
+    "title": "Interpolation",
+    "section": "Ripley’s \\(K\\) Function",
+    "text": "Ripley’s \\(K\\) Function\n\naccounting for variation in \\(d\\)\n\n\nkf.env &lt;- envelope(bramblecanes, correction=\"border\", envelope = FALSE, verbose = FALSE)\nplot(kf.env)"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-4",
-    "href": "slides/19-slides.html#an-example-4",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nLooking at correlations\n\npairs(pts.df[,2:7])"
+    "objectID": "slides/19-slides.html#other-functions",
+    "href": "slides/19-slides.html#other-functions",
+    "title": "Interpolation",
+    "section": "Other functions",
+    "text": "Other functions\n\n\n\n\\(L\\) function: square root transformation of \\(K\\)\n\\(G\\) function: the cummulative frequency distribution of the nearest neighbor distances\n\\(F\\) function: similar to \\(G\\) but based on randomly located points"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-5",
-    "href": "slides/19-slides.html#an-example-5",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nLooking at correlations\n\ncorrplot(cor(pts.df[,2:7]), method = \"number\")"
+    "objectID": "slides/19-slides.html#spatial-autocorrelation",
+    "href": "slides/19-slides.html#spatial-autocorrelation",
+    "title": "Interpolation",
+    "section": "Spatial autocorrelation",
+    "text": "Spatial autocorrelation\n\nFrom Manuel Gimond"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-6",
-    "href": "slides/19-slides.html#an-example-6",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nFitting some models\n\npts.df &lt;- cbind(pts.df, pres.abs$y)\ncolnames(pts.df)[8] &lt;- \"y\"\nlogistic.global &lt;- glm(y~., family=binomial(link=\"logit\"), data=pts.df[,2:8])\nlogistic.simple &lt;- glm(y ~ MeanAnnTemp + TotalPrecip, family=binomial(link=\"logit\"), data=pts.df[,2:8])\nlogistic.rich &lt;- glm(y ~ MeanAnnTemp + PrecipWetQuarter + PrecipDryQuarter, family=binomial(link=\"logit\"), data=pts.df[,2:8])"
+    "objectID": "slides/19-slides.html#one-measure-of-autocorrelation",
+    "href": "slides/19-slides.html#one-measure-of-autocorrelation",
+    "title": "Interpolation",
+    "section": "(One) Measure of autocorrelation",
+    "text": "(One) Measure of autocorrelation\n\n\n\nMoran’s I"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-7",
-    "href": "slides/19-slides.html#an-example-7",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nChecking out the results\n\nsummary(logistic.global)"
+    "objectID": "slides/19-slides.html#morans-i-an-example",
+    "href": "slides/19-slides.html#morans-i-an-example",
+    "title": "Interpolation",
+    "section": "Moran’s I: An example",
+    "text": "Moran’s I: An example\n\n\n\n\nUse spdep package\nEstimate neighbors\nGenerate weighted average\n\n\nset.seed(2354)\n# Load the shapefile\ns &lt;- readRDS(url(\"https://github.com/mgimond/Data/raw/gh-pages/Exercises/fl_hr80.rds\"))\n\n# Define the neighbors (use queen case)\nnb &lt;- poly2nb(s, queen=TRUE)\n\n# Compute the neighboring average homicide rates\nlw &lt;- nb2listw(nb, style=\"W\", zero.policy=TRUE)\n#estimate Moran's I\nmoran.test(s$HR80,lw, alternative=\"greater\")\n\n\n    Moran I test under randomisation\n\ndata:  s$HR80  \nweights: lw    \n\nMoran I statistic standard deviate = 1.8891, p-value = 0.02944\nalternative hypothesis: greater\nsample estimates:\nMoran I statistic       Expectation          Variance \n      0.136277593      -0.015151515       0.006425761"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-8",
-    "href": "slides/19-slides.html#an-example-8",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nChecking out the results\n\nsummary(logistic.simple)"
+    "objectID": "slides/19-slides.html#morans-i-an-example-1",
+    "href": "slides/19-slides.html#morans-i-an-example-1",
+    "title": "Interpolation",
+    "section": "Moran’s I: An example",
+    "text": "Moran’s I: An example\n\n\n\nM1 &lt;- moran.mc(s$HR80, lw, nsim=9999, alternative=\"greater\")\n\n\n\n# Display the resulting statistics\nM1\n\n\n    Monte-Carlo simulation of Moran I\n\ndata:  s$HR80 \nweights: lw  \nnumber of simulations + 1: 10000 \n\nstatistic = 0.13628, observed rank = 9575, p-value = 0.0425\nalternative hypothesis: greater"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-9",
-    "href": "slides/19-slides.html#an-example-9",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nChecking out the results\n\nsummary(logistic.rich)"
+    "objectID": "slides/19-slides.html#the-challenge-of-areal-data",
+    "href": "slides/19-slides.html#the-challenge-of-areal-data",
+    "title": "Interpolation",
+    "section": "The challenge of areal data",
+    "text": "The challenge of areal data\n\nSpatial autocorrelation threatens second order randomness\nAreal data means an infinite number of potential distances\nNeighbor matrices, \\(\\boldsymbol W\\), allow different characterizations"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-10",
-    "href": "slides/19-slides.html#an-example-10",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nComparing models\n\nAIC(logistic.global, logistic.simple, logistic.rich)"
+    "objectID": "slides/19-slides.html#interpolation-1",
+    "href": "slides/19-slides.html#interpolation-1",
+    "title": "Interpolation",
+    "section": "Interpolation",
+    "text": "Interpolation\n\nGoal: estimate the value of \\(z\\) at new points in \\(\\mathbf{x_i}\\)\nMost useful for continuous values\nNearest-neighbor, Inverse Distance Weighting, Kriging"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-11",
-    "href": "slides/19-slides.html#an-example-11",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nGenerating predictions\n\npreds &lt;- predict(object=pred.stack, model=logistic.simple)\nplot(preds)\nplot(pres.pts$geometry, add=TRUE, pch=3, col=\"blue\")\nplot(abs.pts$geometry, add=TRUE, pch =\"-\", col=\"red\")"
+    "objectID": "slides/19-slides.html#nearest-neighbor",
+    "href": "slides/19-slides.html#nearest-neighbor",
+    "title": "Interpolation",
+    "section": "Nearest neighbor",
+    "text": "Nearest neighbor\n\nfind \\(i\\) such that \\(| \\mathbf{x_i} - \\mathbf{x}|\\) is minimized\nThe estimate of \\(z\\) is \\(z_i\\)\n\n\n\n\n\naq &lt;- read_csv(\"data/ad_viz_plotval_data.csv\") %&gt;% \n  st_as_sf(., coords = c(\"SITE_LONGITUDE\", \"SITE_LATITUDE\"), crs = \"EPSG:4326\") %&gt;% \n  st_transform(., crs = \"EPSG:8826\") %&gt;% \n  mutate(date = as_date(parse_datetime(Date, \"%m/%d/%Y\"))) %&gt;% \n  filter(., date &gt;= 2023-07-01) %&gt;% \n  filter(., date &gt; \"2023-07-01\" & date &lt; \"2023-07-31\")\naq.sum &lt;- aq %&gt;% \n  group_by(., `Site Name`) %&gt;% \n  summarise(., meanpm25 = mean(DAILY_AQI_VALUE))\n\nnodes &lt;- st_make_grid(aq.sum,\n                      what = \"centers\")\n\ndist &lt;- distance(vect(nodes), vect(aq.sum))\nnearest &lt;- apply(dist, 1, function(x) which(x == min(x)))\naq.nn &lt;- aq.sum$meanpm25[nearest]\npreds &lt;- st_as_sf(nodes)\npreds$aq &lt;- aq.nn\n\npreds &lt;- as(preds, \"Spatial\")\nsp::gridded(preds) &lt;- TRUE\npreds.rast &lt;- rast(preds)"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-12",
-    "href": "slides/19-slides.html#an-example-12",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nGenerating predictions\n\npreds &lt;- predict(object=pred.stack, model=logistic.simple, type=\"response\")\nplot(preds)\nplot(pres.pts$geometry, add=TRUE, pch=3, col=\"blue\")\nplot(abs.pts$geometry, add=TRUE, pch =\"-\", col=\"red\")"
+    "objectID": "slides/19-slides.html#inverse-distance-weighting",
+    "href": "slides/19-slides.html#inverse-distance-weighting",
+    "title": "Interpolation",
+    "section": "Inverse-Distance Weighting",
+    "text": "Inverse-Distance Weighting\n\nWeight closer observations more heavily\n\n\\[\n\\begin{equation}\n\\hat{z}(\\mathbf{x}) = \\frac{\\sum_{i=1}w_iz_i}{\\sum_{i=1}w_i}\n\\end{equation}\n\\] where\n\\[\n\\begin{equation}\nw_i = | \\mathbf{x} - \\mathbf{x}_i |^{-\\alpha}\n\\end{equation}\n\\] and \\(\\alpha &gt; 0\\) (\\(\\alpha = 1\\) is inverse; \\(\\alpha = 2\\) is inverse square)"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-13",
-    "href": "slides/19-slides.html#an-example-13",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nGenerating predictions\n\npreds &lt;- predict(object=pred.stack, model=logistic.global, type=\"response\")\nplot(preds)\nplot(pres.pts$geometry, add=TRUE, pch=3, col=\"blue\")\nplot(abs.pts$geometry, add=TRUE, pch =\"-\", col=\"red\")"
+    "objectID": "slides/19-slides.html#inverse-distance-weighting-1",
+    "href": "slides/19-slides.html#inverse-distance-weighting-1",
+    "title": "Interpolation",
+    "section": "Inverse-Distance Weighting",
+    "text": "Inverse-Distance Weighting\n\nterra::interpolate provides flexible interpolation methods\nUse the gstat package to develop the formula\n\n\nmgsf05 &lt;- gstat(id = \"meanpm25\", formula = meanpm25~1, data=aq.sum,  nmax=7, set=list(idp = 0.5))\nmgsf2 &lt;- gstat(id = \"meanpm25\", formula = meanpm25~1, data=aq.sum,  nmax=7, set=list(idp = 2))\ninterpolate_gstat &lt;- function(model, x, crs, ...) {\n    v &lt;- st_as_sf(x, coords=c(\"x\", \"y\"), crs=crs)\n    p &lt;- predict(model, v, ...)\n    as.data.frame(p)[,1:2]\n}\nzsf05 &lt;- interpolate(preds.rast, mgsf05, debug.level=0, fun=interpolate_gstat, crs=crs(preds.rast), index=1)\nzsf2 &lt;- interpolate(preds.rast, mgsf2, debug.level=0, fun=interpolate_gstat, crs=crs(preds.rast), index=1)"
   },
   {
-    "objectID": "slides/19-slides.html#an-example-14",
-    "href": "slides/19-slides.html#an-example-14",
-    "title": "Multivariate Analysis I",
-    "section": "An Example",
-    "text": "An Example\nGenerating predictions\n\npreds &lt;- predict(object=pred.stack, model=logistic.rich, type=\"response\")\nplot(preds)\nplot(pres.pts$geometry, add=TRUE, pch=3, col=\"blue\")\nplot(abs.pts$geometry, add=TRUE, pch =\"-\", col=\"red\")"
+    "objectID": "slides/19-slides.html#inverse-distance-weighting-2",
+    "href": "slides/19-slides.html#inverse-distance-weighting-2",
+    "title": "Interpolation",
+    "section": "Inverse-Distance Weighting",
+    "text": "Inverse-Distance Weighting"
   },
   {
-    "objectID": "slides/19-slides.html#key-assumptions-of-logistic-regression",
-    "href": "slides/19-slides.html#key-assumptions-of-logistic-regression",
-    "title": "Multivariate Analysis I",
-    "section": "Key assumptions of logistic regression",
-    "text": "Key assumptions of logistic regression\n\nDependent variable must be binary\nObservations must be independent (important for spatial analyses)\nPredictors should not be collinear\nPredictors should be linearly related to the log-odds\nSample Size"
+    "objectID": "slides/19-slides.html#inverse-distance-weighting-3",
+    "href": "slides/19-slides.html#inverse-distance-weighting-3",
+    "title": "Interpolation",
+    "section": "Inverse-Distance Weighting",
+    "text": "Inverse-Distance Weighting"
   },
   {
-    "objectID": "slides/19-slides.html#the-sampling-situation",
-    "href": "slides/19-slides.html#the-sampling-situation",
-    "title": "Multivariate Analysis I",
-    "section": "The sampling situation",
-    "text": "The sampling situation\n\n\n\n\n\nFrom Lentz et al. 2008\n\n\n\n\nOpportunistic collection of presences only\nHypothesized predictors of occurrence are measured (or extracted) at each presence\nBackground points (or pseudoabsences) generated for comparison"
+    "objectID": "slides/19-slides.html#kriging",
+    "href": "slides/19-slides.html#kriging",
+    "title": "Interpolation",
+    "section": "Kriging",
+    "text": "Kriging\n\n\nPrevious methods predict \\(z\\) as a (weighted) function of distance\nTreat the observations as perfect (no error)\nIf we imagine that \\(z\\) is the outcome of some spatial process such that:\n\n\\[\n\\begin{equation}\nz(\\mathbf{x}) = \\mu(\\mathbf{x}) + \\epsilon(\\mathbf{x})\n\\end{equation}\n\\]\nthen any observed value of \\(z\\) is some function of the process (\\(\\mu(\\mathbf{x})\\)) and some error (\\(\\epsilon(\\mathbf{x})\\))\n\nKriging exploits autocorrelation in \\(\\epsilon(\\mathbf{x})\\) to identify the trend and interpolate accordingly"
   },
   {
-    "objectID": "slides/19-slides.html#the-challenge-with-background-points",
-    "href": "slides/19-slides.html#the-challenge-with-background-points",
-    "title": "Multivariate Analysis I",
-    "section": "The Challenge with Background Points",
-    "text": "The Challenge with Background Points\n\nWhat constitutes background?\nNot measuring probability, but relative likelihood of occurrence\nSampling bias affects estimation\nThe intercept\n\n\\[\n\\begin{equation}\ny_{i} \\sim \\text{Bern}(p_i)\\\\\n\\text{link}(p_i) = \\mathbf{x_i}'\\beta + \\alpha\n\\end{equation}\n\\]"
+    "objectID": "slides/19-slides.html#autocorrelation",
+    "href": "slides/19-slides.html#autocorrelation",
+    "title": "Interpolation",
+    "section": "Autocorrelation",
+    "text": "Autocorrelation\n\nCorrelation the tendency for two variables to be related\nAutocorrelation the tendency for observations that are closer (in space or time) to be correlated\nPositive autocorrelation neighboring observations have \\(\\epsilon\\) with the same sign\nNegative autocorrelation neighboring observations have \\(\\epsilon\\) with a different sign (rare in geography)"
   },
   {
-    "objectID": "slides/19-slides.html#point-process-models",
-    "href": "slides/19-slides.html#point-process-models",
-    "title": "Multivariate Analysis I",
-    "section": "Point Process Models",
-    "text": "Point Process Models\n\nPoisson Point Process Models model location (not \\(y\\))\nNumber of points expected is given by a rate \\(\\lambda\\)\nModel \\(\\lambda\\) using Poisson regression"
+    "objectID": "slides/19-slides.html#ordinary-kriging",
+    "href": "slides/19-slides.html#ordinary-kriging",
+    "title": "Interpolation",
+    "section": "Ordinary Kriging",
+    "text": "Ordinary Kriging\n\nAssumes that the deterministic part of the process (\\(\\mu(\\mathbf{x})\\)) is an unknown constant (\\(\\mu\\))\n\n\\[\n\\begin{equation}\nz(\\mathbf{x}) = \\mu + \\epsilon(\\mathbf{x})\n\\end{equation}\n\\] * Specified in call to variogram and gstat as y~1 (or some other constant)\n\nlibrary(sp)\ndata(meuse)\nv &lt;- variogram(log(zinc)~1, ~x+y, data=meuse)\nmv &lt;- fit.variogram(v, vgm(1, \"Sph\", 300, 1))\ngOK &lt;- gstat(NULL, \"log.zinc\", log(zinc)~1, meuse, locations=~x+y, model=mv)\nOK &lt;- interpolate(r, gOK, debug.level=0)"
+  },
+  {
+    "objectID": "slides/19-slides.html#ordinary-kriging-1",
+    "href": "slides/19-slides.html#ordinary-kriging-1",
+    "title": "Interpolation",
+    "section": "Ordinary Kriging",
+    "text": "Ordinary Kriging"
+  },
+  {
+    "objectID": "slides/19-slides.html#universal-kriging",
+    "href": "slides/19-slides.html#universal-kriging",
+    "title": "Interpolation",
+    "section": "Universal Kriging",
+    "text": "Universal Kriging\n\nAssumes that the deterministic part of the process (\\(\\mu(\\mathbf{x})\\)) is now a function of the location \\(\\mathbf{x}\\)\nCould be the location or some other attribute\nNow y is a function of some aspect of x\n\n\nvu &lt;- variogram(log(zinc)~elev, ~x+y, data=meuse)\nmu &lt;- fit.variogram(vu, vgm(1, \"Sph\", 300, 1))\ngUK &lt;- gstat(NULL, \"log.zinc\", log(zinc)~elev, meuse, locations=~x+y, model=mu)\nnames(r) &lt;- \"elev\"\nUK &lt;- interpolate(r, gUK, debug.level=0)"
+  },
+  {
+    "objectID": "slides/19-slides.html#universal-kriging-1",
+    "href": "slides/19-slides.html#universal-kriging-1",
+    "title": "Interpolation",
+    "section": "Universal Kriging",
+    "text": "Universal Kriging"
+  },
+  {
+    "objectID": "slides/19-slides.html#universal-kriging-2",
+    "href": "slides/19-slides.html#universal-kriging-2",
+    "title": "Interpolation",
+    "section": "Universal Kriging",
+    "text": "Universal Kriging\n\nvu &lt;- variogram(log(zinc)~x + x^2 + y + y^2, ~x+y, data=meuse)\nmu &lt;- fit.variogram(vu, vgm(1, \"Sph\", 300, 1))\ngUK &lt;- gstat(NULL, \"log.zinc\", log(zinc)~x + x^2 + y + y^2, meuse, locations=~x+y, model=mu)\nnames(r) &lt;- \"elev\"\nUK &lt;- interpolate(r, gUK, debug.level=0)"
+  },
+  {
+    "objectID": "slides/19-slides.html#universal-kriging-3",
+    "href": "slides/19-slides.html#universal-kriging-3",
+    "title": "Interpolation",
+    "section": "Universal Kriging",
+    "text": "Universal Kriging"
+  },
+  {
+    "objectID": "slides/19-slides.html#co-kriging",
+    "href": "slides/19-slides.html#co-kriging",
+    "title": "Interpolation",
+    "section": "Co-Kriging",
+    "text": "Co-Kriging\n\nrelies on autocorrelation in \\(\\epsilon_1(\\mathbf{x})\\) for \\(z_1\\) AND cross correlation with other variables (\\(z_{2...j}\\))\nExtending the ordinary kriging model gives:\n\n\\[\n\\begin{equation}\nz_1(\\mathbf{x}) = \\mu_1 + \\epsilon_1(\\mathbf{x})\\\\\nz_2(\\mathbf{x}) = \\mu_2 + \\epsilon_2(\\mathbf{x})\n\\end{equation}\n\\] * Note that there is autocorrelation within both \\(z_1\\) and \\(z_2\\) (because of the \\(\\epsilon\\)) and cross-correlation (because of the location, \\(\\mathbf{x}\\))\n\nNot required that all variables are measured at exactly the same points"
+  },
+  {
+    "objectID": "slides/19-slides.html#co-kriging-1",
+    "href": "slides/19-slides.html#co-kriging-1",
+    "title": "Interpolation",
+    "section": "Co-Kriging",
+    "text": "Co-Kriging\n\nProcess is just a linked series of gstat calls\n\n\ngCoK &lt;- gstat(NULL, 'log.zinc', log(zinc)~1, meuse, locations=~x+y)\ngCoK &lt;- gstat(gCoK, 'elev', elev~1, meuse, locations=~x+y)\ngCoK &lt;- gstat(gCoK, 'cadmium', cadmium~1, meuse, locations=~x+y)\ncoV &lt;- variogram(gCoK)\ncoV.fit &lt;- fit.lmc(coV, gCoK, vgm(model='Sph', range=1000))\n\ncoK &lt;- interpolate(r, coV.fit, debug.level=0)"
+  },
+  {
+    "objectID": "slides/19-slides.html#co-kriging-2",
+    "href": "slides/19-slides.html#co-kriging-2",
+    "title": "Interpolation",
+    "section": "Co-Kriging",
+    "text": "Co-Kriging"
+  },
+  {
+    "objectID": "slides/19-slides.html#co-kriging-3",
+    "href": "slides/19-slides.html#co-kriging-3",
+    "title": "Interpolation",
+    "section": "Co-Kriging",
+    "text": "Co-Kriging"
+  },
+  {
+    "objectID": "slides/19-slides.html#a-note-about-semivariograms",
+    "href": "slides/19-slides.html#a-note-about-semivariograms",
+    "title": "Interpolation",
+    "section": "A Note about Semivariograms",
+    "text": "A Note about Semivariograms\n\nnugget - the proportion of semivariance that occurs at small distances\nsill - the maximum semivariance between pairs of observations\nrange - the distance at which the sill occurs\nexperimental vs. fitted variograms"
+  },
+  {
+    "objectID": "slides/19-slides.html#a-note-about-semivariograms-1",
+    "href": "slides/19-slides.html#a-note-about-semivariograms-1",
+    "title": "Interpolation",
+    "section": "A Note about Semivariograms",
+    "text": "A Note about Semivariograms"
+  },
+  {
+    "objectID": "slides/19-slides.html#fitted-semivariograms",
+    "href": "slides/19-slides.html#fitted-semivariograms",
+    "title": "Interpolation",
+    "section": "Fitted Semivariograms",
+    "text": "Fitted Semivariograms\n\nRely on functional forms to model semivariance"
   },
   {
     "objectID": "slides/21-slides.html#best-model-for-what",
