@@ -84,123 +84,228 @@
     "text": "Footnotes\n\n\nSo seriously, just don’t cheat or plagiarize!↩︎"
   },
   {
-    "objectID": "slides/20-slides.html#favorability-in-general",
-    "href": "slides/20-slides.html#favorability-in-general",
-    "title": "Multivariate Analysis II",
-    "section": "Favorability in General",
-    "text": "Favorability in General\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = f(w_1X_1(\\mathbf{s}), w_2X_2(\\mathbf{s}), w_3X_3(\\mathbf{s}), ..., w_mX_m(\\mathbf{s}))\n\\end{equation}\n\\]\n\nLogistic regression treats \\(f(x)\\) as a (generalized) linear function\nAllows for multiple qualitative classes\nEnsures that estimates of \\(F(\\mathbf{s})\\) are [0,1]"
+    "objectID": "slides/20-slides.html#statistical-interpolation-1",
+    "href": "slides/20-slides.html#statistical-interpolation-1",
+    "title": "Areal Data and Proximity",
+    "section": "Statistical Interpolation",
+    "text": "Statistical Interpolation\n\n\n\nPrevious methods predict \\(z\\) as a (weighted) function of distance\nTreat the observations as perfect (no error)\nIf we imagine that \\(z\\) is the outcome of some spatial process such that:"
   },
   {
-    "objectID": "slides/20-slides.html#beyond-linearity",
-    "href": "slides/20-slides.html#beyond-linearity",
-    "title": "Multivariate Analysis II",
-    "section": "Beyond Linearity",
-    "text": "Beyond Linearity\n\nLogistic (and other generalized linear models) are relatively interpretable\nProbability theory allows robust inference of effects\nPredictive power can be low\nRelaxing the linearity assumption can help"
+    "objectID": "slides/20-slides.html#trend-surface-modeling",
+    "href": "slides/20-slides.html#trend-surface-modeling",
+    "title": "Areal Data and Proximity",
+    "section": "Trend Surface Modeling",
+    "text": "Trend Surface Modeling\n\nBasically a regression on the coordinates of your data points\nCoefficients apply to the coordinates and their interaction\nRelies on different functional forms"
   },
   {
-    "objectID": "slides/20-slides.html#classification-trees",
-    "href": "slides/20-slides.html#classification-trees",
-    "title": "Multivariate Analysis II",
-    "section": "Classification Trees",
-    "text": "Classification Trees\n\nUse decision rules to segment the predictor space\nSeries of consecutive decision rules form a ‘tree’\nTerminal nodes (leaves) are the outcome; internal nodes (branches) the splits"
+    "objectID": "slides/20-slides.html#th-order-trend-surface",
+    "href": "slides/20-slides.html#th-order-trend-surface",
+    "title": "Areal Data and Proximity",
+    "section": "0th Order Trend Surface",
+    "text": "0th Order Trend Surface\n\n\n\n\n\n\n\n\n\nSimplest form of trend surface\n\\(Z=a\\) where \\(a\\) is the mean value of air quality\nResult is a simple horizontal surface where all values are the same."
   },
   {
-    "objectID": "slides/20-slides.html#classification-trees-1",
-    "href": "slides/20-slides.html#classification-trees-1",
-    "title": "Multivariate Analysis II",
-    "section": "Classification Trees",
-    "text": "Classification Trees\n\nDivide the predictor space (\\(R\\)) into \\(J\\) non-overlapping regions\nEvery observation in \\(R_j\\) gets the same prediction\nRecursive binary splitting\nPruning and over-fitting"
+    "objectID": "slides/20-slides.html#th-order-trend-surface-1",
+    "href": "slides/20-slides.html#th-order-trend-surface-1",
+    "title": "Areal Data and Proximity",
+    "section": "0th order trend surface",
+    "text": "0th order trend surface\n\n#set up interpolation grid\n# Create an empty grid where n is the total number of cells\ngrd &lt;- as.data.frame(spsample(as(id.cty, \"Spatial\"), \"regular\", n=20000))\nnames(grd)       &lt;- c(\"X\", \"Y\")\ncoordinates(grd) &lt;- c(\"X\", \"Y\")\ngridded(grd)     &lt;- TRUE  # Create SpatialPixel object\nfullgrid(grd)    &lt;- TRUE  # Create SpatialGrid object\nproj4string(grd) &lt;- proj4string(as(aq.sum, \"Spatial\"))\n# Define the polynomial equation\nf.0  &lt;- as.formula(meanpm25 ~ 1)\n\n# Run the regression model\nlm.0 &lt;- lm( f.0 , data=aq.sum)\n\n# Use the regression model output to interpolate the surface\ndat.0th &lt;- SpatialGridDataFrame(grd, data.frame(var1.pred = predict(lm.0, newdata=grd)))\n\n# Convert to raster object to take advantage of rasterVis' imaging\n# environment\nr   &lt;- rast(dat.0th)\nr.m &lt;- mask(r, st_as_sf(id.cty))"
   },
   {
-    "objectID": "slides/20-slides.html#an-example",
-    "href": "slides/20-slides.html#an-example",
-    "title": "Multivariate Analysis II",
-    "section": "An Example",
-    "text": "An Example\nInputs from the dismo package"
+    "objectID": "slides/20-slides.html#st-order-trend-surface",
+    "href": "slides/20-slides.html#st-order-trend-surface",
+    "title": "Areal Data and Proximity",
+    "section": "1st Order Trend Surface",
+    "text": "1st Order Trend Surface\n\n\n\nCreates a slanted surface\n\\(Z = a + bX + cY\\)\nX and Y are the coordinate pairs"
   },
   {
-    "objectID": "slides/20-slides.html#an-example-1",
-    "href": "slides/20-slides.html#an-example-1",
-    "title": "Multivariate Analysis II",
-    "section": "An Example",
-    "text": "An Example\nThe sample data\n\n\n\nhead(pres.abs)"
+    "objectID": "slides/20-slides.html#st-order-trend-surface-1",
+    "href": "slides/20-slides.html#st-order-trend-surface-1",
+    "title": "Areal Data and Proximity",
+    "section": "1st Order Trend Surface",
+    "text": "1st Order Trend Surface\n\n# Define the polynomial equation\nf.1  &lt;- as.formula(meanpm25 ~ X + Y)\n\naq.sum$X &lt;- st_coordinates(aq.sum)[,1]\naq.sum$Y &lt;- st_coordinates(aq.sum)[,2]\n\n# Run the regression model\nlm.1 &lt;- lm( f.1 , data=aq.sum)\n\n# Use the regression model output to interpolate the surface\ndat.1st &lt;- SpatialGridDataFrame(grd, data.frame(var1.pred = predict(lm.1, newdata=grd)))\n\n# Convert to raster object to take advantage of rasterVis' imaging\n# environment\nr   &lt;- rast(dat.1st)\nr.m &lt;- mask(r, st_as_sf(id.cty))"
   },
   {
-    "objectID": "slides/20-slides.html#an-example-2",
-    "href": "slides/20-slides.html#an-example-2",
-    "title": "Multivariate Analysis II",
-    "section": "An Example",
-    "text": "An Example\nBuilding our dataframe\n\npts.df &lt;- terra::extract(pred.stack, vect(pres.abs), df=TRUE)\nhead(pts.df)"
+    "objectID": "slides/20-slides.html#nd-order-trend-surfaces",
+    "href": "slides/20-slides.html#nd-order-trend-surfaces",
+    "title": "Areal Data and Proximity",
+    "section": "2nd Order Trend Surfaces",
+    "text": "2nd Order Trend Surfaces\n\n\n\nProduces a parabolic surface\n\\(Z = a + bX + cY + dX^2 + eY^2 + fXY\\)\nHighlights the interaction of both directions"
   },
   {
-    "objectID": "slides/20-slides.html#an-example-3",
-    "href": "slides/20-slides.html#an-example-3",
-    "title": "Multivariate Analysis II",
-    "section": "An Example",
-    "text": "An Example\nBuilding our dataframe\n\npts.df[,2:7] &lt;- scale(pts.df[,2:7])\nsummary(pts.df)"
+    "objectID": "slides/20-slides.html#nd-order-trend-surfaces-1",
+    "href": "slides/20-slides.html#nd-order-trend-surfaces-1",
+    "title": "Areal Data and Proximity",
+    "section": "2nd Order Trend Surfaces",
+    "text": "2nd Order Trend Surfaces\n\n# Define the 1st order polynomial equation\nf.2 &lt;- as.formula(meanpm25 ~ X + Y + I(X*X)+I(Y*Y) + I(X*Y))\n \n# Run the regression model\nlm.2 &lt;- lm( f.2, data=aq.sum)\n\n# Use the regression model output to interpolate the surface\ndat.2nd &lt;- SpatialGridDataFrame(grd, data.frame(var1.pred = predict(lm.2, newdata=grd))) \n\nr   &lt;- rast(dat.2nd)\nr.m &lt;- mask(r, st_as_sf(id.cty))\n\ntm_shape(r.m) + tm_raster(n=10, palette=\"RdBu\", title=\"Predicted air quality\") +tm_shape(aq.sum) + tm_dots(size=0.2) +\n  tm_legend(legend.outside=TRUE)"
   },
   {
-    "objectID": "slides/20-slides.html#an-example-4",
-    "href": "slides/20-slides.html#an-example-4",
-    "title": "Multivariate Analysis II",
-    "section": "An example",
-    "text": "An example\n\nFitting the classification tree\n\n\n\n\nlibrary(tree)\npts.df &lt;- cbind(pts.df, pres.abs$y)\ncolnames(pts.df)[8] &lt;- \"y\"\npts.df$y &lt;- as.factor(ifelse(pts.df$y == 1, \"Yes\", \"No\"))\ntree.model &lt;- tree(y ~ . , pts.df)\n\n\n\nplot(tree.model)\ntext(tree.model, pretty=0)"
+    "objectID": "slides/20-slides.html#kriging",
+    "href": "slides/20-slides.html#kriging",
+    "title": "Areal Data and Proximity",
+    "section": "Kriging",
+    "text": "Kriging\n\n\nPrevious methods predict \\(z\\) as a (weighted) function of distance\nTreat the observations as perfect (no error)\nIf we imagine that \\(z\\) is the outcome of some spatial process such that:\n\n\\[\n\\begin{equation}\nz(\\mathbf{x}) = \\mu(\\mathbf{x}) + \\epsilon(\\mathbf{x})\n\\end{equation}\n\\]\nthen any observed value of \\(z\\) is some function of the process (\\(\\mu(\\mathbf{x})\\)) and some error (\\(\\epsilon(\\mathbf{x})\\))\n\nKriging exploits autocorrelation in \\(\\epsilon(\\mathbf{x})\\) to identify the trend and interpolate accordingly"
   },
   {
-    "objectID": "slides/20-slides.html#an-example-5",
-    "href": "slides/20-slides.html#an-example-5",
-    "title": "Multivariate Analysis II",
-    "section": "An example",
-    "text": "An example\n\nFitting the classification tree\n\n\nsummary(tree.model)"
+    "objectID": "slides/20-slides.html#autocorrelation",
+    "href": "slides/20-slides.html#autocorrelation",
+    "title": "Areal Data and Proximity",
+    "section": "Autocorrelation",
+    "text": "Autocorrelation\n\nCorrelation the tendency for two variables to be related\nAutocorrelation the tendency for observations that are closer (in space or time) to be correlated\nPositive autocorrelation neighboring observations have \\(\\epsilon\\) with the same sign\nNegative autocorrelation neighboring observations have \\(\\epsilon\\) with a different sign (rare in geography)"
   },
   {
-    "objectID": "slides/20-slides.html#benefits-and-drawbacks",
-    "href": "slides/20-slides.html#benefits-and-drawbacks",
-    "title": "Multivariate Analysis II",
-    "section": "Benefits and drawbacks",
-    "text": "Benefits and drawbacks\n\n\nBenefits\n\nEasy to explain\nLinks to human decision-making\nGraphical displays\nEasy handling of qualitative predictors\n\n\nCosts\n\nLower predictive accuracy than other methods\nNot necessarily robust"
+    "objectID": "slides/20-slides.html#ordinary-kriging",
+    "href": "slides/20-slides.html#ordinary-kriging",
+    "title": "Areal Data and Proximity",
+    "section": "Ordinary Kriging",
+    "text": "Ordinary Kriging\n\nAssumes that the deterministic part of the process (\\(\\mu(\\mathbf{x})\\)) is an unknown constant (\\(\\mu\\))\n\n\\[\n\\begin{equation}\nz(\\mathbf{x}) = \\mu + \\epsilon(\\mathbf{x})\n\\end{equation}\n\\]"
   },
   {
-    "objectID": "slides/20-slides.html#random-forests",
-    "href": "slides/20-slides.html#random-forests",
-    "title": "Multivariate Analysis II",
-    "section": "Random Forests",
-    "text": "Random Forests\n\n\n\n\nGrow 100(000s) of trees using bootstrapping\nRandom sample of predictors considered at each split\nAvoids correlation amongst multiple predictions\nAverage of trees improves overall outcome (usually)\nLots of extensions"
+    "objectID": "slides/20-slides.html#steps-for-ordinary-kriging",
+    "href": "slides/20-slides.html#steps-for-ordinary-kriging",
+    "title": "Areal Data and Proximity",
+    "section": "Steps for Ordinary Kriging",
+    "text": "Steps for Ordinary Kriging\n\nRemoving any spatial trend in the data (if present).\nComputing the experimental variogram, \\(\\gamma\\), which is a measure of spatial autocorrelation.\nDefining an experimental variogram model that best characterizes the spatial autocorrelation in the data.\nInterpolating the surface using the experimental variogram.\nAdding the kriged interpolated surface to the trend interpolated surface to produce the final output."
   },
   {
-    "objectID": "slides/20-slides.html#an-example-6",
-    "href": "slides/20-slides.html#an-example-6",
-    "title": "Multivariate Analysis II",
-    "section": "An example",
-    "text": "An example\n\nFitting the Random Forest\n\n\n\n\nlibrary(randomForest)\nclass.model &lt;- y ~ .\nrf2 &lt;- randomForest(class.model, data=pts.df)\n\n\n\nvarImpPlot(rf2)"
+    "objectID": "slides/20-slides.html#removing-spatial-trend",
+    "href": "slides/20-slides.html#removing-spatial-trend",
+    "title": "Areal Data and Proximity",
+    "section": "Removing Spatial Trend",
+    "text": "Removing Spatial Trend\n\nMean and variance need to be constant across study area\nTrend surfaces indicate that is not the case\nNeed to remove that trend\n\n\nf.2 &lt;- as.formula(meanpm25 ~ X + Y + I(X*X)+I(Y*Y) + I(X*Y))\n \n# Run the regression model\nlm.2 &lt;- lm( f.2, data=aq.sum)\n\n# Copy the residuals to the point object\naq.sum$res &lt;- lm.2$residuals"
   },
   {
-    "objectID": "slides/20-slides.html#maxent",
-    "href": "slides/20-slides.html#maxent",
-    "title": "Multivariate Analysis II",
-    "section": "MaxEnt",
-    "text": "MaxEnt\n\n\n\n\n\nFrom Lentz et al. 2008\n\n\n\n\nOpportunistic collection of presences only\nHypothesized predictors of occurrence are measured (or extracted) at each presence\nBackground points (or pseudoabsences) generated for comparison"
+    "objectID": "slides/20-slides.html#removing-the-trend",
+    "href": "slides/20-slides.html#removing-the-trend",
+    "title": "Areal Data and Proximity",
+    "section": "Removing the trend",
+    "text": "Removing the trend"
   },
   {
-    "objectID": "slides/20-slides.html#maximum-entropy-models",
-    "href": "slides/20-slides.html#maximum-entropy-models",
-    "title": "Multivariate Analysis II",
-    "section": "Maximum Entropy models",
-    "text": "Maximum Entropy models\n\n\n\n\nMaxEnt (after the original software)\nNeed plausible background points across the remainder of the study area\nIterative fitting to maximize the distance between predictions generated by a spatially uniform model\nTuning parameters to account for differences in sampling effort, placement of background points, etc\nDevelopment of the model beyond the scope of this course, but see Elith et al. 2010\n\n\n\n\n\n\nFrom Elith et al. 2010"
+    "objectID": "slides/20-slides.html#calculate-the-experimental-variogram",
+    "href": "slides/20-slides.html#calculate-the-experimental-variogram",
+    "title": "Areal Data and Proximity",
+    "section": "Calculate the experimental variogram",
+    "text": "Calculate the experimental variogram\n\nnugget - the proportion of semivariance that occurs at small distances\nsill - the maximum semivariance between pairs of observations\nrange - the distance at which the sill occurs\nexperimental vs. fitted variograms"
   },
   {
-    "objectID": "slides/20-slides.html#challenges-with-maxent",
-    "href": "slides/20-slides.html#challenges-with-maxent",
-    "title": "Multivariate Analysis II",
-    "section": "Challenges with MaxEnt",
-    "text": "Challenges with MaxEnt\n\nNot measuring probability, but relative likelihood of occurrence\nSampling bias affects estimation (but can be mitigated using tuning parameters)\nTheoretical issues with background points and the intercept\nRecent developments relate MaxEnt (with cloglog links) to Inhomogenous Point Process models"
+    "objectID": "slides/20-slides.html#a-note-about-semivariograms",
+    "href": "slides/20-slides.html#a-note-about-semivariograms",
+    "title": "Areal Data and Proximity",
+    "section": "A Note about Semivariograms",
+    "text": "A Note about Semivariograms"
   },
   {
-    "objectID": "slides/20-slides.html#extensions",
-    "href": "slides/20-slides.html#extensions",
-    "title": "Multivariate Analysis II",
-    "section": "Extensions",
-    "text": "Extensions\n\nPolynomial, splines, piece-wise regression\nNeural nets, Support Vector Machines, many many more"
+    "objectID": "slides/20-slides.html#fitted-semivariograms",
+    "href": "slides/20-slides.html#fitted-semivariograms",
+    "title": "Areal Data and Proximity",
+    "section": "Fitted Semivariograms",
+    "text": "Fitted Semivariograms\n\nRely on functional forms to model semivariance"
+  },
+  {
+    "objectID": "slides/20-slides.html#calculate-the-experimental-variogram-1",
+    "href": "slides/20-slides.html#calculate-the-experimental-variogram-1",
+    "title": "Areal Data and Proximity",
+    "section": "Calculate the experimental variogram",
+    "text": "Calculate the experimental variogram"
+  },
+  {
+    "objectID": "slides/20-slides.html#looking-at-the-sample-variogram",
+    "href": "slides/20-slides.html#looking-at-the-sample-variogram",
+    "title": "Areal Data and Proximity",
+    "section": "Looking at the sample Variogram",
+    "text": "Looking at the sample Variogram"
+  },
+  {
+    "objectID": "slides/20-slides.html#estimating-the-sample-variogram",
+    "href": "slides/20-slides.html#estimating-the-sample-variogram",
+    "title": "Areal Data and Proximity",
+    "section": "Estimating the sample variogram",
+    "text": "Estimating the sample variogram\n\nvar.smpl &lt;- gstat::variogram(f.2, aq.sum, cloud = FALSE, cutoff=1000000, width=89900)\n\n\n# Compute the variogram model by passing the nugget, sill and range values\n# to fit.variogram() via the vgm() function.\ndat.fit  &lt;- gstat::fit.variogram(var.smpl, fit.ranges = FALSE, fit.sills = FALSE, gstat::vgm(psill=18, model=\"Sph\", range=500000, nugget=0))"
+  },
+  {
+    "objectID": "slides/20-slides.html#ordinary-kriging-1",
+    "href": "slides/20-slides.html#ordinary-kriging-1",
+    "title": "Areal Data and Proximity",
+    "section": "Ordinary Kriging",
+    "text": "Ordinary Kriging\n\n\n[using ordinary kriging]"
+  },
+  {
+    "objectID": "slides/20-slides.html#ordinary-kriging-2",
+    "href": "slides/20-slides.html#ordinary-kriging-2",
+    "title": "Areal Data and Proximity",
+    "section": "Ordinary Kriging",
+    "text": "Ordinary Kriging\n\ndat.krg &lt;- gstat::krige( res~1, as(aq.sum, \"Spatial\"), grd, dat.fit)"
+  },
+  {
+    "objectID": "slides/20-slides.html#visualizing-uncertainty",
+    "href": "slides/20-slides.html#visualizing-uncertainty",
+    "title": "Areal Data and Proximity",
+    "section": "Visualizing Uncertainty",
+    "text": "Visualizing Uncertainty"
+  },
+  {
+    "objectID": "slides/20-slides.html#universal-kriging",
+    "href": "slides/20-slides.html#universal-kriging",
+    "title": "Areal Data and Proximity",
+    "section": "Universal Kriging",
+    "text": "Universal Kriging\n\nAssumes that the deterministic part of the process (\\(\\mu(\\mathbf{x})\\)) is now a function of the location \\(\\mathbf{x}\\)\nCould be the location or some other attribute\nNow y is a function of some aspect of x\n\n\nvu &lt;- variogram(log(zinc)~elev, ~x+y, data=meuse)\nmu &lt;- fit.variogram(vu, vgm(1, \"Sph\", 300, 1))\ngUK &lt;- gstat(NULL, \"log.zinc\", log(zinc)~elev, meuse, locations=~x+y, model=mu)\nnames(r) &lt;- \"elev\"\nUK &lt;- interpolate(r, gUK, debug.level=0)"
+  },
+  {
+    "objectID": "slides/20-slides.html#universal-kriging-1",
+    "href": "slides/20-slides.html#universal-kriging-1",
+    "title": "Areal Data and Proximity",
+    "section": "Universal Kriging",
+    "text": "Universal Kriging"
+  },
+  {
+    "objectID": "slides/20-slides.html#universal-kriging-2",
+    "href": "slides/20-slides.html#universal-kriging-2",
+    "title": "Areal Data and Proximity",
+    "section": "Universal Kriging",
+    "text": "Universal Kriging\n\nvu &lt;- variogram(log(zinc)~x + x^2 + y + y^2, ~x+y, data=meuse)\nmu &lt;- fit.variogram(vu, vgm(1, \"Sph\", 300, 1))\ngUK &lt;- gstat(NULL, \"log.zinc\", log(zinc)~x + x^2 + y + y^2, meuse, locations=~x+y, model=mu)\nnames(r) &lt;- \"elev\"\nUK &lt;- interpolate(r, gUK, debug.level=0)"
+  },
+  {
+    "objectID": "slides/20-slides.html#universal-kriging-3",
+    "href": "slides/20-slides.html#universal-kriging-3",
+    "title": "Areal Data and Proximity",
+    "section": "Universal Kriging",
+    "text": "Universal Kriging"
+  },
+  {
+    "objectID": "slides/20-slides.html#co-kriging",
+    "href": "slides/20-slides.html#co-kriging",
+    "title": "Areal Data and Proximity",
+    "section": "Co-Kriging",
+    "text": "Co-Kriging\n\nrelies on autocorrelation in \\(\\epsilon_1(\\mathbf{x})\\) for \\(z_1\\) AND cross correlation with other variables (\\(z_{2...j}\\))\nExtending the ordinary kriging model gives:\n\n\\[\n\\begin{equation}\nz_1(\\mathbf{x}) = \\mu_1 + \\epsilon_1(\\mathbf{x})\\\\\nz_2(\\mathbf{x}) = \\mu_2 + \\epsilon_2(\\mathbf{x})\n\\end{equation}\n\\] * Note that there is autocorrelation within both \\(z_1\\) and \\(z_2\\) (because of the \\(\\epsilon\\)) and cross-correlation (because of the location, \\(\\mathbf{x}\\))\n\nNot required that all variables are measured at exactly the same points"
+  },
+  {
+    "objectID": "slides/20-slides.html#co-kriging-1",
+    "href": "slides/20-slides.html#co-kriging-1",
+    "title": "Areal Data and Proximity",
+    "section": "Co-Kriging",
+    "text": "Co-Kriging\n\nProcess is just a linked series of gstat calls\n\n\ngCoK &lt;- gstat(NULL, 'log.zinc', log(zinc)~1, meuse, locations=~x+y)\ngCoK &lt;- gstat(gCoK, 'elev', elev~1, meuse, locations=~x+y)\ngCoK &lt;- gstat(gCoK, 'cadmium', cadmium~1, meuse, locations=~x+y)\ncoV &lt;- variogram(gCoK)\ncoV.fit &lt;- fit.lmc(coV, gCoK, vgm(model='Sph', range=1000))\n\ncoK &lt;- interpolate(r, coV.fit, debug.level=0)"
+  },
+  {
+    "objectID": "slides/20-slides.html#co-kriging-2",
+    "href": "slides/20-slides.html#co-kriging-2",
+    "title": "Areal Data and Proximity",
+    "section": "Co-Kriging",
+    "text": "Co-Kriging"
+  },
+  {
+    "objectID": "slides/20-slides.html#co-kriging-3",
+    "href": "slides/20-slides.html#co-kriging-3",
+    "title": "Areal Data and Proximity",
+    "section": "Co-Kriging",
+    "text": "Co-Kriging"
+  },
+  {
+    "objectID": "slides/20-slides.html#a-note-about-semivariograms-1",
+    "href": "slides/20-slides.html#a-note-about-semivariograms-1",
+    "title": "Areal Data and Proximity",
+    "section": "A Note about Semivariograms",
+    "text": "A Note about Semivariograms"
   },
   {
     "objectID": "slides/18-slides.html#what-is-a-point-pattern",
@@ -1645,11 +1750,25 @@
     "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
   },
   {
+    "objectID": "content/20-content.html",
+    "href": "content/20-content.html",
+    "title": "Proximity and Areal Data",
+    "section": "",
+    "text": "Last class we started to explore ways to leverage spatial autocorrelation as a means of using interpolation to generate values at unobserved locations. We’ll continue that discussion using variograms and kriging. We then move to a discussion of areal data and the need to identify “neighbors” as a means of understanding how to weight observations when the actual point location of the observation may be unknown or impossible to assign."
+  },
+  {
+    "objectID": "content/20-content.html#resources",
+    "href": "content/20-content.html#resources",
+    "title": "Proximity and Areal Data",
+    "section": "Resources",
+    "text": "Resources\n\n Ch. 7: Spatial Neighborhood Matrices in from Paula Moraga’s new book Spatial Statistics for Data Science: Theory and Practice with R gives a little gentler introduction to spatial neighbors specifically in the context of statistical models.\n Chapter 14 Proximity and Areal Data in Spatial Data Science by Edzer Pebesma and Roger Bivand provides explanations of how the spdep package can be used to construct neighborhood weights."
+  },
+  {
     "objectID": "content/20-content.html#objectives",
     "href": "content/20-content.html#objectives",
     "title": "Proximity and Areal Data",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDescribe and implement statistical approaches to interpolation\nDescribe the case for identifying neighbors with areal data\nImplement contiguity-based neighborhood detection approaches\nImplement graph-based neighborhood detection approaches\n\n\n View all slides in new window  Download PDF of all slides"
   },
   {
     "objectID": "content/18-content.html",
@@ -2503,7 +2622,7 @@
     "href": "content/19-content.html#objectives",
     "title": "Interpolation",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nDistinguish deterministic and stochastic processes\nDefine autocorrelation and describe its estimation\nArticulate the benefits and drawbacks of autocorrelation\nLeverage point patterns and autocorrelation to interpolate missing data\n\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDistinguish deterministic and stochastic processes\nDefine autocorrelation and describe its estimation\nArticulate the benefits and drawbacks of autocorrelation\nLeverage point patterns and autocorrelation to interpolate missing data\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Recording"
   },
   {
     "objectID": "content/21-content.html#objectives",
@@ -4163,111 +4282,6 @@
     "title": "Interpolation",
     "section": "Inverse-Distance Weighting",
     "text": "Inverse-Distance Weighting"
-  },
-  {
-    "objectID": "slides/19-slides.html#kriging",
-    "href": "slides/19-slides.html#kriging",
-    "title": "Interpolation",
-    "section": "Kriging",
-    "text": "Kriging\n\n\nPrevious methods predict \\(z\\) as a (weighted) function of distance\nTreat the observations as perfect (no error)\nIf we imagine that \\(z\\) is the outcome of some spatial process such that:\n\n\\[\n\\begin{equation}\nz(\\mathbf{x}) = \\mu(\\mathbf{x}) + \\epsilon(\\mathbf{x})\n\\end{equation}\n\\]\nthen any observed value of \\(z\\) is some function of the process (\\(\\mu(\\mathbf{x})\\)) and some error (\\(\\epsilon(\\mathbf{x})\\))\n\nKriging exploits autocorrelation in \\(\\epsilon(\\mathbf{x})\\) to identify the trend and interpolate accordingly"
-  },
-  {
-    "objectID": "slides/19-slides.html#autocorrelation",
-    "href": "slides/19-slides.html#autocorrelation",
-    "title": "Interpolation",
-    "section": "Autocorrelation",
-    "text": "Autocorrelation\n\nCorrelation the tendency for two variables to be related\nAutocorrelation the tendency for observations that are closer (in space or time) to be correlated\nPositive autocorrelation neighboring observations have \\(\\epsilon\\) with the same sign\nNegative autocorrelation neighboring observations have \\(\\epsilon\\) with a different sign (rare in geography)"
-  },
-  {
-    "objectID": "slides/19-slides.html#ordinary-kriging",
-    "href": "slides/19-slides.html#ordinary-kriging",
-    "title": "Interpolation",
-    "section": "Ordinary Kriging",
-    "text": "Ordinary Kriging\n\nAssumes that the deterministic part of the process (\\(\\mu(\\mathbf{x})\\)) is an unknown constant (\\(\\mu\\))\n\n\\[\n\\begin{equation}\nz(\\mathbf{x}) = \\mu + \\epsilon(\\mathbf{x})\n\\end{equation}\n\\] * Specified in call to variogram and gstat as y~1 (or some other constant)\n\nlibrary(sp)\ndata(meuse)\nv &lt;- variogram(log(zinc)~1, ~x+y, data=meuse)\nmv &lt;- fit.variogram(v, vgm(1, \"Sph\", 300, 1))\ngOK &lt;- gstat(NULL, \"log.zinc\", log(zinc)~1, meuse, locations=~x+y, model=mv)\nOK &lt;- interpolate(r, gOK, debug.level=0)"
-  },
-  {
-    "objectID": "slides/19-slides.html#ordinary-kriging-1",
-    "href": "slides/19-slides.html#ordinary-kriging-1",
-    "title": "Interpolation",
-    "section": "Ordinary Kriging",
-    "text": "Ordinary Kriging"
-  },
-  {
-    "objectID": "slides/19-slides.html#universal-kriging",
-    "href": "slides/19-slides.html#universal-kriging",
-    "title": "Interpolation",
-    "section": "Universal Kriging",
-    "text": "Universal Kriging\n\nAssumes that the deterministic part of the process (\\(\\mu(\\mathbf{x})\\)) is now a function of the location \\(\\mathbf{x}\\)\nCould be the location or some other attribute\nNow y is a function of some aspect of x\n\n\nvu &lt;- variogram(log(zinc)~elev, ~x+y, data=meuse)\nmu &lt;- fit.variogram(vu, vgm(1, \"Sph\", 300, 1))\ngUK &lt;- gstat(NULL, \"log.zinc\", log(zinc)~elev, meuse, locations=~x+y, model=mu)\nnames(r) &lt;- \"elev\"\nUK &lt;- interpolate(r, gUK, debug.level=0)"
-  },
-  {
-    "objectID": "slides/19-slides.html#universal-kriging-1",
-    "href": "slides/19-slides.html#universal-kriging-1",
-    "title": "Interpolation",
-    "section": "Universal Kriging",
-    "text": "Universal Kriging"
-  },
-  {
-    "objectID": "slides/19-slides.html#universal-kriging-2",
-    "href": "slides/19-slides.html#universal-kriging-2",
-    "title": "Interpolation",
-    "section": "Universal Kriging",
-    "text": "Universal Kriging\n\nvu &lt;- variogram(log(zinc)~x + x^2 + y + y^2, ~x+y, data=meuse)\nmu &lt;- fit.variogram(vu, vgm(1, \"Sph\", 300, 1))\ngUK &lt;- gstat(NULL, \"log.zinc\", log(zinc)~x + x^2 + y + y^2, meuse, locations=~x+y, model=mu)\nnames(r) &lt;- \"elev\"\nUK &lt;- interpolate(r, gUK, debug.level=0)"
-  },
-  {
-    "objectID": "slides/19-slides.html#universal-kriging-3",
-    "href": "slides/19-slides.html#universal-kriging-3",
-    "title": "Interpolation",
-    "section": "Universal Kriging",
-    "text": "Universal Kriging"
-  },
-  {
-    "objectID": "slides/19-slides.html#co-kriging",
-    "href": "slides/19-slides.html#co-kriging",
-    "title": "Interpolation",
-    "section": "Co-Kriging",
-    "text": "Co-Kriging\n\nrelies on autocorrelation in \\(\\epsilon_1(\\mathbf{x})\\) for \\(z_1\\) AND cross correlation with other variables (\\(z_{2...j}\\))\nExtending the ordinary kriging model gives:\n\n\\[\n\\begin{equation}\nz_1(\\mathbf{x}) = \\mu_1 + \\epsilon_1(\\mathbf{x})\\\\\nz_2(\\mathbf{x}) = \\mu_2 + \\epsilon_2(\\mathbf{x})\n\\end{equation}\n\\] * Note that there is autocorrelation within both \\(z_1\\) and \\(z_2\\) (because of the \\(\\epsilon\\)) and cross-correlation (because of the location, \\(\\mathbf{x}\\))\n\nNot required that all variables are measured at exactly the same points"
-  },
-  {
-    "objectID": "slides/19-slides.html#co-kriging-1",
-    "href": "slides/19-slides.html#co-kriging-1",
-    "title": "Interpolation",
-    "section": "Co-Kriging",
-    "text": "Co-Kriging\n\nProcess is just a linked series of gstat calls\n\n\ngCoK &lt;- gstat(NULL, 'log.zinc', log(zinc)~1, meuse, locations=~x+y)\ngCoK &lt;- gstat(gCoK, 'elev', elev~1, meuse, locations=~x+y)\ngCoK &lt;- gstat(gCoK, 'cadmium', cadmium~1, meuse, locations=~x+y)\ncoV &lt;- variogram(gCoK)\ncoV.fit &lt;- fit.lmc(coV, gCoK, vgm(model='Sph', range=1000))\n\ncoK &lt;- interpolate(r, coV.fit, debug.level=0)"
-  },
-  {
-    "objectID": "slides/19-slides.html#co-kriging-2",
-    "href": "slides/19-slides.html#co-kriging-2",
-    "title": "Interpolation",
-    "section": "Co-Kriging",
-    "text": "Co-Kriging"
-  },
-  {
-    "objectID": "slides/19-slides.html#co-kriging-3",
-    "href": "slides/19-slides.html#co-kriging-3",
-    "title": "Interpolation",
-    "section": "Co-Kriging",
-    "text": "Co-Kriging"
-  },
-  {
-    "objectID": "slides/19-slides.html#a-note-about-semivariograms",
-    "href": "slides/19-slides.html#a-note-about-semivariograms",
-    "title": "Interpolation",
-    "section": "A Note about Semivariograms",
-    "text": "A Note about Semivariograms\n\nnugget - the proportion of semivariance that occurs at small distances\nsill - the maximum semivariance between pairs of observations\nrange - the distance at which the sill occurs\nexperimental vs. fitted variograms"
-  },
-  {
-    "objectID": "slides/19-slides.html#a-note-about-semivariograms-1",
-    "href": "slides/19-slides.html#a-note-about-semivariograms-1",
-    "title": "Interpolation",
-    "section": "A Note about Semivariograms",
-    "text": "A Note about Semivariograms"
-  },
-  {
-    "objectID": "slides/19-slides.html#fitted-semivariograms",
-    "href": "slides/19-slides.html#fitted-semivariograms",
-    "title": "Interpolation",
-    "section": "Fitted Semivariograms",
-    "text": "Fitted Semivariograms\n\nRely on functional forms to model semivariance"
   },
   {
     "objectID": "slides/21-slides.html#best-model-for-what",
