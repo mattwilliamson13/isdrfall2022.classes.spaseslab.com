@@ -2298,16 +2298,23 @@
   {
     "objectID": "assignment/07-rasterops.html",
     "href": "assignment/07-rasterops.html",
-    "title": "Assignment 6: Raster Operations",
+    "title": "Assignment 7: RBuilding spatial databases",
     "section": "",
-    "text": "The first part of the course was designed to introduce some of the foundations of working in R, developing programming workflows, and getting help. These topics are important for building robust spatial workflows, but their utility extends beyond that to most things you’ll do in R during the course of your graduate research. This homework is meant to help reinforce those concepts and identify any gaps that I need to fill in as we go. Make sure to check out the example too!. By the end of this assignment you should be able to:\nYou’ll need to accept the link to access the questions."
+    "text": "It’s time to put together the various vector, raster, and tabular code we’ve learned in order to build a dataframe that you can use for a subsequent statistical analysis. For this assignment we’ll be using the National Forest boundaries that we used in class (I’ve written a function for you to download and unzip this in the /code/ folder), a dataset describing the cost of natural disasters fromm 1999-2020 (described in this paper and available at /assignment07/ics209-plus-wf_incidents_1999to2020.csv folder. a land use dataset (/assignment07/land_use_pnw.tif), and the wildfire hazard dataset (/assignment07/wildfire_hazard_agg.tif). Your goal is to create a dataframe that includes the total cost of all disasters that have occurred within a National Forest Boundary along with several social and ecological variables that might help explain the difference in dollars expended to contain the hazard (typically fire). By the end of this assignment you should be able to:"
   },
   {
     "objectID": "assignment/07-rasterops.html#instructions",
     "href": "assignment/07-rasterops.html#instructions",
-    "title": "Assignment 6: Raster Operations",
+    "title": "Assignment 7: RBuilding spatial databases",
     "section": "Instructions",
-    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-1-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-1-xxx.qmd and give it a title (like M Williamson Assignment 1). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-1-xx.qmd, and assignment-1-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-7-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-7-xxx.qmd and give it a title (like M Williamson Assignment 7). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 3 more times (having 4 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-7-xx.qmd, and assignment-7-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+  },
+  {
+    "objectID": "assignment/07-rasterops.html#the-assignment",
+    "href": "assignment/07-rasterops.html#the-assignment",
+    "title": "Assignment 7: RBuilding spatial databases",
+    "section": "The Assignment",
+    "text": "The Assignment\n\nYou’ll need to download the FS boundary shapefiles then load in all of the different spatial and tabular datasets.\nValidate your geometries and make sure all of your data is in the same CRS.\nSmooth the wildfire hazard and land use datasets using a 5s5 moving window; use the mean for the continuos dataset and the mode for the categorical dataset.\nEstimate the total cost of the incidents within each forest (PROJECTED_FINAL_IM_COST contains this value for each incident).\nNext join 3 attributes of your choosing from the CEJST and the extracted fire and land cover values to your dataframe.\nMake a set of maps that shows the Forest-level values for all of your selected variables."
   },
   {
     "objectID": "assignment/09-pointpatterns.html",
