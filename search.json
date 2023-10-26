@@ -207,7 +207,14 @@
     "href": "slides/20-slides.html#calculate-the-experimental-variogram-1",
     "title": "Areal Data and Proximity",
     "section": "Calculate the experimental variogram",
-    "text": "Calculate the experimental variogram"
+    "text": "Calculate the experimental variogram\n\nvar.cld  &lt;- gstat::variogram(res ~ 1, aq.sum, cloud = TRUE)\nvar.df  &lt;- as.data.frame(var.cld)\nindex1  &lt;- which(with(var.df, left==21 & right==2))\n\nOP &lt;- par( mar=c(4,6,1,1))\nplot(var.cld$dist/1000 , var.cld$gamma, col=\"grey\", \n     xlab = \"Distance between point pairs (km)\",\n     ylab = expression( frac((res[2] - res[1])^2 , 2)) )\n\npar(OP)"
+  },
+  {
+    "objectID": "slides/20-slides.html#simplifying-the-cloud-plot",
+    "href": "slides/20-slides.html#simplifying-the-cloud-plot",
+    "title": "Areal Data and Proximity",
+    "section": "Simplifying the cloud plot",
+    "text": "Simplifying the cloud plot\n\n# Compute the sample experimental variogram\nvar.smpl &lt;- gstat::variogram(f.2, aq.sum, cloud = FALSE)\n\nbins.ct &lt;- c(0, var.smpl$dist , max(var.cld$dist) )\nbins &lt;- vector()\nfor (i in 1: (length(bins.ct) - 1) ){\n  bins[i] &lt;- mean(bins.ct[ seq(i,i+1, length.out=2)] ) \n}\nbins[length(bins)] &lt;- max(var.cld$dist)\nvar.bins &lt;- findInterval(var.cld$dist, bins)\n\n# Point data cloud with bin boundaries\nOP &lt;- par( mar = c(5,6,1,1))\nplot(var.cld$gamma ~ eval(var.cld$dist/1000), col=rgb(0,0,0,0.2), pch=16, cex=0.7,\n     xlab = \"Distance between point pairs (km)\",\n     ylab = expression( gamma ) )\npoints( var.smpl$dist/1000, var.smpl$gamma, pch=21, col=\"black\", bg=\"red\", cex=1.3)\nabline(v=bins/1000, col=\"red\", lty=2)\n\n\n\npar(OP)"
   },
   {
     "objectID": "slides/20-slides.html#looking-at-the-sample-variogram",
@@ -221,7 +228,7 @@
     "href": "slides/20-slides.html#estimating-the-sample-variogram",
     "title": "Areal Data and Proximity",
     "section": "Estimating the sample variogram",
-    "text": "Estimating the sample variogram\n\nvar.smpl &lt;- gstat::variogram(f.2, aq.sum, cloud = FALSE, cutoff=1000000, width=89900)\n\n\n# Compute the variogram model by passing the nugget, sill and range values\n# to fit.variogram() via the vgm() function.\ndat.fit  &lt;- gstat::fit.variogram(var.smpl, fit.ranges = FALSE, fit.sills = FALSE, gstat::vgm(psill=18, model=\"Sph\", range=500000, nugget=0))"
+    "text": "Estimating the sample variogram\n\nvar.smpl &lt;- gstat::variogram(f.2, aq.sum, cloud = FALSE, cutoff = 1000000)\n\n\n# Compute the variogram model by passing the nugget, sill and range values\n# to fit.variogram() via the vgm() function.\ndat.fit  &lt;- gstat::fit.variogram(var.smpl, gstat::vgm(nugget = 12, range= 60000, model=\"Gau\", cutoff=1000000))"
   },
   {
     "objectID": "slides/20-slides.html#ordinary-kriging-1",
@@ -236,6 +243,20 @@
     "title": "Areal Data and Proximity",
     "section": "Ordinary Kriging",
     "text": "Ordinary Kriging\n\ndat.krg &lt;- gstat::krige( res~1, as(aq.sum, \"Spatial\"), grd, dat.fit)"
+  },
+  {
+    "objectID": "slides/20-slides.html#combining-with-the-trend-data",
+    "href": "slides/20-slides.html#combining-with-the-trend-data",
+    "title": "Areal Data and Proximity",
+    "section": "Combining with the trend data",
+    "text": "Combining with the trend data\n\n\n[using universal kriging]"
+  },
+  {
+    "objectID": "slides/20-slides.html#combining-with-the-trend-data-1",
+    "href": "slides/20-slides.html#combining-with-the-trend-data-1",
+    "title": "Areal Data and Proximity",
+    "section": "Combining with the trend data",
+    "text": "Combining with the trend data\n\ndat.krg &lt;- gstat::krige( f.2, as(aq.sum, \"Spatial\"), grd, dat.fit)\n\nr &lt;- rast(dat.krg)$var1.pred\nr.m &lt;- mask(r, st_as_sf(id.cty))\n\n# Plot the raster and the sampled points\ntm_shape(r.m) + tm_raster(n=10, palette=\"RdBu\", title=\"Predicted air quality\") +tm_shape(aq.sum) + tm_dots(size=0.2) +\n  tm_legend(legend.outside=TRUE)"
   },
   {
     "objectID": "slides/20-slides.html#visualizing-uncertainty",
@@ -1768,7 +1789,7 @@
     "href": "content/20-content.html#objectives",
     "title": "Proximity and Areal Data",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nDescribe and implement statistical approaches to interpolation\nDescribe the case for identifying neighbors with areal data\nImplement contiguity-based neighborhood detection approaches\nImplement graph-based neighborhood detection approaches\n\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDescribe and implement statistical approaches to interpolation\nDescribe the case for identifying neighbors with areal data\nImplement contiguity-based neighborhood detection approaches\nImplement graph-based neighborhood detection approaches\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nPanopto Recording"
   },
   {
     "objectID": "content/18-content.html",
