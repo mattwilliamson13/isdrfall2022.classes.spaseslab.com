@@ -2298,21 +2298,21 @@
   {
     "objectID": "assignment/07-rasterops.html",
     "href": "assignment/07-rasterops.html",
-    "title": "Assignment 7: RBuilding spatial databases",
+    "title": "Assignment 7: Building spatial databases",
     "section": "",
     "text": "It’s time to put together the various vector, raster, and tabular code we’ve learned in order to build a dataframe that you can use for a subsequent statistical analysis. For this assignment we’ll be using the National Forest boundaries that we used in class (I’ve written a function for you to download and unzip this in the /code/ folder), a dataset describing the cost of natural disasters fromm 1999-2020 (described in this paper and available at /assignment07/ics209-plus-wf_incidents_1999to2020.csv folder. a land use dataset (/assignment07/land_use_pnw.tif), and the wildfire hazard dataset (/assignment07/wildfire_hazard_agg.tif). Your goal is to create a dataframe that includes the total cost of all disasters that have occurred within a National Forest Boundary along with several social and ecological variables that might help explain the difference in dollars expended to contain the hazard (typically fire). By the end of this assignment you should be able to:"
   },
   {
     "objectID": "assignment/07-rasterops.html#instructions",
     "href": "assignment/07-rasterops.html#instructions",
-    "title": "Assignment 7: RBuilding spatial databases",
+    "title": "Assignment 7: Building spatial databases",
     "section": "Instructions",
     "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-7-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-7-xxx.qmd and give it a title (like M Williamson Assignment 7). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 3 more times (having 4 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-7-xx.qmd, and assignment-7-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
   },
   {
     "objectID": "assignment/07-rasterops.html#the-assignment",
     "href": "assignment/07-rasterops.html#the-assignment",
-    "title": "Assignment 7: RBuilding spatial databases",
+    "title": "Assignment 7: Building spatial databases",
     "section": "The Assignment",
     "text": "The Assignment\n\nYou’ll need to download the FS boundary shapefiles then load in all of the different spatial and tabular datasets.\nValidate your geometries and make sure all of your data is in the same CRS.\nSmooth the wildfire hazard and land use datasets using a 5s5 moving window; use the mean for the continuos dataset and the mode for the categorical dataset.\nEstimate the total cost of the incidents within each forest (PROJECTED_FINAL_IM_COST contains this value for each incident).\nNext join 3 attributes of your choosing from the CEJST and the extracted fire and land cover values to your dataframe.\nMake a set of maps that shows the Forest-level values for all of your selected variables."
   },
@@ -2653,11 +2653,25 @@
     "text": "Objectives\nBy the end of today you should be able to:\n\nDistinguish deterministic and stochastic processes\nDefine autocorrelation and describe its estimation\nArticulate the benefits and drawbacks of autocorrelation\nLeverage point patterns and autocorrelation to interpolate missing data\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Recording"
   },
   {
+    "objectID": "content/21-content.html",
+    "href": "content/21-content.html",
+    "title": "Spatial Autocorrelation",
+    "section": "",
+    "text": "Now that we’ve learned about the power of spatial autocorrelation for interpolation from point data, it’s time to explore methods for spatial autocorrelation with areal data. We’ll have to define neighbors because distance is a little more ambiguous here and then look at some global and local measures of autocorrelation."
+  },
+  {
+    "objectID": "content/21-content.html#resources",
+    "href": "content/21-content.html#resources",
+    "title": "Spatial Autocorrelation",
+    "section": "Resources",
+    "text": "Resources\n\n Ch. 7: Spatial Neighborhood Matrices in from Paula Moraga’s new book Spatial Statistics for Data Science: Theory and Practice with R gives a little gentler introduction to spatial neighbors specifically in the context of statistical models.\n Chapter 14 Proximity and Areal Data in Spatial Data Science by Edzer Pebesma and Roger Bivand provides explanations of how the spdep package can be used to construct neighborhood weights.\n\n Spatial Autocorrelation in R provides some easy code for working through neighbors with areal data and calculating spatial autocorrelation measures."
+  },
+  {
     "objectID": "content/21-content.html#objectives",
     "href": "content/21-content.html#objectives",
     "title": "Spatial Autocorrelation",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nUse the spdep package to identify the neighbors of a given polygon based on proximity, distance, and minimum number\nUnderstand the underlying mechanics of Moran’s I and calculate it for various neighbors\nDistinguish between global and local measures of spatial autocorrelation\nVisualize neighbors and clusters\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Video"
   },
   {
     "objectID": "content/23-content.html#objectives",
@@ -4312,164 +4326,66 @@
     "text": "Inverse-Distance Weighting"
   },
   {
-    "objectID": "slides/21-slides.html#best-model-for-what",
-    "href": "slides/21-slides.html#best-model-for-what",
-    "title": "Multivariate Analysis III",
-    "section": "Best Model for What?",
-    "text": "Best Model for What?\n\n\n\n\n\nfrom Tradennick et al. 2021\n\n\n\n\n\nExploration: describe patterns in the data and generate hypotheses\nInference: evaluate the strength of evidence for some statement about the process\nPrediction: forecast outcomes at unsampled locations based on covariates"
+    "objectID": "slides/21-slides.html#spatial-autocorrelation",
+    "href": "slides/21-slides.html#spatial-autocorrelation",
+    "title": "Spatial Autocorrelation and Areal Data",
+    "section": "Spatial Autocorrelation",
+    "text": "Spatial Autocorrelation\n\n\n\nAttributes (features) are often non-randomly distributed\nEspecially true with aggregated data\nInterest is in the relationship between proximity and the feature\nDifference from kriging and semivariance\n\n\n\n\n\nFrom Manuel Gimond"
   },
   {
-    "objectID": "slides/21-slides.html#the-importance-of-model-fit",
-    "href": "slides/21-slides.html#the-importance-of-model-fit",
-    "title": "Multivariate Analysis III",
-    "section": "The Importance of Model Fit",
-    "text": "The Importance of Model Fit\n\nThe general regression context:\n\n\\[\n\\begin{equation}\n\\hat{y} = \\mathbf{X}\\hat{\\beta}\n\\end{equation}\n\\]\n\nInference is focused on robust estimates of \\(\\hat{\\beta}\\) given the data we have\nPrediction is focused on accurate forecasts of \\(\\hat{y}\\) at locations where we have yet to collect the data"
+    "objectID": "slides/21-slides.html#morans-i",
+    "href": "slides/21-slides.html#morans-i",
+    "title": "Spatial Autocorrelation and Areal Data",
+    "section": "Moran’s I",
+    "text": "Moran’s I\n\n\n\nMoran’s I"
   },
   {
-    "objectID": "slides/21-slides.html#inference-and-presenceabsence-data",
-    "href": "slides/21-slides.html#inference-and-presenceabsence-data",
-    "title": "Multivariate Analysis III",
-    "section": "Inference and Presence/Absence Data",
-    "text": "Inference and Presence/Absence Data\n\n\\(\\hat{\\beta}\\) is conditional on variables in the model and those not in the model\n\n\nnsamp &lt;- 1000\ndf &lt;- data.frame(x1 = rnorm(nsamp,0,1),\n                 x2 = rnorm(nsamp,0,1),\n                 x3 = rnorm(nsamp,0,1))\n\nlinpred &lt;- 1 + 2*df$x1 -0.18*df$x2 -3.5*df$x3\ny &lt;- rbinom(nsamp, 1, plogis(linpred))\ndf &lt;- cbind(df, y)\n\nmod1 &lt;- glm(y~x1 +x2, data=df, family=\"binomial\")\nmod2 &lt;- glm(y~x1 +x2 + x3, data=df, family=\"binomial\")"
+    "objectID": "slides/21-slides.html#finding-neighbors",
+    "href": "slides/21-slides.html#finding-neighbors",
+    "title": "Spatial Autocorrelation and Areal Data",
+    "section": "Finding Neighbors",
+    "text": "Finding Neighbors\n\n\n\nHow do we define \\(I(d)\\) for areal data?\nWhat about \\(w_{ij}\\)?\nWe can use spdep for that!!"
   },
   {
-    "objectID": "slides/21-slides.html#inference-presenceabsence-data",
-    "href": "slides/21-slides.html#inference-presenceabsence-data",
-    "title": "Multivariate Analysis III",
-    "section": "Inference & Presence/Absence Data",
-    "text": "Inference & Presence/Absence Data\n\n\n\ncoef(mod1)\ncoef(mod2)\n\n\n\nprd1 &lt;- predict(mod1, df, \"response\")\ndif1 &lt;- plogis(linpred) - prd1\nprd2 &lt;- predict(mod2, df, \"response\")\ndif2 &lt;- plogis(linpred) - prd2\n\n\n\n\nInferring coefficient effects requires that your model fit the data well"
+    "objectID": "slides/21-slides.html#using-spdep",
+    "href": "slides/21-slides.html#using-spdep",
+    "title": "Spatial Autocorrelation and Areal Data",
+    "section": "Using spdep",
+    "text": "Using spdep\n\n\n\ncdc &lt;- read_sf(\"data/opt/data/2023/vectorexample/cdc_nw.shp\") %&gt;% \n  select(stateabbr, countyname, countyfips, casthma_cr)"
   },
   {
-    "objectID": "slides/21-slides.html#using-test-statistics",
-    "href": "slides/21-slides.html#using-test-statistics",
-    "title": "Multivariate Analysis III",
-    "section": "Using Test Statistics",
-    "text": "Using Test Statistics\n\n\n\n\\(R^2\\) for linear regression:\n\n\\[\n\\begin{equation}\nR^2 = 1- \\frac{SS_{res}}{SS_{tot}}\\\\\nSS_{res} = \\sum_{i}(y_i- f_i)^2\\\\\nSS_{tot} = \\sum_{i}(y_i-\\bar{y})^2\n\\end{equation}\n\\]\n\n\nPerfect prediction (\\(f_i = y_i\\)); \\(SS_{res} = 0\\); and \\(R^2 = 1\\)\nNull prediction (Intercept only) (\\(f_i = \\bar{y}\\)); \\(SS_{res} = SS_{tot}\\); and \\(R^2 = 0\\)\nNo direct way of implementing for logistic regression"
+    "objectID": "slides/21-slides.html#finding-neighbors-1",
+    "href": "slides/21-slides.html#finding-neighbors-1",
+    "title": "Spatial Autocorrelation and Areal Data",
+    "section": "Finding Neighbors",
+    "text": "Finding Neighbors\n\nQueen, rook, (and bishop) cases impose neighbors by contiguity\nWeights calculated as a \\(1/ num. of neighbors\\)\n\n\nnb.qn &lt;- poly2nb(cdc, queen=TRUE)\nnb.rk &lt;- poly2nb(cdc, queen=FALSE)"
   },
   {
-    "objectID": "slides/21-slides.html#pseudo--r2",
-    "href": "slides/21-slides.html#pseudo--r2",
-    "title": "Multivariate Analysis III",
-    "section": "Pseudo- \\(R^2\\)",
-    "text": "Pseudo- \\(R^2\\)\n\n\n\\[\n\\begin{equation}\nR^2_L = \\frac{D_{null} - D_{fitted}}{D_{null}}\n\\end{equation}\n\\]\n\n\nCohen’s Likelihood Ratio\nDeviance (\\(D\\)), the difference between the model and some hypothetical perfect model (lower is better)\nChallenge: Not monotonically related to \\(p\\)\nChallenge: How high is too high?"
+    "objectID": "slides/21-slides.html#finding-neighbors-2",
+    "href": "slides/21-slides.html#finding-neighbors-2",
+    "title": "Spatial Autocorrelation and Areal Data",
+    "section": "Finding Neighbors",
+    "text": "Finding Neighbors\n::: :::"
   },
   {
-    "objectID": "slides/21-slides.html#cohens-likelihood-ratio",
-    "href": "slides/21-slides.html#cohens-likelihood-ratio",
-    "title": "Multivariate Analysis III",
-    "section": "Cohen’s Likelihood Ratio",
-    "text": "Cohen’s Likelihood Ratio\n\nlogistic.rich &lt;- glm(y ~ MeanAnnTemp + PrecipWetQuarter + PrecipDryQuarter, \n                     family=binomial(link=\"logit\"),\n                     data=pts.df[,2:8])\n\nwith(logistic.rich, \n     null.deviance - deviance)/with(logistic.rich,\n                                    null.deviance)"
+    "objectID": "slides/21-slides.html#getting-weights",
+    "href": "slides/21-slides.html#getting-weights",
+    "title": "Spatial Autocorrelation and Areal Data",
+    "section": "Getting Weights",
+    "text": "Getting Weights\n::: columns ::: {.column width=“60%”}\n\nlw.qn &lt;- nb2listw(nb.qn, style=\"W\", zero.policy=TRUE)\nlw.qn$weights[1:5]\n\n[[1]]\n[1] 0.5 0.5\n\n[[2]]\n[1] 0.25 0.25 0.25 0.25\n\n[[3]]\n[1] 0.2 0.2 0.2 0.2 0.2\n\n[[4]]\n[1] 0.3333333 0.3333333 0.3333333\n\n[[5]]\n[1] 1\n\nasthma.lag &lt;- lag.listw(lw.qn, cdc$casthma_cr)\n\n::: :::{.column width=“40%”}\n\n\n                         asthma.lag        \n[1,] \"Camas\"      \"9.9\"  \"10.3\"            \n[2,] \"Kootenai\"   \"10.4\" \"9.575\"           \n[3,] \"Kootenai\"   \"10\"   \"9.88\"            \n[4,] \"Kootenai\"   \"9.5\"  \"10.2666666666667\"\n[5,] \"Twin Falls\" \"10.2\" \"9.5\"             \n[6,] \"Twin Falls\" \"10.4\" \"9.9\""
   },
   {
-    "objectID": "slides/21-slides.html#pseudo--r2-1",
-    "href": "slides/21-slides.html#pseudo--r2-1",
-    "title": "Multivariate Analysis III",
-    "section": "Pseudo- \\(R^2\\)",
-    "text": "Pseudo- \\(R^2\\)\n\n\n\\[\n\\begin{equation}\n\\begin{aligned}\nR^2_{CS} &= 1 - \\left( \\frac{L_0}{L_M} \\right)^{(2/n)}\\\\\n&= 1 - \\exp^{2(ln(L_0)-ln(L_M))/n}\n\\end{aligned}\n\\end{equation}\n\\]\n\n\n\nCox and Snell \\(R^2\\)\nLikelihood (\\(L\\)), the probability of observing the sample given an assumed distribution\nChallenge: Maximum value is less than 1 and changes with \\(n\\)\nCorrection by Nagelkerke so that maximum is 1"
+    "objectID": "slides/21-slides.html#fit-a-model",
+    "href": "slides/21-slides.html#fit-a-model",
+    "title": "Spatial Autocorrelation and Areal Data",
+    "section": "Fit a model",
+    "text": "Fit a model\n\nMoran’s I is just the slope of the regression!\n\n\n\n\nM &lt;- lm(asthma.lag ~ cdc$casthma_cr)\n\n\n\n\n\n\n\ncdc$casthma_cr \n     0.6467989"
   },
   {
-    "objectID": "slides/21-slides.html#cox-and-snell-r2",
-    "href": "slides/21-slides.html#cox-and-snell-r2",
-    "title": "Multivariate Analysis III",
-    "section": "Cox and Snell \\(R^2\\)",
-    "text": "Cox and Snell \\(R^2\\)\n\nlogistic.null &lt;- glm(y ~ 1, \n                     family=binomial(link=\"logit\"),\n                     data=pts.df[,2:8])\n\n1 - exp(2*(logLik(logistic.null)[1] - logLik(logistic.rich)[1])/nobs(logistic.rich))"
-  },
-  {
-    "objectID": "slides/21-slides.html#using-test-statistics-1",
-    "href": "slides/21-slides.html#using-test-statistics-1",
-    "title": "Multivariate Analysis III",
-    "section": "Using Test Statistics",
-    "text": "Using Test Statistics\n\nBased on the data used in the model (i.e., not prediction)\nLikelihood Ratio behaves most similarly to \\(R^2\\)\nCox and Snell (and Nagelkerke) increases with more presences\nOngoing debate over which is “best”\nDon’t defer to a single statistic"
-  },
-  {
-    "objectID": "slides/21-slides.html#predictive-performance-and-fit",
-    "href": "slides/21-slides.html#predictive-performance-and-fit",
-    "title": "Multivariate Analysis III",
-    "section": "Predictive Performance and Fit",
-    "text": "Predictive Performance and Fit\n\nPredictive performance can be an estimate of fit\nComparisons are often relative (better \\(\\neq\\) good)\nTheoretical and subsampling methods"
-  },
-  {
-    "objectID": "slides/21-slides.html#theoretical-assessment-of-predictive-performance",
-    "href": "slides/21-slides.html#theoretical-assessment-of-predictive-performance",
-    "title": "Multivariate Analysis III",
-    "section": "Theoretical Assessment of Predictive Performance",
-    "text": "Theoretical Assessment of Predictive Performance\n\n\n\n\n\nHirotugu Akaike of AIC\n\n\n\n\n\nInformation Criterion Methods\nMinimize the amount of information lost by using model to approximate true process\nTrade-off between fit and overfitting\nCan’t know the true process (so comparisons are relative) \\[\n\\begin{equation}\nAIC = -2ln(\\hat{L}) +2k\n\\end{equation}\n\\]"
-  },
-  {
-    "objectID": "slides/21-slides.html#aic-comparison",
-    "href": "slides/21-slides.html#aic-comparison",
-    "title": "Multivariate Analysis III",
-    "section": "AIC Comparison",
-    "text": "AIC Comparison\n\nlogistic.null &lt;- glm(y ~ 1, \n                     family=binomial(link=\"logit\"),\n                     data=pts.df[,2:8])\n\nlogistic.rich &lt;- glm(y ~ MeanAnnTemp + PrecipWetQuarter + PrecipDryQuarter, \n                     family=binomial(link=\"logit\"),\n                     data=pts.df[,2:8])\n\nAIC(logistic.null, logistic.rich)"
-  },
-  {
-    "objectID": "slides/21-slides.html#sub-sampling-methods",
-    "href": "slides/21-slides.html#sub-sampling-methods",
-    "title": "Multivariate Analysis III",
-    "section": "Sub-sampling Methods",
-    "text": "Sub-sampling Methods\n\n\n\nSplit data into training and testing\nTesting set needs to be large enough for results to be statistically meaningful\nTest set should be representative of the data as a whole\nValidation data used to tune parameters (not always)"
-  },
-  {
-    "objectID": "slides/21-slides.html#subsampling-your-data-with-caret",
-    "href": "slides/21-slides.html#subsampling-your-data-with-caret",
-    "title": "Multivariate Analysis III",
-    "section": "Subsampling your data with caret",
-    "text": "Subsampling your data with caret\n\npts.df$y &lt;- as.factor(ifelse(pts.df$y == 1, \"Yes\", \"No\"))\nlibrary(caret)\nTrain &lt;- createDataPartition(pts.df$y, p=0.6, list=FALSE)\n\ntraining &lt;- pts.df[ Train, ]\ntesting &lt;- pts.df[ -Train, ]"
-  },
-  {
-    "objectID": "slides/21-slides.html#misclassification",
-    "href": "slides/21-slides.html#misclassification",
-    "title": "Multivariate Analysis III",
-    "section": "Misclassification",
-    "text": "Misclassification\n\n\n\nConfusion matrices compare actual values to predictions\n\n\n\nTrue Positive (TN) - This is correctly classified as the class if interest / target.\nTrue Negative (TN) - This is correctly classified as not a class of interest / target.\nFalse Positive (FP) - This is wrongly classified as the class of interest / target.\nFalse Negative (FN) - This is wrongly classified as not a class of interest / target."
-  },
-  {
-    "objectID": "slides/21-slides.html#confusion-matrices-in-r",
-    "href": "slides/21-slides.html#confusion-matrices-in-r",
-    "title": "Multivariate Analysis III",
-    "section": "Confusion Matrices in R",
-    "text": "Confusion Matrices in R\n\n\n\ntrain.log &lt;- glm(y ~ ., \n                 family=\"binomial\", \n                 data=training[,2:8])\n\npredicted.log &lt;- predict(train.log, \n                         newdata=testing[,2:8], \n                         type=\"response\")\n\npred &lt;- as.factor(\n  ifelse(predicted.log &gt; 0.5, \n                         \"Yes\",\n                         \"No\"))\n\n\n\n\nconfusionMatrix(testing$y, pred)"
-  },
-  {
-    "objectID": "slides/21-slides.html#confusion-matrices",
-    "href": "slides/21-slides.html#confusion-matrices",
-    "title": "Multivariate Analysis III",
-    "section": "Confusion Matrices",
-    "text": "Confusion Matrices\n\n\n\\[\n\\begin{equation}\n\\begin{aligned}\nAccuracy &= \\frac{TP + TN}{TP + TN + FP + FN}\\\\\nSensitivity &= \\frac{TP}{TP + FN}\\\\\nSpecificity &= \\frac{TN}{FP + TN}\\\\\nPrecision &= \\frac{TP}{TP + FP}\\\\\nRecall &= \\frac{TP}{TP + FN}\n\\end{aligned}\n\\end{equation}\n\\]\n\n\nDepends upon threshold!!"
-  },
-  {
-    "objectID": "slides/21-slides.html#confusion-matrices-in-r-1",
-    "href": "slides/21-slides.html#confusion-matrices-in-r-1",
-    "title": "Multivariate Analysis III",
-    "section": "Confusion Matrices in R",
-    "text": "Confusion Matrices in R\n\n\n\nlibrary(tree)\ntree.model &lt;- tree(y ~ . , training[,2:8])\npredict.tree &lt;- predict(tree.model, newdata=testing[,2:8], type=\"class\")\n\n\n\n\nconfusionMatrix(testing$y, predict.tree)"
-  },
-  {
-    "objectID": "slides/21-slides.html#confusion-matrices-in-r-2",
-    "href": "slides/21-slides.html#confusion-matrices-in-r-2",
-    "title": "Multivariate Analysis III",
-    "section": "Confusion Matrices in R",
-    "text": "Confusion Matrices in R\n\n\n\nlibrary(randomForest)\nclass.model &lt;- y ~ .\nrf &lt;- randomForest(class.model, data=training[,2:8])\npredict.rf &lt;- predict(rf, newdata=testing[,2:8], type=\"class\")\n\n\n\n\nconfusionMatrix(testing$y, predict.rf)"
-  },
-  {
-    "objectID": "slides/21-slides.html#threshold-free-methods",
-    "href": "slides/21-slides.html#threshold-free-methods",
-    "title": "Multivariate Analysis III",
-    "section": "Threshold-Free Methods",
-    "text": "Threshold-Free Methods\n\n\n\n\n\nReceiver Operating Characteristic Curves\nIllustrates discrimination of binary classifier as the threshold is varied\nArea Under the Curve (AUC) provides an estimate of classification ability"
-  },
-  {
-    "objectID": "slides/21-slides.html#criticisms-of-rocauc",
-    "href": "slides/21-slides.html#criticisms-of-rocauc",
-    "title": "Multivariate Analysis III",
-    "section": "Criticisms of ROC/AUC",
-    "text": "Criticisms of ROC/AUC\n\nTreats false positives and false negatives equally\nUndervalues models that predict across smaller geographies\nFocus on discrimination and not calibration\nNew methods for presence-only data"
-  },
-  {
-    "objectID": "slides/21-slides.html#roc-in-r",
-    "href": "slides/21-slides.html#roc-in-r",
-    "title": "Multivariate Analysis III",
-    "section": "ROC in R",
-    "text": "ROC in R"
+    "objectID": "slides/21-slides.html#comparing-observed-to-expected",
+    "href": "slides/21-slides.html#comparing-observed-to-expected",
+    "title": "Spatial Autocorrelation and Areal Data",
+    "section": "Comparing observed to expected",
+    "text": "Comparing observed to expected\n\n\n\nn &lt;- 400L   # Define the number of simulations\nI.r &lt;- vector(length=n)  # Create an empty vector\n\nfor (i in 1:n){\n  # Randomly shuffle income values\n  x &lt;- sample(cdc$casthma_cr, replace=FALSE)\n  # Compute new set of lagged values\n  x.lag &lt;- lag.listw(lw.qn, x)\n  # Compute the regression slope and store its value\n  M.r    &lt;- lm(x.lag ~ x)\n  I.r[i] &lt;- coef(M.r)[2]\n}"
   }
 ]
