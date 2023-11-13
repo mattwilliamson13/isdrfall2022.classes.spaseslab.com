@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -386,21 +405,42 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </header>
 
+<p>Today we’re going to finish up some of the model evaluation and prediction pieces from last week and then take a brief detour into the use of spatial information in networks. To do that, we’ll need to introduce some basic concepts of networks before getting too far down the road of the syntax.</p>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/0012-9658%282001%29082%5B1205%3ALCAGTP%5D2.0.CO%3B2">Landscape connectivity: A graph-theoretic perspective</a> by <span class="citation" data-cites="urban">(<a href="#ref-urban" role="doc-biblioref">Urban and Keitt 2001</a>)</span> introduces the notion of using networks and graphs to understand ecological connectivity.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/09-2190.1">Connectivity for conservation: a framework to classify network measures</a> by <span class="citation" data-cites="rayfield">(<a href="#ref-rayfield" role="doc-biblioref">Rayfield et al. 2011</a>)</span> helps simplify the (often overwhelming nature) of terminology and network metrics.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://livebook.manning.com/book/graphs-and-network-science-an-introduction/chapter-1/">Graphs and network science: and introduction</a> provides a little simpler, but less spatially informed introduction to the tasks of network analysis.</p></li>
+</ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today you should be able to:</p>
+<ul>
+<li><p>Use cross-validation to evaluate your models</p></li>
+<li><p>Define a network and it’s key components</p></li>
+<li><p>Identify major questions that we can address with networks</p></li>
+</ul>
 <p class="text-center buttons">
 <a class="btn btn-danger" target="_blank" href="../slides/25-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/25-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
-<p>Slides Forthcoming</p>
+<div>
+<iframe class="slide-deck" src="../slides/25-slides.html"></iframe>
+</div>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-rayfield" class="csl-entry" role="listitem">
+Rayfield, B., M.-J. Fortin, and A. Fall. 2011. <a href="https://doi.org/10.1890/09-2190.1">Connectivity for conservation: A framework to classify network measures</a>. Ecology 92:847–858.
+</div>
+<div id="ref-urban" class="csl-entry" role="listitem">
+Urban, D., and T. Keitt. 2001. <a href="https://doi.org/10.1890/0012-9658(2001)082[1205:LCAGTP]2.0.CO;2">LANDSCAPE CONNECTIVITY: A GRAPH-THEORETIC PERSPECTIVE</a>. Ecology 82:1205–1218.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
