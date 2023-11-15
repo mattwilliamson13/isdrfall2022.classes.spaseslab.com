@@ -5290,5 +5290,110 @@
     "title": "Movement and Networks II",
     "section": "Common questions",
     "text": "Common questions\n\nWhat are the shortest paths across the network?\nWhere are the most important locations for maintaining the network?\nHow does the loss of a node alter the subsequent configuration of the network?\nHow do we translate typical movement paths into network structures?"
+  },
+  {
+    "objectID": "slides/26-slides.html#sage-grouse-in-the-west",
+    "href": "slides/26-slides.html#sage-grouse-in-the-west",
+    "title": "Movement and Networks II",
+    "section": "Sage Grouse in the West",
+    "text": "Sage Grouse in the West\n\n\nReading layer `GRSG_2015_USFWS_StatusReview_PACs' from data source \n  `/Users/mattwilliamson/Websites/isdrfall23/slides/data/GRSG_2015_USFWS_StatusReview_PACs.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 301 features and 9 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -1361708 ymin: 381165.6 xmax: 147308.4 ymax: 1661769\nProjected CRS: GRSG Range Wide"
+  },
+  {
+    "objectID": "slides/26-slides.html#the-data",
+    "href": "slides/26-slides.html#the-data",
+    "title": "Movement and Networks II",
+    "section": "The Data",
+    "text": "The Data\n\nhead(sg.pacs[,1:9])\n\nSimple feature collection with 6 features and 9 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -1183048 ymin: 446911.4 xmax: -1096618 ymax: 472038.5\nProjected CRS: GRSG Range Wide\n  OBJECTID UniqueID Population MgmtZone          ID_Name     Acres Shape_Leng\n1        1      401   Bi-State      MZ3 401-Bi-State-MZ3  444.2940   5691.176\n2        2      362   Bi-State      MZ3 362-Bi-State-MZ3 3553.0707  25207.100\n3        3      400   Bi-State      MZ3 400-Bi-State-MZ3  494.7130   5958.419\n4        4      399   Bi-State      MZ3 399-Bi-State-MZ3  995.5216  10911.550\n5        5      398   Bi-State      MZ3 398-Bi-State-MZ3  395.0896   7904.861\n6        6      361   Bi-State      MZ3 361-Bi-State-MZ3 8252.1309  60989.117\n  Shape_Area Bi_State                       geometry\n1    1797994      Yes POLYGON ((-1181624 457935.6...\n2   14378767      Yes POLYGON ((-1102151 456210.8...\n3    2002033      Yes POLYGON ((-1127306 459256.1...\n4    4028733      Yes POLYGON ((-1122955 461942.7...\n5    1598871      Yes POLYGON ((-1111653 471567.5...\n6   33395189      Yes POLYGON ((-1100113 470204.4..."
+  },
+  {
+    "objectID": "slides/26-slides.html#preparing-the-adjacency-matrix",
+    "href": "slides/26-slides.html#preparing-the-adjacency-matrix",
+    "title": "Movement and Networks II",
+    "section": "Preparing the adjacency matrix",
+    "text": "Preparing the adjacency matrix\n\nsg.pacs.cent &lt;- sg.pacs %&gt;% \n  filter(., MgmtZone == \"MZ3\") %&gt;% \n  st_centroid(sg.pacs, of_largest_polygon = TRUE)"
+  },
+  {
+    "objectID": "slides/26-slides.html#preparing-the-adjacency-matrix-1",
+    "href": "slides/26-slides.html#preparing-the-adjacency-matrix-1",
+    "title": "Movement and Networks II",
+    "section": "Preparing the Adjacency Matrix",
+    "text": "Preparing the Adjacency Matrix\n\n\n\nsg.pacs.dist &lt;- st_distance(sg.pacs.cent) \n\nthreshold &lt;- units::as_units(50, \"km\") \n\nadj.mtx &lt;- sg.pacs.dist &lt; threshold \n\n\n\n\n      1     2     3     4     5\n1  TRUE FALSE FALSE FALSE FALSE\n2 FALSE  TRUE  TRUE  TRUE  TRUE\n3 FALSE  TRUE  TRUE  TRUE  TRUE\n4 FALSE  TRUE  TRUE  TRUE  TRUE\n5 FALSE  TRUE  TRUE  TRUE  TRUE"
+  },
+  {
+    "objectID": "slides/26-slides.html#preparing-the-adjacency-matrix-2",
+    "href": "slides/26-slides.html#preparing-the-adjacency-matrix-2",
+    "title": "Movement and Networks II",
+    "section": "Preparing the Adjacency Matrix",
+    "text": "Preparing the Adjacency Matrix\n\n\n\nadj.mtx &lt;- adj.mtx *1 \ndiag(adj.mtx) &lt;- 0  \n\ndimnames(adj.mtx) &lt;- list(\n  sg.pacs.cent$UniqueID, \n  sg.pacs.cent$UniqueID) \n\n\n\n\n    401 362 400 399 398\n401   0   0   0   0   0\n362   0   0   1   1   1\n400   0   1   0   1   1\n399   0   1   1   0   1\n398   0   1   1   1   0"
+  },
+  {
+    "objectID": "slides/26-slides.html#graphing-your-network",
+    "href": "slides/26-slides.html#graphing-your-network",
+    "title": "Movement and Networks II",
+    "section": "Graphing your network",
+    "text": "Graphing your network\n\nsg.graph &lt;- igraph::graph_from_adjacency_matrix(adj.mtx) %&gt;% \n  as_tbl_graph(directed - FALSE,\n               node_key = \"UniqueID\") %&gt;% \n  left_join(., sg.pacs.cent, \n            by = c(\"name\" = \"UniqueID\"))"
+  },
+  {
+    "objectID": "slides/26-slides.html#common-metrics",
+    "href": "slides/26-slides.html#common-metrics",
+    "title": "Movement and Networks II",
+    "section": "Common Metrics",
+    "text": "Common Metrics\n\nBetweenness Centrality: the sum of all of the shortest paths that flow through that node.\nDegree reflects the number of connections a node has to other nodes.\nComponent size: the number of nodes in a group that is connected to each other, but disconnected from the rest of the graph\nDegree Distribution: Describes the general connectedness of all the nodes in a network; vulnerability"
+  },
+  {
+    "objectID": "slides/26-slides.html#estimating-metrics",
+    "href": "slides/26-slides.html#estimating-metrics",
+    "title": "Movement and Networks II",
+    "section": "Estimating metrics",
+    "text": "Estimating metrics\n\nsg.graph.mets &lt;- sg.graph %&gt;% \n  activate(nodes) %&gt;% \n  mutate(., bet.centrality = centrality_betweenness(),\n            deg = degree(.))"
+  },
+  {
+    "objectID": "slides/26-slides.html#estimating-metrics-betweeness",
+    "href": "slides/26-slides.html#estimating-metrics-betweeness",
+    "title": "Movement and Networks II",
+    "section": "Estimating metrics: Betweeness",
+    "text": "Estimating metrics: Betweeness"
+  },
+  {
+    "objectID": "slides/26-slides.html#estimating-metrics-degree",
+    "href": "slides/26-slides.html#estimating-metrics-degree",
+    "title": "Movement and Networks II",
+    "section": "Estimating metrics: Degree",
+    "text": "Estimating metrics: Degree"
+  },
+  {
+    "objectID": "slides/26-slides.html#estimating-metrics-component-size",
+    "href": "slides/26-slides.html#estimating-metrics-component-size",
+    "title": "Movement and Networks II",
+    "section": "Estimating metrics: Component Size",
+    "text": "Estimating metrics: Component Size\n\ncomps &lt;- components(sg.graph)\ncomps$csize\n\n [1] 61  1  1  1  1  1  4  1  1  1  1\n\ncomps$membership\n\n401 362 400 399 398 361 360 397 359 396 395 358 353 394 393 392 357 354 355 352 \n  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 \n351 350 391 390 389 388 356 387 386 385 349 384 383 382 381 380 379 378 377 376 \n  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 \n375 374 239 347 345 373 372 348 371 346 370 369 368 344 367 366 365 364 343 242 \n  1   1   2   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   3 \n342 363 341 238 237 241 234 232 235 236 233 244 243 240 \n  1   1   1   4   5   6   7   8   7   7   7   9  10  11"
+  },
+  {
+    "objectID": "slides/26-slides.html#estimating-metrics-degree-distribution",
+    "href": "slides/26-slides.html#estimating-metrics-degree-distribution",
+    "title": "Movement and Networks II",
+    "section": "Estimating metrics: Degree distribution",
+    "text": "Estimating metrics: Degree distribution\n\n\n\n\n[1] 26.10811\n\n\n[1] 16.13943"
+  },
+  {
+    "objectID": "slides/26-slides.html#setting-up-the-data",
+    "href": "slides/26-slides.html#setting-up-the-data",
+    "title": "Movement and Networks II",
+    "section": "Setting up the data",
+    "text": "Setting up the data\n\nthresholds &lt;- as_units(c(1, 10,25, 50, 100, 150, 250, 500), \"km\")\nthresh.df &lt;- data.frame(thresh.dist = rep(NA, length(thresholds)),\n                        mean.between = rep(NA, length(thresholds)),\n                        ncomps = rep(NA, length(thresholds)),\n                        mean.deg = rep(NA, length(thresholds)))\nsg.pacs.cent &lt;- sg.pacs %&gt;% \n  st_centroid(sg.pacs, of_largest_polygon = TRUE) \nsg.pacs.dist &lt;- st_distance(sg.pacs.cent)"
+  },
+  {
+    "objectID": "slides/26-slides.html#iterating",
+    "href": "slides/26-slides.html#iterating",
+    "title": "Movement and Networks II",
+    "section": "Iterating",
+    "text": "Iterating\n\nfor (i in 1:length(thresholds)){\n  adj.mtx &lt;- sg.pacs.dist &lt; thresholds[i]\n  adj.mtx &lt;- adj.mtx *1\n  diag(adj.mtx) &lt;- 0\n  dimnames(adj.mtx) &lt;- list(sg.pacs.cent$UniqueID, sg.pacs.cent$UniqueID)\n  \n  sg.graph &lt;- igraph::graph_from_adjacency_matrix(adj.mtx) %&gt;% \n  as_tbl_graph(directed - FALSE,\n               node_key = \"UniqueID\") %&gt;% \n  left_join(., sg.pacs.cent, \n            by = c(\"name\" = \"UniqueID\"))\n  thresh.df$thresh.dist[i] &lt;- thresholds[i]\n  thresh.df$mean.between[i] &lt;- mean(betweenness(sg.graph, directed = FALSE))\n  thresh.df$ncomps[i] &lt;- length(components(sg.graph)$csize)\n  thresh.df$mean.deg[i] &lt;- mean(degree(sg.graph))\n}"
+  },
+  {
+    "objectID": "slides/26-slides.html#collecting-data",
+    "href": "slides/26-slides.html#collecting-data",
+    "title": "Movement and Networks II",
+    "section": "Collecting Data",
+    "text": "Collecting Data\n\nthresh.long &lt;- thresh.df %&gt;% \n  tidyr::pivot_longer(!thresh.dist, \n                      names_to = \"metric\", \n                      values_to = \"estimate\")\n\nggplot(data = thresh.long, aes(x= thresh.dist, y = estimate)) +\n  geom_line()+\n  facet_wrap(vars(metric)) +\n  ggtitle(\"Whole Network\")"
   }
 ]
