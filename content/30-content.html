@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -371,7 +390,6 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources">Resources</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
   </ul>
 </nav>
     </div>
@@ -386,21 +404,41 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </header>
 
+<p><code>R</code> provides a number of different packages for generating plots of your data, but <code>ggplot2</code> is probably the most common owing to its ability to use consistent syntax to produce a variety of different graphics. In addition to plots of data and model objects, <code>ggplot2</code> can also be used with <code>sf</code> objects and some raster datasets to generate publication quality maps. We’ll also take a little more time to understand some of the options for building static maps in <code>R</code> and look at a few packages that can help you build publication-quality maps without having to move into a new software.</p>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
-</section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ul>
+<li><p><i class="fas fa-book"></i> The <a href="https://socviz.co/">Data Visualization: A Practical Introduction</a> by <span class="citation" data-cites="healy2018data">(<a href="#ref-healy2018data" role="doc-biblioref">Healy 2018</a>)</span> provides a lot of examples of Tufte-style graphics built with <code>ggplot2</code>.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://rstudio-conf-2022.github.io/ggplot2-graphic-design/">Graphic design with ggplot2</a> is an entire course devoted to making beautiful visualizations with <code>ggplot2</code>. If nothing else, check out some of the examples!</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://patchwork.data-imaginist.com/">The <code>patchwork</code> package website</a> provides a lot of examples of building complicated layouts with <code>ggplot2</code> objects with intuitive syntax.</p></li>
+<li><p><i class="fas fa-book"></i> The <a href="https://r-spatial.org/r/2018/10/25/ggplot2-sf.html">Drawing Beautiful Maps Programatically with <code>R</code>, <code>sf</code>, and <code>ggplot2</code></a> chapter by Mel Moreno and Mathieu Basille provides a nice series of blogposts designed to help you build maps with <code>sf</code> objects.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="http://zevross.com/blog/2018/10/02/creating-beautiful-demographic-maps-in-r-with-the-tidycensus-and-tmap-packages/">Creating beautiful demographic maps in <code>R</code> with the <code>tidycensus</code> and <code>tmap</code> packages</a> by Zev Ross illustrates the simplicity of mapping with <code>tmap</code>.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://oscarperpinan.github.io/bookvis/">Displaying time series, spatial and space-time data with R</a> by Oscar Perpiñán Lamigueiro has a bunch of interesting code for producing maps contained in the book by the same name. ## Objectives</p></li>
+</ul>
 <p>By the end of today you should be able to:</p>
+<ul>
+<li><p>Understand the relationship between the Grammar of Graphics and <code>ggplot</code> syntax</p></li>
+<li><p>Describe the various options for customizing <code>ggplot</code>s and their syntactic conventions</p></li>
+<li><p>Generate complicated plot layouts without additional pre-processing</p></li>
+<li><p>Construct a map using <code>ggplot2</code> and <code>tmap</code></p></li>
+<li><p>Combine vector and raster data in the same map</p></li>
+</ul>
 <p class="text-center buttons">
 <a class="btn btn-danger" target="_blank" href="../slides/30-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/30-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
-<p>Slides Forthcoming</p>
+<div>
+<iframe class="slide-deck" src="../slides/30-slides.html"></iframe>
+</div>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-healy2018data" class="csl-entry" role="listitem">
+Healy, K. 2018. Data visualization: A practical introduction. Princeton University Press.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
