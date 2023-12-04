@@ -2258,7 +2258,7 @@
     "href": "content/29-content.html#objectives",
     "title": "Data Visualization and Maps I",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nDescribe some basic principles of data visualization\nExtend principles of data visualization to the development of maps\nDistinguish between several common types of spatial data visualization\n\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDescribe some basic principles of data visualization\nExtend principles of data visualization to the development of maps\nDistinguish between several common types of spatial data visualization\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nPanopto Video"
   },
   {
     "objectID": "content/25-content.html",
@@ -2279,7 +2279,7 @@
     "href": "content/25-content.html#objectives",
     "title": "Movement and Networks I",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nUse cross-validation to evaluate your models\nDefine a network and it’s key components\nIdentify major questions that we can address with networks\n\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nUse cross-validation to evaluate your models\nDefine a network and it’s key components\nIdentify major questions that we can address with networks\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nPanopto Video"
   },
   {
     "objectID": "content/23-content.html",
@@ -2713,7 +2713,7 @@
     "href": "assignment/04-maps.html#the-assignment",
     "title": "Assignment 4: Predicates and Measures",
     "section": "The Assignment",
-    "text": "The Assignment\n\nLoad the cejst_pnw.shp use the correct predicates to determine whether the geometries are valid and to check for empty geometries. If there are empty geometries, determine which rows have empty geometries (show your code).\nLoad the landmarks_ID.csv table and convert it to an sf object. Now filter to just the hospital records (MTFCC == \"K1231\") and calculate the distance between all of the hospitals in Idaho. Note that you’ll have to figure out the CRS for the landmarks dataset…\nFilter the cejst_pnw.shp to just those records from Ada County. Then filter again to return the row with the highest annual loss rate for agriculture (2 hints: you’ll need to look at the columns.csv file in the data folder to figure out which column is the expected agricultural loss rate and you’ll need to set na.rm=TRUEwhen looking for the maximum value). Calculate the area of the resulting polygon.\nFinally, look at the helpfile for the terra::adjacent command. How do you specify which cells you’d like to get the adjacency matrix for? How do you return only the cells touching your cells of interest? Use the example in the helpfile to illustrate how you’d do this on a toy dataset - this will help you learn to ask minimally reproducible examples.\n\n\n\n\n\n\n\nNote\n\n\n\nSolutions arehere"
+    "text": "The Assignment\n\nLoad the cejst_pnw.shp use the correct predicates to determine whether the geometries are valid and to check for empty geometries. If there are empty geometries, determine which rows have empty geometries (show your code).\nLoad the landmarks_ID.csv table and convert it to an sf object. Now filter to just the hospital records (MTFCC == \"K1231\") and calculate the distance between all of the hospitals in Idaho. Note that you’ll have to figure out the CRS for the landmarks dataset…\nFilter the cejst_pnw.shp to just those records from Ada County. Then filter again to return the row with the highest annual loss rate for agriculture (2 hints: you’ll need to look at the columns.csv file in the data folder to figure out which column is the expected agricultural loss rate and you’ll need to set na.rm=TRUEwhen looking for the maximum value). Calculate the area of the resulting polygon.\nFinally, look at the helpfile for the terra::adjacent command. How do you specify which cells you’d like to get the adjacency matrix for? How do you return only the cells touching your cells of interest? Use the example in the helpfile to illustrate how you’d do this on a toy dataset - this will help you learn to ask minimally reproducible examples.\n\n\n\n\n\n\n\nNote\n\n\n\nSolutions are here"
   },
   {
     "objectID": "assignment/03-vector.html",
@@ -2825,7 +2825,7 @@
     "href": "assignment/06-vectorops.html#instructions",
     "title": "Assignment 6: Vector Operations",
     "section": "Instructions",
-    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-6-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-6-xxx.qmd and give it a title (like M Williamson Assignment 6). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 3 more times (having 4 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-6-xx.qmd, and assignment-6-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-6-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-6-xxx.qmd and give it a title (like M Williamson Assignment 6). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 3 more times (having 4 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-6-xx.qmd, and assignment-6-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com.\n\nSolutions are here"
   },
   {
     "objectID": "assignment/07-rasterops.html",
@@ -3266,7 +3266,7 @@
     "href": "content/24-content.html#objectives",
     "title": "Statistical Modelling III",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nArticulate three different reasons for modeling and how they link to assessments of fit\nDescribe and implement several test statistics for assessing model fit\nDescribe and implement several assessments of classification\nDescribe and implement resampling techniques to estimate predictive performance\n\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nArticulate three different reasons for modeling and how they link to assessments of fit\nDescribe and implement several test statistics for assessing model fit\nDescribe and implement several assessments of classification\nDescribe and implement resampling techniques to estimate predictive performance\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nPanopto Video"
   },
   {
     "objectID": "content/26-content.html",
@@ -3287,7 +3287,7 @@
     "href": "content/26-content.html#objectives",
     "title": "Movement and Networks II",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nGenerate an adjacency matrix for network analysis\nCalculate network density, centrality, and other common measures\nGenerate landscape connectivity models using terra and gDistance\n\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nGenerate an adjacency matrix for network analysis\nCalculate network density, centrality, and other common measures\nGenerate landscape connectivity models using terra and gDistance\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nPanopto Video"
   },
   {
     "objectID": "content/30-content.html",
@@ -3301,7 +3301,7 @@
     "href": "content/30-content.html#resources",
     "title": "Data Visualization and Maps II",
     "section": "Resources",
-    "text": "Resources\n\n The Data Visualization: A Practical Introduction by (Healy 2018) provides a lot of examples of Tufte-style graphics built with ggplot2.\n Graphic design with ggplot2 is an entire course devoted to making beautiful visualizations with ggplot2. If nothing else, check out some of the examples!\n The patchwork package website provides a lot of examples of building complicated layouts with ggplot2 objects with intuitive syntax.\n The Drawing Beautiful Maps Programatically with R, sf, and ggplot2 chapter by Mel Moreno and Mathieu Basille provides a nice series of blogposts designed to help you build maps with sf objects.\n Creating beautiful demographic maps in R with the tidycensus and tmap packages by Zev Ross illustrates the simplicity of mapping with tmap.\n Displaying time series, spatial and space-time data with R by Oscar Perpiñán Lamigueiro has a bunch of interesting code for producing maps contained in the book by the same name. ## Objectives\n\nBy the end of today you should be able to:\n\nUnderstand the relationship between the Grammar of Graphics and ggplot syntax\nDescribe the various options for customizing ggplots and their syntactic conventions\nGenerate complicated plot layouts without additional pre-processing\nConstruct a map using ggplot2 and tmap\nCombine vector and raster data in the same map\n\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Resources\n\n The Data Visualization: A Practical Introduction by (Healy 2018) provides a lot of examples of Tufte-style graphics built with ggplot2.\n Graphic design with ggplot2 is an entire course devoted to making beautiful visualizations with ggplot2. If nothing else, check out some of the examples!\n The patchwork package website provides a lot of examples of building complicated layouts with ggplot2 objects with intuitive syntax.\n The Drawing Beautiful Maps Programatically with R, sf, and ggplot2 chapter by Mel Moreno and Mathieu Basille provides a nice series of blogposts designed to help you build maps with sf objects.\n Creating beautiful demographic maps in R with the tidycensus and tmap packages by Zev Ross illustrates the simplicity of mapping with tmap.\n Displaying time series, spatial and space-time data with R by Oscar Perpiñán Lamigueiro has a bunch of interesting code for producing maps contained in the book by the same name. ## Objectives\n\nBy the end of today you should be able to:\n\nUnderstand the relationship between the Grammar of Graphics and ggplot syntax\nDescribe the various options for customizing ggplots and their syntactic conventions\nGenerate complicated plot layouts without additional pre-processing\nConstruct a map using ggplot2 and tmap\nCombine vector and raster data in the same map\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nPanopto Video"
   },
   {
     "objectID": "content/32-content.html#objectives",
