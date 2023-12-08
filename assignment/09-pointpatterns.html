@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Intro to Spatial Data in R - Assignment 8: Spatial Autocorrelation and Interpolation</title>
+<title>Intro to Spatial Data in R - Assignment 8: Fitting Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,12 +63,12 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Intro to Spatial Data in R - Assignment 8: Spatial Autocorrelation and Interpolation">
+<meta property="og:title" content="Intro to Spatial Data in R - Assignment 8: Fitting Models">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://isdrfall23.classes.spaseslab.com/files/social-image-f22.png">
 <meta property="og:site-name" content="Intro to Spatial Data in R">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:title" content="Intro to Spatial Data in R - Assignment 8: Spatial Autocorrelation and Interpolation">
+<meta name="twitter:title" content="Intro to Spatial Data in R - Assignment 8: Fitting Models">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://isdrfall23.classes.spaseslab.com/files/social-image-f22.png">
 <meta name="twitter:creator" content="@MwilliamsonMatt">
@@ -317,7 +317,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Assignment 8: Spatial Autocorrelation and Interpolation</h1>
+<h1 class="title">Assignment 8: Fitting Models</h1>
 </div>
 
 
@@ -332,12 +332,11 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Exploring and exploiting spatial autocorrelation in our data is an important tool for interpolating missing values in geographic data. It’s also an important diagnostic to check before additional statistical analyses. You’ll get to try some of that out here. We’ll the cost of natural disasters dataset fromm 1999-2020 (described in <a href="https://www.nature.com/articles/s41597-023-01955-0">this paper</a> and available at <code>/assignment07/ics209-plus-wf_incidents_1999to2020.csv</code> folder and focusing on the data describing the structures lost to natural disaster (<code>STR_DESTROYED_TOTAL</code>). <a href="https://classroom.github.com/a/wlCo9WNT">For this assignment</a>, we’ll use this data to:</p>
+<p>You built a dataframe for analysis in Assignment 6 using the National Forest boundaries that we used in class (I’ve written a function for you to download and unzip this in the <code>/code/</code> folder), a dataset describing the cost of natural disasters fromm 1999-2020 (described in <a href="https://www.nature.com/articles/s41597-023-01955-0">this paper</a> and available at <code>/assignment07/ics209-plus-wf_incidents_1999to2020.csv</code> folder. a land use dataset (<code>/assignment07/land_use_pnw.tif</code>), and the wildfire hazard dataset (<code>/assignment07/wildfire_hazard_agg.tif</code>). Now it’s time to fit some models to explain the cost of natural disasters. By the end of this assignment you should be able to:</p>
 <ul>
-<li>Plot the Ripley’s K envelope for a point dataset</li>
-<li>Use nearest-neighbors as a means of estimating Moran’s I</li>
-<li>Generate several spatial field interpolations</li>
-<li>Krige data based on spatial patterns and semivariance</li>
+<li>Fit multiple types of models to your data</li>
+<li>Evaluate the performance of your model</li>
+<li>Generate predictions based on your model</li>
 </ul>
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
@@ -349,6 +348,19 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Answer the questions making sure save and commit at least 3 more times (having 4 commits is part of the assignment).</p></li>
 <li><p>Render the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-8-xx.qmd, and assignment-8-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com.</p></li>
 </ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Solutions are<a href="../assignment/09-pointpatternssolutions.html">here</a></p>
+</div>
+</div>
 
 
 </section>
